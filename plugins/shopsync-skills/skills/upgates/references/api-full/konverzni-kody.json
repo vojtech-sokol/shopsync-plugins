@@ -1,0 +1,641 @@
+{
+ "schema": {
+  "servers": [],
+  "description": null,
+  "summary": null,
+  "title": "API",
+  "url": null,
+  "version": "2",
+  "tag": {
+   "name": "Konverzní kódy",
+   "description": "- konverzní kódy jsou vázány na **uživatele API.** Odstraněním API přístupu (anebo odinstalaci [doplňku](https://www.upgates.cz/a/pro-vyvojare-doplnky)), se konverzní kódy smažou.\n- pokud budete využívat měřící scripty, můžete nahlédnout do naší dokumentace [Dynamických zástupců](/conversion-codes/intro).\n- v rámci API, nelze zasáhnout do [vlastních konverzních kódů](https://www.upgates.cz/a/princip-konverznich-kodu), které si vytváří majitel e-shopu ručně v adminsitraci.\n- konverzní kód (`code`) je vložen přímo do HTML, tzn. že JavaScriptový kód musí být obalen do tagu `<script>`.",
+   "operations": [
+    {
+     "slug": "seznam-konverznich-kodu",
+     "summary": "Seznam konverzních kódů",
+     "method": "get",
+     "description": null,
+     "operationId": null,
+     "contentTypes": [],
+     "path": "/api/v2/conversion-codes",
+     "deprecated": null,
+     "extensions": {},
+     "servers": [],
+     "parameters": [
+      {
+       "name": "language_id",
+       "in": "query",
+       "description": null,
+       "required": false,
+       "schema": {
+        "type": "string",
+        "description": "kód jazyka dle [ISO 639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes)",
+        "example": "cz",
+        "__$ref": "#/components/schemas/Language"
+       },
+       "style": null,
+       "explode": null,
+       "allowReserved": null,
+       "examples": []
+      }
+     ],
+     "security": null,
+     "requestBody": {
+      "content": [],
+      "description": null,
+      "required": null
+     },
+     "responses": [
+      {
+       "statusCode": "200",
+       "links": null,
+       "description": "OK",
+       "content": [
+        {
+         "examples": [],
+         "mediaType": "application/json",
+         "encoding": null,
+         "schema": {
+          "type": "object",
+          "required": [
+           "conversion_codes"
+          ],
+          "properties": {
+           "conversion_codes": {
+            "type": "array",
+            "items": {
+             "type": "object",
+             "properties": {
+              "position": {
+               "type": "string",
+               "enum": [
+                "head",
+                "body_top",
+                "body_bottom",
+                "order_head",
+                "order_body_top",
+                "order_body_bottom"
+               ],
+               "description": "pozice konverzního kódu\n- `head` - kód je umístěn mezi tagy `<head>` a `</head>` na každé stránce\n- `body_top` - kód je umístěn na začátku tagu `<body>` na každé stránce\n- `body_bottom` - kód je umístěn před tagem `</body>` na každé stránce\n- `order_head` - kód je umístěn mezi tagy `<head>` a `</head>` na stránce po dokončení objednávky\n- `order_body_top` - kód je umístěn na začátku tagu `<body>` na stránce po dokončení objednávky\n- `order_body_bottom` - kód je umístěn před tagem `</body>` na stránce po dokončení objednávky\n",
+               "__$ref": "#/components/schemas/ConversionCodePosition"
+              },
+              "language_id": {
+               "type": "string",
+               "description": "kód jazyka dle [ISO 639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes)",
+               "example": "cz",
+               "__$ref": "#/components/schemas/Language"
+              },
+              "code": {
+               "type": "string",
+               "description": "konverzní kód"
+              }
+             }
+            }
+           }
+          }
+         }
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "slug": "aktualizace-konverzniho-kodu",
+     "summary": "Aktualizace konverzního kódu",
+     "method": "put",
+     "description": null,
+     "operationId": null,
+     "contentTypes": [
+      "application/json"
+     ],
+     "path": "/api/v2/conversion-codes",
+     "deprecated": null,
+     "extensions": {},
+     "servers": [],
+     "parameters": [],
+     "security": null,
+     "requestBody": {
+      "content": [
+       {
+        "mediaType": "application/json",
+        "encoding": [],
+        "examples": [],
+        "schema": {
+         "type": "object",
+         "required": [
+          "conversion_codes"
+         ],
+         "properties": {
+          "conversion_codes": {
+           "type": "array",
+           "items": {
+            "type": "object",
+            "required": [
+             "position",
+             "language_id",
+             "code"
+            ],
+            "properties": {
+             "position": {
+              "type": "string",
+              "enum": [
+               "head",
+               "body_top",
+               "body_bottom",
+               "order_head",
+               "order_body_top",
+               "order_body_bottom"
+              ],
+              "description": "pozice konverzního kódu\n- `head` - kód je umístěn mezi tagy `<head>` a `</head>` na každé stránce\n- `body_top` - kód je umístěn na začátku tagu `<body>` na každé stránce\n- `body_bottom` - kód je umístěn před tagem `</body>` na každé stránce\n- `order_head` - kód je umístěn mezi tagy `<head>` a `</head>` na stránce po dokončení objednávky\n- `order_body_top` - kód je umístěn na začátku tagu `<body>` na stránce po dokončení objednávky\n- `order_body_bottom` - kód je umístěn před tagem `</body>` na stránce po dokončení objednávky\n",
+              "__$ref": "#/components/schemas/ConversionCodePosition"
+             },
+             "language_id": {
+              "type": "string",
+              "description": "kód jazyka dle [ISO 639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes)",
+              "example": "cz",
+              "__$ref": "#/components/schemas/Language"
+             },
+             "code": {
+              "type": "string"
+             }
+            }
+           }
+          }
+         }
+        }
+       }
+      ],
+      "description": null,
+      "required": true
+     },
+     "responses": [
+      {
+       "statusCode": "200",
+       "links": null,
+       "description": "OK",
+       "content": [
+        {
+         "examples": [],
+         "mediaType": "application/json",
+         "encoding": null,
+         "schema": {
+          "type": "object",
+          "required": [
+           "conversion_codes"
+          ],
+          "properties": {
+           "conversion_codes": {
+            "type": "array",
+            "items": {
+             "type": "object",
+             "properties": {
+              "position": {
+               "type": "string",
+               "enum": [
+                "head",
+                "body_top",
+                "body_bottom",
+                "order_head",
+                "order_body_top",
+                "order_body_bottom"
+               ],
+               "description": "pozice konverzního kódu\n- `head` - kód je umístěn mezi tagy `<head>` a `</head>` na každé stránce\n- `body_top` - kód je umístěn na začátku tagu `<body>` na každé stránce\n- `body_bottom` - kód je umístěn před tagem `</body>` na každé stránce\n- `order_head` - kód je umístěn mezi tagy `<head>` a `</head>` na stránce po dokončení objednávky\n- `order_body_top` - kód je umístěn na začátku tagu `<body>` na stránce po dokončení objednávky\n- `order_body_bottom` - kód je umístěn před tagem `</body>` na stránce po dokončení objednávky\n",
+               "__$ref": "#/components/schemas/ConversionCodePosition"
+              },
+              "language_id": {
+               "type": "string",
+               "description": "kód jazyka dle [ISO 639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes)",
+               "example": "cz",
+               "__$ref": "#/components/schemas/Language"
+              },
+              "messages": {
+               "type": "array",
+               "description": "chybové zprávy",
+               "items": {
+                "type": "object",
+                "properties": {
+                 "object": {
+                  "type": "string",
+                  "nullable": true,
+                  "description": "název objektu (část JSONu), kterého se zpráva týká"
+                 },
+                 "property": {
+                  "type": "string",
+                  "nullable": true,
+                  "description": "hodnota, které se zpráva týká"
+                 },
+                 "message": {
+                  "type": "string",
+                  "description": "text zprávy"
+                 },
+                 "level": {
+                  "type": "string",
+                  "enum": [
+                   "info",
+                   "warning",
+                   "error",
+                   "fatal_error"
+                  ],
+                  "description": "úroveň chyby:\n- `info` - informační sdělení\n- `warning` - varování\n- `error` - chyba, pravděpodobně nedošlo ke zpracování\n- `fatal_error` - chyba API, kontaktujte technickou podporu"
+                 }
+                }
+               },
+               "__$ref": "#/components/schemas/ErrorMessages"
+              }
+             }
+            }
+           }
+          }
+         }
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "slug": "vytvoreni-konverzniho-kodu",
+     "summary": "Vytvoření konverzního kódu",
+     "method": "post",
+     "description": null,
+     "operationId": null,
+     "contentTypes": [
+      "application/json"
+     ],
+     "path": "/api/v2/conversion-codes",
+     "deprecated": null,
+     "extensions": {},
+     "servers": [],
+     "parameters": [],
+     "security": null,
+     "requestBody": {
+      "content": [
+       {
+        "mediaType": "application/json",
+        "encoding": [],
+        "examples": [],
+        "schema": {
+         "type": "object",
+         "required": [
+          "conversion_codes"
+         ],
+         "properties": {
+          "conversion_codes": {
+           "type": "array",
+           "items": {
+            "type": "object",
+            "required": [
+             "position",
+             "language_id",
+             "code"
+            ],
+            "properties": {
+             "position": {
+              "type": "string",
+              "enum": [
+               "head",
+               "body_top",
+               "body_bottom",
+               "order_head",
+               "order_body_top",
+               "order_body_bottom"
+              ],
+              "description": "pozice konverzního kódu\n- `head` - kód je umístěn mezi tagy `<head>` a `</head>` na každé stránce\n- `body_top` - kód je umístěn na začátku tagu `<body>` na každé stránce\n- `body_bottom` - kód je umístěn před tagem `</body>` na každé stránce\n- `order_head` - kód je umístěn mezi tagy `<head>` a `</head>` na stránce po dokončení objednávky\n- `order_body_top` - kód je umístěn na začátku tagu `<body>` na stránce po dokončení objednávky\n- `order_body_bottom` - kód je umístěn před tagem `</body>` na stránce po dokončení objednávky\n",
+              "__$ref": "#/components/schemas/ConversionCodePosition"
+             },
+             "language_id": {
+              "type": "string",
+              "description": "kód jazyka dle [ISO 639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes)",
+              "example": "cz",
+              "__$ref": "#/components/schemas/Language"
+             },
+             "code": {
+              "type": "string",
+              "description": "konverzní kód"
+             }
+            }
+           }
+          }
+         }
+        }
+       }
+      ],
+      "description": null,
+      "required": true
+     },
+     "responses": [
+      {
+       "statusCode": "200",
+       "links": null,
+       "description": "OK",
+       "content": [
+        {
+         "examples": [],
+         "mediaType": "application/json",
+         "encoding": null,
+         "schema": {
+          "type": "object",
+          "required": [
+           "conversion_codes"
+          ],
+          "properties": {
+           "conversion_codes": {
+            "type": "array",
+            "items": {
+             "type": "object",
+             "properties": {
+              "position": {
+               "type": "string",
+               "enum": [
+                "head",
+                "body_top",
+                "body_bottom",
+                "order_head",
+                "order_body_top",
+                "order_body_bottom"
+               ],
+               "description": "pozice konverzního kódu\n- `head` - kód je umístěn mezi tagy `<head>` a `</head>` na každé stránce\n- `body_top` - kód je umístěn na začátku tagu `<body>` na každé stránce\n- `body_bottom` - kód je umístěn před tagem `</body>` na každé stránce\n- `order_head` - kód je umístěn mezi tagy `<head>` a `</head>` na stránce po dokončení objednávky\n- `order_body_top` - kód je umístěn na začátku tagu `<body>` na stránce po dokončení objednávky\n- `order_body_bottom` - kód je umístěn před tagem `</body>` na stránce po dokončení objednávky\n",
+               "__$ref": "#/components/schemas/ConversionCodePosition"
+              },
+              "language_id": {
+               "type": "string",
+               "description": "kód jazyka dle [ISO 639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes)",
+               "example": "cz",
+               "__$ref": "#/components/schemas/Language"
+              },
+              "messages": {
+               "type": "array",
+               "description": "chybové zprávy",
+               "items": {
+                "type": "object",
+                "properties": {
+                 "object": {
+                  "type": "string",
+                  "nullable": true,
+                  "description": "název objektu (část JSONu), kterého se zpráva týká"
+                 },
+                 "property": {
+                  "type": "string",
+                  "nullable": true,
+                  "description": "hodnota, které se zpráva týká"
+                 },
+                 "message": {
+                  "type": "string",
+                  "description": "text zprávy"
+                 },
+                 "level": {
+                  "type": "string",
+                  "enum": [
+                   "info",
+                   "warning",
+                   "error",
+                   "fatal_error"
+                  ],
+                  "description": "úroveň chyby:\n- `info` - informační sdělení\n- `warning` - varování\n- `error` - chyba, pravděpodobně nedošlo ke zpracování\n- `fatal_error` - chyba API, kontaktujte technickou podporu"
+                 }
+                }
+               },
+               "__$ref": "#/components/schemas/ErrorMessages"
+              }
+             }
+            }
+           }
+          }
+         }
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "slug": "detail-konverzniho-kodu",
+     "summary": "Detail konverzního kódu",
+     "method": "get",
+     "description": null,
+     "operationId": null,
+     "contentTypes": [],
+     "path": "/api/v2/conversion-codes/{position}",
+     "deprecated": null,
+     "extensions": {},
+     "servers": [],
+     "parameters": [
+      {
+       "name": "position",
+       "in": "path",
+       "description": "pozice konverzního kódu",
+       "required": true,
+       "schema": {
+        "type": "string"
+       },
+       "style": null,
+       "explode": null,
+       "allowReserved": null,
+       "examples": []
+      }
+     ],
+     "security": null,
+     "requestBody": {
+      "content": [],
+      "description": null,
+      "required": null
+     },
+     "responses": [
+      {
+       "statusCode": "200",
+       "links": null,
+       "description": "OK",
+       "content": [
+        {
+         "examples": [],
+         "mediaType": "application/json",
+         "encoding": null,
+         "schema": {
+          "type": "object",
+          "required": [
+           "conversion_codes"
+          ],
+          "properties": {
+           "conversion_codes": {
+            "type": "array",
+            "items": {
+             "type": "object",
+             "properties": {
+              "position": {
+               "type": "string",
+               "enum": [
+                "head",
+                "body_top",
+                "body_bottom",
+                "order_head",
+                "order_body_top",
+                "order_body_bottom"
+               ],
+               "description": "pozice konverzního kódu\n- `head` - kód je umístěn mezi tagy `<head>` a `</head>` na každé stránce\n- `body_top` - kód je umístěn na začátku tagu `<body>` na každé stránce\n- `body_bottom` - kód je umístěn před tagem `</body>` na každé stránce\n- `order_head` - kód je umístěn mezi tagy `<head>` a `</head>` na stránce po dokončení objednávky\n- `order_body_top` - kód je umístěn na začátku tagu `<body>` na stránce po dokončení objednávky\n- `order_body_bottom` - kód je umístěn před tagem `</body>` na stránce po dokončení objednávky\n",
+               "__$ref": "#/components/schemas/ConversionCodePosition"
+              },
+              "language_id": {
+               "type": "string",
+               "description": "kód jazyka dle [ISO 639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes)",
+               "example": "cz",
+               "__$ref": "#/components/schemas/Language"
+              },
+              "code": {
+               "type": "string",
+               "description": "konverzní kód"
+              }
+             }
+            }
+           }
+          }
+         }
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "slug": "smazani-konverzniho-kodu",
+     "summary": "Smazání konverzního kódu",
+     "method": "delete",
+     "description": null,
+     "operationId": null,
+     "contentTypes": [],
+     "path": "/api/v2/conversion-codes/{position}",
+     "deprecated": null,
+     "extensions": {},
+     "servers": [],
+     "parameters": [
+      {
+       "name": "position",
+       "in": "path",
+       "description": null,
+       "required": true,
+       "schema": {
+        "type": "string"
+       },
+       "style": null,
+       "explode": null,
+       "allowReserved": null,
+       "examples": []
+      },
+      {
+       "name": "language_id",
+       "in": "query",
+       "description": null,
+       "required": false,
+       "schema": {
+        "type": "string",
+        "description": "kód jazyka dle [ISO 639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes)",
+        "example": "cz",
+        "__$ref": "#/components/schemas/Language"
+       },
+       "style": null,
+       "explode": null,
+       "allowReserved": null,
+       "examples": []
+      }
+     ],
+     "security": null,
+     "requestBody": {
+      "content": [],
+      "description": null,
+      "required": null
+     },
+     "responses": [
+      {
+       "statusCode": "200",
+       "links": null,
+       "description": "OK",
+       "content": [
+        {
+         "examples": [],
+         "mediaType": "application/json",
+         "encoding": null,
+         "schema": {
+          "type": "object",
+          "required": [
+           "conversion_codes"
+          ],
+          "properties": {
+           "conversion_codes": {
+            "type": "array",
+            "items": {
+             "type": "object",
+             "properties": {
+              "position": {
+               "type": "string",
+               "enum": [
+                "head",
+                "body_top",
+                "body_bottom",
+                "order_head",
+                "order_body_top",
+                "order_body_bottom"
+               ],
+               "description": "pozice konverzního kódu\n- `head` - kód je umístěn mezi tagy `<head>` a `</head>` na každé stránce\n- `body_top` - kód je umístěn na začátku tagu `<body>` na každé stránce\n- `body_bottom` - kód je umístěn před tagem `</body>` na každé stránce\n- `order_head` - kód je umístěn mezi tagy `<head>` a `</head>` na stránce po dokončení objednávky\n- `order_body_top` - kód je umístěn na začátku tagu `<body>` na stránce po dokončení objednávky\n- `order_body_bottom` - kód je umístěn před tagem `</body>` na stránce po dokončení objednávky\n",
+               "__$ref": "#/components/schemas/ConversionCodePosition"
+              },
+              "language_id": {
+               "type": "string",
+               "description": "kód jazyka dle [ISO 639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes)",
+               "example": "cz",
+               "__$ref": "#/components/schemas/Language"
+              },
+              "messages": {
+               "type": "array",
+               "description": "chybové zprávy",
+               "items": {
+                "type": "object",
+                "properties": {
+                 "object": {
+                  "type": "string",
+                  "nullable": true,
+                  "description": "název objektu (část JSONu), kterého se zpráva týká"
+                 },
+                 "property": {
+                  "type": "string",
+                  "nullable": true,
+                  "description": "hodnota, které se zpráva týká"
+                 },
+                 "message": {
+                  "type": "string",
+                  "description": "text zprávy"
+                 },
+                 "level": {
+                  "type": "string",
+                  "enum": [
+                   "info",
+                   "warning",
+                   "error",
+                   "fatal_error"
+                  ],
+                  "description": "úroveň chyby:\n- `info` - informační sdělení\n- `warning` - varování\n- `error` - chyba, pravděpodobně nedošlo ke zpracování\n- `fatal_error` - chyba API, kontaktujte technickou podporu"
+                 }
+                }
+               },
+               "__$ref": "#/components/schemas/ErrorMessages"
+              }
+             }
+            }
+           }
+          }
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "extensions": {},
+   "next": {
+    "name": "Košíky",
+    "slug": "kosiky",
+    "extensions": {}
+   },
+   "prev": {
+    "name": "Kategorie",
+    "slug": "kategorie",
+    "extensions": {}
+   }
+  }
+ }
+}

@@ -1,0 +1,559 @@
+{
+ "schema": {
+  "servers": [],
+  "description": null,
+  "summary": null,
+  "title": "API",
+  "url": null,
+  "version": "2",
+  "tag": {
+   "name": "Slevové kupóny",
+   "description": "- více o slevových kupónech v Upgates e-shopech naleznete [zde](https://www.upgates.cz/a/slevove-karty).",
+   "operations": [
+    {
+     "slug": "seznam-kuponu",
+     "summary": "Seznam kupónů",
+     "method": "get",
+     "description": "Seznam kupónů je dostupný po jednotlivých stranách, výstup je omezen na 100 položek na stránku.",
+     "operationId": null,
+     "contentTypes": [],
+     "path": "/api/v2/vouchers",
+     "deprecated": null,
+     "extensions": {},
+     "servers": [],
+     "parameters": [
+      {
+       "name": "voucher_code",
+       "in": "query",
+       "description": "kód kupónu",
+       "required": null,
+       "schema": {
+        "type": "string"
+       },
+       "style": null,
+       "explode": null,
+       "allowReserved": null,
+       "examples": []
+      },
+      {
+       "name": "voucher_codes",
+       "in": "query",
+       "description": "kódy kupónů oddělené středníkem `;` nebo pole",
+       "required": null,
+       "schema": {
+        "oneOf": [
+         {
+          "type": "string",
+          "description": "hodnoty oddělené středníkem `;`\\\nnapříklad `A;B;C`\n"
+         },
+         {
+          "type": "array",
+          "items": {
+           "type": "string"
+          }
+         }
+        ],
+        "__$ref": "#/components/schemas/QueryParameterArrayString"
+       },
+       "style": null,
+       "explode": null,
+       "allowReserved": null,
+       "examples": []
+      },
+      {
+       "name": "currency_id",
+       "in": "query",
+       "description": null,
+       "required": null,
+       "schema": {
+        "type": "string",
+        "description": "kód měny dle [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217)",
+        "example": "CZK",
+        "__$ref": "#/components/schemas/Currency"
+       },
+       "style": null,
+       "explode": null,
+       "allowReserved": null,
+       "examples": []
+      },
+      {
+       "name": "active_yn",
+       "in": "query",
+       "description": "aktivní / neaktivní",
+       "required": null,
+       "schema": {
+        "type": "boolean"
+       },
+       "style": null,
+       "explode": null,
+       "allowReserved": null,
+       "examples": []
+      },
+      {
+       "name": "for_products_in_action_yn",
+       "in": "query",
+       "description": "lze použít na produkty v akci",
+       "required": null,
+       "schema": {
+        "type": "boolean"
+       },
+       "style": null,
+       "explode": null,
+       "allowReserved": null,
+       "examples": []
+      },
+      {
+       "name": "date_from",
+       "in": "query",
+       "description": "datum platnosti od",
+       "required": null,
+       "schema": {
+        "type": "string",
+        "format": "date",
+        "description": "datum zapsané jako řeťezec znaků dle [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601)",
+        "example": "2026-04-28",
+        "__$ref": "#/components/schemas/Date"
+       },
+       "style": null,
+       "explode": null,
+       "allowReserved": null,
+       "examples": []
+      },
+      {
+       "name": "date_to",
+       "in": "query",
+       "description": "datum platnosti do",
+       "required": null,
+       "schema": {
+        "type": "string",
+        "format": "date",
+        "description": "datum zapsané jako řeťezec znaků dle [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601)",
+        "example": "2026-04-28",
+        "__$ref": "#/components/schemas/Date"
+       },
+       "style": null,
+       "explode": null,
+       "allowReserved": null,
+       "examples": []
+      },
+      {
+       "name": "global_yn",
+       "in": "query",
+       "description": "opakované použití",
+       "required": null,
+       "schema": {
+        "type": "boolean"
+       },
+       "style": null,
+       "explode": null,
+       "allowReserved": null,
+       "examples": []
+      },
+      {
+       "name": "page",
+       "in": "query",
+       "description": "stránka",
+       "required": false,
+       "schema": {
+        "type": "integer",
+        "default": 1
+       },
+       "style": null,
+       "explode": null,
+       "allowReserved": null,
+       "examples": []
+      }
+     ],
+     "security": null,
+     "requestBody": {
+      "content": [],
+      "description": null,
+      "required": null
+     },
+     "responses": [
+      {
+       "statusCode": "200",
+       "links": null,
+       "description": "OK",
+       "content": [
+        {
+         "examples": [],
+         "mediaType": "application/json",
+         "encoding": null,
+         "schema": {
+          "type": "object",
+          "properties": {
+           "current_page": {
+            "type": "integer",
+            "minimum": 1,
+            "description": "aktuální strana"
+           },
+           "current_page_items": {
+            "type": "integer",
+            "description": "počet položek na aktuální straně",
+            "example": 1
+           },
+           "number_of_items": {
+            "type": "integer",
+            "description": "celkový počet položek",
+            "example": 1
+           },
+           "number_of_pages": {
+            "type": "integer",
+            "description": "celkový počet stran",
+            "example": 1
+           },
+           "vouchers": {
+            "type": "array",
+            "description": "pole objektů s kupóny",
+            "items": {
+             "type": "object",
+             "properties": {
+              "voucher_code": {
+               "type": "string",
+               "description": "kód kupónu"
+              },
+              "active_yn": {
+               "type": "boolean",
+               "description": "aktivní"
+              },
+              "global_yn": {
+               "type": "boolean",
+               "description": "opakované použití"
+              },
+              "for_products_in_action_yn": {
+               "type": "boolean",
+               "description": "lze použít na produkty v akci"
+              },
+              "date_from": {
+               "type": "string",
+               "format": "date",
+               "description": "datum platnosti od",
+               "example": "2026-04-28",
+               "nullable": true,
+               "__$ref": "#/components/schemas/Date"
+              },
+              "date_to": {
+               "type": "string",
+               "format": "date",
+               "description": "datum platnosti do",
+               "example": "2026-04-28",
+               "nullable": true,
+               "__$ref": "#/components/schemas/Date"
+              },
+              "type": {
+               "type": "string",
+               "enum": [
+                "price",
+                "percentage",
+                "payment_shipment"
+               ],
+               "description": "typ kupónu:\n- `price` - na pevnou cenu\n- `percentage` - procentuální\n- `payment_shipment` - na dopravu a platbu zdarma\n"
+              },
+              "currency_id": {
+               "type": "string",
+               "description": "kód měny dle [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217)",
+               "example": "CZK",
+               "__$ref": "#/components/schemas/Currency"
+              },
+              "amount": {
+               "type": "number",
+               "format": "float",
+               "description": "hodnota kupónu, podle typu buď procenta nebo cena"
+              },
+              "used_from": {
+               "type": "number",
+               "format": "float",
+               "description": "lze použít od částky"
+              },
+              "note": {
+               "type": "string",
+               "nullable": true,
+               "description": "poznámka"
+              },
+              "creation_time": {
+               "type": "string",
+               "format": "date-time",
+               "description": "datum a čas vytvoření",
+               "example": "2026-04-28T13:57:48+02:00",
+               "__$ref": "#/components/schemas/DateTime"
+              }
+             }
+            }
+           }
+          }
+         }
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "slug": "vytvoreni-kuponu",
+     "summary": "Vytvoření kupónů",
+     "method": "post",
+     "description": "Jedním požadavkem lze vytvořit jeden druh kupónů se stejnými parametry, definuje se počet.",
+     "operationId": null,
+     "contentTypes": [
+      "application/json"
+     ],
+     "path": "/api/v2/vouchers",
+     "deprecated": null,
+     "extensions": {},
+     "servers": [],
+     "parameters": [],
+     "security": null,
+     "requestBody": {
+      "content": [
+       {
+        "mediaType": "application/json",
+        "encoding": [],
+        "examples": [],
+        "schema": {
+         "type": "object",
+         "required": [
+          "type",
+          "currency_id",
+          "amount"
+         ],
+         "properties": {
+          "count": {
+           "type": "integer",
+           "description": "počet kupónů (výchozí hodnota je 1)",
+           "default": 1
+          },
+          "active_yn": {
+           "type": "boolean",
+           "description": "příznak aktivní (výchozí hodnota je `true`)",
+           "default": true
+          },
+          "global_yn": {
+           "type": "boolean",
+           "description": "opakované použití (výchozí hodnota je `false`)",
+           "default": false
+          },
+          "for_products_in_action_yn": {
+           "type": "boolean",
+           "description": "příznak použitelný pro produkty v akci (výchozí hodnota je `false`)",
+           "default": false
+          },
+          "date_from": {
+           "type": "string",
+           "format": "date",
+           "description": "použitelný od data",
+           "example": "2026-04-28",
+           "__$ref": "#/components/schemas/Date"
+          },
+          "date_to": {
+           "type": "string",
+           "format": "date",
+           "description": "použitelný do data",
+           "example": "2026-04-28",
+           "__$ref": "#/components/schemas/Date"
+          },
+          "type": {
+           "type": "string",
+           "enum": [
+            "price",
+            "percentage",
+            "payment_shipment"
+           ],
+           "description": "typ kupónu:\n- `price` - na pevnou cenu\n- `percentage` - procentuální\n- `payment_shipment` - na dopravu a platbu zdarma\n"
+          },
+          "currency_id": {
+           "type": "string",
+           "description": "kód měny dle [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217)",
+           "example": "CZK",
+           "__$ref": "#/components/schemas/Currency"
+          },
+          "amount": {
+           "type": "number",
+           "format": "float",
+           "description": "hodnota kupónu, podle typu buď procenta nebo cena"
+          },
+          "used_from": {
+           "type": "number",
+           "format": "float",
+           "description": "hodnota objednávky, od které lze kupón použít"
+          },
+          "note": {
+           "type": "string",
+           "description": "poznámka"
+          }
+         }
+        }
+       }
+      ],
+      "description": null,
+      "required": true
+     },
+     "responses": [
+      {
+       "statusCode": "200",
+       "links": null,
+       "description": "OK",
+       "content": [
+        {
+         "examples": [],
+         "mediaType": "application/json",
+         "encoding": null,
+         "schema": {
+          "type": "object",
+          "properties": {
+           "vouchers": {
+            "type": "array",
+            "description": "pole kódů nově vygenerovaných slevových kupónů",
+            "items": {
+             "type": "string"
+            }
+           }
+          }
+         }
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "slug": "smazani-kuponu",
+     "summary": "Smazání kupónů",
+     "method": "delete",
+     "description": null,
+     "operationId": null,
+     "contentTypes": [],
+     "path": "/api/v2/vouchers",
+     "deprecated": null,
+     "extensions": {},
+     "servers": [],
+     "parameters": [
+      {
+       "name": "voucher_code",
+       "in": "query",
+       "description": "kód kupónu",
+       "required": null,
+       "schema": {
+        "type": "string"
+       },
+       "style": null,
+       "explode": null,
+       "allowReserved": null,
+       "examples": []
+      },
+      {
+       "name": "voucher_codes",
+       "in": "query",
+       "description": "kódy kupónů oddělené středníkem ; nebo jako pole",
+       "required": null,
+       "schema": {
+        "oneOf": [
+         {
+          "type": "string",
+          "description": "hodnoty oddělené středníkem `;`\\\nnapříklad `A;B;C`\n"
+         },
+         {
+          "type": "array",
+          "items": {
+           "type": "string"
+          }
+         }
+        ],
+        "__$ref": "#/components/schemas/QueryParameterArrayString"
+       },
+       "style": null,
+       "explode": null,
+       "allowReserved": null,
+       "examples": []
+      }
+     ],
+     "security": null,
+     "requestBody": {
+      "content": [],
+      "description": null,
+      "required": null
+     },
+     "responses": [
+      {
+       "statusCode": "200",
+       "links": null,
+       "description": "OK",
+       "content": [
+        {
+         "examples": [],
+         "mediaType": "application/json",
+         "encoding": null,
+         "schema": {
+          "type": "object",
+          "properties": {
+           "vouchers": {
+            "type": "array",
+            "description": "pole objektů s kupóny",
+            "items": {
+             "type": "object",
+             "properties": {
+              "code": {
+               "type": "string",
+               "description": "kód kupónu"
+              },
+              "deleted_yn": {
+               "type": "boolean",
+               "description": "informace o úspěšném smazání položky"
+              },
+              "messages": {
+               "type": "array",
+               "description": "chybové zprávy",
+               "items": {
+                "type": "object",
+                "properties": {
+                 "object": {
+                  "type": "string",
+                  "nullable": true,
+                  "description": "název objektu (část JSONu), kterého se zpráva týká"
+                 },
+                 "property": {
+                  "type": "string",
+                  "nullable": true,
+                  "description": "hodnota, které se zpráva týká"
+                 },
+                 "message": {
+                  "type": "string",
+                  "description": "text zprávy"
+                 },
+                 "level": {
+                  "type": "string",
+                  "enum": [
+                   "info",
+                   "warning",
+                   "error",
+                   "fatal_error"
+                  ],
+                  "description": "úroveň chyby:\n- `info` - informační sdělení\n- `warning` - varování\n- `error` - chyba, pravděpodobně nedošlo ke zpracování\n- `fatal_error` - chyba API, kontaktujte technickou podporu"
+                 }
+                }
+               },
+               "__$ref": "#/components/schemas/ErrorMessages"
+              }
+             }
+            }
+           }
+          }
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "extensions": {},
+   "next": {
+    "name": "Soubory",
+    "slug": "soubory",
+    "extensions": {}
+   },
+   "prev": {
+    "name": "Skupiny zákazníků",
+    "slug": "skupiny-zakazniku",
+    "extensions": {}
+   }
+  }
+ }
+}

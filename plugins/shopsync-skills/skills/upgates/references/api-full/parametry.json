@@ -1,0 +1,1023 @@
+{
+ "schema": {
+  "servers": [],
+  "description": null,
+  "summary": null,
+  "title": "API",
+  "url": null,
+  "version": "2",
+  "tag": {
+   "name": "Parametry",
+   "description": "- více o produktech v Upgates e-shopech naleznete [zde](https://www.upgates.cz/a/princip-a-zobrazeni-parametru).\n- názvy parametrů a hodnot parametrů a musí být vždy ve všech jazycích, ty které chybí se vezmou z výchozího jazyka, pokud není tak z prvního co je na řadě.",
+   "operations": [
+    {
+     "slug": "detail-parametru",
+     "summary": "Detail parametru",
+     "method": "get",
+     "description": null,
+     "operationId": null,
+     "contentTypes": [],
+     "path": "/api/v2/parameters/{id}",
+     "deprecated": null,
+     "extensions": {},
+     "servers": [],
+     "parameters": [
+      {
+       "name": "id",
+       "in": "path",
+       "description": "ID parametru",
+       "required": true,
+       "schema": {
+        "type": "integer"
+       },
+       "style": null,
+       "explode": null,
+       "allowReserved": null,
+       "examples": []
+      }
+     ],
+     "security": null,
+     "requestBody": {
+      "content": [],
+      "description": null,
+      "required": null
+     },
+     "responses": [
+      {
+       "statusCode": "200",
+       "links": null,
+       "description": "OK",
+       "content": [
+        {
+         "examples": [],
+         "mediaType": "application/json",
+         "encoding": null,
+         "schema": {
+          "type": "object",
+          "properties": {
+           "current_page": {
+            "type": "integer",
+            "minimum": 1,
+            "description": "aktuální strana"
+           },
+           "current_page_items": {
+            "type": "integer",
+            "description": "počet položek na aktuální straně",
+            "example": 1
+           },
+           "number_of_items": {
+            "type": "integer",
+            "description": "celkový počet položek",
+            "example": 1
+           },
+           "number_of_pages": {
+            "type": "integer",
+            "description": "celkový počet stran",
+            "example": 1
+           },
+           "parameters": {
+            "type": "array",
+            "items": {
+             "type": "object",
+             "properties": {
+              "id": {
+               "type": "integer",
+               "description": "ID parametru"
+              },
+              "descriptions": {
+               "type": "array",
+               "description": "názvy parametrů",
+               "items": {
+                "type": "object",
+                "properties": {
+                 "language": {
+                  "type": "string",
+                  "description": "kód jazyka dle [ISO 639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes)",
+                  "example": "cz",
+                  "__$ref": "#/components/schemas/Language"
+                 },
+                 "name": {
+                  "type": "string"
+                 }
+                }
+               }
+              },
+              "values": {
+               "type": "array",
+               "description": "hodnoty parametrů",
+               "items": {
+                "type": "object",
+                "properties": {
+                 "id": {
+                  "type": "integer",
+                  "description": "ID hodnoty parametru"
+                 },
+                 "descriptions": {
+                  "type": "array",
+                  "description": "názvy hodnot parametrů",
+                  "items": {
+                   "type": "object",
+                   "properties": {
+                    "language": {
+                     "type": "string",
+                     "description": "kód jazyka dle [ISO 639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes)",
+                     "example": "cz",
+                     "__$ref": "#/components/schemas/Language"
+                    },
+                    "value": {
+                     "type": "string"
+                    }
+                   }
+                  }
+                 },
+                 "image": {
+                  "type": "object",
+                  "description": "obrázek hodnoty parametru, uvádět buď `id` (použije se existující obrázek) nebo `url` (stáhne se obrázek z URL)",
+                  "properties": {
+                   "id": {
+                    "type": "integer",
+                    "description": "ID souboru"
+                   },
+                   "url": {
+                    "type": "string",
+                    "format": "uri",
+                    "description": "URL souboru"
+                   }
+                  }
+                 },
+                 "position": {
+                  "type": "integer"
+                 }
+                }
+               }
+              },
+              "position": {
+               "type": "integer",
+               "description": "pozice"
+              },
+              "display_type": {
+               "type": "string",
+               "enum": [
+                "select",
+                "listing",
+                "tile"
+               ],
+               "description": "zobrazení parametru:\n- `select` - standardní zobrazení (výchozí)\n- `listing` - zobrazení s obrázky\n- `tile` - zobrazení textově v dlaždici\n"
+              },
+              "display_in_product_list_yn": {
+               "type": "boolean",
+               "description": "zobrazit v seznamu produktů"
+              },
+              "display_in_product_detail_yn": {
+               "type": "boolean",
+               "description": "zobrazit v detailu produktu"
+              },
+              "display_in_filters_as_slider_yn": {
+               "type": "boolean",
+               "description": "zobrazit ve filtrech jako slider"
+              }
+             }
+            }
+           }
+          }
+         }
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "slug": "seznam-parametru",
+     "summary": "Seznam parametrů",
+     "method": "get",
+     "description": null,
+     "operationId": null,
+     "contentTypes": [],
+     "path": "/api/v2/parameters",
+     "deprecated": null,
+     "extensions": {},
+     "servers": [],
+     "parameters": [
+      {
+       "name": "ids",
+       "in": "query",
+       "description": "ID parametru oddělené středníkem `;` nebo jako pole",
+       "required": false,
+       "schema": {
+        "oneOf": [
+         {
+          "type": "string",
+          "description": "hodnoty oddělené středníkem `;`\\\nnapříklad `1;2;3`\n"
+         },
+         {
+          "type": "array",
+          "items": {
+           "type": "integer"
+          }
+         }
+        ],
+        "__$ref": "#/components/schemas/QueryParameterArrayInt"
+       },
+       "style": null,
+       "explode": null,
+       "allowReserved": null,
+       "examples": []
+      },
+      {
+       "name": "page",
+       "in": "query",
+       "description": "stránka",
+       "required": false,
+       "schema": {
+        "type": "integer",
+        "default": 1
+       },
+       "style": null,
+       "explode": null,
+       "allowReserved": null,
+       "examples": []
+      }
+     ],
+     "security": null,
+     "requestBody": {
+      "content": [],
+      "description": null,
+      "required": null
+     },
+     "responses": [
+      {
+       "statusCode": "200",
+       "links": null,
+       "description": "OK",
+       "content": [
+        {
+         "examples": [],
+         "mediaType": "application/json",
+         "encoding": null,
+         "schema": {
+          "type": "object",
+          "properties": {
+           "current_page": {
+            "type": "integer",
+            "minimum": 1,
+            "description": "aktuální strana"
+           },
+           "current_page_items": {
+            "type": "integer",
+            "description": "počet položek na aktuální straně",
+            "example": 1
+           },
+           "number_of_items": {
+            "type": "integer",
+            "description": "celkový počet položek",
+            "example": 1
+           },
+           "number_of_pages": {
+            "type": "integer",
+            "description": "celkový počet stran",
+            "example": 1
+           },
+           "parameters": {
+            "type": "array",
+            "items": {
+             "type": "object",
+             "properties": {
+              "id": {
+               "type": "integer",
+               "description": "ID parametru"
+              },
+              "descriptions": {
+               "type": "array",
+               "description": "názvy parametrů",
+               "items": {
+                "type": "object",
+                "properties": {
+                 "language": {
+                  "type": "string",
+                  "description": "kód jazyka dle [ISO 639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes)",
+                  "example": "cz",
+                  "__$ref": "#/components/schemas/Language"
+                 },
+                 "name": {
+                  "type": "string"
+                 }
+                }
+               }
+              },
+              "values": {
+               "type": "array",
+               "description": "hodnoty parametrů",
+               "items": {
+                "type": "object",
+                "properties": {
+                 "id": {
+                  "type": "integer",
+                  "description": "ID hodnoty parametru"
+                 },
+                 "descriptions": {
+                  "type": "array",
+                  "description": "názvy hodnot parametrů",
+                  "items": {
+                   "type": "object",
+                   "properties": {
+                    "language": {
+                     "type": "string",
+                     "description": "kód jazyka dle [ISO 639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes)",
+                     "example": "cz",
+                     "__$ref": "#/components/schemas/Language"
+                    },
+                    "value": {
+                     "type": "string"
+                    }
+                   }
+                  }
+                 },
+                 "image": {
+                  "type": "object",
+                  "description": "obrázek hodnoty parametru, uvádět buď `id` (použije se existující obrázek) nebo `url` (stáhne se obrázek z URL)",
+                  "properties": {
+                   "id": {
+                    "type": "integer",
+                    "description": "ID souboru"
+                   },
+                   "url": {
+                    "type": "string",
+                    "format": "uri",
+                    "description": "URL souboru"
+                   }
+                  }
+                 },
+                 "position": {
+                  "type": "integer"
+                 }
+                }
+               }
+              },
+              "position": {
+               "type": "integer",
+               "description": "pozice"
+              },
+              "display_type": {
+               "type": "string",
+               "enum": [
+                "select",
+                "listing",
+                "tile"
+               ],
+               "description": "zobrazení parametru:\n- `select` - standardní zobrazení (výchozí)\n- `listing` - zobrazení s obrázky\n- `tile` - zobrazení textově v dlaždici\n"
+              },
+              "display_in_product_list_yn": {
+               "type": "boolean",
+               "description": "zobrazit v seznamu produktů"
+              },
+              "display_in_product_detail_yn": {
+               "type": "boolean",
+               "description": "zobrazit v detailu produktu"
+              },
+              "display_in_filters_as_slider_yn": {
+               "type": "boolean",
+               "description": "zobrazit ve filtrech jako slider"
+              }
+             }
+            }
+           }
+          }
+         }
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "slug": "aktualizace-parametru",
+     "summary": "Aktualizace parametrů",
+     "method": "put",
+     "description": null,
+     "operationId": null,
+     "contentTypes": [
+      "application/json"
+     ],
+     "path": "/api/v2/parameters",
+     "deprecated": null,
+     "extensions": {},
+     "servers": [],
+     "parameters": [],
+     "security": null,
+     "requestBody": {
+      "content": [
+       {
+        "mediaType": "application/json",
+        "encoding": [],
+        "examples": [],
+        "schema": {
+         "type": "object",
+         "properties": {
+          "parameters": {
+           "type": "array",
+           "description": "pole objektů s parametry",
+           "items": {
+            "type": "object",
+            "required": [
+             "id"
+            ],
+            "properties": {
+             "id": {
+              "type": "integer",
+              "description": "ID parametru"
+             },
+             "descriptions": {
+              "type": "array",
+              "items": {
+               "type": "object",
+               "properties": {
+                "language": {
+                 "type": "string",
+                 "description": "kód jazyka dle [ISO 639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes)",
+                 "example": "cz",
+                 "__$ref": "#/components/schemas/Language"
+                },
+                "name": {
+                 "type": "string",
+                 "description": "název"
+                }
+               }
+              }
+             },
+             "values": {
+              "type": "array",
+              "description": "hodnoty",
+              "items": {
+               "type": "object",
+               "properties": {
+                "id": {
+                 "type": "integer",
+                 "description": "ID hodnoty parametru"
+                },
+                "descriptions": {
+                 "type": "array",
+                 "items": {
+                  "type": "object",
+                  "properties": {
+                   "language": {
+                    "type": "string",
+                    "description": "kód jazyka dle [ISO 639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes)",
+                    "example": "cz",
+                    "__$ref": "#/components/schemas/Language"
+                   },
+                   "value": {
+                    "type": "string",
+                    "description": "hodnota"
+                   }
+                  }
+                 }
+                },
+                "position": {
+                 "type": "integer",
+                 "description": "pozice"
+                }
+               }
+              }
+             },
+             "position": {
+              "type": "integer",
+              "description": "pozice"
+             },
+             "display_type": {
+              "type": "string",
+              "enum": [
+               "select",
+               "listing",
+               "tile"
+              ],
+              "description": "typ zobrazení parametru"
+             },
+             "display_in_product_list_yn": {
+              "type": "boolean",
+              "description": "zobrazit v seznamu produktů"
+             },
+             "display_in_product_detail_yn": {
+              "type": "boolean",
+              "description": "zobrazit v detailu produktu"
+             },
+             "display_in_filters_as_slider_yn": {
+              "type": "boolean",
+              "description": "zobrazit ve filtrech jako slider"
+             }
+            }
+           }
+          }
+         }
+        }
+       }
+      ],
+      "description": null,
+      "required": true
+     },
+     "responses": [
+      {
+       "statusCode": "200",
+       "links": null,
+       "description": "OK",
+       "content": [
+        {
+         "examples": [],
+         "mediaType": "application/json",
+         "encoding": null,
+         "schema": {
+          "type": "object",
+          "properties": {
+           "parameters": {
+            "type": "array",
+            "items": {
+             "type": "object",
+             "properties": {
+              "id": {
+               "type": "integer",
+               "description": "ID parametru"
+              },
+              "created_yn": {
+               "type": "boolean",
+               "description": "informace o úspěšném vytvoření položky"
+              },
+              "messages": {
+               "type": "array",
+               "description": "chybové zprávy",
+               "items": {
+                "type": "object",
+                "properties": {
+                 "object": {
+                  "type": "string",
+                  "nullable": true,
+                  "description": "název objektu (část JSONu), kterého se zpráva týká"
+                 },
+                 "property": {
+                  "type": "string",
+                  "nullable": true,
+                  "description": "hodnota, které se zpráva týká"
+                 },
+                 "message": {
+                  "type": "string",
+                  "description": "text zprávy"
+                 },
+                 "level": {
+                  "type": "string",
+                  "enum": [
+                   "info",
+                   "warning",
+                   "error",
+                   "fatal_error"
+                  ],
+                  "description": "úroveň chyby:\n- `info` - informační sdělení\n- `warning` - varování\n- `error` - chyba, pravděpodobně nedošlo ke zpracování\n- `fatal_error` - chyba API, kontaktujte technickou podporu"
+                 }
+                }
+               },
+               "__$ref": "#/components/schemas/ErrorMessages"
+              }
+             }
+            }
+           }
+          }
+         }
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "slug": "vytvoreni-parametru",
+     "summary": "Vytvoření parametrů",
+     "method": "post",
+     "description": "Názvy parametrů a hodnot parametrů musí být vždy ve všech jazycích,\nty které chybí se vezmou z výchozího jazyka, pokud není tak z prvního co je na řadě.\n",
+     "operationId": null,
+     "contentTypes": [
+      "application/json"
+     ],
+     "path": "/api/v2/parameters",
+     "deprecated": null,
+     "extensions": {},
+     "servers": [],
+     "parameters": [],
+     "security": null,
+     "requestBody": {
+      "content": [
+       {
+        "mediaType": "application/json",
+        "encoding": [],
+        "examples": [],
+        "schema": {
+         "type": "object",
+         "properties": {
+          "parameters": {
+           "type": "array",
+           "description": "pole objektů s parametry",
+           "items": {
+            "type": "object",
+            "properties": {
+             "descriptions": {
+              "type": "array",
+              "items": {
+               "type": "object",
+               "properties": {
+                "language": {
+                 "type": "string",
+                 "description": "kód jazyka dle [ISO 639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes)",
+                 "example": "cz",
+                 "__$ref": "#/components/schemas/Language"
+                },
+                "name": {
+                 "type": "string",
+                 "description": "název"
+                }
+               }
+              }
+             },
+             "values": {
+              "type": "array",
+              "description": "hodnoty",
+              "items": {
+               "type": "object",
+               "properties": {
+                "descriptions": {
+                 "type": "array",
+                 "items": {
+                  "type": "object",
+                  "properties": {
+                   "language": {
+                    "type": "string",
+                    "description": "kód jazyka dle [ISO 639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes)",
+                    "example": "cz",
+                    "__$ref": "#/components/schemas/Language"
+                   },
+                   "value": {
+                    "type": "string",
+                    "description": "hodnota"
+                   }
+                  }
+                 }
+                },
+                "position": {
+                 "type": "integer",
+                 "description": "pozice"
+                }
+               }
+              }
+             },
+             "position": {
+              "type": "integer",
+              "description": "pozice"
+             },
+             "display_type": {
+              "type": "string",
+              "enum": [
+               "select",
+               "listing",
+               "tile"
+              ],
+              "description": "typ zobrazení parametru"
+             },
+             "display_in_product_list_yn": {
+              "type": "boolean",
+              "description": "zobrazit v seznamu produktů"
+             },
+             "display_in_product_detail_yn": {
+              "type": "boolean",
+              "description": "zobrazit v detailu produktu"
+             },
+             "display_in_filters_as_slider_yn": {
+              "type": "boolean",
+              "description": "zobrazit ve filtrech jako slider"
+             }
+            }
+           }
+          }
+         }
+        }
+       }
+      ],
+      "description": null,
+      "required": true
+     },
+     "responses": [
+      {
+       "statusCode": "200",
+       "links": null,
+       "description": "OK",
+       "content": [
+        {
+         "examples": [],
+         "mediaType": "application/json",
+         "encoding": null,
+         "schema": {
+          "type": "object",
+          "properties": {
+           "parameters": {
+            "type": "array",
+            "items": {
+             "type": "object",
+             "properties": {
+              "id": {
+               "type": "integer",
+               "description": "ID parametru"
+              },
+              "inserted_yn": {
+               "type": "boolean",
+               "description": "informace o úspěšném vytvoření položky"
+              },
+              "messages": {
+               "type": "array",
+               "description": "chybové zprávy",
+               "items": {
+                "type": "object",
+                "properties": {
+                 "object": {
+                  "type": "string",
+                  "nullable": true,
+                  "description": "název objektu (část JSONu), kterého se zpráva týká"
+                 },
+                 "property": {
+                  "type": "string",
+                  "nullable": true,
+                  "description": "hodnota, které se zpráva týká"
+                 },
+                 "message": {
+                  "type": "string",
+                  "description": "text zprávy"
+                 },
+                 "level": {
+                  "type": "string",
+                  "enum": [
+                   "info",
+                   "warning",
+                   "error",
+                   "fatal_error"
+                  ],
+                  "description": "úroveň chyby:\n- `info` - informační sdělení\n- `warning` - varování\n- `error` - chyba, pravděpodobně nedošlo ke zpracování\n- `fatal_error` - chyba API, kontaktujte technickou podporu"
+                 }
+                }
+               },
+               "__$ref": "#/components/schemas/ErrorMessages"
+              }
+             }
+            }
+           }
+          }
+         }
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "slug": "smazani-parametru",
+     "summary": "Smazání parametrů",
+     "method": "delete",
+     "description": null,
+     "operationId": null,
+     "contentTypes": [],
+     "path": "/api/v2/parameters",
+     "deprecated": null,
+     "extensions": {},
+     "servers": [],
+     "parameters": [
+      {
+       "name": "id",
+       "in": "query",
+       "description": "ID parametru",
+       "required": false,
+       "schema": {
+        "type": "integer"
+       },
+       "style": null,
+       "explode": null,
+       "allowReserved": null,
+       "examples": []
+      },
+      {
+       "name": "ids",
+       "in": "query",
+       "description": "ID parametru oddělené středníkem `;` nebo jako pole",
+       "required": false,
+       "schema": {
+        "oneOf": [
+         {
+          "type": "string",
+          "description": "hodnoty oddělené středníkem `;`\\\nnapříklad `1;2;3`\n"
+         },
+         {
+          "type": "array",
+          "items": {
+           "type": "integer"
+          }
+         }
+        ],
+        "__$ref": "#/components/schemas/QueryParameterArrayInt"
+       },
+       "style": null,
+       "explode": null,
+       "allowReserved": null,
+       "examples": []
+      }
+     ],
+     "security": null,
+     "requestBody": {
+      "content": [],
+      "description": null,
+      "required": null
+     },
+     "responses": [
+      {
+       "statusCode": "200",
+       "links": null,
+       "description": "OK",
+       "content": [
+        {
+         "examples": [],
+         "mediaType": "application/json",
+         "encoding": null,
+         "schema": {
+          "type": "object",
+          "properties": {
+           "parameters": {
+            "type": "array",
+            "items": {
+             "type": "object",
+             "properties": {
+              "id": {
+               "type": "integer",
+               "description": "ID parametru"
+              },
+              "deleted_yn": {
+               "type": "boolean"
+              },
+              "messages": {
+               "type": "array",
+               "description": "chybové zprávy",
+               "items": {
+                "type": "object",
+                "properties": {
+                 "object": {
+                  "type": "string",
+                  "nullable": true,
+                  "description": "název objektu (část JSONu), kterého se zpráva týká"
+                 },
+                 "property": {
+                  "type": "string",
+                  "nullable": true,
+                  "description": "hodnota, které se zpráva týká"
+                 },
+                 "message": {
+                  "type": "string",
+                  "description": "text zprávy"
+                 },
+                 "level": {
+                  "type": "string",
+                  "enum": [
+                   "info",
+                   "warning",
+                   "error",
+                   "fatal_error"
+                  ],
+                  "description": "úroveň chyby:\n- `info` - informační sdělení\n- `warning` - varování\n- `error` - chyba, pravděpodobně nedošlo ke zpracování\n- `fatal_error` - chyba API, kontaktujte technickou podporu"
+                 }
+                }
+               },
+               "__$ref": "#/components/schemas/ErrorMessages"
+              }
+             }
+            }
+           }
+          }
+         }
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "slug": "smazani-hodnot-parametru",
+     "summary": "Smazání hodnot parametrů",
+     "method": "delete",
+     "description": null,
+     "operationId": null,
+     "contentTypes": [],
+     "path": "/api/v2/parameters/values",
+     "deprecated": null,
+     "extensions": {},
+     "servers": [],
+     "parameters": [
+      {
+       "name": "ids",
+       "in": "query",
+       "description": "ID hodnoty parametru oddělené středníkem `;` nebo jako pole",
+       "required": false,
+       "schema": {
+        "oneOf": [
+         {
+          "type": "string",
+          "description": "hodnoty oddělené středníkem `;`\\\nnapříklad `1;2;3`\n"
+         },
+         {
+          "type": "array",
+          "items": {
+           "type": "integer"
+          }
+         }
+        ],
+        "__$ref": "#/components/schemas/QueryParameterArrayInt"
+       },
+       "style": null,
+       "explode": null,
+       "allowReserved": null,
+       "examples": []
+      }
+     ],
+     "security": null,
+     "requestBody": {
+      "content": [],
+      "description": null,
+      "required": null
+     },
+     "responses": [
+      {
+       "statusCode": "200",
+       "links": null,
+       "description": "OK",
+       "content": [
+        {
+         "examples": [],
+         "mediaType": "application/json",
+         "encoding": null,
+         "schema": {
+          "type": "object",
+          "properties": {
+           "parameters": {
+            "type": "array",
+            "items": {
+             "type": "object",
+             "properties": {
+              "id": {
+               "type": "integer",
+               "description": "ID hodnoty"
+              },
+              "deleted_yn": {
+               "type": "boolean"
+              },
+              "messages": {
+               "type": "array",
+               "description": "chybové zprávy",
+               "items": {
+                "type": "object",
+                "properties": {
+                 "object": {
+                  "type": "string",
+                  "nullable": true,
+                  "description": "název objektu (část JSONu), kterého se zpráva týká"
+                 },
+                 "property": {
+                  "type": "string",
+                  "nullable": true,
+                  "description": "hodnota, které se zpráva týká"
+                 },
+                 "message": {
+                  "type": "string",
+                  "description": "text zprávy"
+                 },
+                 "level": {
+                  "type": "string",
+                  "enum": [
+                   "info",
+                   "warning",
+                   "error",
+                   "fatal_error"
+                  ],
+                  "description": "úroveň chyby:\n- `info` - informační sdělení\n- `warning` - varování\n- `error` - chyba, pravděpodobně nedošlo ke zpracování\n- `fatal_error` - chyba API, kontaktujte technickou podporu"
+                 }
+                }
+               },
+               "__$ref": "#/components/schemas/ErrorMessages"
+              }
+             }
+            }
+           }
+          }
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "extensions": {},
+   "next": {
+    "name": "Platby",
+    "slug": "platby",
+    "extensions": {}
+   },
+   "prev": {
+    "name": "Objednávky - přílohy",
+    "slug": "objednavky-prilohy",
+    "extensions": {}
+   }
+  }
+ }
+}

@@ -1,0 +1,129 @@
+{
+ "schema": {
+  "servers": [],
+  "description": null,
+  "summary": null,
+  "title": "API",
+  "url": null,
+  "version": "2",
+  "tag": {
+   "name": "Jazyky",
+   "description": "- pro práci s jazyky lze využívat **[webhooky](/webhooks/languages)**.\n- více na téma jazyky a jazykové mutace v Upgates naleznete [zde](https://www.upgates.cz/a/typy-jazykovych-mutaci).",
+   "operations": [
+    {
+     "slug": "seznam-jazyku",
+     "summary": "Seznam jazyků",
+     "method": "get",
+     "description": null,
+     "operationId": null,
+     "contentTypes": [],
+     "path": "/api/v2/languages",
+     "deprecated": null,
+     "extensions": {},
+     "servers": [],
+     "parameters": [],
+     "security": null,
+     "requestBody": {
+      "content": [],
+      "description": null,
+      "required": null
+     },
+     "responses": [
+      {
+       "statusCode": "200",
+       "links": null,
+       "description": "OK",
+       "content": [
+        {
+         "examples": [],
+         "mediaType": "application/json",
+         "encoding": null,
+         "schema": {
+          "type": "object",
+          "required": [
+           "languages"
+          ],
+          "properties": {
+           "languages": {
+            "type": "array",
+            "description": "seznam jazykových mutací",
+            "items": {
+             "type": "object",
+             "properties": {
+              "language_id": {
+               "type": "string",
+               "description": "kód jazyka dle [ISO 639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes)",
+               "example": "cz",
+               "__$ref": "#/components/schemas/Language"
+              },
+              "actual_language_id": {
+               "type": "string",
+               "description": "skutečné ID jazyka (sdílené mutace)",
+               "example": "cz",
+               "__$ref": "#/components/schemas/Language"
+              },
+              "active_yn": {
+               "type": "boolean",
+               "description": "příznak aktivního jazyka"
+              },
+              "default_yn": {
+               "type": "boolean",
+               "description": "hlavní jazyk"
+              },
+              "domain": {
+               "type": "string",
+               "description": "doména jazykové mutace"
+              },
+              "currency_id": {
+               "type": "string",
+               "description": "kód měny dle [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217)",
+               "example": "CZK",
+               "__$ref": "#/components/schemas/Currency"
+              },
+              "default_country_id": {
+               "type": "string",
+               "description": "kód země dle [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)",
+               "example": "cz",
+               "__$ref": "#/components/schemas/Country"
+              },
+              "logo_url": {
+               "type": [
+                "string",
+                "null"
+               ],
+               "format": "uri",
+               "description": "URL loga (může být SVG)"
+              },
+              "logo_no_svg": {
+               "type": [
+                "string",
+                "null"
+               ],
+               "format": "uri",
+               "description": "URL loga bez SVG"
+              }
+             }
+            }
+           }
+          }
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "extensions": {},
+   "next": {
+    "name": "Kategorie",
+    "slug": "kategorie",
+    "extensions": {}
+   },
+   "prev": {
+    "name": "Grafika - zálohy",
+    "slug": "grafika-zalohy",
+    "extensions": {}
+   }
+  }
+ }
+}

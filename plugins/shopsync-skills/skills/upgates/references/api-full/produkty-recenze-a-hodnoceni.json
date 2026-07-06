@@ -1,0 +1,580 @@
+{
+ "schema": {
+  "servers": [],
+  "description": null,
+  "summary": null,
+  "title": "API",
+  "url": null,
+  "version": "2",
+  "tag": {
+   "name": "Produkty - recenze a hodnocení",
+   "description": "- pro práci s produkty lze využívat **[webhooky](/webhooks/products)**.\n- recenze a hodnocení jsou spojeny do jednoho záznamu.\n- více informací na [Hodnocení a recenze](https://www.upgates.cz/a/hodnoceni-a-recenze)",
+   "operations": [
+    {
+     "slug": "seznam-recenzi-a-hodnoceni",
+     "summary": "Seznam recenzí a hodnocení",
+     "method": "get",
+     "description": null,
+     "operationId": null,
+     "contentTypes": [],
+     "path": "/api/v2/products/ratings-reviews",
+     "deprecated": null,
+     "extensions": {},
+     "servers": [],
+     "parameters": [
+      {
+       "name": "product_code",
+       "in": "query",
+       "description": "kód produktu",
+       "required": null,
+       "schema": {
+        "type": "string"
+       },
+       "style": null,
+       "explode": null,
+       "allowReserved": null,
+       "examples": []
+      },
+      {
+       "name": "email",
+       "in": "query",
+       "description": "email zákazníka",
+       "required": null,
+       "schema": {
+        "type": "string",
+        "format": "email"
+       },
+       "style": null,
+       "explode": null,
+       "allowReserved": null,
+       "examples": []
+      },
+      {
+       "name": "page",
+       "in": "query",
+       "description": "stránka",
+       "required": false,
+       "schema": {
+        "type": "integer",
+        "default": 1
+       },
+       "style": null,
+       "explode": null,
+       "allowReserved": null,
+       "examples": []
+      }
+     ],
+     "security": null,
+     "requestBody": {
+      "content": [],
+      "description": null,
+      "required": null
+     },
+     "responses": [
+      {
+       "statusCode": "200",
+       "links": null,
+       "description": "OK",
+       "content": [
+        {
+         "examples": [],
+         "mediaType": "application/json",
+         "encoding": null,
+         "schema": {
+          "type": "object",
+          "properties": {
+           "current_page": {
+            "type": "integer",
+            "minimum": 1,
+            "description": "aktuální strana"
+           },
+           "current_page_items": {
+            "type": "integer",
+            "description": "počet položek na aktuální straně",
+            "example": 1
+           },
+           "number_of_items": {
+            "type": "integer",
+            "description": "celkový počet položek",
+            "example": 1
+           },
+           "number_of_pages": {
+            "type": "integer",
+            "description": "celkový počet stran",
+            "example": 1
+           },
+           "ratings_reviews": {
+            "type": "array",
+            "items": {
+             "type": "object",
+             "properties": {
+              "rating_review_id": {
+               "type": "integer",
+               "description": "ID hodnocení a recenze"
+              },
+              "product": {
+               "type": "object",
+               "description": "produkt",
+               "properties": {
+                "product_id": {
+                 "type": "integer",
+                 "description": "ID produktu"
+                },
+                "code": {
+                 "type": "string",
+                 "nullable": true,
+                 "description": "kód produktu"
+                }
+               }
+              },
+              "customer": {
+               "type": "object",
+               "description": "zákazník",
+               "properties": {
+                "email": {
+                 "type": "string",
+                 "format": "email",
+                 "description": "email zákazníka"
+                },
+                "code": {
+                 "type": "string",
+                 "description": "kód zákazníka"
+                },
+                "customer_name": {
+                 "type": "string",
+                 "description": "jméno zákazníka, které se zobrazuje u recenze a hodnocení. Může jít i o nick"
+                }
+               }
+              },
+              "review": {
+               "type": "object",
+               "description": "recenze",
+               "properties": {
+                "positives": {
+                 "type": "string",
+                 "description": "klady"
+                },
+                "negatives": {
+                 "type": "string",
+                 "description": "zápory"
+                },
+                "creation_time": {
+                 "type": "string",
+                 "format": "date-time",
+                 "description": "datum vytvoření recenze",
+                 "example": "2026-04-28T13:57:48+02:00",
+                 "__$ref": "#/components/schemas/DateTime"
+                },
+                "answer": {
+                 "type": "object",
+                 "description": "odpověď na recenzi",
+                 "properties": {
+                  "user_name": {
+                   "type": "string",
+                   "description": "jméno uživatele, který odpovídal"
+                  },
+                  "text": {
+                   "type": "string",
+                   "description": "text odpovědi"
+                  },
+                  "creation_time": {
+                   "type": "string",
+                   "format": "date-time",
+                   "description": "datum a čas vytvoření odpovědi",
+                   "example": "2026-04-28T13:57:48+02:00",
+                   "__$ref": "#/components/schemas/DateTime"
+                  }
+                 }
+                }
+               }
+              },
+              "rating": {
+               "type": "object",
+               "description": "hodnocení",
+               "properties": {
+                "score": {
+                 "type": "integer",
+                 "description": "počet hvězdiček 1-5",
+                 "minimum": 1,
+                 "maximum": 5
+                },
+                "creation_time": {
+                 "type": "string",
+                 "format": "date-time",
+                 "description": "datum a čas vytvoření recenze",
+                 "example": "2026-04-28T13:57:48+02:00",
+                 "__$ref": "#/components/schemas/DateTime"
+                }
+               }
+              },
+              "approved_yn": {
+               "type": "boolean",
+               "description": "příznak, jestli je recenze a hodnocení schváleno"
+              },
+              "approved_time": {
+               "type": "string",
+               "format": "date-time",
+               "description": "datum a čas schválení",
+               "example": "2026-04-28T13:57:48+02:00",
+               "__$ref": "#/components/schemas/DateTime"
+              }
+             }
+            }
+           }
+          }
+         }
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "slug": "vytvoreni-recenze-a-hodnoceni",
+     "summary": "Vytvoření recenze a hodnocení",
+     "method": "post",
+     "description": "Vytvoří recenzi a hodnocení produktu.\nKaždý zákazník může hodnotit produkt pouze jednou.\n",
+     "operationId": null,
+     "contentTypes": [
+      "application/json"
+     ],
+     "path": "/api/v2/products/ratings-reviews",
+     "deprecated": null,
+     "extensions": {},
+     "servers": [],
+     "parameters": [],
+     "security": null,
+     "requestBody": {
+      "content": [
+       {
+        "mediaType": "application/json",
+        "encoding": [],
+        "examples": [],
+        "schema": {
+         "type": "object",
+         "required": [
+          "ratings_reviews"
+         ],
+         "properties": {
+          "ratings_reviews": {
+           "type": "array",
+           "items": {
+            "type": "object",
+            "required": [
+             "product",
+             "customer",
+             "rating"
+            ],
+            "properties": {
+             "product": {
+              "type": "object",
+              "description": "produkt",
+              "required": [
+               "code"
+              ],
+              "properties": {
+               "code": {
+                "type": "string",
+                "description": "kód produktu"
+               }
+              }
+             },
+             "customer": {
+              "type": "object",
+              "description": "zákazník",
+              "required": [
+               "email"
+              ],
+              "properties": {
+               "email": {
+                "type": "string",
+                "format": "email",
+                "description": "email zákazníka"
+               },
+               "customer_name": {
+                "type": "string",
+                "description": "Jméno nebo nick zákazníka zobrazovaný u recenze.\nPokud není uvedeno, použije se účet zákazníka.\n"
+               }
+              }
+             },
+             "review": {
+              "type": "object",
+              "description": "recenze",
+              "properties": {
+               "positives": {
+                "type": "string",
+                "description": "klady. HTML tagy budou odstraněny a text bude ořezán na délku 500 znaků"
+               },
+               "negatives": {
+                "type": "string",
+                "description": "zápory. HTML tagy budou odstraněny a text bude ořezán na délku 500 znaků"
+               },
+               "creation_time": {
+                "type": "string",
+                "format": "date-time",
+                "description": "datum a čas vytvoření recenze",
+                "example": "2026-04-28T13:57:48+02:00",
+                "__$ref": "#/components/schemas/DateTime"
+               },
+               "answer": {
+                "type": "object",
+                "description": "odpověď na recenzi",
+                "properties": {
+                 "user_name": {
+                  "type": "string",
+                  "description": "jméno uživatele, který odpovídal"
+                 },
+                 "text": {
+                  "type": "string",
+                  "description": "text odpovědi"
+                 },
+                 "creation_time": {
+                  "type": "string",
+                  "format": "date-time",
+                  "description": "datum a čas vytvoření odpovědi",
+                  "example": "2026-04-28T13:57:48+02:00",
+                  "__$ref": "#/components/schemas/DateTime"
+                 }
+                }
+               }
+              }
+             },
+             "rating": {
+              "type": "object",
+              "description": "hodnocení",
+              "required": [
+               "score"
+              ],
+              "properties": {
+               "score": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 5,
+                "description": "počet hvězdiček 1-5"
+               },
+               "creation_time": {
+                "type": "string",
+                "format": "date-time",
+                "description": "datum a čas vytvoření recenze",
+                "example": "2026-04-28T13:57:48+02:00",
+                "__$ref": "#/components/schemas/DateTime"
+               }
+              }
+             }
+            }
+           }
+          }
+         }
+        }
+       }
+      ],
+      "description": null,
+      "required": true
+     },
+     "responses": [
+      {
+       "statusCode": "200",
+       "links": null,
+       "description": "OK",
+       "content": [
+        {
+         "examples": [],
+         "mediaType": "application/json",
+         "encoding": null,
+         "schema": {
+          "type": "object",
+          "properties": {
+           "ratings_reviews": {
+            "type": "array",
+            "items": {
+             "type": "object",
+             "properties": {
+              "created_yn": {
+               "type": "boolean",
+               "description": "informace o úspěšném vytvoření položky"
+              },
+              "messages": {
+               "type": "array",
+               "description": "chybové zprávy",
+               "items": {
+                "type": "object",
+                "properties": {
+                 "object": {
+                  "type": "string",
+                  "nullable": true,
+                  "description": "název objektu (část JSONu), kterého se zpráva týká"
+                 },
+                 "property": {
+                  "type": "string",
+                  "nullable": true,
+                  "description": "hodnota, které se zpráva týká"
+                 },
+                 "message": {
+                  "type": "string",
+                  "description": "text zprávy"
+                 },
+                 "level": {
+                  "type": "string",
+                  "enum": [
+                   "info",
+                   "warning",
+                   "error",
+                   "fatal_error"
+                  ],
+                  "description": "úroveň chyby:\n- `info` - informační sdělení\n- `warning` - varování\n- `error` - chyba, pravděpodobně nedošlo ke zpracování\n- `fatal_error` - chyba API, kontaktujte technickou podporu"
+                 }
+                }
+               },
+               "__$ref": "#/components/schemas/ErrorMessages"
+              }
+             }
+            }
+           }
+          }
+         }
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "slug": "smazani-recenzi-a-hodnoceni",
+     "summary": "Smazání recenzí a hodnocení",
+     "method": "delete",
+     "description": null,
+     "operationId": null,
+     "contentTypes": [],
+     "path": "/api/v2/products/ratings-reviews",
+     "deprecated": null,
+     "extensions": {},
+     "servers": [],
+     "parameters": [
+      {
+       "name": "rating_review_id",
+       "in": "query",
+       "description": "ID hodnocení a recenze",
+       "required": null,
+       "schema": {
+        "type": "integer"
+       },
+       "style": null,
+       "explode": null,
+       "allowReserved": null,
+       "examples": []
+      },
+      {
+       "name": "rating_review_ids",
+       "in": "query",
+       "description": "ID hodnocení a recenze oddělené středníkem `;` nebo jako pole",
+       "required": null,
+       "schema": {
+        "oneOf": [
+         {
+          "type": "string",
+          "description": "hodnoty oddělené středníkem `;`\\\nnapříklad `1;2;3`\n"
+         },
+         {
+          "type": "array",
+          "items": {
+           "type": "integer"
+          }
+         }
+        ],
+        "__$ref": "#/components/schemas/QueryParameterArrayInt"
+       },
+       "style": null,
+       "explode": null,
+       "allowReserved": null,
+       "examples": []
+      }
+     ],
+     "security": null,
+     "requestBody": {
+      "content": [],
+      "description": null,
+      "required": null
+     },
+     "responses": [
+      {
+       "statusCode": "200",
+       "links": null,
+       "description": "OK",
+       "content": [
+        {
+         "examples": [],
+         "mediaType": "application/json",
+         "encoding": null,
+         "schema": {
+          "type": "object",
+          "properties": {
+           "ratings_reviews": {
+            "type": "array",
+            "items": {
+             "type": "object",
+             "properties": {
+              "rating_review_id": {
+               "type": "integer",
+               "description": "ID hodnocení a recenze"
+              },
+              "deleted_yn": {
+               "type": "boolean",
+               "description": "informace o úspěšném smazání položky"
+              },
+              "messages": {
+               "type": "array",
+               "description": "chybové zprávy",
+               "items": {
+                "type": "object",
+                "properties": {
+                 "object": {
+                  "type": "string",
+                  "nullable": true,
+                  "description": "název objektu (část JSONu), kterého se zpráva týká"
+                 },
+                 "property": {
+                  "type": "string",
+                  "nullable": true,
+                  "description": "hodnota, které se zpráva týká"
+                 },
+                 "message": {
+                  "type": "string",
+                  "description": "text zprávy"
+                 },
+                 "level": {
+                  "type": "string",
+                  "enum": [
+                   "info",
+                   "warning",
+                   "error",
+                   "fatal_error"
+                  ],
+                  "description": "úroveň chyby:\n- `info` - informační sdělení\n- `warning` - varování\n- `error` - chyba, pravděpodobně nedošlo ke zpracování\n- `fatal_error` - chyba API, kontaktujte technickou podporu"
+                 }
+                }
+               },
+               "__$ref": "#/components/schemas/ErrorMessages"
+              }
+             }
+            }
+           }
+          }
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "extensions": {},
+   "next": {
+    "name": "Provozovatel eshopu",
+    "slug": "provozovatel-eshopu",
+    "extensions": {}
+   },
+   "prev": {
+    "name": "Produkty - seznamy",
+    "slug": "produkty-seznamy",
+    "extensions": {}
+   }
+  }
+ }
+}

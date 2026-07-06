@@ -1,0 +1,97 @@
+{
+ "schema": {
+  "servers": [],
+  "description": null,
+  "summary": null,
+  "title": "API",
+  "url": null,
+  "version": "2",
+  "tag": {
+   "name": null,
+   "description": null,
+   "operations": [
+    {
+     "slug": "stav-api",
+     "summary": "Stav API",
+     "method": "get",
+     "description": "- slouží pro zjištění stavu API\n- vrací seznam povolených endpointů pro aktuálního uživatele\n\n> ---\n> Endpoint **nevyžaduje nastavení oprávnění**, je povolen vždy pro všechny API uživatele\n",
+     "operationId": null,
+     "contentTypes": [],
+     "path": "/api/v2/status",
+     "deprecated": null,
+     "extensions": {},
+     "servers": [],
+     "parameters": [],
+     "security": null,
+     "requestBody": {
+      "content": [],
+      "description": null,
+      "required": null
+     },
+     "responses": [
+      {
+       "statusCode": "200",
+       "links": null,
+       "description": "OK",
+       "content": [
+        {
+         "examples": [],
+         "mediaType": "application/json",
+         "encoding": null,
+         "schema": {
+          "type": "object",
+          "required": [
+           "services",
+           "documentation_link"
+          ],
+          "properties": {
+           "services": {
+            "type": "array",
+            "description": "API endpointy",
+            "items": {
+             "type": "object",
+             "properties": {
+              "service": {
+               "type": "string",
+               "description": "název služby"
+              },
+              "url": {
+               "type": "string",
+               "format": "uri",
+               "description": "URL adresa endpointu"
+              },
+              "privilege": {
+               "type": "string",
+               "enum": [
+                "deny",
+                "readonly",
+                "all"
+               ],
+               "description": "práva na přístup k endpointu\n- `deny` - vše zakázáno\n- `readonly` - pouze čtení (jen `GET` endpointy)\n- `all` - vše povoleno\n"
+              }
+             }
+            }
+           },
+           "documentation_link": {
+            "type": "string",
+            "format": "uri",
+            "description": "URL adresa dokumentace API"
+           }
+          }
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "extensions": {},
+   "next": null,
+   "prev": {
+    "name": "Zákazníci",
+    "slug": "zakaznici",
+    "extensions": {}
+   }
+  }
+ }
+}

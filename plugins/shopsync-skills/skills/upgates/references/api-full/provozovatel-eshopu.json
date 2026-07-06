@@ -1,0 +1,198 @@
+{
+ "schema": {
+  "servers": [],
+  "description": null,
+  "summary": null,
+  "title": "API",
+  "url": null,
+  "version": "2",
+  "tag": {
+   "name": "Provozovatel eshopu",
+   "description": null,
+   "operations": [
+    {
+     "slug": "provozovatel-eshopu",
+     "summary": "Provozovatel eshopu",
+     "method": "get",
+     "description": "- více na téma  provozovatel e-shopu v Upgates najdete [zde](https://www.upgates.cz/a/nastaveni-fakturacnich-udaju-e-shopu)\n",
+     "operationId": null,
+     "contentTypes": [],
+     "path": "/api/v2/owner",
+     "deprecated": null,
+     "extensions": {},
+     "servers": [],
+     "parameters": [],
+     "security": null,
+     "requestBody": {
+      "content": [],
+      "description": null,
+      "required": null
+     },
+     "responses": [
+      {
+       "statusCode": "200",
+       "links": null,
+       "description": "OK",
+       "content": [
+        {
+         "examples": [],
+         "mediaType": "application/json",
+         "encoding": null,
+         "schema": {
+          "type": "object",
+          "properties": {
+           "owner": {
+            "type": "array",
+            "description": "informace o provozovateli",
+            "items": {
+             "type": "object",
+             "properties": {
+              "company": {
+               "type": "string",
+               "description": "název firmy"
+              },
+              "company_number": {
+               "type": [
+                "string",
+                "null"
+               ],
+               "description": "IČO"
+              },
+              "vat_number": {
+               "type": [
+                "string",
+                "null"
+               ],
+               "description": "DIČ"
+              },
+              "vat_country_id": {
+               "type": "string",
+               "description": "registrace DPH v zemi",
+               "example": "cz",
+               "__$ref": "#/components/schemas/Country"
+              },
+              "street": {
+               "type": "string",
+               "description": "ulice"
+              },
+              "city": {
+               "type": "string",
+               "description": "město"
+              },
+              "state": {
+               "type": "string",
+               "description": "kraj"
+              },
+              "zip": {
+               "type": "string",
+               "description": "PSČ"
+              },
+              "country_id": {
+               "type": "string",
+               "description": "kód země dle [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)",
+               "example": "cz",
+               "__$ref": "#/components/schemas/Country"
+              },
+              "language_id": {
+               "type": "string",
+               "description": "kód jazyka dle [ISO 639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes)",
+               "example": "cz",
+               "__$ref": "#/components/schemas/Language"
+              },
+              "email": {
+               "type": [
+                "string",
+                "null"
+               ],
+               "format": "email",
+               "description": "emailová adresa"
+              },
+              "phone": {
+               "type": [
+                "string",
+                "null"
+               ],
+               "format": "phone",
+               "description": "telefon"
+              },
+              "firstname": {
+               "type": [
+                "string",
+                "null"
+               ],
+               "description": "jméno"
+              },
+              "surname": {
+               "type": [
+                "string",
+                "null"
+               ],
+               "description": "příjmení"
+              },
+              "bank_account_holder": {
+               "type": [
+                "string",
+                "null"
+               ],
+               "description": "název příjemce"
+              },
+              "bank_account": {
+               "type": [
+                "string",
+                "null"
+               ],
+               "description": "číslo účtu"
+              },
+              "bank_symbol": {
+               "type": [
+                "string",
+                "null"
+               ],
+               "description": "kód banky"
+              },
+              "bank_specific_symbol": {
+               "type": [
+                "string",
+                "null"
+               ],
+               "description": "specifický symbol"
+              },
+              "iban": {
+               "type": [
+                "string",
+                "null"
+               ],
+               "description": "IBAN"
+              },
+              "swift": {
+               "type": [
+                "string",
+                "null"
+               ],
+               "description": "BIC / SWIFT"
+              }
+             }
+            }
+           }
+          }
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "extensions": {},
+   "next": {
+    "name": "Přesměrování",
+    "slug": "presmerovani",
+    "extensions": {}
+   },
+   "prev": {
+    "name": "Produkty - recenze a hodnocení",
+    "slug": "produkty-recenze-a-hodnoceni",
+    "extensions": {}
+   }
+  }
+ }
+}

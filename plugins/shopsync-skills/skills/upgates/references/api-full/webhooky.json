@@ -1,0 +1,653 @@
+{
+ "schema": {
+  "servers": [],
+  "description": null,
+  "summary": null,
+  "title": "API",
+  "url": null,
+  "version": "2",
+  "tag": {
+   "name": "Webhooky",
+   "description": "- endpoint nevyžaduje nastavení oprávnění, je povolen vždy pro všechny API uživatele.\n- více na téma webhooky v Upgates najdete [zde](/webhooks/intro)",
+   "operations": [
+    {
+     "slug": "seznam-webhooku",
+     "summary": "Seznam webhooků",
+     "method": "get",
+     "description": null,
+     "operationId": null,
+     "contentTypes": [],
+     "path": "/api/v2/webhooks",
+     "deprecated": null,
+     "extensions": {},
+     "servers": [],
+     "parameters": [],
+     "security": null,
+     "requestBody": {
+      "content": [],
+      "description": null,
+      "required": null
+     },
+     "responses": [
+      {
+       "statusCode": "200",
+       "links": null,
+       "description": "OK",
+       "content": [
+        {
+         "examples": [],
+         "mediaType": "application/json",
+         "encoding": null,
+         "schema": {
+          "type": "object",
+          "properties": {
+           "webhooks": {
+            "type": "array",
+            "description": "pole objektů s webhooky",
+            "items": {
+             "type": "object",
+             "properties": {
+              "id": {
+               "type": "integer",
+               "description": "ID webhooku"
+              },
+              "active_yn": {
+               "type": "boolean",
+               "description": "příznak, jestli je webhook aktivní"
+              },
+              "name": {
+               "type": "string",
+               "description": "název webhooku, pouze pro interní označení"
+              },
+              "url": {
+               "type": "string",
+               "format": "uri",
+               "description": "URL adresa"
+              },
+              "event": {
+               "type": "string",
+               "description": "událost"
+              },
+              "last_success_call": {
+               "type": "string",
+               "format": "date-time",
+               "description": "čas posledního úspěšného volání",
+               "example": "2026-04-28T13:57:48+02:00",
+               "nullable": true,
+               "__$ref": "#/components/schemas/DateTime"
+              },
+              "last_success_call_status": {
+               "type": "string",
+               "format": "date-time",
+               "description": "HTTP status posledního úspěšného volání",
+               "example": "2026-04-28T13:57:48+02:00",
+               "nullable": true,
+               "__$ref": "#/components/schemas/DateTime"
+              },
+              "last_error_call": {
+               "type": "string",
+               "format": "date-time",
+               "description": "čas posledního neúspěšného volání",
+               "example": "2026-04-28T13:57:48+02:00",
+               "nullable": true,
+               "__$ref": "#/components/schemas/DateTime"
+              },
+              "last_error_call_status": {
+               "type": [
+                "integer",
+                "null"
+               ],
+               "description": "HTTP status posledního neúspěšného volání"
+              },
+              "creation_time": {
+               "type": "string",
+               "format": "date-time",
+               "description": "datum a čas vytvoření",
+               "example": "2026-04-28T13:57:48+02:00",
+               "__$ref": "#/components/schemas/DateTime"
+              }
+             }
+            }
+           }
+          }
+         }
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "slug": "aktualizace-webhooku",
+     "summary": "Aktualizace webhooku",
+     "method": "put",
+     "description": "Webhooky se párují podle hodnoty `id`.\n",
+     "operationId": null,
+     "contentTypes": [
+      "application/json"
+     ],
+     "path": "/api/v2/webhooks",
+     "deprecated": null,
+     "extensions": {},
+     "servers": [],
+     "parameters": [],
+     "security": null,
+     "requestBody": {
+      "content": [
+       {
+        "mediaType": "application/json",
+        "encoding": [],
+        "examples": [],
+        "schema": {
+         "type": "object",
+         "required": [
+          "id"
+         ],
+         "properties": {
+          "id": {
+           "type": "integer",
+           "description": "ID webhooku"
+          },
+          "active_yn": {
+           "type": "boolean",
+           "description": "příznak, jestli je webhook aktivní"
+          },
+          "name": {
+           "type": "string",
+           "description": "název webhooku, pouze pro interní označení"
+          },
+          "url": {
+           "type": "string",
+           "format": "uri",
+           "description": "validní URL adresa, může obsahovat i přihlašovací údaje"
+          },
+          "event": {
+           "type": "string",
+           "description": "událost"
+          }
+         }
+        }
+       }
+      ],
+      "description": null,
+      "required": true
+     },
+     "responses": [
+      {
+       "statusCode": "200",
+       "links": null,
+       "description": "OK",
+       "content": [
+        {
+         "examples": [],
+         "mediaType": "application/json",
+         "encoding": null,
+         "schema": {
+          "type": "object",
+          "properties": {
+           "webhook": {
+            "type": "object",
+            "properties": {
+             "id": {
+              "type": "integer",
+              "description": "ID webhooku"
+             },
+             "active_yn": {
+              "type": "boolean",
+              "description": "příznak, jestli je webhook aktivní"
+             },
+             "name": {
+              "type": "string",
+              "description": "název webhooku, pouze pro interní označení"
+             },
+             "url": {
+              "type": "string",
+              "format": "uri",
+              "description": "URL adresa"
+             },
+             "event": {
+              "type": "string",
+              "description": "událost"
+             }
+            }
+           }
+          }
+         }
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "slug": "vytvoreni-webhooku",
+     "summary": "Vytvoření webhooku",
+     "method": "post",
+     "description": "Seznam dostupných událostí lze získat pomocí:\nGET /api/v2/webhooks/events\n",
+     "operationId": null,
+     "contentTypes": [
+      "application/json"
+     ],
+     "path": "/api/v2/webhooks",
+     "deprecated": null,
+     "extensions": {},
+     "servers": [],
+     "parameters": [],
+     "security": null,
+     "requestBody": {
+      "content": [
+       {
+        "mediaType": "application/json",
+        "encoding": [],
+        "examples": [],
+        "schema": {
+         "type": "object",
+         "required": [
+          "name",
+          "url",
+          "event"
+         ],
+         "properties": {
+          "active_yn": {
+           "type": "boolean",
+           "description": "příznak, jestli je webhook aktivní. Výchozí hodnota je `true`",
+           "default": true
+          },
+          "name": {
+           "type": "string",
+           "description": "název webhooku, pouze pro interní označení"
+          },
+          "url": {
+           "type": "string",
+           "format": "uri",
+           "description": "URL adresa, musí obsahovat schéma a doménu (Absolute URI).\nMůže obsahovat i přihlašovací údaje\n"
+          },
+          "event": {
+           "type": "string",
+           "description": "událost"
+          }
+         }
+        }
+       }
+      ],
+      "description": null,
+      "required": true
+     },
+     "responses": [
+      {
+       "statusCode": "200",
+       "links": null,
+       "description": "OK",
+       "content": [
+        {
+         "examples": [],
+         "mediaType": "application/json",
+         "encoding": null,
+         "schema": {
+          "type": "object",
+          "properties": {
+           "webhook": {
+            "type": "object",
+            "properties": {
+             "id": {
+              "type": "integer",
+              "description": "ID webhooku"
+             },
+             "active_yn": {
+              "type": "boolean",
+              "description": "příznak, jestli je webhook aktivní"
+             },
+             "name": {
+              "type": "string",
+              "description": "název webhooku, pouze pro interní označení"
+             },
+             "url": {
+              "type": "string",
+              "format": "uri",
+              "description": "URL adresa"
+             },
+             "event": {
+              "type": "string",
+              "description": "událost"
+             }
+            }
+           }
+          }
+         }
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "slug": "webhook",
+     "summary": "Webhook",
+     "method": "get",
+     "description": null,
+     "operationId": null,
+     "contentTypes": [],
+     "path": "/api/v2/webhooks/{id}",
+     "deprecated": null,
+     "extensions": {},
+     "servers": [],
+     "parameters": [
+      {
+       "name": "id",
+       "in": "query",
+       "description": "ID webhooku",
+       "required": true,
+       "schema": {
+        "type": "integer"
+       },
+       "style": null,
+       "explode": null,
+       "allowReserved": null,
+       "examples": []
+      }
+     ],
+     "security": null,
+     "requestBody": {
+      "content": [],
+      "description": null,
+      "required": null
+     },
+     "responses": [
+      {
+       "statusCode": "200",
+       "links": null,
+       "description": "OK",
+       "content": [
+        {
+         "examples": [],
+         "mediaType": "application/json",
+         "encoding": null,
+         "schema": {
+          "type": "object",
+          "properties": {
+           "webhooks": {
+            "type": "array",
+            "description": "pole objektů s webhooky",
+            "items": {
+             "type": "object",
+             "properties": {
+              "id": {
+               "type": "integer",
+               "description": "ID webhooku"
+              },
+              "active_yn": {
+               "type": "boolean",
+               "description": "příznak, jestli je webhook aktivní"
+              },
+              "name": {
+               "type": "string",
+               "description": "název webhooku, pouze pro interní označení"
+              },
+              "url": {
+               "type": "string",
+               "format": "uri",
+               "description": "URL adresa"
+              },
+              "event": {
+               "type": "string",
+               "description": "událost"
+              },
+              "last_success_call": {
+               "type": "string",
+               "format": "date-time",
+               "description": "čas posledního úspěšného volání",
+               "example": "2026-04-28T13:57:48+02:00",
+               "nullable": true,
+               "__$ref": "#/components/schemas/DateTime"
+              },
+              "last_success_call_status": {
+               "type": "string",
+               "format": "date-time",
+               "description": "HTTP status posledního úspěšného volání",
+               "example": "2026-04-28T13:57:48+02:00",
+               "nullable": true,
+               "__$ref": "#/components/schemas/DateTime"
+              },
+              "last_error_call": {
+               "type": "string",
+               "format": "date-time",
+               "description": "čas posledního neúspěšného volání",
+               "example": "2026-04-28T13:57:48+02:00",
+               "nullable": true,
+               "__$ref": "#/components/schemas/DateTime"
+              },
+              "last_error_call_status": {
+               "type": [
+                "integer",
+                "null"
+               ],
+               "description": "HTTP status posledního neúspěšného volání"
+              },
+              "creation_time": {
+               "type": "string",
+               "format": "date-time",
+               "description": "datum a čas vytvoření",
+               "example": "2026-04-28T13:57:48+02:00",
+               "__$ref": "#/components/schemas/DateTime"
+              }
+             }
+            }
+           }
+          }
+         }
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "slug": "smazani-webhooku",
+     "summary": "Smazání webhooku",
+     "method": "delete",
+     "description": "Musí být definováno ID webhooku v jednom z parametrů.",
+     "operationId": null,
+     "contentTypes": [],
+     "path": "/api/v2/webhooks/{id}",
+     "deprecated": null,
+     "extensions": {},
+     "servers": [],
+     "parameters": [
+      {
+       "name": "id",
+       "in": "query",
+       "description": "ID webhooku",
+       "required": false,
+       "schema": {
+        "type": "integer"
+       },
+       "style": null,
+       "explode": null,
+       "allowReserved": null,
+       "examples": []
+      },
+      {
+       "name": "ids",
+       "in": "query",
+       "description": "ID webhooků oddělená středníkem `;` nebo jako pole",
+       "required": false,
+       "schema": {
+        "oneOf": [
+         {
+          "type": "string",
+          "description": "hodnoty oddělené středníkem `;`\\\nnapříklad `1;2;3`\n"
+         },
+         {
+          "type": "array",
+          "items": {
+           "type": "integer"
+          }
+         }
+        ],
+        "__$ref": "#/components/schemas/QueryParameterArrayInt"
+       },
+       "style": null,
+       "explode": null,
+       "allowReserved": null,
+       "examples": []
+      }
+     ],
+     "security": null,
+     "requestBody": {
+      "content": [],
+      "description": null,
+      "required": null
+     },
+     "responses": [
+      {
+       "statusCode": "200",
+       "links": null,
+       "description": "OK",
+       "content": [
+        {
+         "examples": [],
+         "mediaType": "application/json",
+         "encoding": null,
+         "schema": {
+          "type": "object",
+          "properties": {
+           "webhooks": {
+            "type": "array",
+            "description": "pole objektů s webhooky",
+            "items": {
+             "type": "object",
+             "properties": {
+              "id": {
+               "type": "integer",
+               "description": "ID webhooku"
+              },
+              "deleted": {
+               "type": "boolean",
+               "description": "informace o úspěšném smazání položky"
+              },
+              "messages": {
+               "type": "array",
+               "description": "chybové nebo informační zprávy",
+               "items": {
+                "type": "object",
+                "properties": {
+                 "code": {
+                  "type": [
+                   "string",
+                   "integer"
+                  ],
+                  "description": "kód zprávy"
+                 },
+                 "messages": {
+                  "type": "array",
+                  "description": "chybové zprávy",
+                  "items": {
+                   "type": "object",
+                   "properties": {
+                    "object": {
+                     "type": "string",
+                     "nullable": true,
+                     "description": "název objektu (část JSONu), kterého se zpráva týká"
+                    },
+                    "property": {
+                     "type": "string",
+                     "nullable": true,
+                     "description": "hodnota, které se zpráva týká"
+                    },
+                    "message": {
+                     "type": "string",
+                     "description": "text zprávy"
+                    },
+                    "level": {
+                     "type": "string",
+                     "enum": [
+                      "info",
+                      "warning",
+                      "error",
+                      "fatal_error"
+                     ],
+                     "description": "úroveň chyby:\n- `info` - informační sdělení\n- `warning` - varování\n- `error` - chyba, pravděpodobně nedošlo ke zpracování\n- `fatal_error` - chyba API, kontaktujte technickou podporu"
+                    }
+                   }
+                  },
+                  "__$ref": "#/components/schemas/ErrorMessages"
+                 }
+                }
+               }
+              }
+             }
+            }
+           }
+          }
+         }
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "slug": "udalosti-webhooku",
+     "summary": "Události webhooků",
+     "method": "get",
+     "description": null,
+     "operationId": null,
+     "contentTypes": [],
+     "path": "/api/v2/webhooks/events",
+     "deprecated": null,
+     "extensions": {},
+     "servers": [],
+     "parameters": [],
+     "security": null,
+     "requestBody": {
+      "content": [],
+      "description": null,
+      "required": null
+     },
+     "responses": [
+      {
+       "statusCode": "200",
+       "links": null,
+       "description": "OK",
+       "content": [
+        {
+         "examples": [],
+         "mediaType": "application/json",
+         "encoding": null,
+         "schema": {
+          "type": "object",
+          "properties": {
+           "events": {
+            "type": "array",
+            "description": "pole objektů s událostmi",
+            "items": {
+             "type": "object",
+             "properties": {
+              "name": {
+               "type": "string",
+               "description": "název události"
+              },
+              "allowed_yn": {
+               "type": "string",
+               "description": "příznak, jestli je událost pro aktuálního uživatele API povolena"
+              }
+             }
+            }
+           }
+          }
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "extensions": {},
+   "next": {
+    "name": "Zákazníci",
+    "slug": "zakaznici",
+    "extensions": {}
+   },
+   "prev": {
+    "name": "Výrobci",
+    "slug": "vyrobci",
+    "extensions": {}
+   }
+  }
+ }
+}

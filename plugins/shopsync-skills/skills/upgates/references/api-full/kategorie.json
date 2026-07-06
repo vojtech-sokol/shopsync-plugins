@@ -1,0 +1,1570 @@
+{
+ "schema": {
+  "servers": [],
+  "description": null,
+  "summary": null,
+  "title": "API",
+  "url": null,
+  "version": "2",
+  "tag": {
+   "name": "Kategorie",
+   "description": "- unikátním identifikátorem kategorie je kód (`code`) nebo ID (`category_id`).\n- pro práci s kategoriemi lze využívat **[webhooky](/webhooks/categories)**.\n- více o kategoriích v Upgates najdete [zde](https://www.upgates.cz/a/princip-a-zobrazeni-kategorii).",
+   "operations": [
+    {
+     "slug": "seznam-kategorii",
+     "summary": "Seznam kategorií",
+     "method": "get",
+     "description": "Seznam kategorií je dostupný po jednotlivých stranách, výstup je omezený na 100 položek na stránku.\nSeznam kategorií je seřazen podle rodiče a podle pozice, tzn. že první jsou rodičovské kategorie a potom potomci.\n",
+     "operationId": null,
+     "contentTypes": [],
+     "path": "/api/v2/categories",
+     "deprecated": null,
+     "extensions": {},
+     "servers": [],
+     "parameters": [
+      {
+       "name": "creation_time_from",
+       "in": "query",
+       "description": "pouze kategorie vytvořené od data",
+       "required": null,
+       "schema": {
+        "type": "string",
+        "format": "date-time",
+        "description": "datum a čas zapsaný jako řeťezec znaků dle [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601)",
+        "example": "2026-04-28T13:57:48+02:00",
+        "__$ref": "#/components/schemas/DateTime"
+       },
+       "style": null,
+       "explode": null,
+       "allowReserved": null,
+       "examples": []
+      },
+      {
+       "name": "last_update_time_from",
+       "in": "query",
+       "description": "vrátí kategorie změněné od data",
+       "required": null,
+       "schema": {
+        "type": "string",
+        "format": "date-time",
+        "description": "datum a čas zapsaný jako řeťezec znaků dle [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601)",
+        "example": "2026-04-28T13:57:48+02:00",
+        "__$ref": "#/components/schemas/DateTime"
+       },
+       "style": null,
+       "explode": null,
+       "allowReserved": null,
+       "examples": []
+      },
+      {
+       "name": "code",
+       "in": "query",
+       "description": "kód kategorie",
+       "required": null,
+       "schema": {
+        "type": "string"
+       },
+       "style": null,
+       "explode": null,
+       "allowReserved": null,
+       "examples": []
+      },
+      {
+       "name": "codes",
+       "in": "query",
+       "description": "kódy kategorií oddělené středníkem `;` nebo jako pole",
+       "required": null,
+       "schema": {
+        "oneOf": [
+         {
+          "type": "string",
+          "description": "hodnoty oddělené středníkem `;`\\\nnapříklad `A;B;C`\n"
+         },
+         {
+          "type": "array",
+          "items": {
+           "type": "string"
+          }
+         }
+        ],
+        "__$ref": "#/components/schemas/QueryParameterArrayString"
+       },
+       "style": null,
+       "explode": null,
+       "allowReserved": null,
+       "examples": []
+      },
+      {
+       "name": "category_id",
+       "in": "query",
+       "description": "ID kategorie",
+       "required": null,
+       "schema": {
+        "type": "integer"
+       },
+       "style": null,
+       "explode": null,
+       "allowReserved": null,
+       "examples": []
+      },
+      {
+       "name": "ids",
+       "in": "query",
+       "description": "ID kategorií oddělené středníkem `;` nebo jako pole",
+       "required": null,
+       "schema": {
+        "oneOf": [
+         {
+          "type": "string",
+          "description": "hodnoty oddělené středníkem `;`\\\nnapříklad `1;2;3`\n"
+         },
+         {
+          "type": "array",
+          "items": {
+           "type": "integer"
+          }
+         }
+        ],
+        "__$ref": "#/components/schemas/QueryParameterArrayInt"
+       },
+       "style": null,
+       "explode": null,
+       "allowReserved": null,
+       "examples": []
+      },
+      {
+       "name": "parent_id",
+       "in": "query",
+       "description": "ID nadřazené kategorie",
+       "required": null,
+       "schema": {
+        "type": "integer"
+       },
+       "style": null,
+       "explode": null,
+       "allowReserved": null,
+       "examples": []
+      },
+      {
+       "name": "active_yn",
+       "in": "query",
+       "description": "aktivní / neaktivní",
+       "required": null,
+       "schema": {
+        "type": "boolean"
+       },
+       "style": null,
+       "explode": null,
+       "allowReserved": null,
+       "examples": []
+      },
+      {
+       "name": "exclude_from_search_yn",
+       "in": "query",
+       "description": "příznak vyřadit z vyhledávání",
+       "required": null,
+       "schema": {
+        "type": "boolean"
+       },
+       "style": null,
+       "explode": null,
+       "allowReserved": null,
+       "examples": []
+      },
+      {
+       "name": "language",
+       "in": "query",
+       "description": "jazyk kategorie",
+       "required": null,
+       "schema": {
+        "type": "string",
+        "description": "kód jazyka dle [ISO 639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes)",
+        "example": "cz",
+        "__$ref": "#/components/schemas/Language"
+       },
+       "style": null,
+       "explode": null,
+       "allowReserved": null,
+       "examples": []
+      },
+      {
+       "name": "page",
+       "in": "query",
+       "description": "stránka",
+       "required": false,
+       "schema": {
+        "type": "integer",
+        "default": 1
+       },
+       "style": null,
+       "explode": null,
+       "allowReserved": null,
+       "examples": []
+      }
+     ],
+     "security": null,
+     "requestBody": {
+      "content": [],
+      "description": null,
+      "required": null
+     },
+     "responses": [
+      {
+       "statusCode": "200",
+       "links": null,
+       "description": "OK",
+       "content": [
+        {
+         "examples": [],
+         "mediaType": "application/json",
+         "encoding": null,
+         "schema": {
+          "type": "object",
+          "properties": {
+           "current_page": {
+            "type": "integer",
+            "minimum": 1,
+            "description": "aktuální strana"
+           },
+           "current_page_items": {
+            "type": "integer",
+            "description": "počet položek na aktuální straně",
+            "example": 1
+           },
+           "number_of_items": {
+            "type": "integer",
+            "description": "celkový počet položek",
+            "example": 1
+           },
+           "number_of_pages": {
+            "type": "integer",
+            "description": "celkový počet stran",
+            "example": 1
+           },
+           "categories": {
+            "type": "array",
+            "description": "pole objektů s kategoriemi",
+            "items": {
+             "type": "object",
+             "properties": {
+              "code": {
+               "type": "string",
+               "nullable": true,
+               "description": "kód kategorie"
+              },
+              "category_id": {
+               "type": "integer",
+               "description": "ID kategorie"
+              },
+              "parent_code": {
+               "type": "string",
+               "nullable": true,
+               "description": "kód nadřazené kategorie, pokud je `NULL` nelze použít při zařazování produktů"
+              },
+              "parent_id": {
+               "type": "integer",
+               "nullable": true,
+               "description": "ID nadřazené kategorie"
+              },
+              "position": {
+               "type": "integer",
+               "description": "pozice v nadřazené kategorii"
+              },
+              "active_yn": {
+               "type": "boolean",
+               "description": "zobrazit kategorii na webu"
+              },
+              "type": {
+               "type": "string",
+               "enum": [
+                "homepage",
+                "news",
+                "individual",
+                "url",
+                "site",
+                "siteWithProducts",
+                "parametric",
+                "linkCategory",
+                "advisor",
+                "why-us",
+                "contact",
+                "manufacturers",
+                "contactMenu"
+               ],
+               "description": "typ kategorie:\n- `homepage` - odkaz na homepage\n- `news` - odkaz na novinky\n- `url` - odkaz na URL\n- `site` - stránka\n- `siteWithProducts` - stránka s produkty\n- `parametric` - parametrická stránka\n- `linkCategory` - odkaz na jinou kategorii\n- `advisor` - odkaz na rádce\n- `why-us` - odkaz na výhody\n- `contact` - kontakt\n- `manufacturers` - seznam výrobců\n- `contactMenu` - kontaktní menu",
+               "__$ref": "#/components/schemas/CategoryType"
+              },
+              "type_of_items": {
+               "type": "string",
+               "enum": [
+                "withSubcategories",
+                "withoutSubcategories",
+                "label",
+                "manufacturer"
+               ],
+               "description": "typ položek v kategorii:\n- `withSubcategories` - produkty s podkategoriemi\n- `withoutSubcategories` - produkty bez podkategorií\n- `label` - produkty s konkrétním štítkem\n- `manufacturer` - produkty s konkrétním výrobcem",
+               "__$ref": "#/components/schemas/CategoryTypeOfItems"
+              },
+              "target_category_id": {
+               "type": "integer",
+               "nullable": true,
+               "description": "ID kategorie na kterou tato kategorie odkazuje. Bere se v úvahu pouze pokud má kategorie typ položek `linkCategory`"
+              },
+              "manufacturer": {
+               "type": "string",
+               "nullable": true,
+               "description": "název výrobce. Bere se v úvahu pouze pokud je v tagu `type_of_items` hodnota `manufacturer`"
+              },
+              "label": {
+               "type": "string",
+               "nullable": true,
+               "description": "název štítku. Bere se v úvahu pouze pokud je v tagu `type_of_items` hodnota `label`"
+              },
+              "show_in_menu_yn": {
+               "type": "boolean",
+               "description": "zobrazit kategorii v menu"
+              },
+              "exclude_from_search_yn": {
+               "type": "boolean",
+               "description": "příznak vyřadit z vyhledávání"
+              },
+              "descriptions": {
+               "type": "array",
+               "description": "pole objektů s texty",
+               "items": {
+                "type": "object",
+                "properties": {
+                 "language": {
+                  "type": "string",
+                  "description": "kód jazyka dle [ISO 639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes)",
+                  "example": "cz",
+                  "__$ref": "#/components/schemas/Language"
+                 },
+                 "name": {
+                  "type": "string",
+                  "description": "název kategorie"
+                 },
+                 "name_h1": {
+                  "type": "string",
+                  "nullable": true,
+                  "description": "nadpis stránky v kategorii"
+                 },
+                 "short_description_text": {
+                  "type": "string",
+                  "description": "krátký popis kategorie"
+                 },
+                 "description_text": {
+                  "type": "string",
+                  "nullable": true,
+                  "description": "text kategorie"
+                 },
+                 "bottom_description_text": {
+                  "type": "string",
+                  "description": "doplňkový (spodní) text kategorie"
+                 },
+                 "url": {
+                  "type": "string",
+                  "format": "uri",
+                  "nullable": true,
+                  "description": "url kategorie"
+                 },
+                 "link_url": {
+                  "type": "string",
+                  "nullable": true,
+                  "description": "URL adresa, na kterou bude vést kategorie. Bere se v úvahu pouze pokud je v tagu `type` hodnota `url`."
+                 },
+                 "seo_title": {
+                  "type": "string",
+                  "nullable": true,
+                  "description": "SEO titulek"
+                 },
+                 "seo_description": {
+                  "type": "string",
+                  "nullable": true,
+                  "description": "META popisek stránky kategorie"
+                 },
+                 "seo_url": {
+                  "type": "string",
+                  "nullable": true,
+                  "description": "vlastní koncovka URL adresy"
+                 }
+                }
+               }
+              },
+              "images": {
+               "type": "array",
+               "description": "pole objektů s obrázky",
+               "items": {
+                "type": "object",
+                "properties": {
+                 "file_id": {
+                  "type": "integer",
+                  "description": "ID souboru<br>\nPři `GET`, nebo `PUT` se hledá soubor s konkrétním ID, musí být typu `image` nebo `video`\n"
+                 },
+                 "url": {
+                  "type": "string",
+                  "format": "uri",
+                  "description": "URL obrázku<br>\nPři `GET`, nebo `PUT` se obrázky nestahují hned, ale jsou staženy na pozadí\n"
+                 },
+                 "main_yn": {
+                  "type": "boolean",
+                  "description": "příznak pro hlavní obrázek. Pokud není definováno nebo je u všech obrázků `FALSE`, vezme se jako hlavní obrázek první"
+                 },
+                 "list_yn": {
+                  "type": "boolean",
+                  "description": "příznak pro seznamový obrázek. Pokud není definováno nebo je u všech obrázků `FALSE`, vezme se jako seznamový obrázek první"
+                 },
+                 "position": {
+                  "type": "integer",
+                  "description": "pozice"
+                 },
+                 "titles": {
+                  "type": "array",
+                  "description": "titulky",
+                  "items": {
+                   "type": "object",
+                   "required": [
+                    "language",
+                    "title"
+                   ],
+                   "properties": {
+                    "language": {
+                     "type": "string",
+                     "description": "kód jazyka dle [ISO 639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes)",
+                     "example": "cz",
+                     "__$ref": "#/components/schemas/Language"
+                    },
+                    "title": {
+                     "type": "string",
+                     "description": "titulek"
+                    }
+                   }
+                  }
+                 },
+                 "languages": {
+                  "type": "array",
+                  "description": "jazykové mutace na kterých se obrázek zobrazí, hlavní a seznamový obrázek se zobrazí ve všech jazykových mutacích",
+                  "items": {
+                   "type": "object",
+                   "required": [
+                    "language",
+                    "selected_yn"
+                   ],
+                   "properties": {
+                    "language": {
+                     "type": "string",
+                     "description": "kód jazyka dle [ISO 639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes)",
+                     "example": "cz",
+                     "__$ref": "#/components/schemas/Language"
+                    },
+                    "selected_yn": {
+                     "type": "boolean"
+                    }
+                   }
+                  }
+                 }
+                }
+               },
+               "__$ref": "#/components/schemas/Images"
+              },
+              "metas": {
+               "type": "array",
+               "description": "vlastní pole",
+               "items": {
+                "oneOf": [
+                 {
+                  "type": "object",
+                  "description": "vlastní pole s hodnotami společnými pro všechny jazyky",
+                  "required": [
+                   "key",
+                   "type",
+                   "value"
+                  ],
+                  "properties": {
+                   "key": {
+                    "type": "string",
+                    "pattern": "^[a-z_][a-z0-9_]*$",
+                    "description": "klíč vlastního pole",
+                    "__$ref": "#/components/schemas/MetaKey"
+                   },
+                   "type": {
+                    "type": "string",
+                    "enum": [
+                     "checkbox",
+                     "radiolist",
+                     "input",
+                     "date",
+                     "email",
+                     "number",
+                     "textarea",
+                     "formatted",
+                     "select",
+                     "multiselect"
+                    ],
+                    "description": "typ vlastního pole:\n- `checkbox` - Zatržítko\n- `radiolist` - Přepínač\n- `input` - Textové pole\n- `date` - Textové pole - datum\n- `email` - Textové pole - emailová adresa\n- `number` - Textové pole - číslo\n- `textarea` - Víceřádkové textové pole\n- `formatted` - Víceřádkové textové pole, formátované\n- `select` - Rolovací nabídka\n- `multiselect` - Multi rolovací nabídka\n",
+                    "__$ref": "#/components/schemas/MetaType"
+                   },
+                   "value": {
+                    "type": "string",
+                    "description": "hodnota společná pro všechny jazyky"
+                   }
+                  }
+                 },
+                 {
+                  "type": "object",
+                  "description": "vlastní pole s hodnotami pro každý jazyk zvlášť",
+                  "required": [
+                   "key",
+                   "type",
+                   "values"
+                  ],
+                  "properties": {
+                   "key": {
+                    "type": "string",
+                    "pattern": "^[a-z_][a-z0-9_]*$",
+                    "description": "klíč vlastního pole",
+                    "__$ref": "#/components/schemas/MetaKey"
+                   },
+                   "type": {
+                    "type": "string",
+                    "enum": [
+                     "checkbox",
+                     "radiolist",
+                     "input",
+                     "date",
+                     "email",
+                     "number",
+                     "textarea",
+                     "formatted",
+                     "select",
+                     "multiselect"
+                    ],
+                    "description": "typ vlastního pole:\n- `checkbox` - Zatržítko\n- `radiolist` - Přepínač\n- `input` - Textové pole\n- `date` - Textové pole - datum\n- `email` - Textové pole - emailová adresa\n- `number` - Textové pole - číslo\n- `textarea` - Víceřádkové textové pole\n- `formatted` - Víceřádkové textové pole, formátované\n- `select` - Rolovací nabídka\n- `multiselect` - Multi rolovací nabídka\n",
+                    "__$ref": "#/components/schemas/MetaType"
+                   },
+                   "values": {
+                    "type": "array",
+                    "description": "hodnoty pro každý jazyk zvlášť",
+                    "items": {
+                     "type": "object",
+                     "required": [
+                      "language",
+                      "value"
+                     ],
+                     "properties": {
+                      "language": {
+                       "type": "string",
+                       "description": "kód jazyka dle [ISO 639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes)",
+                       "example": "cz",
+                       "__$ref": "#/components/schemas/Language"
+                      },
+                      "value": {
+                       "type": "string"
+                      }
+                     }
+                    }
+                   }
+                  }
+                 }
+                ]
+               },
+               "__$ref": "#/components/schemas/MetasGet"
+              },
+              "creation_time": {
+               "type": "string",
+               "format": "date-time",
+               "description": "datum a čas vytvoření",
+               "example": "2026-04-28T13:57:48+02:00",
+               "__$ref": "#/components/schemas/DateTime"
+              },
+              "last_update_time": {
+               "type": "string",
+               "format": "date-time",
+               "description": "datum a čas poslední změny",
+               "example": "2026-04-28T13:57:48+02:00",
+               "__$ref": "#/components/schemas/DateTime"
+              },
+              "admin_url": {
+               "type": "string",
+               "format": "uri",
+               "description": "URL do detailu kategorie v administraci"
+              }
+             }
+            }
+           }
+          }
+         }
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "slug": "aktualizace-kategorii",
+     "summary": "Aktualizace kategorií",
+     "method": "put",
+     "description": "Kategorie párují podle kódu (`code`) nebo ID (`category_id`). Pro správnou aktualizaci je potřeba poslat jeden z těchto údajů.\nSystémové kategorie které mají \"parent_id\": NULL nelze aktualizovat!\n",
+     "operationId": null,
+     "contentTypes": [
+      "application/json"
+     ],
+     "path": "/api/v2/categories",
+     "deprecated": null,
+     "extensions": {},
+     "servers": [],
+     "parameters": [],
+     "security": null,
+     "requestBody": {
+      "content": [
+       {
+        "mediaType": "application/json",
+        "encoding": [],
+        "examples": [],
+        "schema": {
+         "type": "object",
+         "properties": {
+          "categories": {
+           "type": "array",
+           "description": "pole objektů s kategoriemi",
+           "items": {
+            "type": "object",
+            "properties": {
+             "category_id": {
+              "type": "integer",
+              "nullable": true,
+              "description": "ID kategorie"
+             },
+             "code": {
+              "type": "string",
+              "nullable": true,
+              "description": "kód kategorie"
+             },
+             "parent_code": {
+              "type": "string",
+              "nullable": true,
+              "description": "kód nadřazené kategorie"
+             },
+             "parent_id": {
+              "type": "integer",
+              "nullable": true,
+              "description": "ID nadřazené kategorie"
+             },
+             "position": {
+              "type": "integer",
+              "description": "pozice v nadřazené kategorii"
+             },
+             "active_yn": {
+              "type": "boolean",
+              "description": "zda je kategorie zobrazena na webu"
+             },
+             "type": {
+              "type": "string",
+              "enum": [
+               "homepage",
+               "news",
+               "individual",
+               "url",
+               "site",
+               "siteWithProducts",
+               "parametric",
+               "linkCategory",
+               "advisor",
+               "why-us",
+               "contact",
+               "manufacturers",
+               "contactMenu"
+              ],
+              "description": "typ kategorie:\n- `homepage` - odkaz na homepage\n- `news` - odkaz na novinky\n- `url` - odkaz na URL\n- `site` - stránka\n- `siteWithProducts` - stránka s produkty\n- `parametric` - parametrická stránka\n- `linkCategory` - odkaz na jinou kategorii\n- `advisor` - odkaz na rádce\n- `why-us` - odkaz na výhody\n- `contact` - kontakt\n- `manufacturers` - seznam výrobců\n- `contactMenu` - kontaktní menu",
+              "__$ref": "#/components/schemas/CategoryType"
+             },
+             "type_of_items": {
+              "type": "string",
+              "enum": [
+               "withSubcategories",
+               "withoutSubcategories",
+               "label",
+               "manufacturer"
+              ],
+              "description": "typ položek v kategorii:\n- `withSubcategories` - produkty s podkategoriemi\n- `withoutSubcategories` - produkty bez podkategorií\n- `label` - produkty s konkrétním štítkem\n- `manufacturer` - produkty s konkrétním výrobcem",
+              "__$ref": "#/components/schemas/CategoryTypeOfItems"
+             },
+             "target_category_id": {
+              "type": "integer",
+              "nullable": true,
+              "description": "ID cílové kategorie (pouze linkCategory)"
+             },
+             "manufacturer": {
+              "type": "string",
+              "nullable": true,
+              "description": "název výrobce (pouze manufacturer typ)"
+             },
+             "manufacturer_id": {
+              "type": "integer",
+              "nullable": true,
+              "description": "ID výrobce"
+             },
+             "label": {
+              "type": "string",
+              "nullable": true,
+              "description": "název štítku (pouze label typ)"
+             },
+             "label_id": {
+              "type": "integer",
+              "nullable": true,
+              "description": "ID štítku"
+             },
+             "show_in_menu_yn": {
+              "type": "boolean",
+              "description": "zobrazení v menu"
+             },
+             "descriptions": {
+              "type": "array",
+              "description": "popisky kategorií",
+              "items": {
+               "type": "object",
+               "properties": {
+                "language": {
+                 "type": "string",
+                 "description": "kód jazyka dle [ISO 639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes)",
+                 "example": "cz",
+                 "__$ref": "#/components/schemas/Language"
+                },
+                "active_yn": {
+                 "type": "boolean",
+                 "description": "aktivní v jazykové mutaci"
+                },
+                "name": {
+                 "type": "string",
+                 "description": "název kategorie"
+                },
+                "name_h1": {
+                 "type": "string",
+                 "nullable": true,
+                 "description": "H1 nadpis"
+                },
+                "short_description_text": {
+                 "type": "string",
+                 "description": "krátký popis"
+                },
+                "description_text": {
+                 "type": "string",
+                 "nullable": true,
+                 "description": "dlouhý popis"
+                },
+                "bottom_description_text": {
+                 "type": "string",
+                 "description": "spodní text"
+                },
+                "link_url": {
+                 "type": "string",
+                 "format": "uri",
+                 "nullable": true,
+                 "description": "URL adresa, na kterou bude vést kategorie. Bere se v úvahu pouze pokud je v tagu `type` hodnota `url`."
+                },
+                "seo_title": {
+                 "type": "string",
+                 "nullable": true,
+                 "description": "SEO titulek"
+                },
+                "seo_description": {
+                 "type": "string",
+                 "nullable": true,
+                 "description": "SEO meta popis"
+                },
+                "seo_url": {
+                 "type": "string",
+                 "nullable": true,
+                 "description": "vlastní URL slug"
+                }
+               }
+              }
+             },
+             "images": {
+              "type": "array",
+              "description": "pole objektů s obrázky",
+              "items": {
+               "type": "object",
+               "properties": {
+                "file_id": {
+                 "type": "integer",
+                 "description": "ID souboru<br>\nPři `GET`, nebo `PUT` se hledá soubor s konkrétním ID, musí být typu `image` nebo `video`\n"
+                },
+                "url": {
+                 "type": "string",
+                 "format": "uri",
+                 "description": "URL obrázku<br>\nPři `GET`, nebo `PUT` se obrázky nestahují hned, ale jsou staženy na pozadí\n"
+                },
+                "main_yn": {
+                 "type": "boolean",
+                 "description": "příznak pro hlavní obrázek. Pokud není definováno nebo je u všech obrázků `FALSE`, vezme se jako hlavní obrázek první"
+                },
+                "list_yn": {
+                 "type": "boolean",
+                 "description": "příznak pro seznamový obrázek. Pokud není definováno nebo je u všech obrázků `FALSE`, vezme se jako seznamový obrázek první"
+                },
+                "position": {
+                 "type": "integer",
+                 "description": "pozice"
+                },
+                "titles": {
+                 "type": "array",
+                 "description": "titulky",
+                 "items": {
+                  "type": "object",
+                  "required": [
+                   "language",
+                   "title"
+                  ],
+                  "properties": {
+                   "language": {
+                    "type": "string",
+                    "description": "kód jazyka dle [ISO 639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes)",
+                    "example": "cz",
+                    "__$ref": "#/components/schemas/Language"
+                   },
+                   "title": {
+                    "type": "string",
+                    "description": "titulek"
+                   }
+                  }
+                 }
+                },
+                "languages": {
+                 "type": "array",
+                 "description": "jazykové mutace na kterých se obrázek zobrazí, hlavní a seznamový obrázek se zobrazí ve všech jazykových mutacích",
+                 "items": {
+                  "type": "object",
+                  "required": [
+                   "language",
+                   "selected_yn"
+                  ],
+                  "properties": {
+                   "language": {
+                    "type": "string",
+                    "description": "kód jazyka dle [ISO 639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes)",
+                    "example": "cz",
+                    "__$ref": "#/components/schemas/Language"
+                   },
+                   "selected_yn": {
+                    "type": "boolean"
+                   }
+                  }
+                 }
+                }
+               }
+              },
+              "__$ref": "#/components/schemas/Images"
+             },
+             "metas": {
+              "type": "array",
+              "description": "vlastní pole",
+              "items": {
+               "oneOf": [
+                {
+                 "type": "object",
+                 "description": "vlastní pole s hodnotami společnými pro všechny jazyky",
+                 "required": [
+                  "key",
+                  "value"
+                 ],
+                 "properties": {
+                  "key": {
+                   "type": "string",
+                   "pattern": "^[a-z_][a-z0-9_]*$",
+                   "description": "klíč vlastního pole",
+                   "__$ref": "#/components/schemas/MetaKey"
+                  },
+                  "value": {
+                   "type": "string",
+                   "description": "hodnota společná pro všechny jazyky"
+                  }
+                 }
+                },
+                {
+                 "type": "object",
+                 "description": "vlastní pole s hodnotami pro každý jazyk zvlášť",
+                 "required": [
+                  "key",
+                  "values"
+                 ],
+                 "properties": {
+                  "key": {
+                   "type": "string",
+                   "pattern": "^[a-z_][a-z0-9_]*$",
+                   "description": "klíč vlastního pole",
+                   "__$ref": "#/components/schemas/MetaKey"
+                  },
+                  "values": {
+                   "type": "array",
+                   "description": "hodnoty pro každý jazyk zvlášť",
+                   "items": {
+                    "type": "object",
+                    "required": [
+                     "language",
+                     "value"
+                    ],
+                    "properties": {
+                     "language": {
+                      "type": "string",
+                      "description": "kód jazyka dle [ISO 639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes)",
+                      "example": "cz",
+                      "__$ref": "#/components/schemas/Language"
+                     },
+                     "value": {
+                      "type": "string"
+                     }
+                    }
+                   }
+                  }
+                 }
+                }
+               ]
+              },
+              "__$ref": "#/components/schemas/Metas"
+             }
+            }
+           }
+          }
+         }
+        }
+       }
+      ],
+      "description": null,
+      "required": true
+     },
+     "responses": [
+      {
+       "statusCode": "200",
+       "links": null,
+       "description": "OK",
+       "content": [
+        {
+         "examples": [],
+         "mediaType": "application/json",
+         "encoding": null,
+         "schema": {
+          "type": "object",
+          "properties": {
+           "categories": {
+            "type": "array",
+            "items": {
+             "type": "object",
+             "properties": {
+              "code": {
+               "type": "string",
+               "description": "kód kategorie"
+              },
+              "category_id": {
+               "type": "integer",
+               "description": "ID kategorie"
+              },
+              "updated_yn": {
+               "type": "boolean",
+               "description": "informace o úspěšném aktualizaci položky"
+              },
+              "messages": {
+               "type": "array",
+               "description": "chybové zprávy",
+               "items": {
+                "type": "object",
+                "properties": {
+                 "object": {
+                  "type": "string",
+                  "nullable": true,
+                  "description": "název objektu (část JSONu), kterého se zpráva týká"
+                 },
+                 "property": {
+                  "type": "string",
+                  "nullable": true,
+                  "description": "hodnota, které se zpráva týká"
+                 },
+                 "message": {
+                  "type": "string",
+                  "description": "text zprávy"
+                 },
+                 "level": {
+                  "type": "string",
+                  "enum": [
+                   "info",
+                   "warning",
+                   "error",
+                   "fatal_error"
+                  ],
+                  "description": "úroveň chyby:\n- `info` - informační sdělení\n- `warning` - varování\n- `error` - chyba, pravděpodobně nedošlo ke zpracování\n- `fatal_error` - chyba API, kontaktujte technickou podporu"
+                 }
+                }
+               },
+               "__$ref": "#/components/schemas/ErrorMessages"
+              }
+             }
+            }
+           }
+          }
+         }
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "slug": "vytvoreni-kategorii",
+     "summary": "Vytvoření kategorií",
+     "method": "post",
+     "description": "Při vytváření stromu kategorií je potřeba poslat kategorie ve správném pořadí, tzn. napřed rodičovské kategorie a potom potomky.",
+     "operationId": null,
+     "contentTypes": [
+      "application/json"
+     ],
+     "path": "/api/v2/categories",
+     "deprecated": null,
+     "extensions": {},
+     "servers": [],
+     "parameters": [],
+     "security": null,
+     "requestBody": {
+      "content": [
+       {
+        "mediaType": "application/json",
+        "encoding": [],
+        "examples": [],
+        "schema": {
+         "type": "object",
+         "properties": {
+          "categories": {
+           "type": "array",
+           "description": "pole objektů s kategoriemi",
+           "items": {
+            "type": "object",
+            "properties": {
+             "code": {
+              "type": "string",
+              "nullable": true,
+              "description": "kód kategorie"
+             },
+             "parent_code": {
+              "type": "string",
+              "nullable": true,
+              "description": "kód nadřazené kategorie"
+             },
+             "parent_id": {
+              "type": "integer",
+              "nullable": true,
+              "description": "ID nadřazené kategorie"
+             },
+             "position": {
+              "type": "integer",
+              "description": "pozice v nadřazené kategorii"
+             },
+             "active_yn": {
+              "type": "boolean",
+              "description": "zda je kategorie zobrazena na webu"
+             },
+             "type": {
+              "type": "string",
+              "enum": [
+               "homepage",
+               "news",
+               "individual",
+               "url",
+               "site",
+               "siteWithProducts",
+               "parametric",
+               "linkCategory",
+               "advisor",
+               "why-us",
+               "contact",
+               "manufacturers",
+               "contactMenu"
+              ],
+              "description": "typ kategorie:\n- `homepage` - odkaz na homepage\n- `news` - odkaz na novinky\n- `url` - odkaz na URL\n- `site` - stránka\n- `siteWithProducts` - stránka s produkty\n- `parametric` - parametrická stránka\n- `linkCategory` - odkaz na jinou kategorii\n- `advisor` - odkaz na rádce\n- `why-us` - odkaz na výhody\n- `contact` - kontakt\n- `manufacturers` - seznam výrobců\n- `contactMenu` - kontaktní menu",
+              "__$ref": "#/components/schemas/CategoryType"
+             },
+             "type_of_items": {
+              "type": "string",
+              "enum": [
+               "withSubcategories",
+               "withoutSubcategories",
+               "label",
+               "manufacturer"
+              ],
+              "description": "typ položek v kategorii:\n- `withSubcategories` - produkty s podkategoriemi\n- `withoutSubcategories` - produkty bez podkategorií\n- `label` - produkty s konkrétním štítkem\n- `manufacturer` - produkty s konkrétním výrobcem",
+              "__$ref": "#/components/schemas/CategoryTypeOfItems"
+             },
+             "target_category_id": {
+              "type": "integer",
+              "nullable": true,
+              "description": "ID cílové kategorie (pouze linkCategory)"
+             },
+             "manufacturer": {
+              "type": "string",
+              "nullable": true,
+              "description": "název výrobce (pouze manufacturer typ)"
+             },
+             "manufacturer_id": {
+              "type": "integer",
+              "nullable": true,
+              "description": "ID výrobce"
+             },
+             "label": {
+              "type": "string",
+              "nullable": true,
+              "description": "název štítku (pouze label typ)"
+             },
+             "label_id": {
+              "type": "integer",
+              "nullable": true,
+              "description": "ID štítku"
+             },
+             "show_in_menu_yn": {
+              "type": "boolean",
+              "description": "zobrazení v menu"
+             },
+             "descriptions": {
+              "type": "array",
+              "description": "popisky kategorií",
+              "items": {
+               "type": "object",
+               "properties": {
+                "language": {
+                 "type": "string",
+                 "description": "kód jazyka dle [ISO 639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes)",
+                 "example": "cz",
+                 "__$ref": "#/components/schemas/Language"
+                },
+                "active_yn": {
+                 "type": "boolean",
+                 "description": "aktivní v jazykové mutaci"
+                },
+                "name": {
+                 "type": "string",
+                 "description": "název kategorie"
+                },
+                "name_h1": {
+                 "type": "string",
+                 "nullable": true,
+                 "description": "H1 nadpis"
+                },
+                "short_description_text": {
+                 "type": "string",
+                 "description": "krátký popis"
+                },
+                "description_text": {
+                 "type": "string",
+                 "nullable": true,
+                 "description": "dlouhý popis"
+                },
+                "bottom_description_text": {
+                 "type": "string",
+                 "description": "spodní text"
+                },
+                "link_url": {
+                 "type": "string",
+                 "format": "uri",
+                 "nullable": true,
+                 "description": "URL adresa, na kterou bude vést kategorie. Bere se v úvahu pouze pokud je v tagu `type` hodnota `url`."
+                },
+                "seo_title": {
+                 "type": "string",
+                 "nullable": true,
+                 "description": "SEO titulek"
+                },
+                "seo_description": {
+                 "type": "string",
+                 "nullable": true,
+                 "description": "SEO meta popis"
+                },
+                "seo_url": {
+                 "type": "string",
+                 "nullable": true,
+                 "description": "vlastní URL slug"
+                }
+               }
+              }
+             },
+             "images": {
+              "type": "array",
+              "description": "pole objektů s obrázky",
+              "items": {
+               "type": "object",
+               "properties": {
+                "file_id": {
+                 "type": "integer",
+                 "description": "ID souboru<br>\nPři `GET`, nebo `PUT` se hledá soubor s konkrétním ID, musí být typu `image` nebo `video`\n"
+                },
+                "url": {
+                 "type": "string",
+                 "format": "uri",
+                 "description": "URL obrázku<br>\nPři `GET`, nebo `PUT` se obrázky nestahují hned, ale jsou staženy na pozadí\n"
+                },
+                "main_yn": {
+                 "type": "boolean",
+                 "description": "příznak pro hlavní obrázek. Pokud není definováno nebo je u všech obrázků `FALSE`, vezme se jako hlavní obrázek první"
+                },
+                "list_yn": {
+                 "type": "boolean",
+                 "description": "příznak pro seznamový obrázek. Pokud není definováno nebo je u všech obrázků `FALSE`, vezme se jako seznamový obrázek první"
+                },
+                "position": {
+                 "type": "integer",
+                 "description": "pozice"
+                },
+                "titles": {
+                 "type": "array",
+                 "description": "titulky",
+                 "items": {
+                  "type": "object",
+                  "required": [
+                   "language",
+                   "title"
+                  ],
+                  "properties": {
+                   "language": {
+                    "type": "string",
+                    "description": "kód jazyka dle [ISO 639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes)",
+                    "example": "cz",
+                    "__$ref": "#/components/schemas/Language"
+                   },
+                   "title": {
+                    "type": "string",
+                    "description": "titulek"
+                   }
+                  }
+                 }
+                },
+                "languages": {
+                 "type": "array",
+                 "description": "jazykové mutace na kterých se obrázek zobrazí, hlavní a seznamový obrázek se zobrazí ve všech jazykových mutacích",
+                 "items": {
+                  "type": "object",
+                  "required": [
+                   "language",
+                   "selected_yn"
+                  ],
+                  "properties": {
+                   "language": {
+                    "type": "string",
+                    "description": "kód jazyka dle [ISO 639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes)",
+                    "example": "cz",
+                    "__$ref": "#/components/schemas/Language"
+                   },
+                   "selected_yn": {
+                    "type": "boolean"
+                   }
+                  }
+                 }
+                }
+               }
+              },
+              "__$ref": "#/components/schemas/Images"
+             },
+             "metas": {
+              "type": "array",
+              "description": "vlastní pole",
+              "items": {
+               "oneOf": [
+                {
+                 "type": "object",
+                 "description": "vlastní pole s hodnotami společnými pro všechny jazyky",
+                 "required": [
+                  "key",
+                  "value"
+                 ],
+                 "properties": {
+                  "key": {
+                   "type": "string",
+                   "pattern": "^[a-z_][a-z0-9_]*$",
+                   "description": "klíč vlastního pole",
+                   "__$ref": "#/components/schemas/MetaKey"
+                  },
+                  "value": {
+                   "type": "string",
+                   "description": "hodnota společná pro všechny jazyky"
+                  }
+                 }
+                },
+                {
+                 "type": "object",
+                 "description": "vlastní pole s hodnotami pro každý jazyk zvlášť",
+                 "required": [
+                  "key",
+                  "values"
+                 ],
+                 "properties": {
+                  "key": {
+                   "type": "string",
+                   "pattern": "^[a-z_][a-z0-9_]*$",
+                   "description": "klíč vlastního pole",
+                   "__$ref": "#/components/schemas/MetaKey"
+                  },
+                  "values": {
+                   "type": "array",
+                   "description": "hodnoty pro každý jazyk zvlášť",
+                   "items": {
+                    "type": "object",
+                    "required": [
+                     "language",
+                     "value"
+                    ],
+                    "properties": {
+                     "language": {
+                      "type": "string",
+                      "description": "kód jazyka dle [ISO 639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes)",
+                      "example": "cz",
+                      "__$ref": "#/components/schemas/Language"
+                     },
+                     "value": {
+                      "type": "string"
+                     }
+                    }
+                   }
+                  }
+                 }
+                }
+               ]
+              },
+              "__$ref": "#/components/schemas/Metas"
+             }
+            }
+           }
+          }
+         }
+        }
+       }
+      ],
+      "description": null,
+      "required": true
+     },
+     "responses": [
+      {
+       "statusCode": "200",
+       "links": null,
+       "description": "OK",
+       "content": [
+        {
+         "examples": [],
+         "mediaType": "application/json",
+         "encoding": null,
+         "schema": {
+          "type": "object",
+          "properties": {
+           "categories": {
+            "type": "array",
+            "items": {
+             "type": "object",
+             "properties": {
+              "code": {
+               "type": "string",
+               "description": "kód kategorie"
+              },
+              "category_id": {
+               "type": "integer",
+               "description": "ID kategorie"
+              },
+              "inserted_yn": {
+               "type": "boolean",
+               "description": "informace o úspěšném vytvoření položky"
+              },
+              "messages": {
+               "type": "array",
+               "description": "chybové zprávy",
+               "items": {
+                "type": "object",
+                "properties": {
+                 "object": {
+                  "type": "string",
+                  "nullable": true,
+                  "description": "název objektu (část JSONu), kterého se zpráva týká"
+                 },
+                 "property": {
+                  "type": "string",
+                  "nullable": true,
+                  "description": "hodnota, které se zpráva týká"
+                 },
+                 "message": {
+                  "type": "string",
+                  "description": "text zprávy"
+                 },
+                 "level": {
+                  "type": "string",
+                  "enum": [
+                   "info",
+                   "warning",
+                   "error",
+                   "fatal_error"
+                  ],
+                  "description": "úroveň chyby:\n- `info` - informační sdělení\n- `warning` - varování\n- `error` - chyba, pravděpodobně nedošlo ke zpracování\n- `fatal_error` - chyba API, kontaktujte technickou podporu"
+                 }
+                }
+               },
+               "__$ref": "#/components/schemas/ErrorMessages"
+              }
+             }
+            }
+           }
+          }
+         }
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "slug": "smazani-kategorii",
+     "summary": "Smazání kategorií",
+     "method": "delete",
+     "description": "Smaže kategorii včetně všech podkategorií. Nelze mazat systémové root kategorie (`\"parent_id\": null`).\n",
+     "operationId": null,
+     "contentTypes": [],
+     "path": "/api/v2/categories",
+     "deprecated": null,
+     "extensions": {},
+     "servers": [],
+     "parameters": [
+      {
+       "name": "id",
+       "in": "query",
+       "description": "ID kategorie",
+       "required": null,
+       "schema": {
+        "type": "integer"
+       },
+       "style": null,
+       "explode": null,
+       "allowReserved": null,
+       "examples": []
+      },
+      {
+       "name": "ids",
+       "in": "query",
+       "description": "ID kategorií oddělené středníkem `;` nebo jako pole",
+       "required": null,
+       "schema": {
+        "oneOf": [
+         {
+          "type": "string",
+          "description": "hodnoty oddělené středníkem `;`\\\nnapříklad `1;2;3`\n"
+         },
+         {
+          "type": "array",
+          "items": {
+           "type": "integer"
+          }
+         }
+        ],
+        "__$ref": "#/components/schemas/QueryParameterArrayInt"
+       },
+       "style": null,
+       "explode": null,
+       "allowReserved": null,
+       "examples": []
+      },
+      {
+       "name": "code",
+       "in": "query",
+       "description": "kód kategorie",
+       "required": null,
+       "schema": {
+        "type": "string"
+       },
+       "style": null,
+       "explode": null,
+       "allowReserved": null,
+       "examples": []
+      }
+     ],
+     "security": null,
+     "requestBody": {
+      "content": [],
+      "description": null,
+      "required": null
+     },
+     "responses": [
+      {
+       "statusCode": "200",
+       "links": null,
+       "description": "OK",
+       "content": [
+        {
+         "examples": [],
+         "mediaType": "application/json",
+         "encoding": null,
+         "schema": {
+          "type": "object",
+          "properties": {
+           "categories": {
+            "type": "array",
+            "description": "pole objektů s kategoriemi",
+            "items": {
+             "type": "object",
+             "properties": {
+              "category_id": {
+               "type": "integer",
+               "description": "ID kategorie"
+              },
+              "code": {
+               "type": "string",
+               "description": "kód kategorie"
+              },
+              "deleted_yn": {
+               "type": "boolean",
+               "description": "informace o úspěšném smazání"
+              },
+              "messages": {
+               "type": "array",
+               "description": "chybové zprávy",
+               "items": {
+                "type": "object",
+                "properties": {
+                 "object": {
+                  "type": "string",
+                  "nullable": true,
+                  "description": "název objektu (část JSONu), kterého se zpráva týká"
+                 },
+                 "property": {
+                  "type": "string",
+                  "nullable": true,
+                  "description": "hodnota, které se zpráva týká"
+                 },
+                 "message": {
+                  "type": "string",
+                  "description": "text zprávy"
+                 },
+                 "level": {
+                  "type": "string",
+                  "enum": [
+                   "info",
+                   "warning",
+                   "error",
+                   "fatal_error"
+                  ],
+                  "description": "úroveň chyby:\n- `info` - informační sdělení\n- `warning` - varování\n- `error` - chyba, pravděpodobně nedošlo ke zpracování\n- `fatal_error` - chyba API, kontaktujte technickou podporu"
+                 }
+                }
+               },
+               "__$ref": "#/components/schemas/ErrorMessages"
+              }
+             }
+            }
+           }
+          }
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "extensions": {},
+   "next": {
+    "name": "Konverzní kódy",
+    "slug": "konverzni-kody",
+    "extensions": {}
+   },
+   "prev": {
+    "name": "Jazyky",
+    "slug": "jazyky",
+    "extensions": {}
+   }
+  }
+ }
+}

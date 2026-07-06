@@ -1,0 +1,114 @@
+{
+ "schema": {
+  "servers": [],
+  "description": null,
+  "summary": null,
+  "title": "API",
+  "url": null,
+  "version": "2",
+  "tag": {
+   "name": "Nastavení eshopu",
+   "description": null,
+   "operations": [
+    {
+     "slug": "nastaveni-eshopu",
+     "summary": "Nastavení eshopu",
+     "method": "get",
+     "description": "- vrací atributy nastavení e-shopu\n",
+     "operationId": null,
+     "contentTypes": [],
+     "path": "/api/v2/config",
+     "deprecated": null,
+     "extensions": {},
+     "servers": [],
+     "parameters": [],
+     "security": null,
+     "requestBody": {
+      "content": [],
+      "description": null,
+      "required": null
+     },
+     "responses": [
+      {
+       "statusCode": "200",
+       "links": null,
+       "description": "OK",
+       "content": [
+        {
+         "examples": [],
+         "mediaType": "application/json",
+         "encoding": null,
+         "schema": {
+          "type": "object",
+          "properties": {
+           "config": {
+            "type": "object",
+            "description": "nastavení e-shopu",
+            "required": [
+             "prices_with_vat_yn",
+             "vat_payer_yn",
+             "oss_yn"
+            ],
+            "properties": {
+             "prices_with_vat_yn": {
+              "type": "boolean",
+              "description": "e-shop ukládá ceny s DPH"
+             },
+             "vat_payer_yn": {
+              "type": "boolean",
+              "description": "provozovatel je plátcem DPH"
+             },
+             "oss_yn": {
+              "type": "boolean",
+              "description": "používá se režim OSS"
+             },
+             "limit_orders": {
+              "description": "omezení objednání",
+              "oneOf": [
+               {
+                "type": "integer",
+                "enum": [
+                 0,
+                 1
+                ]
+               },
+               {
+                "type": "string",
+                "enum": [
+                 "sale"
+                ]
+               }
+              ]
+             }
+            }
+           },
+           "languages": {
+            "type": "object",
+            "description": "**ZASTARALÉ** – bude odstraněno. Použijte endpoint /api/v2/languages.\n"
+           },
+           "pricelists": {
+            "type": "object",
+            "description": "**ZASTARALÉ** – bude odstraněno. Použijte endpoint /api/v2/pricelists.\n"
+           }
+          }
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "extensions": {},
+   "next": {
+    "name": "Objednávky",
+    "slug": "objednavky",
+    "extensions": {}
+   },
+   "prev": {
+    "name": "Košíky",
+    "slug": "kosiky",
+    "extensions": {}
+   }
+  }
+ }
+}

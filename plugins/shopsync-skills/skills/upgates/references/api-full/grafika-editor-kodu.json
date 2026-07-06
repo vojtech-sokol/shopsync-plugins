@@ -1,0 +1,477 @@
+{
+ "schema": {
+  "servers": [],
+  "description": null,
+  "summary": null,
+  "title": "API",
+  "url": null,
+  "version": "2",
+  "tag": {
+   "name": "Grafika - editor kódu",
+   "description": "- slouží pro práci se soubory na [testovací verzi grafiky](https://www.upgates.cz/a/eshop-pohled-zakaznika#testovaci-verze-e-shopu) e-shopu, obdobně lze využít nástroj [Editor kódu](https://www.upgates.cz/a/editor-kodu) v administraci.\n- seznamy souborů ovlivňuje zapnutý či vypnutý grafický editor [Designer](https://www.upgates.cz/a/designer-modul).\n- více informací ohledně [struktury souborů a složek](souboru) nebo [základní dokumentace](https://www.upgates.cz/a/dokumentace-latte) naleznete v [nápovědách](https://www.upgates.cz/pruvodce).\n- všechny cesty jsou vzhledem k root složce `/`. Dle [verze grafiky](https://www.upgates.cz/a/finalizace-grafiky#zjisteni-aktualni-verze-grafiky) se mohou měnit názvy a umístění systémových souborů.",
+   "operations": [
+    {
+     "slug": "informace-o-souboru-slozce",
+     "summary": "Informace o souboru / složce",
+     "method": "get",
+     "description": "Vrací informace o souboru nebo složce",
+     "operationId": null,
+     "contentTypes": [],
+     "path": "/api/v2/graphics/code",
+     "deprecated": null,
+     "extensions": {},
+     "servers": [],
+     "parameters": [
+      {
+       "name": "pathname",
+       "in": "query",
+       "description": "cesta ke konkrétní složce nebo souboru",
+       "required": false,
+       "schema": {
+        "type": "string",
+        "default": "/"
+       },
+       "style": null,
+       "explode": null,
+       "allowReserved": null,
+       "examples": []
+      }
+     ],
+     "security": null,
+     "requestBody": {
+      "content": [],
+      "description": null,
+      "required": null
+     },
+     "responses": [
+      {
+       "statusCode": "200",
+       "links": null,
+       "description": "OK",
+       "content": [
+        {
+         "examples": [],
+         "mediaType": "application/json",
+         "encoding": null,
+         "schema": {
+          "oneOf": [
+           {
+            "type": "object",
+            "description": "Soubor",
+            "properties": {
+             "pathname": {
+              "type": "string",
+              "description": "cesta k souboru",
+              "example": "/css/custom.css"
+             },
+             "last_update_time": {
+              "type": "string",
+              "format": "date-time",
+              "description": "datum poslední změny souboru",
+              "example": "2026-04-28T13:57:48+02:00",
+              "__$ref": "#/components/schemas/DateTime"
+             },
+             "custom_yn": {
+              "type": "boolean",
+              "description": "příznak, zda jde o vlastnoručně vytvořený soubor"
+             },
+             "size": {
+              "type": "integer",
+              "description": "velikost souboru v bajtech"
+             },
+             "content": {
+              "type": "string",
+              "description": "samotný obsah souboru (textový řetězec)"
+             },
+             "readonly_yn": {
+              "type": "boolean",
+              "description": "příznak, zda je soubor pouze pro čtení (nelze jej přepsat)"
+             },
+             "success": {
+              "type": "boolean",
+              "description": "indikace úspěšného zpracování požadavku"
+             },
+             "errors": {
+              "type": "array",
+              "description": "seznam chyb (pouze pokud je `success` = `TRUE`)",
+              "items": {
+               "type": "object",
+               "properties": {
+                "type": {
+                 "type": "string",
+                 "description": "typ nebo kód chyby"
+                },
+                "message": {
+                 "type": "string",
+                 "description": "textový popis chyby"
+                }
+               }
+              }
+             }
+            },
+            "__$ref": "#/components/schemas/GraphicsFile"
+           },
+           {
+            "type": "object",
+            "description": "Složka",
+            "properties": {
+             "pathname": {
+              "type": "string",
+              "description": "cesta ke složce"
+             },
+             "last_update_time": {
+              "type": "string",
+              "format": "date-time",
+              "description": "Datum poslední změny složky.",
+              "example": "2026-04-28T13:57:48+02:00",
+              "__$ref": "#/components/schemas/DateTime"
+             },
+             "custom_yn": {
+              "type": "boolean",
+              "description": "příznak, zda jde o uživatelem vytvořenou složku"
+             },
+             "items": {
+              "type": "array",
+              "description": "Seznam položek (souborů a podsložek) uvnitř složky.",
+              "items": {
+               "type": "object",
+               "properties": {
+                "type": {
+                 "type": "string",
+                 "enum": [
+                  "directory",
+                  "file"
+                 ],
+                 "description": "Typ položky:\n- `directory` - složka\n- `file` - soubor"
+                },
+                "pathname": {
+                 "type": "string",
+                 "description": "Relativní cesta k souboru nebo složce."
+                },
+                "last_update_time": {
+                 "type": "string",
+                 "format": "date-time",
+                 "description": "Datum poslední změny položky.",
+                 "example": "2026-04-28T13:57:48+02:00",
+                 "__$ref": "#/components/schemas/DateTime"
+                },
+                "custom_yn": {
+                 "type": "boolean",
+                 "description": "Příznak, zda jde o uživatelsky vytvořený prvek."
+                },
+                "size": {
+                 "type": "integer",
+                 "description": "Velikost souboru v bajtech (vrací se pouze u typu file)"
+                },
+                "readonly_yn": {
+                 "type": "boolean",
+                 "description": "příznak, zda je soubor pouze pro čtení"
+                }
+               }
+              }
+             },
+             "success": {
+              "type": "boolean",
+              "description": "Indikace úspěšného zpracování požadavku."
+             },
+             "errors": {
+              "type": "array",
+              "description": "seznam chyb (pouze pokud je `success` = `TRUE`)",
+              "items": {
+               "type": "object",
+               "properties": {
+                "type": {
+                 "type": "string",
+                 "description": "typ nebo kód chyby"
+                },
+                "message": {
+                 "type": "string",
+                 "description": "textový popis chyby"
+                }
+               }
+              }
+             }
+            },
+            "__$ref": "#/components/schemas/GraphicsDirectory"
+           }
+          ]
+         }
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "slug": "aktualizace-obsahu-souboru",
+     "summary": "Aktualizace obsahu souboru",
+     "method": "put",
+     "description": "Přepíše obsah souboru na zadané cestě novými daty.",
+     "operationId": null,
+     "contentTypes": [
+      "application/json"
+     ],
+     "path": "/api/v2/graphics/code",
+     "deprecated": null,
+     "extensions": {},
+     "servers": [],
+     "parameters": [],
+     "security": null,
+     "requestBody": {
+      "content": [
+       {
+        "mediaType": "application/json",
+        "encoding": [],
+        "examples": [],
+        "schema": {
+         "type": "object",
+         "required": [
+          "pathname",
+          "content"
+         ],
+         "properties": {
+          "pathname": {
+           "type": "string",
+           "description": "Cesta k souboru"
+          },
+          "content": {
+           "type": "string",
+           "description": "Obsah souboru."
+          }
+         }
+        }
+       }
+      ],
+      "description": null,
+      "required": true
+     },
+     "responses": [
+      {
+       "statusCode": "200",
+       "links": null,
+       "description": "OK",
+       "content": [
+        {
+         "examples": [],
+         "mediaType": "application/json",
+         "encoding": null,
+         "schema": {
+          "type": "object",
+          "properties": {
+           "success": {
+            "type": "boolean",
+            "description": "Indikace, zda aktualizace proběhla v pořádku."
+           },
+           "errors": {
+            "type": "array",
+            "description": "seznam chyb (pouze pokud je `success` = `TRUE`)",
+            "items": {
+             "type": "object",
+             "properties": {
+              "type": {
+               "type": "string"
+              },
+              "message": {
+               "type": "string"
+              },
+              "line": {
+               "type": "integer"
+              }
+             }
+            }
+           }
+          }
+         }
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "slug": "vytvoreni-souboru-slozky",
+     "summary": "Vytvoření souboru / složky",
+     "method": "post",
+     "description": "Vytvoří nový soubor nebo složku na zadané cestě.",
+     "operationId": null,
+     "contentTypes": [
+      "application/json"
+     ],
+     "path": "/api/v2/graphics/code",
+     "deprecated": null,
+     "extensions": {},
+     "servers": [],
+     "parameters": [],
+     "security": null,
+     "requestBody": {
+      "content": [
+       {
+        "mediaType": "application/json",
+        "encoding": [],
+        "examples": [],
+        "schema": {
+         "type": "object",
+         "required": [
+          "pathname",
+          "type"
+         ],
+         "properties": {
+          "pathname": {
+           "type": "string",
+           "description": "Plná cesta k souboru nebo složce (`/path/<name><.><extension>`).\nSamotný název (bez cesty a přípony) musí odpovídat REGEXu: `/^([a-zA-Z0-9_-]){1,50}$/i`."
+          },
+          "type": {
+           "type": "string",
+           "enum": [
+            "directory",
+            "file"
+           ],
+           "description": "Typ položky:\n- `directory` - složka\n- `file` - soubor"
+          },
+          "content": {
+           "type": "string",
+           "description": "obsah souboru (použitelné pouze pro type=file)"
+          }
+         }
+        }
+       }
+      ],
+      "description": null,
+      "required": true
+     },
+     "responses": [
+      {
+       "statusCode": "200",
+       "links": null,
+       "description": "OK",
+       "content": [
+        {
+         "examples": [],
+         "mediaType": "application/json",
+         "encoding": null,
+         "schema": {
+          "type": "object",
+          "properties": {
+           "pathname": {
+            "type": "string",
+            "description": "Cesta k vytvořenému objektu."
+           },
+           "success": {
+            "type": "boolean",
+            "description": "Indikace, zda se vytvoření podařilo."
+           },
+           "errors": {
+            "type": "array",
+            "description": "seznam chyb (pouze pokud je `success` = `TRUE`)",
+            "items": {
+             "type": "object",
+             "properties": {
+              "type": {
+               "type": "string"
+              },
+              "message": {
+               "type": "string"
+              },
+              "line": {
+               "type": "integer"
+              }
+             }
+            }
+           }
+          }
+         }
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "slug": "smazani-souboru-slozky",
+     "summary": "Smazání souboru / složky",
+     "method": "delete",
+     "description": "Odstraní soubor nebo celou složku na základě zadané cesty.",
+     "operationId": null,
+     "contentTypes": [
+      "application/json"
+     ],
+     "path": "/api/v2/graphics/code",
+     "deprecated": null,
+     "extensions": {},
+     "servers": [],
+     "parameters": [],
+     "security": null,
+     "requestBody": {
+      "content": [
+       {
+        "mediaType": "application/json",
+        "encoding": [],
+        "examples": [],
+        "schema": {
+         "type": "object",
+         "required": [
+          "pathname"
+         ],
+         "properties": {
+          "pathname": {
+           "type": "string",
+           "description": "Cesta k souboru nebo složce, která má být smazána."
+          }
+         }
+        }
+       }
+      ],
+      "description": null,
+      "required": true
+     },
+     "responses": [
+      {
+       "statusCode": "200",
+       "links": null,
+       "description": "OK",
+       "content": [
+        {
+         "examples": [],
+         "mediaType": "application/json",
+         "encoding": null,
+         "schema": {
+          "type": "object",
+          "properties": {
+           "success": {
+            "type": "boolean",
+            "description": "Indikace, zda smazání proběhlo úspěšně."
+           },
+           "errors": {
+            "type": "array",
+            "description": "seznam chyb (pouze pokud je `success` = `TRUE`)",
+            "items": {
+             "type": "object",
+             "properties": {
+              "type": {
+               "type": "string"
+              },
+              "message": {
+               "type": "string"
+              }
+             }
+            }
+           }
+          }
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "extensions": {},
+   "next": {
+    "name": "Grafika - zálohy",
+    "slug": "grafika-zalohy",
+    "extensions": {}
+   },
+   "prev": {
+    "name": "Faktury",
+    "slug": "faktury",
+    "extensions": {}
+   }
+  }
+ }
+}

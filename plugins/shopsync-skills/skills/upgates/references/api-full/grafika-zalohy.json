@@ -1,0 +1,430 @@
+{
+ "schema": {
+  "servers": [],
+  "description": null,
+  "summary": null,
+  "title": "API",
+  "url": null,
+  "version": "2",
+  "tag": {
+   "name": "Grafika - zálohy",
+   "description": "- slouží pro přehled grafických záloh a správu [manuálních záloh](https://www.upgates.cz/a/zalohy-grafiky-napoveda#manualni-zalohy-grafiky).",
+   "operations": [
+    {
+     "slug": "seznam-zaloh",
+     "summary": "Seznam záloh",
+     "method": "get",
+     "description": "Vrátí seznam všech dostupných záloh grafiky, včetně manuálních a systémových.",
+     "operationId": null,
+     "contentTypes": [],
+     "path": "/api/v2/graphics/backups",
+     "deprecated": null,
+     "extensions": {},
+     "servers": [],
+     "parameters": [],
+     "security": null,
+     "requestBody": {
+      "content": [],
+      "description": null,
+      "required": null
+     },
+     "responses": [
+      {
+       "statusCode": "200",
+       "links": null,
+       "description": "Seznam záloh byl úspěšně načten.",
+       "content": [
+        {
+         "examples": [],
+         "mediaType": "application/json",
+         "encoding": null,
+         "schema": {
+          "type": "object",
+          "required": [
+           "backups",
+           "success"
+          ],
+          "properties": {
+           "backups": {
+            "type": "array",
+            "description": "Pole objektů se zálohami.",
+            "items": {
+             "type": "object",
+             "required": [
+              "token",
+              "creation_time",
+              "type"
+             ],
+             "properties": {
+              "token": {
+               "type": "string",
+               "description": "Unikátní identifikátor zálohy pro následné operace (např. obnovu)."
+              },
+              "creation_time": {
+               "type": "string",
+               "format": "date-time",
+               "description": "Datum a čas vytvoření zálohy.",
+               "example": "2026-04-28T13:57:48+02:00",
+               "__$ref": "#/components/schemas/DateTime"
+              },
+              "type": {
+               "type": "string",
+               "enum": [
+                "manual",
+                "system.updateFinal",
+                "system.updateConfigurator",
+                "system.disableConfigurator",
+                "system.enableConfigurator"
+               ],
+               "description": "Typ zálohy:\n* `manual` - ručně vytvořena.\n* `system.updateFinal` - vzniká při překlopení testovací verze grafiky na ostrou.\n* `system.updateConfigurator` - změna verze grafiky (obsahuje info o verzích v additional_data).\n* `system.disableConfigurator` - vypnutí Designeru / zapnutí editoru kódu.\n* `system.enableConfigurator` - zapnutí Designeru / vypnutí editoru kódu."
+              },
+              "additional_data": {
+               "type": "array",
+               "description": "Dodatečné informace (např. u změny konfigurátoru obsahuje pole \"from\" a \"to\").",
+               "items": {
+                "type": "object"
+               }
+              },
+              "name": {
+               "type": "string",
+               "description": "Název zálohy. Vrací se pouze v případě, že `type` = `manual`."
+              },
+              "expiration_time": {
+               "type": "string",
+               "format": "date-time",
+               "description": "Datum expirace zálohy. Vrací se pouze u systémových záloh.",
+               "example": "2026-04-28T13:57:48+02:00",
+               "__$ref": "#/components/schemas/DateTime"
+              }
+             }
+            }
+           },
+           "success": {
+            "type": "boolean",
+            "description": "Indikace úspěšného zpracování požadavku."
+           },
+           "errors": {
+            "type": "array",
+            "description": "Seznam chyb, pokud success = false.",
+            "items": {
+             "type": "object",
+             "required": [
+              "type",
+              "message"
+             ],
+             "properties": {
+              "type": {
+               "type": "string",
+               "description": "Typ nebo kód chyby."
+              },
+              "message": {
+               "type": "string",
+               "description": "Textový popis chyby."
+              }
+             }
+            }
+           }
+          }
+         }
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "slug": "obnoveni-zalohy",
+     "summary": "Obnovení zálohy",
+     "method": "put",
+     "description": "Nahradí aktuální konfiguraci a soubory grafiky daty ze zvolené zálohy.\n> **POZOR !**<br>\n> Tato operace přepíše aktuální neuložené změny nebo současný stav grafiky.\n",
+     "operationId": null,
+     "contentTypes": [
+      "application/json"
+     ],
+     "path": "/api/v2/graphics/backups",
+     "deprecated": null,
+     "extensions": {},
+     "servers": [],
+     "parameters": [],
+     "security": null,
+     "requestBody": {
+      "content": [
+       {
+        "mediaType": "application/json",
+        "encoding": [],
+        "examples": [],
+        "schema": {
+         "type": "object",
+         "required": [
+          "token"
+         ],
+         "properties": {
+          "token": {
+           "type": "string",
+           "description": "Unikátní identifikátor zálohy, která má být obnovena.",
+           "example": "a1b2c3d4e5f6g7h8i9j0"
+          }
+         }
+        }
+       }
+      ],
+      "description": null,
+      "required": true
+     },
+     "responses": [
+      {
+       "statusCode": "200",
+       "links": null,
+       "description": "Požadavek na obnovu byl zpracován.",
+       "content": [
+        {
+         "examples": [],
+         "mediaType": "application/json",
+         "encoding": null,
+         "schema": {
+          "type": "object",
+          "required": [
+           "success"
+          ],
+          "properties": {
+           "success": {
+            "type": "boolean",
+            "description": "Indikace, zda obnova proběhla úspěšně."
+           },
+           "errors": {
+            "type": "array",
+            "description": "Seznam chyb, pokud success = false.\nNejčastější příčinou je neplatný nebo expirovaný token zálohy.",
+            "items": {
+             "type": "object",
+             "required": [
+              "type",
+              "message"
+             ],
+             "properties": {
+              "type": {
+               "type": "string",
+               "description": "Kód nebo typ chyby."
+              },
+              "message": {
+               "type": "string",
+               "description": "Čitelný popis chyby (např. \"Záloha nebyla nalezena\")."
+              }
+             }
+            }
+           }
+          }
+         }
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "slug": "vytvoreni-zalohy",
+     "summary": "Vytvoření zálohy",
+     "method": "post",
+     "description": "Vytvoří novou manuální zálohu aktuálního nastavení a souborů grafiky.",
+     "operationId": null,
+     "contentTypes": [
+      "application/json"
+     ],
+     "path": "/api/v2/graphics/backups",
+     "deprecated": null,
+     "extensions": {},
+     "servers": [],
+     "parameters": [],
+     "security": null,
+     "requestBody": {
+      "content": [
+       {
+        "mediaType": "application/json",
+        "encoding": [],
+        "examples": [],
+        "schema": {
+         "type": "object",
+         "required": [
+          "name"
+         ],
+         "properties": {
+          "name": {
+           "type": "string",
+           "maxLength": 256,
+           "description": "Uživatelský název zálohy.",
+           "example": "Záloha před úpravou CSS"
+          }
+         }
+        }
+       }
+      ],
+      "description": null,
+      "required": true
+     },
+     "responses": [
+      {
+       "statusCode": "200",
+       "links": null,
+       "description": "Požadavek byl zpracován. Úspěch závisí na hodnotě v poli `success`.",
+       "content": [
+        {
+         "examples": [],
+         "mediaType": "application/json",
+         "encoding": null,
+         "schema": {
+          "type": "object",
+          "required": [
+           "success"
+          ],
+          "properties": {
+           "token": {
+            "type": "string",
+            "description": "Unikátní identifikátor vytvořené zálohy."
+           },
+           "creation_time": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Datum a čas vytvoření zálohy.",
+            "example": "2026-04-28T13:57:48+02:00",
+            "__$ref": "#/components/schemas/DateTime"
+           },
+           "type": {
+            "type": "string",
+            "example": "manual",
+            "description": "Typ zálohy (pro tento endpoint vždy \"manual\")."
+           },
+           "name": {
+            "type": "string",
+            "description": "Název vytvořené zálohy."
+           },
+           "success": {
+            "type": "boolean",
+            "description": "Indikace, zda se zálohu podařilo vytvořit."
+           },
+           "errors": {
+            "type": "array",
+            "description": "Seznam chyb (např. při překročení délky názvu), pokud success = false.",
+            "items": {
+             "type": "object",
+             "required": [
+              "type",
+              "message"
+             ],
+             "properties": {
+              "type": {
+               "type": "string",
+               "description": "Kód nebo typ chyby."
+              },
+              "message": {
+               "type": "string",
+               "description": "Čitelný popis chyby."
+              }
+             }
+            }
+           }
+          }
+         }
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "slug": "smazani-zalohy",
+     "summary": "Smazání zálohy",
+     "method": "delete",
+     "description": "Trvale odstraní konkrétní zálohu ze systému na základě poskytnutého tokenu.",
+     "operationId": null,
+     "contentTypes": [
+      "application/json"
+     ],
+     "path": "/api/v2/graphics/backups",
+     "deprecated": null,
+     "extensions": {},
+     "servers": [],
+     "parameters": [],
+     "security": null,
+     "requestBody": {
+      "content": [
+       {
+        "mediaType": "application/json",
+        "encoding": [],
+        "examples": [],
+        "schema": {
+         "type": "object",
+         "required": [
+          "token"
+         ],
+         "properties": {
+          "token": {
+           "type": "string",
+           "description": "Unikátní identifikátor zálohy, která má být smazána.",
+           "example": "a1b2c3d4e5f6g7h8i9j0"
+          }
+         }
+        }
+       }
+      ],
+      "description": null,
+      "required": true
+     },
+     "responses": [
+      {
+       "statusCode": "200",
+       "links": null,
+       "description": "Požadavek na smazání byl zpracován.",
+       "content": [
+        {
+         "examples": [],
+         "mediaType": "application/json",
+         "encoding": null,
+         "schema": {
+          "type": "object",
+          "required": [
+           "success"
+          ],
+          "properties": {
+           "success": {
+            "type": "boolean",
+            "description": "Indikace, zda smazání proběhlo úspěšně."
+           },
+           "errors": {
+            "type": "array",
+            "description": "Seznam chyb, pokud success = false.\nMožné příčiny: záloha s tímto tokenem neexistuje nebo je systémem chráněna proti smazání.",
+            "items": {
+             "type": "object",
+             "required": [
+              "type",
+              "message"
+             ],
+             "properties": {
+              "type": {
+               "type": "string",
+               "description": "Kód nebo typ chyby."
+              },
+              "message": {
+               "type": "string",
+               "description": "Čitelný popis chyby (např. \"Záloha nebyla nalezena\")."
+              }
+             }
+            }
+           }
+          }
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "extensions": {},
+   "next": {
+    "name": "Jazyky",
+    "slug": "jazyky",
+    "extensions": {}
+   },
+   "prev": {
+    "name": "Grafika - editor kódu",
+    "slug": "grafika-editor-kodu",
+    "extensions": {}
+   }
+  }
+ }
+}

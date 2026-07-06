@@ -1,0 +1,1306 @@
+{
+ "schema": {
+  "servers": [],
+  "description": null,
+  "summary": null,
+  "title": "API",
+  "url": null,
+  "version": "2",
+  "tag": {
+   "name": "Faktury",
+   "description": "- více o fakturaci v Upgates e-shopech naleznete [zde](https://www.upgates.cz/a/dokument-faktura).",
+   "operations": [
+    {
+     "slug": "seznam-faktur",
+     "summary": "Seznam faktur",
+     "method": "get",
+     "description": "Některé údaje nejsou dostupné přímo ve faktuře, ale v detailu související objednávky.\nSeznam faktur je dostupný po jednotlivých stranách, výstup je omezený na 100 položek na stránku.\n",
+     "operationId": null,
+     "contentTypes": [],
+     "path": "/api/v2/invoices",
+     "deprecated": null,
+     "extensions": {},
+     "servers": [],
+     "parameters": [
+      {
+       "name": "invoice_numbers",
+       "in": "query",
+       "description": "Čísla faktur oddělená středníkem `;` nebo jako pole",
+       "required": false,
+       "schema": {
+        "oneOf": [
+         {
+          "type": "string",
+          "description": "hodnoty oddělené středníkem `;`\\\nnapříklad `A;B;C`\n"
+         },
+         {
+          "type": "array",
+          "items": {
+           "type": "string"
+          }
+         }
+        ],
+        "__$ref": "#/components/schemas/QueryParameterArrayString"
+       },
+       "style": null,
+       "explode": null,
+       "allowReserved": null,
+       "examples": []
+      },
+      {
+       "name": "creation_time_from",
+       "in": "query",
+       "description": "vrátí faktury vytvořené od tohoto data",
+       "required": false,
+       "schema": {
+        "type": "string",
+        "format": "date-time",
+        "description": "datum a čas zapsaný jako řeťezec znaků dle [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601)",
+        "example": "2026-04-28T13:57:48+02:00",
+        "__$ref": "#/components/schemas/DateTime"
+       },
+       "style": null,
+       "explode": null,
+       "allowReserved": null,
+       "examples": []
+      },
+      {
+       "name": "creation_time_to",
+       "in": "query",
+       "description": "vrátí faktury vytvořené do tohoto data",
+       "required": false,
+       "schema": {
+        "type": "string",
+        "format": "date-time",
+        "description": "datum a čas zapsaný jako řeťezec znaků dle [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601)",
+        "example": "2026-04-28T13:57:48+02:00",
+        "__$ref": "#/components/schemas/DateTime"
+       },
+       "style": null,
+       "explode": null,
+       "allowReserved": null,
+       "examples": []
+      },
+      {
+       "name": "last_update_time_from",
+       "in": "query",
+       "description": "vrátí faktury změněné od tohoto data",
+       "required": false,
+       "schema": {
+        "type": "string",
+        "format": "date-time",
+        "description": "datum a čas zapsaný jako řeťezec znaků dle [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601)",
+        "example": "2026-04-28T13:57:48+02:00",
+        "__$ref": "#/components/schemas/DateTime"
+       },
+       "style": null,
+       "explode": null,
+       "allowReserved": null,
+       "examples": []
+      },
+      {
+       "name": "page",
+       "in": "query",
+       "description": "stránka",
+       "required": false,
+       "schema": {
+        "type": "integer",
+        "default": 1
+       },
+       "style": null,
+       "explode": null,
+       "allowReserved": null,
+       "examples": []
+      },
+      {
+       "name": "paid_yn",
+       "in": "query",
+       "description": "pokud je `true`, vrátí zaplacené faktury",
+       "required": false,
+       "schema": {
+        "type": "boolean"
+       },
+       "style": null,
+       "explode": null,
+       "allowReserved": null,
+       "examples": []
+      },
+      {
+       "name": "type",
+       "in": "query",
+       "description": "typ dokladu",
+       "required": false,
+       "schema": {
+        "type": "string",
+        "enum": [
+         "invoice",
+         "creditNote",
+         "receipt"
+        ]
+       },
+       "style": null,
+       "explode": null,
+       "allowReserved": null,
+       "examples": []
+      }
+     ],
+     "security": null,
+     "requestBody": {
+      "content": [],
+      "description": null,
+      "required": null
+     },
+     "responses": [
+      {
+       "statusCode": "200",
+       "links": null,
+       "description": "OK",
+       "content": [
+        {
+         "examples": [],
+         "mediaType": "application/json",
+         "encoding": null,
+         "schema": {
+          "type": "object",
+          "properties": {
+           "current_page": {
+            "type": "integer",
+            "minimum": 1,
+            "description": "aktuální strana"
+           },
+           "current_page_items": {
+            "type": "integer",
+            "description": "počet položek na aktuální straně",
+            "example": 1
+           },
+           "number_of_items": {
+            "type": "integer",
+            "description": "celkový počet položek",
+            "example": 1
+           },
+           "number_of_pages": {
+            "type": "integer",
+            "description": "celkový počet stran",
+            "example": 1
+           },
+           "invoices": {
+            "type": "array",
+            "description": "pole objektů s fakturami",
+            "items": {
+             "type": "object",
+             "properties": {
+              "invoice_number": {
+               "type": "string",
+               "description": "číslo faktury"
+              },
+              "related_invoice_number": {
+               "type": "string",
+               "nullable": true,
+               "description": "číslo související faktury, pouze u dobropisu"
+              },
+              "type": {
+               "type": "string",
+               "enum": [
+                "invoice",
+                "creditNote",
+                "receipt"
+               ],
+               "description": "typ faktury"
+              },
+              "order_number": {
+               "type": "string",
+               "description": "číslo objednávky"
+              },
+              "external_order_number": {
+               "type": "string",
+               "nullable": true,
+               "description": "číslo objednávky z externího systému"
+              },
+              "case_number": {
+               "type": "string",
+               "nullable": true,
+               "description": "číslo obchodního případu"
+              },
+              "language_id": {
+               "type": "string",
+               "description": "kód jazyka dle [ISO 639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes)",
+               "example": "cz",
+               "__$ref": "#/components/schemas/Language"
+              },
+              "currency_id": {
+               "type": "string",
+               "description": "kód měny dle [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217)",
+               "example": "CZK",
+               "__$ref": "#/components/schemas/Currency"
+              },
+              "date_of_issuance": {
+               "type": "string",
+               "format": "date",
+               "description": "datum vystavení",
+               "example": "2026-04-28",
+               "__$ref": "#/components/schemas/Date"
+              },
+              "date_of_vat_revenue_recognition": {
+               "type": "string",
+               "format": "date",
+               "description": "datum zdanitelného plnění",
+               "example": "2026-04-28",
+               "__$ref": "#/components/schemas/Date"
+              },
+              "date_of_expiration": {
+               "type": "string",
+               "format": "date",
+               "description": "datum splatnosti",
+               "example": "2026-04-28",
+               "__$ref": "#/components/schemas/Date"
+              },
+              "creation_time": {
+               "type": "string",
+               "format": "date-time",
+               "description": "datum vytvoření",
+               "example": "2026-04-28T13:57:48+02:00",
+               "__$ref": "#/components/schemas/DateTime"
+              },
+              "variable_symbol": {
+               "type": "string",
+               "description": "variabilní symbol"
+              },
+              "specific_symbol": {
+               "type": "string",
+               "description": "specifický symbol"
+              },
+              "payment": {
+               "type": "string",
+               "description": "platba"
+              },
+              "paid_yn": {
+               "type": "boolean",
+               "description": "zaplaceno / nezaplaceno"
+              },
+              "paid_date": {
+               "type": "string",
+               "format": "date",
+               "description": "datum zaplacení",
+               "example": "2026-04-28",
+               "nullable": true,
+               "__$ref": "#/components/schemas/Date"
+              },
+              "oss_yn": {
+               "type": "boolean",
+               "description": "příznak jestli je faktura v režimu OSS"
+              },
+              "oss_country_id": {
+               "type": "string",
+               "nullable": true,
+               "description": "země režimu OSS"
+              },
+              "total_rest": {
+               "type": "number",
+               "format": "float",
+               "description": "zaokrouhlení celkové částky"
+              },
+              "total_with_vat": {
+               "type": "number",
+               "format": "float",
+               "description": "celková částka s DPH"
+              },
+              "total_without_vat": {
+               "type": "number",
+               "format": "float",
+               "description": "celková částka bez DPH"
+              },
+              "note": {
+               "type": "string",
+               "nullable": true,
+               "description": "poznámka"
+              },
+              "invoice_pdf_url": {
+               "type": "string",
+               "format": "uri",
+               "description": "URL na PDF fakturu"
+              },
+              "supplier": {
+               "type": "object",
+               "description": "dodavatel",
+               "properties": {
+                "email": {
+                 "type": [
+                  "string",
+                  "null"
+                 ],
+                 "format": "email",
+                 "description": "email"
+                },
+                "phone": {
+                 "type": [
+                  "string",
+                  "null"
+                 ],
+                 "format": "phone",
+                 "description": "telefon"
+                },
+                "name": {
+                 "type": [
+                  "string",
+                  "null"
+                 ],
+                 "description": "jméno osoby nebo název firmy"
+                },
+                "street": {
+                 "type": [
+                  "string",
+                  "null"
+                 ],
+                 "description": "ulice a číslo"
+                },
+                "city": {
+                 "type": [
+                  "string",
+                  "null"
+                 ],
+                 "description": "město"
+                },
+                "zip": {
+                 "type": [
+                  "string",
+                  "null"
+                 ],
+                 "description": "PSČ"
+                },
+                "country_id": {
+                 "type": [
+                  "string",
+                  "null"
+                 ],
+                 "description": "stát"
+                },
+                "company_yn": {
+                 "type": "boolean",
+                 "description": "příznak, jestli je firma"
+                },
+                "var_payer_yn": {
+                 "type": "boolean",
+                 "description": "příznak, jestli je plátce DPH"
+                },
+                "ico": {
+                 "type": [
+                  "string",
+                  "null"
+                 ],
+                 "description": "IČ"
+                },
+                "dic": {
+                 "type": [
+                  "string",
+                  "null"
+                 ],
+                 "description": "DIČ"
+                },
+                "account_number": {
+                 "type": [
+                  "string",
+                  "null"
+                 ],
+                 "description": "číslo účtu"
+                },
+                "iban": {
+                 "type": [
+                  "string",
+                  "null"
+                 ],
+                 "description": "IBAN"
+                },
+                "swift": {
+                 "type": [
+                  "string",
+                  "null"
+                 ],
+                 "description": "SWIFT"
+                },
+                "web": {
+                 "type": [
+                  "string",
+                  "null"
+                 ],
+                 "description": "webová stránka"
+                }
+               }
+              },
+              "customer": {
+               "type": "object",
+               "description": "zákazník",
+               "properties": {
+                "email": {
+                 "type": [
+                  "string",
+                  "null"
+                 ],
+                 "format": "email",
+                 "description": "email"
+                },
+                "phone": {
+                 "type": [
+                  "string",
+                  "null"
+                 ],
+                 "format": "phone",
+                 "description": "telefon"
+                },
+                "name": {
+                 "type": [
+                  "string",
+                  "null"
+                 ],
+                 "description": "jméno osoby nebo název firmy"
+                },
+                "street": {
+                 "type": [
+                  "string",
+                  "null"
+                 ],
+                 "description": "ulice a číslo"
+                },
+                "city": {
+                 "type": [
+                  "string",
+                  "null"
+                 ],
+                 "description": "město"
+                },
+                "zip": {
+                 "type": [
+                  "string",
+                  "null"
+                 ],
+                 "description": "PSČ"
+                },
+                "country_id": {
+                 "type": [
+                  "string",
+                  "null"
+                 ],
+                 "description": "stát"
+                },
+                "company_yn": {
+                 "type": "boolean",
+                 "description": "příznak, jestli je firma"
+                },
+                "ico": {
+                 "type": [
+                  "string",
+                  "null"
+                 ],
+                 "description": "IČ"
+                },
+                "dic": {
+                 "type": [
+                  "string",
+                  "null"
+                 ],
+                 "description": "DIČ"
+                }
+               }
+              },
+              "items": {
+               "type": "array",
+               "description": "položky faktury",
+               "items": {
+                "type": "object",
+                "properties": {
+                 "code": {
+                  "type": [
+                   "string",
+                   "null"
+                  ],
+                  "description": "kód položky"
+                 },
+                 "name": {
+                  "type": "string",
+                  "description": "název"
+                 },
+                 "description": {
+                  "type": "string",
+                  "description": "popis"
+                 },
+                 "quantity": {
+                  "type": "number",
+                  "format": "float",
+                  "description": "počet jednotek"
+                 },
+                 "unit": {
+                  "type": "string",
+                  "description": "měrná jednotka"
+                 },
+                 "vat": {
+                  "type": "number",
+                  "format": "float",
+                  "description": "DPH"
+                 },
+                 "price_per_unit_with_vat": {
+                  "type": "number",
+                  "format": "float",
+                  "description": "cena za jednotku s DPH"
+                 },
+                 "price_per_unit_without_vat": {
+                  "type": "number",
+                  "format": "float",
+                  "description": "cena za jednotku bez DPH"
+                 },
+                 "price_with_vat": {
+                  "type": "number",
+                  "format": "float",
+                  "description": "cena za s DPH"
+                 },
+                 "price_without_vat": {
+                  "type": "number",
+                  "format": "float",
+                  "description": "cena za bez DPH"
+                 },
+                 "recycling_fee": {
+                  "type": [
+                   "number",
+                   "null"
+                  ],
+                  "format": "float",
+                  "description": "recyklační poplatek"
+                 },
+                 "type": {
+                  "type": "string",
+                  "enum": [
+                   "product",
+                   "discount",
+                   "shipment",
+                   "payment"
+                  ],
+                  "description": "- `product` - produkt\n- `discount` - sleva\n- `shipment` - doprava\n- `payment` - platba\n"
+                 }
+                }
+               }
+              },
+              "eet": {
+               "type": "object",
+               "description": "informace o EET",
+               "nullable": true,
+               "properties": {
+                "send_yn": {
+                 "type": "boolean"
+                },
+                "production_yn": {
+                 "type": "boolean"
+                },
+                "id_provoz": {
+                 "type": "string"
+                },
+                "id_pokl": {
+                 "type": "string"
+                },
+                "rezim": {
+                 "type": "string",
+                 "enum": [
+                  "common",
+                  "simplified"
+                 ]
+                },
+                "bkp": {
+                 "type": "string"
+                },
+                "fik": {
+                 "type": "string"
+                },
+                "pkp": {
+                 "type": "string"
+                }
+               }
+              },
+              "recapitulation_currency_id": {
+               "type": "string",
+               "description": "měna rekapitulace DPH.\nPokud bude faktura v jiné měně než je měna země provozovatele e-shopu, jinými slovy pokud e-shop prodává do zahraničí,\nbude zde měna provozovatele eshopu. Tedy měna, ve které je přehled DPH. Pokud není uvedeno, je přehled DPH ve měně faktury.\n",
+               "example": "CZK",
+               "__$ref": "#/components/schemas/Currency"
+              },
+              "recapitulation_currency_rate": {
+               "type": "number",
+               "format": "float",
+               "description": "kurz měny rekapitulace DPH"
+              },
+              "recapitulation_vats": {
+               "type": "array",
+               "description": "přehled DPH, pole objektů s jednotlivými hladinami DPH. Klíč pole je procentuální sazba DPH",
+               "items": {
+                "type": "object",
+                "properties": {
+                 "base": {
+                  "type": "number",
+                  "format": "float",
+                  "description": "základ"
+                 },
+                 "vat": {
+                  "type": "number",
+                  "format": "float",
+                  "description": "výše DPH"
+                 },
+                 "total": {
+                  "type": "number",
+                  "format": "float",
+                  "description": "celkem s DPH"
+                 }
+                }
+               }
+              },
+              "recapitulation_vats_total": {
+               "type": "object",
+               "description": "přehled DPH celkem",
+               "properties": {
+                "base": {
+                 "type": "number",
+                 "format": "float",
+                 "description": "základ"
+                },
+                "vat": {
+                 "type": "number",
+                 "format": "float",
+                 "description": "výše DPH"
+                },
+                "total": {
+                 "type": "number",
+                 "format": "float",
+                 "description": "celkem s DPH"
+                }
+               }
+              }
+             }
+            }
+           }
+          }
+         }
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "slug": "detail-faktury",
+     "summary": "Detail faktury",
+     "method": "get",
+     "description": null,
+     "operationId": null,
+     "contentTypes": [],
+     "path": "/api/v2/invoices/{invoice_number}",
+     "deprecated": null,
+     "extensions": {},
+     "servers": [],
+     "parameters": [
+      {
+       "name": "invoice_number",
+       "in": "path",
+       "description": "Číslo faktury",
+       "required": true,
+       "schema": {
+        "type": "string"
+       },
+       "style": null,
+       "explode": null,
+       "allowReserved": null,
+       "examples": []
+      }
+     ],
+     "security": null,
+     "requestBody": {
+      "content": [],
+      "description": null,
+      "required": null
+     },
+     "responses": [
+      {
+       "statusCode": "200",
+       "links": null,
+       "description": "OK",
+       "content": [
+        {
+         "examples": [],
+         "mediaType": "application/json",
+         "encoding": null,
+         "schema": {
+          "type": "object",
+          "properties": {
+           "current_page": {
+            "type": "integer",
+            "minimum": 1,
+            "description": "aktuální strana"
+           },
+           "current_page_items": {
+            "type": "integer",
+            "description": "počet položek na aktuální straně",
+            "example": 1
+           },
+           "number_of_items": {
+            "type": "integer",
+            "description": "celkový počet položek",
+            "example": 1
+           },
+           "number_of_pages": {
+            "type": "integer",
+            "description": "celkový počet stran",
+            "example": 1
+           },
+           "invoices": {
+            "type": "array",
+            "description": "pole objektů s fakturami",
+            "items": {
+             "type": "object",
+             "properties": {
+              "invoice_number": {
+               "type": "string",
+               "description": "číslo faktury"
+              },
+              "related_invoice_number": {
+               "type": "string",
+               "nullable": true,
+               "description": "číslo související faktury, pouze u dobropisu"
+              },
+              "type": {
+               "type": "string",
+               "enum": [
+                "invoice",
+                "creditNote",
+                "receipt"
+               ],
+               "description": "typ faktury"
+              },
+              "order_number": {
+               "type": "string",
+               "description": "číslo objednávky"
+              },
+              "external_order_number": {
+               "type": "string",
+               "nullable": true,
+               "description": "číslo objednávky z externího systému"
+              },
+              "case_number": {
+               "type": "string",
+               "nullable": true,
+               "description": "číslo obchodního případu"
+              },
+              "language_id": {
+               "type": "string",
+               "description": "kód jazyka dle [ISO 639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes)",
+               "example": "cz",
+               "__$ref": "#/components/schemas/Language"
+              },
+              "currency_id": {
+               "type": "string",
+               "description": "kód měny dle [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217)",
+               "example": "CZK",
+               "__$ref": "#/components/schemas/Currency"
+              },
+              "date_of_issuance": {
+               "type": "string",
+               "format": "date",
+               "description": "datum vystavení",
+               "example": "2026-04-28",
+               "__$ref": "#/components/schemas/Date"
+              },
+              "date_of_vat_revenue_recognition": {
+               "type": "string",
+               "format": "date",
+               "description": "datum zdanitelného plnění",
+               "example": "2026-04-28",
+               "__$ref": "#/components/schemas/Date"
+              },
+              "date_of_expiration": {
+               "type": "string",
+               "format": "date",
+               "description": "datum splatnosti",
+               "example": "2026-04-28",
+               "__$ref": "#/components/schemas/Date"
+              },
+              "creation_time": {
+               "type": "string",
+               "format": "date-time",
+               "description": "datum vytvoření",
+               "example": "2026-04-28T13:57:48+02:00",
+               "__$ref": "#/components/schemas/DateTime"
+              },
+              "variable_symbol": {
+               "type": "string",
+               "description": "variabilní symbol"
+              },
+              "specific_symbol": {
+               "type": "string",
+               "description": "specifický symbol"
+              },
+              "payment": {
+               "type": "string",
+               "description": "platba"
+              },
+              "paid_yn": {
+               "type": "boolean",
+               "description": "zaplaceno / nezaplaceno"
+              },
+              "paid_date": {
+               "type": "string",
+               "format": "date",
+               "description": "datum zaplacení",
+               "example": "2026-04-28",
+               "nullable": true,
+               "__$ref": "#/components/schemas/Date"
+              },
+              "oss_yn": {
+               "type": "boolean",
+               "description": "příznak jestli je faktura v režimu OSS"
+              },
+              "oss_country_id": {
+               "type": "string",
+               "nullable": true,
+               "description": "země režimu OSS"
+              },
+              "total_rest": {
+               "type": "number",
+               "format": "float",
+               "description": "zaokrouhlení celkové částky"
+              },
+              "total_with_vat": {
+               "type": "number",
+               "format": "float",
+               "description": "celková částka s DPH"
+              },
+              "total_without_vat": {
+               "type": "number",
+               "format": "float",
+               "description": "celková částka bez DPH"
+              },
+              "note": {
+               "type": "string",
+               "nullable": true,
+               "description": "poznámka"
+              },
+              "invoice_pdf_url": {
+               "type": "string",
+               "format": "uri",
+               "description": "URL na PDF fakturu"
+              },
+              "supplier": {
+               "type": "object",
+               "description": "dodavatel",
+               "properties": {
+                "email": {
+                 "type": [
+                  "string",
+                  "null"
+                 ],
+                 "format": "email",
+                 "description": "email"
+                },
+                "phone": {
+                 "type": [
+                  "string",
+                  "null"
+                 ],
+                 "format": "phone",
+                 "description": "telefon"
+                },
+                "name": {
+                 "type": [
+                  "string",
+                  "null"
+                 ],
+                 "description": "jméno osoby nebo název firmy"
+                },
+                "street": {
+                 "type": [
+                  "string",
+                  "null"
+                 ],
+                 "description": "ulice a číslo"
+                },
+                "city": {
+                 "type": [
+                  "string",
+                  "null"
+                 ],
+                 "description": "město"
+                },
+                "zip": {
+                 "type": [
+                  "string",
+                  "null"
+                 ],
+                 "description": "PSČ"
+                },
+                "country_id": {
+                 "type": [
+                  "string",
+                  "null"
+                 ],
+                 "description": "stát"
+                },
+                "company_yn": {
+                 "type": "boolean",
+                 "description": "příznak, jestli je firma"
+                },
+                "var_payer_yn": {
+                 "type": "boolean",
+                 "description": "příznak, jestli je plátce DPH"
+                },
+                "ico": {
+                 "type": [
+                  "string",
+                  "null"
+                 ],
+                 "description": "IČ"
+                },
+                "dic": {
+                 "type": [
+                  "string",
+                  "null"
+                 ],
+                 "description": "DIČ"
+                },
+                "account_number": {
+                 "type": [
+                  "string",
+                  "null"
+                 ],
+                 "description": "číslo účtu"
+                },
+                "iban": {
+                 "type": [
+                  "string",
+                  "null"
+                 ],
+                 "description": "IBAN"
+                },
+                "swift": {
+                 "type": [
+                  "string",
+                  "null"
+                 ],
+                 "description": "SWIFT"
+                },
+                "web": {
+                 "type": [
+                  "string",
+                  "null"
+                 ],
+                 "description": "webová stránka"
+                }
+               }
+              },
+              "customer": {
+               "type": "object",
+               "description": "zákazník",
+               "properties": {
+                "email": {
+                 "type": [
+                  "string",
+                  "null"
+                 ],
+                 "format": "email",
+                 "description": "email"
+                },
+                "phone": {
+                 "type": [
+                  "string",
+                  "null"
+                 ],
+                 "format": "phone",
+                 "description": "telefon"
+                },
+                "name": {
+                 "type": [
+                  "string",
+                  "null"
+                 ],
+                 "description": "jméno osoby nebo název firmy"
+                },
+                "street": {
+                 "type": [
+                  "string",
+                  "null"
+                 ],
+                 "description": "ulice a číslo"
+                },
+                "city": {
+                 "type": [
+                  "string",
+                  "null"
+                 ],
+                 "description": "město"
+                },
+                "zip": {
+                 "type": [
+                  "string",
+                  "null"
+                 ],
+                 "description": "PSČ"
+                },
+                "country_id": {
+                 "type": [
+                  "string",
+                  "null"
+                 ],
+                 "description": "stát"
+                },
+                "company_yn": {
+                 "type": "boolean",
+                 "description": "příznak, jestli je firma"
+                },
+                "ico": {
+                 "type": [
+                  "string",
+                  "null"
+                 ],
+                 "description": "IČ"
+                },
+                "dic": {
+                 "type": [
+                  "string",
+                  "null"
+                 ],
+                 "description": "DIČ"
+                }
+               }
+              },
+              "items": {
+               "type": "array",
+               "description": "položky faktury",
+               "items": {
+                "type": "object",
+                "properties": {
+                 "code": {
+                  "type": [
+                   "string",
+                   "null"
+                  ],
+                  "description": "kód položky"
+                 },
+                 "name": {
+                  "type": "string",
+                  "description": "název"
+                 },
+                 "description": {
+                  "type": "string",
+                  "description": "popis"
+                 },
+                 "quantity": {
+                  "type": "number",
+                  "format": "float",
+                  "description": "počet jednotek"
+                 },
+                 "unit": {
+                  "type": "string",
+                  "description": "měrná jednotka"
+                 },
+                 "vat": {
+                  "type": "number",
+                  "format": "float",
+                  "description": "DPH"
+                 },
+                 "price_per_unit_with_vat": {
+                  "type": "number",
+                  "format": "float",
+                  "description": "cena za jednotku s DPH"
+                 },
+                 "price_per_unit_without_vat": {
+                  "type": "number",
+                  "format": "float",
+                  "description": "cena za jednotku bez DPH"
+                 },
+                 "price_with_vat": {
+                  "type": "number",
+                  "format": "float",
+                  "description": "cena za s DPH"
+                 },
+                 "price_without_vat": {
+                  "type": "number",
+                  "format": "float",
+                  "description": "cena za bez DPH"
+                 },
+                 "recycling_fee": {
+                  "type": [
+                   "number",
+                   "null"
+                  ],
+                  "format": "float",
+                  "description": "recyklační poplatek"
+                 },
+                 "type": {
+                  "type": "string",
+                  "enum": [
+                   "product",
+                   "discount",
+                   "shipment",
+                   "payment"
+                  ],
+                  "description": "- `product` - produkt\n- `discount` - sleva\n- `shipment` - doprava\n- `payment` - platba\n"
+                 }
+                }
+               }
+              },
+              "eet": {
+               "type": "object",
+               "description": "informace o EET",
+               "nullable": true,
+               "properties": {
+                "send_yn": {
+                 "type": "boolean"
+                },
+                "production_yn": {
+                 "type": "boolean"
+                },
+                "id_provoz": {
+                 "type": "string"
+                },
+                "id_pokl": {
+                 "type": "string"
+                },
+                "rezim": {
+                 "type": "string",
+                 "enum": [
+                  "common",
+                  "simplified"
+                 ]
+                },
+                "bkp": {
+                 "type": "string"
+                },
+                "fik": {
+                 "type": "string"
+                },
+                "pkp": {
+                 "type": "string"
+                }
+               }
+              },
+              "recapitulation_currency_id": {
+               "type": "string",
+               "description": "měna rekapitulace DPH.\nPokud bude faktura v jiné měně než je měna země provozovatele e-shopu, jinými slovy pokud e-shop prodává do zahraničí,\nbude zde měna provozovatele eshopu. Tedy měna, ve které je přehled DPH. Pokud není uvedeno, je přehled DPH ve měně faktury.\n",
+               "example": "CZK",
+               "__$ref": "#/components/schemas/Currency"
+              },
+              "recapitulation_currency_rate": {
+               "type": "number",
+               "format": "float",
+               "description": "kurz měny rekapitulace DPH"
+              },
+              "recapitulation_vats": {
+               "type": "array",
+               "description": "přehled DPH, pole objektů s jednotlivými hladinami DPH. Klíč pole je procentuální sazba DPH",
+               "items": {
+                "type": "object",
+                "properties": {
+                 "base": {
+                  "type": "number",
+                  "format": "float",
+                  "description": "základ"
+                 },
+                 "vat": {
+                  "type": "number",
+                  "format": "float",
+                  "description": "výše DPH"
+                 },
+                 "total": {
+                  "type": "number",
+                  "format": "float",
+                  "description": "celkem s DPH"
+                 }
+                }
+               }
+              },
+              "recapitulation_vats_total": {
+               "type": "object",
+               "description": "přehled DPH celkem",
+               "properties": {
+                "base": {
+                 "type": "number",
+                 "format": "float",
+                 "description": "základ"
+                },
+                "vat": {
+                 "type": "number",
+                 "format": "float",
+                 "description": "výše DPH"
+                },
+                "total": {
+                 "type": "number",
+                 "format": "float",
+                 "description": "celkem s DPH"
+                }
+               }
+              }
+             }
+            }
+           }
+          }
+         }
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "slug": "faktura-v-pdf",
+     "summary": "Faktura v PDF",
+     "method": "get",
+     "description": "Vrací dokument objednávky ve formátu PDF.",
+     "operationId": null,
+     "contentTypes": [],
+     "path": "/api/v2/invoices/{invoice_number}/pdf",
+     "deprecated": null,
+     "extensions": {},
+     "servers": [],
+     "parameters": [
+      {
+       "name": "invoice_number",
+       "in": "path",
+       "description": "Číslo faktury",
+       "required": true,
+       "schema": {
+        "type": "string"
+       },
+       "style": null,
+       "explode": null,
+       "allowReserved": null,
+       "examples": []
+      }
+     ],
+     "security": null,
+     "requestBody": {
+      "content": [],
+      "description": null,
+      "required": null
+     },
+     "responses": [
+      {
+       "statusCode": "200",
+       "links": null,
+       "description": "OK",
+       "content": [
+        {
+         "examples": [],
+         "mediaType": "application/pdf",
+         "encoding": null,
+         "schema": {
+          "type": "string",
+          "format": "binary"
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "extensions": {},
+   "next": {
+    "name": "Grafika - editor kódu",
+    "slug": "grafika-editor-kodu",
+    "extensions": {}
+   },
+   "prev": {
+    "name": "Dopravy",
+    "slug": "dopravy",
+    "extensions": {}
+   }
+  }
+ }
+}

@@ -1,0 +1,552 @@
+{
+ "schema": {
+  "servers": [],
+  "description": null,
+  "summary": null,
+  "title": "API",
+  "url": null,
+  "version": "2",
+  "tag": {
+   "name": "Přesměrování",
+   "description": "- více o přesměrování v Upgates e-shopech naleznete [zde](https://www.upgates.cz/a/presmerovani-starych-url-adres-na-nove-1).",
+   "operations": [
+    {
+     "slug": "seznam-presmerovani",
+     "summary": "Seznam přesměrování",
+     "method": "get",
+     "description": null,
+     "operationId": null,
+     "contentTypes": [],
+     "path": "/api/v2/redirections",
+     "deprecated": null,
+     "extensions": {},
+     "servers": [],
+     "parameters": [
+      {
+       "name": "id",
+       "in": "query",
+       "description": "ID přesměrování",
+       "required": null,
+       "schema": {
+        "type": "integer"
+       },
+       "style": null,
+       "explode": null,
+       "allowReserved": null,
+       "examples": []
+      },
+      {
+       "name": "ids",
+       "in": "query",
+       "description": "ID přesměrování oddělené středníkem `;` nebo jako pole",
+       "required": null,
+       "schema": {
+        "oneOf": [
+         {
+          "type": "string",
+          "description": "hodnoty oddělené středníkem `;`\\\nnapříklad `1;2;3`\n"
+         },
+         {
+          "type": "array",
+          "items": {
+           "type": "integer"
+          }
+         }
+        ],
+        "__$ref": "#/components/schemas/QueryParameterArrayInt"
+       },
+       "style": null,
+       "explode": null,
+       "allowReserved": null,
+       "examples": []
+      },
+      {
+       "name": "code",
+       "in": "query",
+       "description": "kód přesměrování",
+       "required": null,
+       "schema": {
+        "type": "string"
+       },
+       "style": null,
+       "explode": null,
+       "allowReserved": null,
+       "examples": []
+      },
+      {
+       "name": "type",
+       "in": "query",
+       "description": "typ",
+       "required": null,
+       "schema": {
+        "type": "string",
+        "enum": [
+         "Custom",
+         "Product",
+         "Variant",
+         "Advisor",
+         "Article",
+         "Category",
+         "News"
+        ]
+       },
+       "style": null,
+       "explode": null,
+       "allowReserved": null,
+       "examples": []
+      },
+      {
+       "name": "language_id_from",
+       "in": "query",
+       "description": null,
+       "required": null,
+       "schema": {
+        "type": "string",
+        "description": "kód jazyka dle [ISO 639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes)",
+        "example": "cz",
+        "__$ref": "#/components/schemas/Language"
+       },
+       "style": null,
+       "explode": null,
+       "allowReserved": null,
+       "examples": []
+      },
+      {
+       "name": "url_from",
+       "in": "query",
+       "description": "stará adresa",
+       "required": null,
+       "schema": {
+        "type": "string"
+       },
+       "style": null,
+       "explode": null,
+       "allowReserved": null,
+       "examples": []
+      },
+      {
+       "name": "language_id_to",
+       "in": "query",
+       "description": null,
+       "required": null,
+       "schema": {
+        "type": "string",
+        "description": "kód jazyka dle [ISO 639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes)",
+        "example": "cz",
+        "__$ref": "#/components/schemas/Language"
+       },
+       "style": null,
+       "explode": null,
+       "allowReserved": null,
+       "examples": []
+      },
+      {
+       "name": "url_to",
+       "in": "query",
+       "description": "nová adresa",
+       "required": null,
+       "schema": {
+        "type": "string"
+       },
+       "style": null,
+       "explode": null,
+       "allowReserved": null,
+       "examples": []
+      },
+      {
+       "name": "page",
+       "in": "query",
+       "description": "stránka",
+       "required": false,
+       "schema": {
+        "type": "integer",
+        "default": 1
+       },
+       "style": null,
+       "explode": null,
+       "allowReserved": null,
+       "examples": []
+      }
+     ],
+     "security": null,
+     "requestBody": {
+      "content": [],
+      "description": null,
+      "required": null
+     },
+     "responses": [
+      {
+       "statusCode": "200",
+       "links": null,
+       "description": "OK",
+       "content": [
+        {
+         "examples": [],
+         "mediaType": "application/json",
+         "encoding": null,
+         "schema": {
+          "type": "object",
+          "properties": {
+           "current_page": {
+            "type": "integer",
+            "minimum": 1,
+            "description": "aktuální strana"
+           },
+           "current_page_items": {
+            "type": "integer",
+            "description": "počet položek na aktuální straně",
+            "example": 1
+           },
+           "number_of_items": {
+            "type": "integer",
+            "description": "celkový počet položek",
+            "example": 1
+           },
+           "number_of_pages": {
+            "type": "integer",
+            "description": "celkový počet stran",
+            "example": 1
+           },
+           "redirections": {
+            "type": "array",
+            "description": "pole objektů s přesměrováním",
+            "items": {
+             "type": "object",
+             "properties": {
+              "id": {
+               "type": "integer",
+               "description": "ID přesměrování"
+              },
+              "type": {
+               "type": "string",
+               "enum": [
+                "Custom",
+                "Product",
+                "Variant",
+                "Advisor",
+                "Article",
+                "Category",
+                "News"
+               ],
+               "description": "typ"
+              },
+              "page_id": {
+               "type": "integer",
+               "description": "ID stránky (pouze pokud není typ `Custom`)"
+              },
+              "language_id_from": {
+               "type": "string",
+               "description": "jazyk staré adresy",
+               "example": "cz",
+               "__$ref": "#/components/schemas/Language"
+              },
+              "url_from": {
+               "type": "string",
+               "nullable": true,
+               "description": "stará adresa"
+              },
+              "language_id_to": {
+               "type": "string",
+               "description": "jazyk nové adresy",
+               "example": "cz",
+               "nullable": true,
+               "__$ref": "#/components/schemas/Language"
+              },
+              "url_to": {
+               "type": "string",
+               "description": "nová adresa"
+              },
+              "code": {
+               "type": "integer",
+               "description": "kód přesměrování"
+              },
+              "last_update_time": {
+               "type": "string",
+               "format": "date-time",
+               "description": "datum a čas změny",
+               "example": "2026-04-28T13:57:48+02:00",
+               "__$ref": "#/components/schemas/DateTime"
+              }
+             }
+            }
+           }
+          }
+         }
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "slug": "vytvoreni-presmerovani",
+     "summary": "Vytvoření přesměrování",
+     "method": "post",
+     "description": "Lze vytvořit pouze přesměrování typu `Custom` (manuální).",
+     "operationId": null,
+     "contentTypes": [
+      "application/json"
+     ],
+     "path": "/api/v2/redirections",
+     "deprecated": null,
+     "extensions": {},
+     "servers": [],
+     "parameters": [],
+     "security": null,
+     "requestBody": {
+      "content": [
+       {
+        "mediaType": "application/json",
+        "encoding": [],
+        "examples": [],
+        "schema": {
+         "type": "object",
+         "required": [
+          "redirections"
+         ],
+         "properties": {
+          "redirections": {
+           "type": "array",
+           "description": "pole objektů s přesměrováním",
+           "items": {
+            "type": "object",
+            "required": [
+             "old",
+             "new"
+            ],
+            "properties": {
+             "old": {
+              "type": "string",
+              "format": "uri",
+              "description": "stará adresa. Musí začínat `https://`"
+             },
+             "new": {
+              "type": "string",
+              "format": "uri",
+              "description": "nová adresa. Musí začínat `https://`"
+             },
+             "code": {
+              "type": "integer",
+              "enum": [
+               301,
+               302,
+               303,
+               304,
+               305,
+               306,
+               307,
+               308
+              ],
+              "default": 301,
+              "description": "kód přesměrování (`301` - `308`), výchozí hodnota je 301"
+             }
+            }
+           }
+          }
+         }
+        }
+       }
+      ],
+      "description": null,
+      "required": true
+     },
+     "responses": [
+      {
+       "statusCode": "200",
+       "links": null,
+       "description": "OK",
+       "content": [
+        {
+         "examples": [],
+         "mediaType": "application/json",
+         "encoding": null,
+         "schema": {
+          "type": "object",
+          "properties": {
+           "redirections": {
+            "type": "array",
+            "description": "pole objektů s přesměrováním",
+            "items": {
+             "type": "object",
+             "properties": {
+              "id": {
+               "type": "string",
+               "description": "ID přesměrování"
+              },
+              "inserted_yn": {
+               "type": "boolean",
+               "description": "informace o úspěšném vytvoření položky"
+              },
+              "messages": {
+               "type": "array",
+               "description": "chybové zprávy",
+               "items": {
+                "type": "object",
+                "properties": {
+                 "object": {
+                  "type": "string",
+                  "nullable": true,
+                  "description": "název objektu (část JSONu), kterého se zpráva týká"
+                 },
+                 "property": {
+                  "type": "string",
+                  "nullable": true,
+                  "description": "hodnota, které se zpráva týká"
+                 },
+                 "message": {
+                  "type": "string",
+                  "description": "text zprávy"
+                 },
+                 "level": {
+                  "type": "string",
+                  "enum": [
+                   "info",
+                   "warning",
+                   "error",
+                   "fatal_error"
+                  ],
+                  "description": "úroveň chyby:\n- `info` - informační sdělení\n- `warning` - varování\n- `error` - chyba, pravděpodobně nedošlo ke zpracování\n- `fatal_error` - chyba API, kontaktujte technickou podporu"
+                 }
+                }
+               },
+               "__$ref": "#/components/schemas/ErrorMessages"
+              }
+             }
+            }
+           }
+          }
+         }
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "slug": "smazani-presmerovani",
+     "summary": "Smazání přesměrování",
+     "method": "delete",
+     "description": null,
+     "operationId": null,
+     "contentTypes": [],
+     "path": "/api/v2/redirections",
+     "deprecated": null,
+     "extensions": {},
+     "servers": [],
+     "parameters": [
+      {
+       "name": "ids",
+       "in": "query",
+       "description": "ID přesměrování oddělené středníkem `;` nebo jako pole",
+       "required": null,
+       "schema": {
+        "oneOf": [
+         {
+          "type": "string",
+          "description": "hodnoty oddělené středníkem `;`\\\nnapříklad `1;2;3`\n"
+         },
+         {
+          "type": "array",
+          "items": {
+           "type": "integer"
+          }
+         }
+        ],
+        "__$ref": "#/components/schemas/QueryParameterArrayInt"
+       },
+       "style": null,
+       "explode": null,
+       "allowReserved": null,
+       "examples": []
+      }
+     ],
+     "security": null,
+     "requestBody": {
+      "content": [],
+      "description": null,
+      "required": null
+     },
+     "responses": [
+      {
+       "statusCode": "200",
+       "links": null,
+       "description": "OK",
+       "content": [
+        {
+         "examples": [],
+         "mediaType": "application/json",
+         "encoding": null,
+         "schema": {
+          "type": "object",
+          "properties": {
+           "redirections": {
+            "type": "array",
+            "description": "pole objektů s přesměrováním",
+            "items": {
+             "type": "object",
+             "properties": {
+              "id": {
+               "type": "string",
+               "description": "ID přesměrování"
+              },
+              "deleted_yn": {
+               "type": "boolean",
+               "description": "informace o úspěšném smazání položky"
+              },
+              "messages": {
+               "type": "array",
+               "description": "chybové zprávy",
+               "items": {
+                "type": "object",
+                "properties": {
+                 "object": {
+                  "type": "string",
+                  "nullable": true,
+                  "description": "název objektu (část JSONu), kterého se zpráva týká"
+                 },
+                 "property": {
+                  "type": "string",
+                  "nullable": true,
+                  "description": "hodnota, které se zpráva týká"
+                 },
+                 "message": {
+                  "type": "string",
+                  "description": "text zprávy"
+                 },
+                 "level": {
+                  "type": "string",
+                  "enum": [
+                   "info",
+                   "warning",
+                   "error",
+                   "fatal_error"
+                  ],
+                  "description": "úroveň chyby:\n- `info` - informační sdělení\n- `warning` - varování\n- `error` - chyba, pravděpodobně nedošlo ke zpracování\n- `fatal_error` - chyba API, kontaktujte technickou podporu"
+                 }
+                }
+               },
+               "__$ref": "#/components/schemas/ErrorMessages"
+              }
+             }
+            }
+           }
+          }
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "extensions": {},
+   "next": {
+    "name": "Rádce",
+    "slug": "radce",
+    "extensions": {}
+   },
+   "prev": {
+    "name": "Provozovatel eshopu",
+    "slug": "provozovatel-eshopu",
+    "extensions": {}
+   }
+  }
+ }
+}

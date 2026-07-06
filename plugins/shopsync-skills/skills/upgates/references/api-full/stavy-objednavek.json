@@ -1,0 +1,706 @@
+{
+ "schema": {
+  "servers": [],
+  "description": null,
+  "summary": null,
+  "title": "API",
+  "url": null,
+  "version": "2",
+  "tag": {
+   "name": "Stavy objednávek",
+   "description": "- pro práci se stavy objednávky lze využívat **[webhooky](/webhooks/order-statuses)**\n- typy stavů Homecredit se zakládají automaticky při zapnutí doplňku Homecredit\n- více o stavech objednávek v Upgates e-shopech naleznete [zde](https://www.upgates.cz/a/stavy).",
+   "operations": [
+    {
+     "slug": "seznam-stavu",
+     "summary": "Seznam stavů",
+     "method": "get",
+     "description": null,
+     "operationId": null,
+     "contentTypes": [],
+     "path": "/api/v2/order-statuses",
+     "deprecated": null,
+     "extensions": {},
+     "servers": [],
+     "parameters": [
+      {
+       "name": "type",
+       "in": "query",
+       "description": null,
+       "required": false,
+       "schema": {
+        "type": "string",
+        "enum": [
+         "Received",
+         "Canceled",
+         "Sent",
+         "PaymentSuccessful",
+         "PaymentFailed",
+         "PaymentCanceled",
+         "PaymentInProcess",
+         "Unresolved",
+         "Custom",
+         "HomecreditProcessing",
+         "HomecreditRejected",
+         "HomecreditApproved",
+         "HomecreditReadyToShip",
+         "HomecreditSent",
+         "HomecreditDelivered",
+         "HomecreditPaid",
+         "HomecreditCanceled"
+        ],
+        "description": "typ stavu objednávky:\n- `Received` - přijatá\n- `Canceled` - stornovaná\n- `Sent` - odeslaná\n- `PaymentSuccessful` - platba úspěšná\n- `PaymentFailed` - platba selhala\n- `PaymentCanceled` - platba zrušena\n- `PaymentInProcess` - platba probíhá\n- `Unresolved` - nedořešená\n- `Custom` - vlastní\n- `HomecreditProcessing` - Homecredit - Probíhá\n- `HomecreditRejected` - Homecredit - Zamítnuto\n- `HomecreditApproved` - Homecredit - Schváleno\n- `HomecreditReadyToShip` - Homecredit - Připraveno k odeslání\n- `HomecreditSent` - Homecredit - Odesláno\n- `HomecreditDelivered` - Homecredit - Doručeno\n- `HomecreditPaid` - Homecredit - Zaplaceno\n- `HomecreditCanceled` - Homecredit - Zrušeno",
+        "__$ref": "#/components/schemas/OrderStatusType"
+       },
+       "style": null,
+       "explode": null,
+       "allowReserved": null,
+       "examples": []
+      }
+     ],
+     "security": null,
+     "requestBody": {
+      "content": [],
+      "description": null,
+      "required": null
+     },
+     "responses": [
+      {
+       "statusCode": "200",
+       "links": null,
+       "description": "OK",
+       "content": [
+        {
+         "examples": [],
+         "mediaType": "application/json",
+         "encoding": null,
+         "schema": {
+          "type": "object",
+          "properties": {
+           "order_statuses": {
+            "type": "array",
+            "description": "pole objektů se stavy",
+            "items": {
+             "type": "object",
+             "properties": {
+              "id": {
+               "type": "integer",
+               "description": "ID stavu"
+              },
+              "type": {
+               "type": "string",
+               "enum": [
+                "Received",
+                "Canceled",
+                "Sent",
+                "PaymentSuccessful",
+                "PaymentFailed",
+                "PaymentCanceled",
+                "PaymentInProcess",
+                "Unresolved",
+                "Custom",
+                "HomecreditProcessing",
+                "HomecreditRejected",
+                "HomecreditApproved",
+                "HomecreditReadyToShip",
+                "HomecreditSent",
+                "HomecreditDelivered",
+                "HomecreditPaid",
+                "HomecreditCanceled"
+               ],
+               "description": "typ stavu objednávky:\n- `Received` - přijatá\n- `Canceled` - stornovaná\n- `Sent` - odeslaná\n- `PaymentSuccessful` - platba úspěšná\n- `PaymentFailed` - platba selhala\n- `PaymentCanceled` - platba zrušena\n- `PaymentInProcess` - platba probíhá\n- `Unresolved` - nedořešená\n- `Custom` - vlastní\n- `HomecreditProcessing` - Homecredit - Probíhá\n- `HomecreditRejected` - Homecredit - Zamítnuto\n- `HomecreditApproved` - Homecredit - Schváleno\n- `HomecreditReadyToShip` - Homecredit - Připraveno k odeslání\n- `HomecreditSent` - Homecredit - Odesláno\n- `HomecreditDelivered` - Homecredit - Doručeno\n- `HomecreditPaid` - Homecredit - Zaplaceno\n- `HomecreditCanceled` - Homecredit - Zrušeno",
+               "__$ref": "#/components/schemas/OrderStatusType"
+              },
+              "color": {
+               "type": "string",
+               "example": "#f9a03b",
+               "description": "barva stavu v HTML HEX formátu"
+              },
+              "descriptions": {
+               "type": "array",
+               "items": {
+                "type": "object",
+                "properties": {
+                 "language_id": {
+                  "type": "string",
+                  "description": "kód jazyka dle [ISO 639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes)",
+                  "example": "cz",
+                  "__$ref": "#/components/schemas/Language"
+                 },
+                 "name": {
+                  "type": "string",
+                  "description": "název"
+                 }
+                }
+               }
+              },
+              "mark_resolved_yn": {
+               "type": "boolean",
+               "description": "příznak označovat objednávku jako vyřešenou"
+              },
+              "mark_paid_yn": {
+               "type": "boolean",
+               "description": "příznak označovat objednávku jako zaplacenou"
+              },
+              "mark_delivered_yn": {
+               "type": "boolean",
+               "description": "příznak označovat objednávku jako doručenou"
+              },
+              "last_update_time": {
+               "type": "string",
+               "format": "date-time",
+               "description": "čas poslední aktualizace",
+               "example": "2026-04-28T13:57:48+02:00",
+               "__$ref": "#/components/schemas/DateTime"
+              },
+              "creation_time": {
+               "type": "string",
+               "format": "date-time",
+               "description": "čas vytvoření",
+               "example": "2026-04-28T13:57:48+02:00",
+               "__$ref": "#/components/schemas/DateTime"
+              }
+             }
+            }
+           }
+          }
+         }
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "slug": "aktualizace-stavu",
+     "summary": "Aktualizace stavu",
+     "method": "put",
+     "description": "Aktualizace existujícího stavu objednávky.",
+     "operationId": null,
+     "contentTypes": [
+      "application/json"
+     ],
+     "path": "/api/v2/order-statuses",
+     "deprecated": null,
+     "extensions": {},
+     "servers": [],
+     "parameters": [],
+     "security": null,
+     "requestBody": {
+      "content": [
+       {
+        "mediaType": "application/json",
+        "encoding": [],
+        "examples": [],
+        "schema": {
+         "type": "object",
+         "required": [
+          "id",
+          "descriptions"
+         ],
+         "properties": {
+          "id": {
+           "type": "integer",
+           "description": "ID existujícího stavu"
+          },
+          "color": {
+           "type": "string",
+           "description": "barva stavu v HTML HEX formátu"
+          },
+          "descriptions": {
+           "type": "array",
+           "description": "lokalizované názvy stavu",
+           "items": {
+            "type": "object",
+            "properties": {
+             "language_id": {
+              "type": "string",
+              "description": "kód jazyka dle [ISO 639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes)",
+              "example": "cz",
+              "__$ref": "#/components/schemas/Language"
+             },
+             "name": {
+              "type": "string",
+              "description": "název"
+             }
+            }
+           }
+          },
+          "mark_resolved_yn": {
+           "type": "boolean",
+           "description": "příznak označovat objednávku jako vyřešenou"
+          },
+          "mark_paid_yn": {
+           "type": "boolean",
+           "description": "příznak označovat objednávku jako zaplacenou"
+          },
+          "mark_delivered_yn": {
+           "type": "boolean",
+           "description": "příznak označovat objednávku jako doručenou"
+          }
+         }
+        }
+       }
+      ],
+      "description": null,
+      "required": true
+     },
+     "responses": [
+      {
+       "statusCode": "200",
+       "links": null,
+       "description": "OK",
+       "content": [
+        {
+         "examples": [],
+         "mediaType": "application/json",
+         "encoding": null,
+         "schema": {
+          "type": "object",
+          "properties": {
+           "order_status": {
+            "type": "object",
+            "description": "výsledek aktualizace stavu",
+            "properties": {
+             "id": {
+              "type": "integer",
+              "description": "ID stavu"
+             },
+             "updated_yn": {
+              "type": "boolean",
+              "description": "informace o úspěšné aktualizaci položky"
+             },
+             "messages": {
+              "type": "array",
+              "description": "chybové zprávy",
+              "items": {
+               "type": "object",
+               "properties": {
+                "object": {
+                 "type": "string",
+                 "nullable": true,
+                 "description": "název objektu (část JSONu), kterého se zpráva týká"
+                },
+                "property": {
+                 "type": "string",
+                 "nullable": true,
+                 "description": "hodnota, které se zpráva týká"
+                },
+                "message": {
+                 "type": "string",
+                 "description": "text zprávy"
+                },
+                "level": {
+                 "type": "string",
+                 "enum": [
+                  "info",
+                  "warning",
+                  "error",
+                  "fatal_error"
+                 ],
+                 "description": "úroveň chyby:\n- `info` - informační sdělení\n- `warning` - varování\n- `error` - chyba, pravděpodobně nedošlo ke zpracování\n- `fatal_error` - chyba API, kontaktujte technickou podporu"
+                }
+               }
+              },
+              "__$ref": "#/components/schemas/ErrorMessages"
+             }
+            }
+           }
+          }
+         }
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "slug": "vytvoreni-stavu",
+     "summary": "Vytvoření stavu",
+     "method": "post",
+     "description": "Vytvoření nového stavu objednávky.\nTyp se u nově založeného stavu dává vždy vlastní (`custom`).\n",
+     "operationId": null,
+     "contentTypes": [
+      "application/json"
+     ],
+     "path": "/api/v2/order-statuses",
+     "deprecated": null,
+     "extensions": {},
+     "servers": [],
+     "parameters": [],
+     "security": null,
+     "requestBody": {
+      "content": [
+       {
+        "mediaType": "application/json",
+        "encoding": [],
+        "examples": [],
+        "schema": {
+         "type": "object",
+         "required": [
+          "descriptions"
+         ],
+         "properties": {
+          "color": {
+           "type": "string",
+           "description": "barva stavu v HTML HEX formátu"
+          },
+          "descriptions": {
+           "type": "array",
+           "description": "lokalizované názvy stavu",
+           "items": {
+            "type": "object",
+            "properties": {
+             "language_id": {
+              "type": "string",
+              "description": "kód jazyka dle [ISO 639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes)",
+              "example": "cz",
+              "__$ref": "#/components/schemas/Language"
+             },
+             "name": {
+              "type": "string",
+              "description": "název"
+             }
+            }
+           }
+          },
+          "mark_resolved_yn": {
+           "type": "boolean",
+           "description": "příznak označovat objednávku jako vyřešenou.",
+           "default": false
+          },
+          "mark_paid_yn": {
+           "type": "boolean",
+           "description": "příznak označovat objednávku jako zaplacenou.",
+           "default": false
+          },
+          "mark_delivered_yn": {
+           "type": "boolean",
+           "description": "příznak označovat objednávku jako doručenou",
+           "default": false
+          }
+         }
+        }
+       }
+      ],
+      "description": null,
+      "required": true
+     },
+     "responses": [
+      {
+       "statusCode": "200",
+       "links": null,
+       "description": "OK",
+       "content": [
+        {
+         "examples": [],
+         "mediaType": "application/json",
+         "encoding": null,
+         "schema": {
+          "type": "object",
+          "properties": {
+           "order_status": {
+            "type": "object",
+            "description": "výsledek vytvoření stavu",
+            "properties": {
+             "id": {
+              "type": "integer",
+              "description": "ID stavu"
+             },
+             "created_yn": {
+              "type": "boolean",
+              "description": "informace o úspěšném vytvoření položky"
+             },
+             "messages": {
+              "type": "array",
+              "description": "chybové zprávy",
+              "items": {
+               "type": "object",
+               "properties": {
+                "object": {
+                 "type": "string",
+                 "nullable": true,
+                 "description": "název objektu (část JSONu), kterého se zpráva týká"
+                },
+                "property": {
+                 "type": "string",
+                 "nullable": true,
+                 "description": "hodnota, které se zpráva týká"
+                },
+                "message": {
+                 "type": "string",
+                 "description": "text zprávy"
+                },
+                "level": {
+                 "type": "string",
+                 "enum": [
+                  "info",
+                  "warning",
+                  "error",
+                  "fatal_error"
+                 ],
+                 "description": "úroveň chyby:\n- `info` - informační sdělení\n- `warning` - varování\n- `error` - chyba, pravděpodobně nedošlo ke zpracování\n- `fatal_error` - chyba API, kontaktujte technickou podporu"
+                }
+               }
+              },
+              "__$ref": "#/components/schemas/ErrorMessages"
+             }
+            }
+           }
+          }
+         }
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "slug": "detail-stavu-objednavky",
+     "summary": "Detail stavu objednávky",
+     "method": "get",
+     "description": null,
+     "operationId": null,
+     "contentTypes": [],
+     "path": "/api/v2/order-statuses/{id}",
+     "deprecated": null,
+     "extensions": {},
+     "servers": [],
+     "parameters": [
+      {
+       "name": "id",
+       "in": "path",
+       "description": "ID stavu",
+       "required": true,
+       "schema": {
+        "type": "string"
+       },
+       "style": null,
+       "explode": null,
+       "allowReserved": null,
+       "examples": []
+      }
+     ],
+     "security": null,
+     "requestBody": {
+      "content": [],
+      "description": null,
+      "required": null
+     },
+     "responses": [
+      {
+       "statusCode": "200",
+       "links": null,
+       "description": "OK",
+       "content": [
+        {
+         "examples": [],
+         "mediaType": "application/json",
+         "encoding": null,
+         "schema": {
+          "type": "object",
+          "properties": {
+           "order_statuses": {
+            "type": "array",
+            "description": "pole objektů se stavy",
+            "items": {
+             "type": "object",
+             "properties": {
+              "id": {
+               "type": "integer",
+               "description": "ID stavu"
+              },
+              "type": {
+               "type": "string",
+               "enum": [
+                "Received",
+                "Canceled",
+                "Sent",
+                "PaymentSuccessful",
+                "PaymentFailed",
+                "PaymentCanceled",
+                "PaymentInProcess",
+                "Unresolved",
+                "Custom",
+                "HomecreditProcessing",
+                "HomecreditRejected",
+                "HomecreditApproved",
+                "HomecreditReadyToShip",
+                "HomecreditSent",
+                "HomecreditDelivered",
+                "HomecreditPaid",
+                "HomecreditCanceled"
+               ],
+               "description": "typ stavu objednávky:\n- `Received` - přijatá\n- `Canceled` - stornovaná\n- `Sent` - odeslaná\n- `PaymentSuccessful` - platba úspěšná\n- `PaymentFailed` - platba selhala\n- `PaymentCanceled` - platba zrušena\n- `PaymentInProcess` - platba probíhá\n- `Unresolved` - nedořešená\n- `Custom` - vlastní\n- `HomecreditProcessing` - Homecredit - Probíhá\n- `HomecreditRejected` - Homecredit - Zamítnuto\n- `HomecreditApproved` - Homecredit - Schváleno\n- `HomecreditReadyToShip` - Homecredit - Připraveno k odeslání\n- `HomecreditSent` - Homecredit - Odesláno\n- `HomecreditDelivered` - Homecredit - Doručeno\n- `HomecreditPaid` - Homecredit - Zaplaceno\n- `HomecreditCanceled` - Homecredit - Zrušeno",
+               "__$ref": "#/components/schemas/OrderStatusType"
+              },
+              "color": {
+               "type": "string",
+               "example": "#f9a03b",
+               "description": "barva stavu v HTML HEX formátu"
+              },
+              "descriptions": {
+               "type": "array",
+               "items": {
+                "type": "object",
+                "properties": {
+                 "language_id": {
+                  "type": "string",
+                  "description": "kód jazyka dle [ISO 639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes)",
+                  "example": "cz",
+                  "__$ref": "#/components/schemas/Language"
+                 },
+                 "name": {
+                  "type": "string",
+                  "description": "název"
+                 }
+                }
+               }
+              },
+              "mark_resolved_yn": {
+               "type": "boolean",
+               "description": "příznak označovat objednávku jako vyřešenou"
+              },
+              "mark_paid_yn": {
+               "type": "boolean",
+               "description": "příznak označovat objednávku jako zaplacenou"
+              },
+              "mark_delivered_yn": {
+               "type": "boolean",
+               "description": "příznak označovat objednávku jako doručenou"
+              },
+              "last_update_time": {
+               "type": "string",
+               "format": "date-time",
+               "description": "čas poslední aktualizace",
+               "example": "2026-04-28T13:57:48+02:00",
+               "__$ref": "#/components/schemas/DateTime"
+              },
+              "creation_time": {
+               "type": "string",
+               "format": "date-time",
+               "description": "čas vytvoření",
+               "example": "2026-04-28T13:57:48+02:00",
+               "__$ref": "#/components/schemas/DateTime"
+              }
+             }
+            }
+           }
+          }
+         }
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "slug": "smazani-stavu",
+     "summary": "Smazání stavu",
+     "method": "delete",
+     "description": null,
+     "operationId": null,
+     "contentTypes": [],
+     "path": "/api/v2/order-statuses/{id}",
+     "deprecated": null,
+     "extensions": {},
+     "servers": [],
+     "parameters": [
+      {
+       "name": "id",
+       "in": "path",
+       "description": "ID stavu",
+       "required": true,
+       "schema": {
+        "type": "integer"
+       },
+       "style": null,
+       "explode": null,
+       "allowReserved": null,
+       "examples": []
+      }
+     ],
+     "security": null,
+     "requestBody": {
+      "content": [],
+      "description": null,
+      "required": null
+     },
+     "responses": [
+      {
+       "statusCode": "200",
+       "links": null,
+       "description": "OK",
+       "content": [
+        {
+         "examples": [],
+         "mediaType": "application/json",
+         "encoding": null,
+         "schema": {
+          "type": "object",
+          "properties": {
+           "order_status": {
+            "type": "object",
+            "description": "výsledek smazání stavu",
+            "properties": {
+             "id": {
+              "type": "integer",
+              "description": "ID stavu"
+             },
+             "deleted_yn": {
+              "type": "boolean",
+              "description": "informace o úspěšném smazání položky"
+             },
+             "messages": {
+              "type": "array",
+              "description": "chybové zprávy",
+              "items": {
+               "type": "object",
+               "properties": {
+                "object": {
+                 "type": "string",
+                 "nullable": true,
+                 "description": "název objektu (část JSONu), kterého se zpráva týká"
+                },
+                "property": {
+                 "type": "string",
+                 "nullable": true,
+                 "description": "hodnota, které se zpráva týká"
+                },
+                "message": {
+                 "type": "string",
+                 "description": "text zprávy"
+                },
+                "level": {
+                 "type": "string",
+                 "enum": [
+                  "info",
+                  "warning",
+                  "error",
+                  "fatal_error"
+                 ],
+                 "description": "úroveň chyby:\n- `info` - informační sdělení\n- `warning` - varování\n- `error` - chyba, pravděpodobně nedošlo ke zpracování\n- `fatal_error` - chyba API, kontaktujte technickou podporu"
+                }
+               }
+              },
+              "__$ref": "#/components/schemas/ErrorMessages"
+             }
+            }
+           }
+          }
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "extensions": {},
+   "next": {
+    "name": "Štítky",
+    "slug": "stitky",
+    "extensions": {}
+   },
+   "prev": {
+    "name": "Soubory",
+    "slug": "soubory",
+    "extensions": {}
+   }
+  }
+ }
+}

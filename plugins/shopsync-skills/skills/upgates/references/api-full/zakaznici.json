@@ -1,0 +1,1919 @@
+{
+ "schema": {
+  "servers": [],
+  "description": null,
+  "summary": null,
+  "title": "API",
+  "url": null,
+  "version": "2",
+  "tag": {
+   "name": "Zákazníci",
+   "description": "- unikátním identifikátorem zákazníků je `email`\n- pro práci se zákazníky lze využívat **[webhooky](/webhooks/customers)**.\n- více o zákaznících v Upgates e-shopech naleznete [zde](https://www.upgates.cz/a/seznamy-zakazniku).",
+   "operations": [
+    {
+     "slug": "seznam-zakazniku",
+     "summary": "Seznam zákazníků",
+     "method": "get",
+     "description": null,
+     "operationId": null,
+     "contentTypes": [],
+     "path": "/api/v2/customers",
+     "deprecated": null,
+     "extensions": {},
+     "servers": [],
+     "parameters": [
+      {
+       "name": "creation_time_from",
+       "in": "query",
+       "description": "vrátí zákazníky vytvořené od data",
+       "required": null,
+       "schema": {
+        "type": "string",
+        "format": "date-time",
+        "description": "datum a čas zapsaný jako řeťezec znaků dle [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601)",
+        "example": "2026-04-28T13:57:48+02:00",
+        "__$ref": "#/components/schemas/DateTime"
+       },
+       "style": null,
+       "explode": null,
+       "allowReserved": null,
+       "examples": []
+      },
+      {
+       "name": "last_update_time_from",
+       "in": "query",
+       "description": "vrátí zákazníky upravené od data",
+       "required": null,
+       "schema": {
+        "type": "string",
+        "format": "date-time",
+        "description": "datum a čas zapsaný jako řeťezec znaků dle [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601)",
+        "example": "2026-04-28T13:57:48+02:00",
+        "__$ref": "#/components/schemas/DateTime"
+       },
+       "style": null,
+       "explode": null,
+       "allowReserved": null,
+       "examples": []
+      },
+      {
+       "name": "code",
+       "in": "query",
+       "description": "kód zákazníka",
+       "required": null,
+       "schema": {
+        "type": "string"
+       },
+       "style": null,
+       "explode": null,
+       "allowReserved": null,
+       "examples": []
+      },
+      {
+       "name": "customer_id",
+       "in": "query",
+       "description": "ID zákazníka",
+       "required": null,
+       "schema": {
+        "type": "integer"
+       },
+       "style": null,
+       "explode": null,
+       "allowReserved": null,
+       "examples": []
+      },
+      {
+       "name": "ids",
+       "in": "query",
+       "description": "ID zákazníků oddělené středníkem `;` nebo jako pole",
+       "required": false,
+       "schema": {
+        "oneOf": [
+         {
+          "type": "string",
+          "description": "hodnoty oddělené středníkem `;`\\\nnapříklad `1;2;3`\n"
+         },
+         {
+          "type": "array",
+          "items": {
+           "type": "integer"
+          }
+         }
+        ],
+        "__$ref": "#/components/schemas/QueryParameterArrayInt"
+       },
+       "style": null,
+       "explode": null,
+       "allowReserved": null,
+       "examples": []
+      },
+      {
+       "name": "active_yn",
+       "in": "query",
+       "description": "aktivní / neaktivní",
+       "required": null,
+       "schema": {
+        "type": "boolean"
+       },
+       "style": null,
+       "explode": null,
+       "allowReserved": null,
+       "examples": []
+      },
+      {
+       "name": "blocked_yn",
+       "in": "query",
+       "description": "blokovaní / neblokovaní",
+       "required": null,
+       "schema": {
+        "type": "boolean"
+       },
+       "style": null,
+       "explode": null,
+       "allowReserved": null,
+       "examples": []
+      },
+      {
+       "name": "language",
+       "in": "query",
+       "description": null,
+       "required": null,
+       "schema": {
+        "type": "string",
+        "description": "kód jazyka dle [ISO 639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes)",
+        "example": "cz",
+        "__$ref": "#/components/schemas/Language"
+       },
+       "style": null,
+       "explode": null,
+       "allowReserved": null,
+       "examples": []
+      },
+      {
+       "name": "pricelist",
+       "in": "query",
+       "description": "ceník",
+       "required": null,
+       "schema": {
+        "type": "string"
+       },
+       "style": null,
+       "explode": null,
+       "allowReserved": null,
+       "examples": []
+      },
+      {
+       "name": "email",
+       "in": "query",
+       "description": "email",
+       "required": null,
+       "schema": {
+        "type": "string",
+        "format": "email"
+       },
+       "style": null,
+       "explode": null,
+       "allowReserved": null,
+       "examples": []
+      },
+      {
+       "name": "phone",
+       "in": "query",
+       "description": "telefon",
+       "required": null,
+       "schema": {
+        "type": "string",
+        "format": "phone"
+       },
+       "style": null,
+       "explode": null,
+       "allowReserved": null,
+       "examples": []
+      },
+      {
+       "name": "company_name",
+       "in": "query",
+       "description": "název firmy",
+       "required": null,
+       "schema": {
+        "type": "string"
+       },
+       "style": null,
+       "explode": null,
+       "allowReserved": null,
+       "examples": []
+      },
+      {
+       "name": "company_number",
+       "in": "query",
+       "description": "DIČ",
+       "required": null,
+       "schema": {
+        "type": "string"
+       },
+       "style": null,
+       "explode": null,
+       "allowReserved": null,
+       "examples": []
+      },
+      {
+       "name": "company_vat_number",
+       "in": "query",
+       "description": "IČO",
+       "required": null,
+       "schema": {
+        "type": "string"
+       },
+       "style": null,
+       "explode": null,
+       "allowReserved": null,
+       "examples": []
+      },
+      {
+       "name": "newsletter_accept",
+       "in": "query",
+       "description": "akceptuje zákazník newsletter",
+       "required": null,
+       "schema": {
+        "type": "string",
+        "enum": [
+         "notset",
+         "no",
+         "yes",
+         "excluded"
+        ]
+       },
+       "style": null,
+       "explode": null,
+       "allowReserved": null,
+       "examples": []
+      },
+      {
+       "name": "page",
+       "in": "query",
+       "description": "stránka",
+       "required": false,
+       "schema": {
+        "type": "integer",
+        "default": 1
+       },
+       "style": null,
+       "explode": null,
+       "allowReserved": null,
+       "examples": []
+      }
+     ],
+     "security": null,
+     "requestBody": {
+      "content": [],
+      "description": null,
+      "required": null
+     },
+     "responses": [
+      {
+       "statusCode": "200",
+       "links": null,
+       "description": "OK",
+       "content": [
+        {
+         "examples": [],
+         "mediaType": "application/json",
+         "encoding": null,
+         "schema": {
+          "type": "object",
+          "properties": {
+           "current_page": {
+            "type": "integer",
+            "minimum": 1,
+            "description": "aktuální strana"
+           },
+           "current_page_items": {
+            "type": "integer",
+            "description": "počet položek na aktuální straně",
+            "example": 1
+           },
+           "number_of_items": {
+            "type": "integer",
+            "description": "celkový počet položek",
+            "example": 1
+           },
+           "number_of_pages": {
+            "type": "integer",
+            "description": "celkový počet stran",
+            "example": 1
+           },
+           "customers": {
+            "type": "array",
+            "items": {
+             "type": "object",
+             "properties": {
+              "customer_id": {
+               "type": "integer",
+               "description": "ID zákazníka"
+              },
+              "type": {
+               "type": "string",
+               "enum": [
+                "contact",
+                "customer",
+                "company"
+               ],
+               "description": "Typ zákazníka:\n- `contact` - kontakt (neregistrovaný zákazník)\n- `customer` - zákazník (registrovaný zákazník)\n- `company` - firma (registrovaný zákazník, který má navíc firemní údaje)\n"
+              },
+              "degree": {
+               "type": "string",
+               "nullable": true,
+               "description": "titul"
+              },
+              "firstname": {
+               "type": "string",
+               "nullable": true,
+               "description": "křestní jméno"
+              },
+              "surname": {
+               "type": "string",
+               "nullable": true,
+               "description": "příjmení"
+              },
+              "nickname": {
+               "type": "string",
+               "nullable": true,
+               "description": "přezdívka"
+              },
+              "code": {
+               "type": "string",
+               "nullable": true,
+               "description": "kód zákazníka"
+              },
+              "language": {
+               "type": "string",
+               "description": "kód jazyka dle [ISO 639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes)",
+               "example": "cz",
+               "__$ref": "#/components/schemas/Language"
+              },
+              "newsletter_yn": {
+               "type": "boolean",
+               "description": "chce / nechce dostávat newsletter"
+              },
+              "newsletter_accept": {
+               "type": "string",
+               "enum": [
+                "notset",
+                "no",
+                "yes",
+                "excluded"
+               ],
+               "description": "akceptuje zákazník newsletter\n- `notset` - nenastaveno\n- `no` - ne\n- `yes` - ano\n- `excluded` - vyloučený zákazník. Dle nastavení zákazník neotevřel určitý počet newsletterů\n"
+              },
+              "pricelist": {
+               "type": "string",
+               "description": "ceník"
+              },
+              "loyalty_system_points": {
+               "type": "integer",
+               "description": "body věrnostního systému"
+              },
+              "base_turnover": {
+               "type": "number",
+               "format": "float",
+               "description": "výchozí hodnota obrazu"
+              },
+              "turnover": {
+               "type": "string",
+               "description": "obrat"
+              },
+              "turnover_currency": {
+               "type": "string",
+               "description": "kód měny dle [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217)",
+               "example": "CZK",
+               "__$ref": "#/components/schemas/Currency"
+              },
+              "company": {
+               "type": "object",
+               "nullable": true,
+               "description": "firemní údaje",
+               "properties": {
+                "name": {
+                 "type": "string",
+                 "nullable": true,
+                 "description": "název firmy"
+                },
+                "company_number": {
+                 "type": "string",
+                 "nullable": true,
+                 "description": "IČ"
+                },
+                "vat_number": {
+                 "type": "string",
+                 "nullable": true,
+                 "description": "DIČ"
+                },
+                "vat_payer_yn": {
+                 "type": "boolean",
+                 "description": "plátce DPH"
+                }
+               }
+              },
+              "communication": {
+               "type": "object",
+               "description": "komunikační údaje",
+               "properties": {
+                "phone": {
+                 "type": "string",
+                 "format": "phone",
+                 "nullable": true,
+                 "description": "telefon"
+                },
+                "fax": {
+                 "type": "string",
+                 "nullable": true,
+                 "description": "fax"
+                },
+                "im": {
+                 "type": "string",
+                 "nullable": true,
+                 "description": "instant messaging"
+                },
+                "salutation": {
+                 "type": "string",
+                 "nullable": true,
+                 "description": "oslovení"
+                },
+                "declension": {
+                 "type": "string",
+                 "nullable": true,
+                 "description": "skloňování"
+                }
+               }
+              },
+              "login": {
+               "type": "object",
+               "description": "přihlašovací údaje",
+               "properties": {
+                "active_yn": {
+                 "type": "boolean",
+                 "description": "zákazník aktivní / neaktivní"
+                },
+                "blocked_yn": {
+                 "type": "boolean",
+                 "description": "zákazník blokovaný / neblokovaný"
+                },
+                "email": {
+                 "type": "string",
+                 "format": "email",
+                 "description": "email zákazníka"
+                }
+               }
+              },
+              "groups": {
+               "type": "object",
+               "description": "klíč = ID skupiny, hodnota = název skupiny",
+               "properties": {
+                "1": {
+                 "type": "string",
+                 "description": "název skupiny"
+                }
+               }
+              },
+              "note": {
+               "type": "string",
+               "nullable": true,
+               "description": "poznámka"
+              },
+              "addresses": {
+               "type": "object",
+               "description": "adresy",
+               "properties": {
+                "billing": {
+                 "type": "object",
+                 "description": "fakturační adresa",
+                 "properties": {
+                  "street": {
+                   "type": "string",
+                   "nullable": true,
+                   "description": "ulice"
+                  },
+                  "city": {
+                   "type": "string",
+                   "nullable": true,
+                   "description": "město"
+                  },
+                  "state": {
+                   "type": "string",
+                   "nullable": true,
+                   "description": "kraj"
+                  },
+                  "zip_code": {
+                   "type": "string",
+                   "nullable": true,
+                   "description": "PSČ"
+                  },
+                  "country_id": {
+                   "type": "string",
+                   "description": "kód země dle [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)",
+                   "example": "cz",
+                   "__$ref": "#/components/schemas/Country"
+                  }
+                 }
+                },
+                "postal": {
+                 "type": "array",
+                 "description": "pole objektů s doručovacímy adresami",
+                 "items": {
+                  "type": "object",
+                  "properties": {
+                   "company_name": {
+                    "type": "string",
+                    "nullable": true,
+                    "description": "název firmy"
+                   },
+                   "firstname": {
+                    "type": "string",
+                    "nullable": true,
+                    "description": "křestní jméno"
+                   },
+                   "surname": {
+                    "type": "string",
+                    "nullable": true,
+                    "description": "příjmení"
+                   },
+                   "street": {
+                    "type": "string",
+                    "nullable": true,
+                    "description": "ulice"
+                   },
+                   "city": {
+                    "type": "string",
+                    "nullable": true,
+                    "description": "město"
+                   },
+                   "state": {
+                    "type": "string",
+                    "nullable": true,
+                    "description": "kraj"
+                   },
+                   "zip_code": {
+                    "type": "string",
+                    "nullable": true,
+                    "description": "PSČ"
+                   },
+                   "country_id": {
+                    "type": "string",
+                    "description": "kód země dle [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)",
+                    "example": "cz",
+                    "__$ref": "#/components/schemas/Country"
+                   }
+                  }
+                 }
+                }
+               }
+              },
+              "metas": {
+               "type": "array",
+               "description": "vlastní pole",
+               "items": {
+                "oneOf": [
+                 {
+                  "type": "object",
+                  "description": "vlastní pole s hodnotami společnými pro všechny jazyky",
+                  "required": [
+                   "key",
+                   "type",
+                   "value"
+                  ],
+                  "properties": {
+                   "key": {
+                    "type": "string",
+                    "pattern": "^[a-z_][a-z0-9_]*$",
+                    "description": "klíč vlastního pole",
+                    "__$ref": "#/components/schemas/MetaKey"
+                   },
+                   "type": {
+                    "type": "string",
+                    "enum": [
+                     "checkbox",
+                     "radiolist",
+                     "input",
+                     "date",
+                     "email",
+                     "number",
+                     "textarea",
+                     "formatted",
+                     "select",
+                     "multiselect"
+                    ],
+                    "description": "typ vlastního pole:\n- `checkbox` - Zatržítko\n- `radiolist` - Přepínač\n- `input` - Textové pole\n- `date` - Textové pole - datum\n- `email` - Textové pole - emailová adresa\n- `number` - Textové pole - číslo\n- `textarea` - Víceřádkové textové pole\n- `formatted` - Víceřádkové textové pole, formátované\n- `select` - Rolovací nabídka\n- `multiselect` - Multi rolovací nabídka\n",
+                    "__$ref": "#/components/schemas/MetaType"
+                   },
+                   "value": {
+                    "type": "string",
+                    "description": "hodnota společná pro všechny jazyky"
+                   }
+                  }
+                 },
+                 {
+                  "type": "object",
+                  "description": "vlastní pole s hodnotami pro každý jazyk zvlášť",
+                  "required": [
+                   "key",
+                   "type",
+                   "values"
+                  ],
+                  "properties": {
+                   "key": {
+                    "type": "string",
+                    "pattern": "^[a-z_][a-z0-9_]*$",
+                    "description": "klíč vlastního pole",
+                    "__$ref": "#/components/schemas/MetaKey"
+                   },
+                   "type": {
+                    "type": "string",
+                    "enum": [
+                     "checkbox",
+                     "radiolist",
+                     "input",
+                     "date",
+                     "email",
+                     "number",
+                     "textarea",
+                     "formatted",
+                     "select",
+                     "multiselect"
+                    ],
+                    "description": "typ vlastního pole:\n- `checkbox` - Zatržítko\n- `radiolist` - Přepínač\n- `input` - Textové pole\n- `date` - Textové pole - datum\n- `email` - Textové pole - emailová adresa\n- `number` - Textové pole - číslo\n- `textarea` - Víceřádkové textové pole\n- `formatted` - Víceřádkové textové pole, formátované\n- `select` - Rolovací nabídka\n- `multiselect` - Multi rolovací nabídka\n",
+                    "__$ref": "#/components/schemas/MetaType"
+                   },
+                   "values": {
+                    "type": "array",
+                    "description": "hodnoty pro každý jazyk zvlášť",
+                    "items": {
+                     "type": "object",
+                     "required": [
+                      "language",
+                      "value"
+                     ],
+                     "properties": {
+                      "language": {
+                       "type": "string",
+                       "description": "kód jazyka dle [ISO 639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes)",
+                       "example": "cz",
+                       "__$ref": "#/components/schemas/Language"
+                      },
+                      "value": {
+                       "type": "string"
+                      }
+                     }
+                    }
+                   }
+                  }
+                 }
+                ]
+               },
+               "__$ref": "#/components/schemas/MetasGet"
+              },
+              "creation_time": {
+               "type": "string",
+               "format": "date-time",
+               "description": "datum a čas vytvoření",
+               "example": "2026-04-28T13:57:48+02:00",
+               "__$ref": "#/components/schemas/DateTime"
+              },
+              "last_update_time": {
+               "type": "string",
+               "format": "date-time",
+               "description": "datum a čas poslední změny",
+               "example": "2026-04-28T13:57:48+02:00",
+               "__$ref": "#/components/schemas/DateTime"
+              },
+              "admin_url": {
+               "type": "string",
+               "description": "URL do detailu zákazníka v administraci"
+              }
+             }
+            }
+           }
+          }
+         }
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "slug": "aktualizace-zakazniku",
+     "summary": "Aktualizace zákazníků",
+     "method": "put",
+     "description": null,
+     "operationId": null,
+     "contentTypes": [
+      "application/json"
+     ],
+     "path": "/api/v2/customers",
+     "deprecated": null,
+     "extensions": {},
+     "servers": [],
+     "parameters": [],
+     "security": null,
+     "requestBody": {
+      "content": [
+       {
+        "mediaType": "application/json",
+        "encoding": [],
+        "examples": [],
+        "schema": {
+         "type": "object",
+         "properties": {
+          "customers": {
+           "type": "array",
+           "description": "pole objektů se zákazníky",
+           "items": {
+            "type": "object",
+            "properties": {
+             "type": {
+              "type": "string",
+              "enum": [
+               "contact",
+               "customer",
+               "company"
+              ],
+              "description": "Typ zákazníka:\n- `contact` - kontakt (neregistrovaný zákazník)\n- `customer` - zákazník (registrovaný zákazník)\n- `company` - firma (registrovaný zákazník, který má navíc firemní údaje)\n"
+             },
+             "degree": {
+              "type": "string",
+              "description": "titul"
+             },
+             "firstname": {
+              "type": "string",
+              "description": "křestní jméno"
+             },
+             "surname": {
+              "type": "string",
+              "description": "příjmení"
+             },
+             "nickname": {
+              "type": "string",
+              "description": "přezdívka"
+             },
+             "code": {
+              "type": "string",
+              "description": "kód zákazníka"
+             },
+             "language": {
+              "type": "string",
+              "description": "kód jazyka dle [ISO 639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes)",
+              "example": "cz",
+              "__$ref": "#/components/schemas/Language"
+             },
+             "newsletter_accept": {
+              "type": "string",
+              "enum": [
+               "notset",
+               "no",
+               "yes",
+               "excluded"
+              ],
+              "description": "akceptuje zákazník newsletter\n- `notset` - nenastaveno\n- `no` - ne\n- `yes` - ano\n- `excluded` - vyloučený zákazník. Dle nastavení zákazník neotevřel určitý počet newsletterů\n"
+             },
+             "pricelist": {
+              "type": "string",
+              "description": "ceník"
+             },
+             "base_turnover": {
+              "type": "number",
+              "format": "float",
+              "description": "výchozí hodnota obrazu"
+             },
+             "note": {
+              "type": "string",
+              "description": "poznámka"
+             },
+             "company": {
+              "type": "object",
+              "description": "firemní údaje",
+              "properties": {
+               "name": {
+                "type": "string",
+                "description": "název firmy"
+               },
+               "company_number": {
+                "type": "string",
+                "description": "IČO"
+               },
+               "vat_number": {
+                "type": "string",
+                "description": "DIČ"
+               },
+               "vat_payer_yn": {
+                "type": "boolean",
+                "description": "plátce DPH"
+               }
+              }
+             },
+             "communication": {
+              "type": "object",
+              "description": "komunikace",
+              "properties": {
+               "phone": {
+                "type": "string",
+                "description": "telefon"
+               },
+               "fax": {
+                "type": "string",
+                "description": "FAX"
+               },
+               "im": {
+                "type": "string",
+                "description": "instant messaging"
+               },
+               "salutation": {
+                "type": "string",
+                "description": "oslovení"
+               },
+               "declension": {
+                "type": "string",
+                "description": "skloňování"
+               }
+              }
+             },
+             "login": {
+              "type": "object",
+              "description": "přihlašovací údaje",
+              "properties": {
+               "active_yn": {
+                "type": "boolean",
+                "description": "aktivní / neaktivní"
+               },
+               "blocked_yn": {
+                "type": "boolean",
+                "description": "blokovaný / neblokovaný"
+               },
+               "email": {
+                "type": "string",
+                "format": "email",
+                "description": "email"
+               },
+               "password": {
+                "type": "string",
+                "description": "heslo"
+               }
+              }
+             },
+             "groups": {
+              "type": "array",
+              "description": "skupiny",
+              "items": {
+               "type": "object",
+               "properties": {
+                "id": {
+                 "type": "integer",
+                 "description": "ID skupiny"
+                }
+               }
+              }
+             },
+             "addresses": {
+              "type": "object",
+              "description": "adresy",
+              "properties": {
+               "billing": {
+                "type": "object",
+                "description": "fakturační adresa",
+                "properties": {
+                 "street": {
+                  "type": "string",
+                  "description": "ulice"
+                 },
+                 "city": {
+                  "type": "string",
+                  "description": "město"
+                 },
+                 "state": {
+                  "type": "string",
+                  "description": "kraj"
+                 },
+                 "zip_code": {
+                  "type": "string",
+                  "description": "PSČ"
+                 },
+                 "country_id": {
+                  "type": "string",
+                  "description": "kód země dle [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)",
+                  "example": "cz",
+                  "__$ref": "#/components/schemas/Country"
+                 }
+                }
+               },
+               "postal": {
+                "type": "array",
+                "description": "pole objektů s doručovacímy adresami",
+                "items": {
+                 "type": "object",
+                 "properties": {
+                  "company_name": {
+                   "type": "string",
+                   "description": "název firmy"
+                  },
+                  "firstname": {
+                   "type": "string",
+                   "description": "křestní jméno"
+                  },
+                  "surname": {
+                   "type": "string",
+                   "description": "příjmení"
+                  },
+                  "street": {
+                   "type": "string",
+                   "description": "ulice"
+                  },
+                  "city": {
+                   "type": "string",
+                   "description": "město"
+                  },
+                  "state": {
+                   "type": "string",
+                   "description": "kraj"
+                  },
+                  "zip_code": {
+                   "type": "string",
+                   "description": "PSČ"
+                  },
+                  "country_id": {
+                   "type": "string",
+                   "description": "kód země dle [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)",
+                   "example": "cz",
+                   "__$ref": "#/components/schemas/Country"
+                  }
+                 }
+                }
+               }
+              }
+             },
+             "metas": {
+              "type": "array",
+              "description": "vlastní pole",
+              "items": {
+               "oneOf": [
+                {
+                 "type": "object",
+                 "description": "vlastní pole s hodnotami společnými pro všechny jazyky",
+                 "required": [
+                  "key",
+                  "value"
+                 ],
+                 "properties": {
+                  "key": {
+                   "type": "string",
+                   "pattern": "^[a-z_][a-z0-9_]*$",
+                   "description": "klíč vlastního pole",
+                   "__$ref": "#/components/schemas/MetaKey"
+                  },
+                  "value": {
+                   "type": "string",
+                   "description": "hodnota společná pro všechny jazyky"
+                  }
+                 }
+                },
+                {
+                 "type": "object",
+                 "description": "vlastní pole s hodnotami pro každý jazyk zvlášť",
+                 "required": [
+                  "key",
+                  "values"
+                 ],
+                 "properties": {
+                  "key": {
+                   "type": "string",
+                   "pattern": "^[a-z_][a-z0-9_]*$",
+                   "description": "klíč vlastního pole",
+                   "__$ref": "#/components/schemas/MetaKey"
+                  },
+                  "values": {
+                   "type": "array",
+                   "description": "hodnoty pro každý jazyk zvlášť",
+                   "items": {
+                    "type": "object",
+                    "required": [
+                     "language",
+                     "value"
+                    ],
+                    "properties": {
+                     "language": {
+                      "type": "string",
+                      "description": "kód jazyka dle [ISO 639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes)",
+                      "example": "cz",
+                      "__$ref": "#/components/schemas/Language"
+                     },
+                     "value": {
+                      "type": "string"
+                     }
+                    }
+                   }
+                  }
+                 }
+                }
+               ]
+              },
+              "__$ref": "#/components/schemas/Metas"
+             }
+            }
+           }
+          }
+         }
+        }
+       }
+      ],
+      "description": null,
+      "required": true
+     },
+     "responses": [
+      {
+       "statusCode": "200",
+       "links": null,
+       "description": "OK",
+       "content": [
+        {
+         "examples": [],
+         "mediaType": "application/json",
+         "encoding": null,
+         "schema": {
+          "type": "object",
+          "properties": {
+           "customers": {
+            "type": "array",
+            "items": {
+             "type": "object",
+             "properties": {
+              "email": {
+               "type": "string",
+               "format": "email",
+               "description": "email zákazníka"
+              },
+              "updated_yn": {
+               "type": "boolean",
+               "description": "informace o úspěšné aktualizaci položky"
+              },
+              "messages": {
+               "type": "array",
+               "description": "chybové zprávy",
+               "items": {
+                "type": "object",
+                "properties": {
+                 "object": {
+                  "type": "string",
+                  "nullable": true,
+                  "description": "název objektu (část JSONu), kterého se zpráva týká"
+                 },
+                 "property": {
+                  "type": "string",
+                  "nullable": true,
+                  "description": "hodnota, které se zpráva týká"
+                 },
+                 "message": {
+                  "type": "string",
+                  "description": "text zprávy"
+                 },
+                 "level": {
+                  "type": "string",
+                  "enum": [
+                   "info",
+                   "warning",
+                   "error",
+                   "fatal_error"
+                  ],
+                  "description": "úroveň chyby:\n- `info` - informační sdělení\n- `warning` - varování\n- `error` - chyba, pravděpodobně nedošlo ke zpracování\n- `fatal_error` - chyba API, kontaktujte technickou podporu"
+                 }
+                }
+               },
+               "__$ref": "#/components/schemas/ErrorMessages"
+              }
+             }
+            }
+           }
+          }
+         }
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "slug": "vytvoreni-zakazniku",
+     "summary": "Vytvoření zákazníků",
+     "method": "post",
+     "description": null,
+     "operationId": null,
+     "contentTypes": [
+      "application/json"
+     ],
+     "path": "/api/v2/customers",
+     "deprecated": null,
+     "extensions": {},
+     "servers": [],
+     "parameters": [],
+     "security": null,
+     "requestBody": {
+      "content": [
+       {
+        "mediaType": "application/json",
+        "encoding": [],
+        "examples": [],
+        "schema": {
+         "type": "object",
+         "required": [
+          "customers"
+         ],
+         "properties": {
+          "customers": {
+           "type": "array",
+           "description": "pole objektů se zákazníky",
+           "items": {
+            "type": "object",
+            "required": [
+             "type",
+             "language",
+             "login"
+            ],
+            "properties": {
+             "type": {
+              "type": "string",
+              "enum": [
+               "contact",
+               "customer",
+               "company"
+              ],
+              "description": "Typ zákazníka:\n- `contact` - kontakt (neregistrovaný zákazník)\n- `customer` - zákazník (registrovaný zákazník)\n- `company` - firma (registrovaný zákazník, který má navíc firemní údaje)\n"
+             },
+             "degree": {
+              "type": "string",
+              "description": "titul"
+             },
+             "firstname": {
+              "type": "string",
+              "description": "křestní jméno"
+             },
+             "surname": {
+              "type": "string",
+              "description": "příjmení"
+             },
+             "nickname": {
+              "type": "string",
+              "description": "přezdívka"
+             },
+             "code": {
+              "type": "string",
+              "description": "kód zákazníka"
+             },
+             "language": {
+              "type": "string",
+              "description": "kód jazyka dle [ISO 639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes)",
+              "example": "cz",
+              "__$ref": "#/components/schemas/Language"
+             },
+             "newsletter_accept": {
+              "type": "string",
+              "enum": [
+               "notset",
+               "no",
+               "yes",
+               "excluded"
+              ],
+              "description": "akceptuje zákazník newsletter\n- `notset` - nenastaveno\n- `no` - ne\n- `yes` - ano\n- `excluded` - vyloučený zákazník. Dle nastavení zákazník neotevřel určitý počet newsletterů\n"
+             },
+             "pricelist": {
+              "type": "string",
+              "description": "ceník"
+             },
+             "base_turnover": {
+              "type": "number",
+              "format": "float",
+              "description": "výchozí hodnota obratu"
+             },
+             "note": {
+              "type": "string",
+              "description": "poznámka"
+             },
+             "company": {
+              "type": "object",
+              "description": "firemní údaje",
+              "properties": {
+               "name": {
+                "type": "string",
+                "description": "název firmy"
+               },
+               "company_number": {
+                "type": "string",
+                "description": "IČO"
+               },
+               "vat_number": {
+                "type": "string",
+                "description": "DIČ"
+               },
+               "vat_payer_yn": {
+                "type": "boolean",
+                "description": "plátce DPH"
+               }
+              }
+             },
+             "communication": {
+              "type": "object",
+              "description": "komunikace",
+              "properties": {
+               "phone": {
+                "type": "string",
+                "description": "telefon"
+               },
+               "fax": {
+                "type": "string",
+                "description": "FAX"
+               },
+               "im": {
+                "type": "string",
+                "description": "instant messaging"
+               },
+               "salutation": {
+                "type": "string",
+                "description": "oslovení"
+               },
+               "declension": {
+                "type": "string",
+                "description": "skloňování"
+               }
+              }
+             },
+             "login": {
+              "type": "object",
+              "description": "přihlašovací údaje",
+              "required": [
+               "email"
+              ],
+              "properties": {
+               "active_yn": {
+                "type": "boolean",
+                "description": "aktivní / neaktivní"
+               },
+               "blocked_yn": {
+                "type": "boolean",
+                "description": "blokovaný / neblokovaný"
+               },
+               "email": {
+                "type": "string",
+                "format": "email",
+                "description": "email"
+               },
+               "password": {
+                "type": "string",
+                "description": "heslo, pokud není specifikováno použije se náhodné"
+               }
+              }
+             },
+             "groups": {
+              "type": "array",
+              "description": "skupiny, do kterých je zákazník zařazený",
+              "items": {
+               "type": "object",
+               "properties": {
+                "id": {
+                 "type": "integer",
+                 "description": "ID skupiny"
+                }
+               }
+              }
+             },
+             "addresses": {
+              "type": "object",
+              "description": "adresy",
+              "properties": {
+               "billing": {
+                "type": "object",
+                "description": "fakturační adresa",
+                "properties": {
+                 "street": {
+                  "type": "string",
+                  "description": "ulice"
+                 },
+                 "city": {
+                  "type": "string",
+                  "description": "město"
+                 },
+                 "state": {
+                  "type": "string",
+                  "description": "kraj"
+                 },
+                 "zip_code": {
+                  "type": "string",
+                  "description": "PSČ"
+                 },
+                 "country_id": {
+                  "type": "string",
+                  "description": "kód země dle [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)",
+                  "example": "cz",
+                  "__$ref": "#/components/schemas/Country"
+                 }
+                }
+               },
+               "postal": {
+                "type": "array",
+                "description": "pole objektů s doručovacímy adresami",
+                "items": {
+                 "type": "object",
+                 "properties": {
+                  "company_name": {
+                   "type": "string",
+                   "description": "název firmy"
+                  },
+                  "firstname": {
+                   "type": "string",
+                   "description": "křestní jméno"
+                  },
+                  "surname": {
+                   "type": "string",
+                   "description": "příjmení"
+                  },
+                  "street": {
+                   "type": "string",
+                   "description": "ulice"
+                  },
+                  "city": {
+                   "type": "string",
+                   "description": "město"
+                  },
+                  "state": {
+                   "type": "string",
+                   "description": "kraj"
+                  },
+                  "zip_code": {
+                   "type": "string",
+                   "description": "PSČ"
+                  },
+                  "country_id": {
+                   "type": "string",
+                   "description": "kód země dle [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)",
+                   "example": "cz",
+                   "__$ref": "#/components/schemas/Country"
+                  }
+                 }
+                }
+               }
+              }
+             },
+             "metas": {
+              "type": "array",
+              "description": "vlastní pole",
+              "items": {
+               "oneOf": [
+                {
+                 "type": "object",
+                 "description": "vlastní pole s hodnotami společnými pro všechny jazyky",
+                 "required": [
+                  "key",
+                  "value"
+                 ],
+                 "properties": {
+                  "key": {
+                   "type": "string",
+                   "pattern": "^[a-z_][a-z0-9_]*$",
+                   "description": "klíč vlastního pole",
+                   "__$ref": "#/components/schemas/MetaKey"
+                  },
+                  "value": {
+                   "type": "string",
+                   "description": "hodnota společná pro všechny jazyky"
+                  }
+                 }
+                },
+                {
+                 "type": "object",
+                 "description": "vlastní pole s hodnotami pro každý jazyk zvlášť",
+                 "required": [
+                  "key",
+                  "values"
+                 ],
+                 "properties": {
+                  "key": {
+                   "type": "string",
+                   "pattern": "^[a-z_][a-z0-9_]*$",
+                   "description": "klíč vlastního pole",
+                   "__$ref": "#/components/schemas/MetaKey"
+                  },
+                  "values": {
+                   "type": "array",
+                   "description": "hodnoty pro každý jazyk zvlášť",
+                   "items": {
+                    "type": "object",
+                    "required": [
+                     "language",
+                     "value"
+                    ],
+                    "properties": {
+                     "language": {
+                      "type": "string",
+                      "description": "kód jazyka dle [ISO 639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes)",
+                      "example": "cz",
+                      "__$ref": "#/components/schemas/Language"
+                     },
+                     "value": {
+                      "type": "string"
+                     }
+                    }
+                   }
+                  }
+                 }
+                }
+               ]
+              },
+              "__$ref": "#/components/schemas/Metas"
+             }
+            }
+           }
+          }
+         }
+        }
+       }
+      ],
+      "description": null,
+      "required": true
+     },
+     "responses": [
+      {
+       "statusCode": "200",
+       "links": null,
+       "description": "OK",
+       "content": [
+        {
+         "examples": [],
+         "mediaType": "application/json",
+         "encoding": null,
+         "schema": {
+          "type": "object",
+          "properties": {
+           "customers": {
+            "type": "array",
+            "description": "pole objektů se zákazníky",
+            "items": {
+             "type": "object",
+             "properties": {
+              "email": {
+               "type": "string",
+               "format": "email",
+               "description": "email zákazníka"
+              },
+              "inserted_yn": {
+               "type": "boolean",
+               "description": "informace o úspěšném vytvoření položky"
+              },
+              "messages": {
+               "type": "array",
+               "description": "chybové zprávy",
+               "items": {
+                "type": "object",
+                "properties": {
+                 "object": {
+                  "type": "string",
+                  "nullable": true,
+                  "description": "název objektu (část JSONu), kterého se zpráva týká"
+                 },
+                 "property": {
+                  "type": "string",
+                  "nullable": true,
+                  "description": "hodnota, které se zpráva týká"
+                 },
+                 "message": {
+                  "type": "string",
+                  "description": "text zprávy"
+                 },
+                 "level": {
+                  "type": "string",
+                  "enum": [
+                   "info",
+                   "warning",
+                   "error",
+                   "fatal_error"
+                  ],
+                  "description": "úroveň chyby:\n- `info` - informační sdělení\n- `warning` - varování\n- `error` - chyba, pravděpodobně nedošlo ke zpracování\n- `fatal_error` - chyba API, kontaktujte technickou podporu"
+                 }
+                }
+               },
+               "__$ref": "#/components/schemas/ErrorMessages"
+              }
+             }
+            }
+           }
+          }
+         }
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "slug": "smazani-zakazniku",
+     "summary": "Smazání zákazníků",
+     "method": "delete",
+     "description": null,
+     "operationId": null,
+     "contentTypes": [],
+     "path": "/api/v2/customers",
+     "deprecated": null,
+     "extensions": {},
+     "servers": [],
+     "parameters": [
+      {
+       "name": "id",
+       "in": "query",
+       "description": "ID zákazníka",
+       "required": null,
+       "schema": {
+        "type": "integer"
+       },
+       "style": null,
+       "explode": null,
+       "allowReserved": null,
+       "examples": []
+      },
+      {
+       "name": "ids",
+       "in": "query",
+       "description": "ID zákazníků oddělené středníkem `;` nebo jako pole",
+       "required": null,
+       "schema": {
+        "oneOf": [
+         {
+          "type": "string",
+          "description": "hodnoty oddělené středníkem `;`\\\nnapříklad `1;2;3`\n"
+         },
+         {
+          "type": "array",
+          "items": {
+           "type": "integer"
+          }
+         }
+        ],
+        "__$ref": "#/components/schemas/QueryParameterArrayInt"
+       },
+       "style": null,
+       "explode": null,
+       "allowReserved": null,
+       "examples": []
+      },
+      {
+       "name": "email",
+       "in": "query",
+       "description": "email",
+       "required": null,
+       "schema": {
+        "type": "string",
+        "format": "email"
+       },
+       "style": null,
+       "explode": null,
+       "allowReserved": null,
+       "examples": []
+      }
+     ],
+     "security": null,
+     "requestBody": {
+      "content": [],
+      "description": null,
+      "required": null
+     },
+     "responses": [
+      {
+       "statusCode": "200",
+       "links": null,
+       "description": "OK",
+       "content": [
+        {
+         "examples": [],
+         "mediaType": "application/json",
+         "encoding": null,
+         "schema": {
+          "type": "object",
+          "properties": {
+           "customers": {
+            "type": "array",
+            "items": {
+             "type": "object",
+             "properties": {
+              "customer_id": {
+               "type": "integer",
+               "description": "ID zákazníka"
+              },
+              "email": {
+               "type": "string",
+               "description": "email"
+              },
+              "deleted_yn": {
+               "type": "boolean",
+               "description": "informace o úspěšném smazání položky"
+              },
+              "messages": {
+               "type": "array",
+               "description": "chybové zprávy",
+               "items": {
+                "type": "object",
+                "properties": {
+                 "object": {
+                  "type": "string",
+                  "nullable": true,
+                  "description": "název objektu (část JSONu), kterého se zpráva týká"
+                 },
+                 "property": {
+                  "type": "string",
+                  "nullable": true,
+                  "description": "hodnota, které se zpráva týká"
+                 },
+                 "message": {
+                  "type": "string",
+                  "description": "text zprávy"
+                 },
+                 "level": {
+                  "type": "string",
+                  "enum": [
+                   "info",
+                   "warning",
+                   "error",
+                   "fatal_error"
+                  ],
+                  "description": "úroveň chyby:\n- `info` - informační sdělení\n- `warning` - varování\n- `error` - chyba, pravděpodobně nedošlo ke zpracování\n- `fatal_error` - chyba API, kontaktujte technickou podporu"
+                 }
+                }
+               },
+               "__$ref": "#/components/schemas/ErrorMessages"
+              }
+             }
+            }
+           }
+          }
+         }
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "slug": "seznam-souhlasu",
+     "summary": "Seznam souhlasů",
+     "method": "get",
+     "description": "Vrací seznam souhlasů zákazníka (GDPR).",
+     "operationId": null,
+     "contentTypes": [],
+     "path": "/api/v2/customers/{customer_id}/agreements",
+     "deprecated": null,
+     "extensions": {},
+     "servers": [],
+     "parameters": [
+      {
+       "name": "customer_id",
+       "in": "path",
+       "description": "ID zákazníka, povinný parametr",
+       "required": true,
+       "schema": {
+        "type": "integer"
+       },
+       "style": null,
+       "explode": null,
+       "allowReserved": null,
+       "examples": []
+      },
+      {
+       "name": "email",
+       "in": "query",
+       "description": "email zákazníka",
+       "required": false,
+       "schema": {
+        "type": "string",
+        "format": "email"
+       },
+       "style": null,
+       "explode": null,
+       "allowReserved": null,
+       "examples": []
+      },
+      {
+       "name": "only_valid_yn",
+       "in": "query",
+       "description": "vrátí pouze platné souhlasy",
+       "required": false,
+       "schema": {
+        "type": "boolean"
+       },
+       "style": null,
+       "explode": null,
+       "allowReserved": null,
+       "examples": []
+      },
+      {
+       "name": "status",
+       "in": "query",
+       "description": "pokud bude TRUE, vrátí pouze souhlasy, kde zákazník zaklikl svůj souhlas",
+       "required": false,
+       "schema": {
+        "type": "boolean"
+       },
+       "style": null,
+       "explode": null,
+       "allowReserved": null,
+       "examples": []
+      },
+      {
+       "name": "agreement_id",
+       "in": "query",
+       "description": "ID souhlasu",
+       "required": false,
+       "schema": {
+        "type": "integer"
+       },
+       "style": null,
+       "explode": null,
+       "allowReserved": null,
+       "examples": []
+      }
+     ],
+     "security": null,
+     "requestBody": {
+      "content": [],
+      "description": null,
+      "required": null
+     },
+     "responses": [
+      {
+       "statusCode": "200",
+       "links": null,
+       "description": "OK",
+       "content": [
+        {
+         "examples": [],
+         "mediaType": "application/json",
+         "encoding": null,
+         "schema": {
+          "type": "object",
+          "properties": {
+           "agreements": {
+            "type": "array",
+            "description": "pole objektů se souhlasy",
+            "items": {
+             "type": "object",
+             "properties": {
+              "name": {
+               "type": "string",
+               "description": "název souhlasu"
+              },
+              "description": {
+               "type": "string",
+               "description": "popis souhlasu"
+              },
+              "agreement_id": {
+               "type": "integer",
+               "nullable": true,
+               "description": "ID souhlasu"
+              },
+              "time": {
+               "type": "string",
+               "format": "date-time",
+               "description": "datum a čas udělení souhlasu/nesouhlasu",
+               "example": "2026-04-28T13:57:48+02:00",
+               "__$ref": "#/components/schemas/DateTime"
+              },
+              "validity": {
+               "type": "string",
+               "format": "date-time",
+               "description": "datum a čas, do kdy je souhlas platný",
+               "example": "2026-04-28T13:57:48+02:00",
+               "nullable": true,
+               "__$ref": "#/components/schemas/DateTime"
+              },
+              "status": {
+               "type": "boolean",
+               "description": "souhlas / nesouhlas"
+              },
+              "form": {
+               "type": "string",
+               "description": "název formuláře, ze kterého souhlas pochází"
+              }
+             }
+            }
+           }
+          }
+         }
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "slug": "overeni-prihlaseni",
+     "summary": "Ověření přihlášení",
+     "method": "post",
+     "description": "Ověření emailu a hesla zákazníka.",
+     "operationId": null,
+     "contentTypes": [
+      "application/json"
+     ],
+     "path": "/api/v2/customers/login",
+     "deprecated": null,
+     "extensions": {},
+     "servers": [],
+     "parameters": [],
+     "security": null,
+     "requestBody": {
+      "content": [
+       {
+        "mediaType": "application/json",
+        "encoding": [],
+        "examples": [],
+        "schema": {
+         "type": "object",
+         "required": [
+          "email",
+          "password"
+         ],
+         "properties": {
+          "email": {
+           "type": "string",
+           "format": "email",
+           "description": "přihlašovací email"
+          },
+          "password": {
+           "type": "string",
+           "description": "heslo"
+          }
+         }
+        }
+       }
+      ],
+      "description": null,
+      "required": true
+     },
+     "responses": [
+      {
+       "statusCode": "200",
+       "links": null,
+       "description": "OK",
+       "content": [
+        {
+         "examples": [],
+         "mediaType": "application/json",
+         "encoding": null,
+         "schema": {
+          "type": "object",
+          "properties": {
+           "authenticated": {
+            "type": "boolean",
+            "description": "když vrací `true`, je to platný přihlašovací email a heslo"
+           },
+           "messages": {
+            "type": "array",
+            "description": "chybové zprávy",
+            "items": {
+             "type": "object",
+             "properties": {
+              "object": {
+               "type": "string",
+               "nullable": true,
+               "description": "název objektu (část JSONu), kterého se zpráva týká"
+              },
+              "property": {
+               "type": "string",
+               "nullable": true,
+               "description": "hodnota, které se zpráva týká"
+              },
+              "message": {
+               "type": "string",
+               "description": "text zprávy"
+              },
+              "level": {
+               "type": "string",
+               "enum": [
+                "info",
+                "warning",
+                "error",
+                "fatal_error"
+               ],
+               "description": "úroveň chyby:\n- `info` - informační sdělení\n- `warning` - varování\n- `error` - chyba, pravděpodobně nedošlo ke zpracování\n- `fatal_error` - chyba API, kontaktujte technickou podporu"
+              }
+             }
+            },
+            "__$ref": "#/components/schemas/ErrorMessages"
+           }
+          }
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "extensions": {},
+   "next": {
+    "name": null,
+    "slug": null,
+    "extensions": {}
+   },
+   "prev": {
+    "name": "Webhooky",
+    "slug": "webhooky",
+    "extensions": {}
+   }
+  }
+ }
+}

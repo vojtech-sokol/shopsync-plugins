@@ -1,0 +1,1253 @@
+{
+ "schema": {
+  "servers": [],
+  "description": null,
+  "summary": null,
+  "title": "API",
+  "url": null,
+  "version": "2",
+  "tag": {
+   "name": "Dopravy",
+   "description": "- pro práci s dopravami lze využívat **[webhooky](/webhooks/shipments)**.\n- více o dopravách v Upgates e-shopech naleznete [zde](https://www.upgates.cz/a/nastaveni-moznosti-dopravy).",
+   "operations": [
+    {
+     "slug": "seznam-doprav",
+     "summary": "Seznam doprav",
+     "method": "get",
+     "description": null,
+     "operationId": null,
+     "contentTypes": [],
+     "path": "/api/v2/shipments",
+     "deprecated": null,
+     "extensions": {},
+     "servers": [],
+     "parameters": [
+      {
+       "name": "ids",
+       "in": "query",
+       "description": "ID dopravy oddělené středníkem `;` nebo jako pole",
+       "required": false,
+       "schema": {
+        "oneOf": [
+         {
+          "type": "string",
+          "description": "hodnoty oddělené středníkem `;`\\\nnapříklad `1;2;3`\n"
+         },
+         {
+          "type": "array",
+          "items": {
+           "type": "integer"
+          }
+         }
+        ],
+        "__$ref": "#/components/schemas/QueryParameterArrayInt"
+       },
+       "style": null,
+       "explode": null,
+       "allowReserved": null,
+       "examples": []
+      },
+      {
+       "name": "code",
+       "in": "query",
+       "description": "kód dopravy",
+       "required": false,
+       "schema": {
+        "type": "string"
+       },
+       "style": null,
+       "explode": null,
+       "allowReserved": null,
+       "examples": []
+      },
+      {
+       "name": "codes",
+       "in": "query",
+       "description": "kódy dopravy oddělené středníkem `;` nebo jako pole",
+       "required": false,
+       "schema": {
+        "oneOf": [
+         {
+          "type": "string",
+          "description": "hodnoty oddělené středníkem `;`\\\nnapříklad `1;2;3`\n"
+         },
+         {
+          "type": "array",
+          "items": {
+           "type": "integer"
+          }
+         }
+        ],
+        "__$ref": "#/components/schemas/QueryParameterArrayInt"
+       },
+       "style": null,
+       "explode": null,
+       "allowReserved": null,
+       "examples": []
+      },
+      {
+       "name": "type",
+       "in": "query",
+       "description": null,
+       "required": false,
+       "schema": {
+        "type": "string",
+        "enum": [
+         "ceskaPosta",
+         "balikovna",
+         "slovenskaPosta",
+         "sps",
+         "zasilkovna",
+         "dpd",
+         "ppl",
+         "gls",
+         "wedo",
+         "depo",
+         "custom",
+         "individual"
+        ],
+        "description": "typ dopravy:\n- `ceskaPosta` - Česká pošta\n- `balikovna` - Balíkovna\n- `slovenskaPosta` - Slovenská pošta\n- `sps` - SPS\n- `ulozenka` - Uloženka\n- `zasilkovna` - Zásilkovna\n- `dpd` - DPD\n- `ppl` - PPL\n- `gls` - GLS\n- `wedo` - WEDO\n- `custom` - Vlastní doprava\n- `individual` - Individuální",
+        "__$ref": "#/components/schemas/ShipmentType"
+       },
+       "style": null,
+       "explode": null,
+       "allowReserved": null,
+       "examples": []
+      },
+      {
+       "name": "page",
+       "in": "query",
+       "description": "stránka",
+       "required": false,
+       "schema": {
+        "type": "integer",
+        "default": 1
+       },
+       "style": null,
+       "explode": null,
+       "allowReserved": null,
+       "examples": []
+      }
+     ],
+     "security": null,
+     "requestBody": {
+      "content": [],
+      "description": null,
+      "required": null
+     },
+     "responses": [
+      {
+       "statusCode": "200",
+       "links": null,
+       "description": "OK",
+       "content": [
+        {
+         "examples": [],
+         "mediaType": "application/json",
+         "encoding": null,
+         "schema": {
+          "type": "object",
+          "properties": {
+           "current_page": {
+            "type": "integer",
+            "minimum": 1,
+            "description": "aktuální strana"
+           },
+           "current_page_items": {
+            "type": "integer",
+            "description": "počet položek na aktuální straně",
+            "example": 1
+           },
+           "number_of_items": {
+            "type": "integer",
+            "description": "celkový počet položek",
+            "example": 1
+           },
+           "number_of_pages": {
+            "type": "integer",
+            "description": "celkový počet stran",
+            "example": 1
+           },
+           "shipments": {
+            "type": "array",
+            "description": "pole objektů s dopravami",
+            "items": {
+             "type": "object",
+             "properties": {
+              "id": {
+               "type": "string",
+               "description": "ID dopravy"
+              },
+              "code": {
+               "type": [
+                "string",
+                "null"
+               ],
+               "description": "kód dopravy"
+              },
+              "image_url": {
+               "type": [
+                "string",
+                "null"
+               ],
+               "format": "uri",
+               "description": "URL adresa obrázku"
+              },
+              "type": {
+               "type": "string",
+               "enum": [
+                "ceskaPosta",
+                "balikovna",
+                "slovenskaPosta",
+                "sps",
+                "zasilkovna",
+                "dpd",
+                "ppl",
+                "gls",
+                "wedo",
+                "depo",
+                "custom",
+                "individual"
+               ],
+               "description": "typ dopravy:\n- `ceskaPosta` - Česká pošta\n- `balikovna` - Balíkovna\n- `slovenskaPosta` - Slovenská pošta\n- `sps` - SPS\n- `ulozenka` - Uloženka\n- `zasilkovna` - Zásilkovna\n- `dpd` - DPD\n- `ppl` - PPL\n- `gls` - GLS\n- `wedo` - WEDO\n- `custom` - Vlastní doprava\n- `individual` - Individuální",
+               "__$ref": "#/components/schemas/ShipmentType"
+              },
+              "active_yn": {
+               "type": "boolean",
+               "description": "příznak aktivní"
+              },
+              "affiliates": {
+               "type": [
+                "array",
+                "null"
+               ],
+               "description": "Pole typů poboček, pokud je `null`, nemá doprava pobočky.\n",
+               "items": {
+                "type": "string",
+                "enum": [
+                 "balikovna",
+                 "balikobox",
+                 "postaPoint",
+                 "naPostu",
+                 "dpdBox",
+                 "pickupPoint",
+                 "parcelBox",
+                 "parcelShop",
+                 "wedoBox",
+                 "wedoPoint",
+                 "zasilkovna",
+                 "ulozenka",
+                 "depo",
+                 "custom"
+                ]
+               }
+              },
+              "tracking_url": {
+               "type": [
+                "string",
+                "null"
+               ],
+               "format": "uri",
+               "description": "URL pro sledování zásilek"
+              },
+              "internal_note": {
+               "type": [
+                "string",
+                "null"
+               ],
+               "description": "interní poznámka"
+              },
+              "descriptions": {
+               "type": "array",
+               "items": {
+                "type": "object",
+                "properties": {
+                 "language_id": {
+                  "type": "string",
+                  "description": "kód jazyka dle [ISO 639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes)",
+                  "example": "cz",
+                  "__$ref": "#/components/schemas/Language"
+                 },
+                 "name": {
+                  "type": "string",
+                  "description": "název"
+                 },
+                 "description": {
+                  "type": [
+                   "string",
+                   "null"
+                  ],
+                  "description": "popis"
+                 },
+                 "price": {
+                  "type": [
+                   "number",
+                   "null"
+                  ],
+                  "description": "cena"
+                 },
+                 "free_from": {
+                  "type": [
+                   "number",
+                   "null"
+                  ],
+                  "description": "zdarma od"
+                 }
+                }
+               }
+              },
+              "metas": {
+               "type": "array",
+               "description": "vlastní pole",
+               "items": {
+                "oneOf": [
+                 {
+                  "type": "object",
+                  "description": "vlastní pole s hodnotami společnými pro všechny jazyky",
+                  "required": [
+                   "key",
+                   "type",
+                   "value"
+                  ],
+                  "properties": {
+                   "key": {
+                    "type": "string",
+                    "pattern": "^[a-z_][a-z0-9_]*$",
+                    "description": "klíč vlastního pole",
+                    "__$ref": "#/components/schemas/MetaKey"
+                   },
+                   "type": {
+                    "type": "string",
+                    "enum": [
+                     "checkbox",
+                     "radiolist",
+                     "input",
+                     "date",
+                     "email",
+                     "number",
+                     "textarea",
+                     "formatted",
+                     "select",
+                     "multiselect"
+                    ],
+                    "description": "typ vlastního pole:\n- `checkbox` - Zatržítko\n- `radiolist` - Přepínač\n- `input` - Textové pole\n- `date` - Textové pole - datum\n- `email` - Textové pole - emailová adresa\n- `number` - Textové pole - číslo\n- `textarea` - Víceřádkové textové pole\n- `formatted` - Víceřádkové textové pole, formátované\n- `select` - Rolovací nabídka\n- `multiselect` - Multi rolovací nabídka\n",
+                    "__$ref": "#/components/schemas/MetaType"
+                   },
+                   "value": {
+                    "type": "string",
+                    "description": "hodnota společná pro všechny jazyky"
+                   }
+                  }
+                 },
+                 {
+                  "type": "object",
+                  "description": "vlastní pole s hodnotami pro každý jazyk zvlášť",
+                  "required": [
+                   "key",
+                   "type",
+                   "values"
+                  ],
+                  "properties": {
+                   "key": {
+                    "type": "string",
+                    "pattern": "^[a-z_][a-z0-9_]*$",
+                    "description": "klíč vlastního pole",
+                    "__$ref": "#/components/schemas/MetaKey"
+                   },
+                   "type": {
+                    "type": "string",
+                    "enum": [
+                     "checkbox",
+                     "radiolist",
+                     "input",
+                     "date",
+                     "email",
+                     "number",
+                     "textarea",
+                     "formatted",
+                     "select",
+                     "multiselect"
+                    ],
+                    "description": "typ vlastního pole:\n- `checkbox` - Zatržítko\n- `radiolist` - Přepínač\n- `input` - Textové pole\n- `date` - Textové pole - datum\n- `email` - Textové pole - emailová adresa\n- `number` - Textové pole - číslo\n- `textarea` - Víceřádkové textové pole\n- `formatted` - Víceřádkové textové pole, formátované\n- `select` - Rolovací nabídka\n- `multiselect` - Multi rolovací nabídka\n",
+                    "__$ref": "#/components/schemas/MetaType"
+                   },
+                   "values": {
+                    "type": "array",
+                    "description": "hodnoty pro každý jazyk zvlášť",
+                    "items": {
+                     "type": "object",
+                     "required": [
+                      "language",
+                      "value"
+                     ],
+                     "properties": {
+                      "language": {
+                       "type": "string",
+                       "description": "kód jazyka dle [ISO 639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes)",
+                       "example": "cz",
+                       "__$ref": "#/components/schemas/Language"
+                      },
+                      "value": {
+                       "type": "string"
+                      }
+                     }
+                    }
+                   }
+                  }
+                 }
+                ]
+               },
+               "__$ref": "#/components/schemas/MetasGet"
+              }
+             }
+            }
+           }
+          }
+         }
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "slug": "detail-dopravy",
+     "summary": "Detail dopravy",
+     "method": "get",
+     "description": null,
+     "operationId": null,
+     "contentTypes": [],
+     "path": "/api/v2/shipments/{id}",
+     "deprecated": null,
+     "extensions": {},
+     "servers": [],
+     "parameters": [
+      {
+       "name": "id",
+       "in": "path",
+       "description": "ID dopravy",
+       "required": true,
+       "schema": {
+        "type": "integer"
+       },
+       "style": null,
+       "explode": null,
+       "allowReserved": null,
+       "examples": []
+      }
+     ],
+     "security": null,
+     "requestBody": {
+      "content": [],
+      "description": null,
+      "required": null
+     },
+     "responses": [
+      {
+       "statusCode": "200",
+       "links": null,
+       "description": "OK",
+       "content": [
+        {
+         "examples": [],
+         "mediaType": "application/json",
+         "encoding": null,
+         "schema": {
+          "type": "object",
+          "properties": {
+           "current_page": {
+            "type": "integer",
+            "minimum": 1,
+            "description": "aktuální strana"
+           },
+           "current_page_items": {
+            "type": "integer",
+            "description": "počet položek na aktuální straně",
+            "example": 1
+           },
+           "number_of_items": {
+            "type": "integer",
+            "description": "celkový počet položek",
+            "example": 1
+           },
+           "number_of_pages": {
+            "type": "integer",
+            "description": "celkový počet stran",
+            "example": 1
+           },
+           "shipments": {
+            "type": "array",
+            "description": "pole objektů s dopravami",
+            "items": {
+             "type": "object",
+             "properties": {
+              "id": {
+               "type": "string",
+               "description": "ID dopravy"
+              },
+              "code": {
+               "type": [
+                "string",
+                "null"
+               ],
+               "description": "kód dopravy"
+              },
+              "image_url": {
+               "type": [
+                "string",
+                "null"
+               ],
+               "format": "uri",
+               "description": "URL adresa obrázku"
+              },
+              "type": {
+               "type": "string",
+               "enum": [
+                "ceskaPosta",
+                "balikovna",
+                "slovenskaPosta",
+                "sps",
+                "zasilkovna",
+                "dpd",
+                "ppl",
+                "gls",
+                "wedo",
+                "depo",
+                "custom",
+                "individual"
+               ],
+               "description": "typ dopravy:\n- `ceskaPosta` - Česká pošta\n- `balikovna` - Balíkovna\n- `slovenskaPosta` - Slovenská pošta\n- `sps` - SPS\n- `ulozenka` - Uloženka\n- `zasilkovna` - Zásilkovna\n- `dpd` - DPD\n- `ppl` - PPL\n- `gls` - GLS\n- `wedo` - WEDO\n- `custom` - Vlastní doprava\n- `individual` - Individuální",
+               "__$ref": "#/components/schemas/ShipmentType"
+              },
+              "active_yn": {
+               "type": "boolean",
+               "description": "příznak aktivní"
+              },
+              "affiliates": {
+               "type": [
+                "array",
+                "null"
+               ],
+               "description": "Pole typů poboček, pokud je `null`, nemá doprava pobočky.\n",
+               "items": {
+                "type": "string",
+                "enum": [
+                 "balikovna",
+                 "balikobox",
+                 "postaPoint",
+                 "naPostu",
+                 "dpdBox",
+                 "pickupPoint",
+                 "parcelBox",
+                 "parcelShop",
+                 "wedoBox",
+                 "wedoPoint",
+                 "zasilkovna",
+                 "ulozenka",
+                 "depo",
+                 "custom"
+                ]
+               }
+              },
+              "tracking_url": {
+               "type": [
+                "string",
+                "null"
+               ],
+               "format": "uri",
+               "description": "URL pro sledování zásilek"
+              },
+              "internal_note": {
+               "type": [
+                "string",
+                "null"
+               ],
+               "description": "interní poznámka"
+              },
+              "descriptions": {
+               "type": "array",
+               "items": {
+                "type": "object",
+                "properties": {
+                 "language_id": {
+                  "type": "string",
+                  "description": "kód jazyka dle [ISO 639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes)",
+                  "example": "cz",
+                  "__$ref": "#/components/schemas/Language"
+                 },
+                 "name": {
+                  "type": "string",
+                  "description": "název"
+                 },
+                 "description": {
+                  "type": [
+                   "string",
+                   "null"
+                  ],
+                  "description": "popis"
+                 },
+                 "price": {
+                  "type": [
+                   "number",
+                   "null"
+                  ],
+                  "description": "cena"
+                 },
+                 "free_from": {
+                  "type": [
+                   "number",
+                   "null"
+                  ],
+                  "description": "zdarma od"
+                 }
+                }
+               }
+              },
+              "metas": {
+               "type": "array",
+               "description": "vlastní pole",
+               "items": {
+                "oneOf": [
+                 {
+                  "type": "object",
+                  "description": "vlastní pole s hodnotami společnými pro všechny jazyky",
+                  "required": [
+                   "key",
+                   "type",
+                   "value"
+                  ],
+                  "properties": {
+                   "key": {
+                    "type": "string",
+                    "pattern": "^[a-z_][a-z0-9_]*$",
+                    "description": "klíč vlastního pole",
+                    "__$ref": "#/components/schemas/MetaKey"
+                   },
+                   "type": {
+                    "type": "string",
+                    "enum": [
+                     "checkbox",
+                     "radiolist",
+                     "input",
+                     "date",
+                     "email",
+                     "number",
+                     "textarea",
+                     "formatted",
+                     "select",
+                     "multiselect"
+                    ],
+                    "description": "typ vlastního pole:\n- `checkbox` - Zatržítko\n- `radiolist` - Přepínač\n- `input` - Textové pole\n- `date` - Textové pole - datum\n- `email` - Textové pole - emailová adresa\n- `number` - Textové pole - číslo\n- `textarea` - Víceřádkové textové pole\n- `formatted` - Víceřádkové textové pole, formátované\n- `select` - Rolovací nabídka\n- `multiselect` - Multi rolovací nabídka\n",
+                    "__$ref": "#/components/schemas/MetaType"
+                   },
+                   "value": {
+                    "type": "string",
+                    "description": "hodnota společná pro všechny jazyky"
+                   }
+                  }
+                 },
+                 {
+                  "type": "object",
+                  "description": "vlastní pole s hodnotami pro každý jazyk zvlášť",
+                  "required": [
+                   "key",
+                   "type",
+                   "values"
+                  ],
+                  "properties": {
+                   "key": {
+                    "type": "string",
+                    "pattern": "^[a-z_][a-z0-9_]*$",
+                    "description": "klíč vlastního pole",
+                    "__$ref": "#/components/schemas/MetaKey"
+                   },
+                   "type": {
+                    "type": "string",
+                    "enum": [
+                     "checkbox",
+                     "radiolist",
+                     "input",
+                     "date",
+                     "email",
+                     "number",
+                     "textarea",
+                     "formatted",
+                     "select",
+                     "multiselect"
+                    ],
+                    "description": "typ vlastního pole:\n- `checkbox` - Zatržítko\n- `radiolist` - Přepínač\n- `input` - Textové pole\n- `date` - Textové pole - datum\n- `email` - Textové pole - emailová adresa\n- `number` - Textové pole - číslo\n- `textarea` - Víceřádkové textové pole\n- `formatted` - Víceřádkové textové pole, formátované\n- `select` - Rolovací nabídka\n- `multiselect` - Multi rolovací nabídka\n",
+                    "__$ref": "#/components/schemas/MetaType"
+                   },
+                   "values": {
+                    "type": "array",
+                    "description": "hodnoty pro každý jazyk zvlášť",
+                    "items": {
+                     "type": "object",
+                     "required": [
+                      "language",
+                      "value"
+                     ],
+                     "properties": {
+                      "language": {
+                       "type": "string",
+                       "description": "kód jazyka dle [ISO 639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes)",
+                       "example": "cz",
+                       "__$ref": "#/components/schemas/Language"
+                      },
+                      "value": {
+                       "type": "string"
+                      }
+                     }
+                    }
+                   }
+                  }
+                 }
+                ]
+               },
+               "__$ref": "#/components/schemas/MetasGet"
+              }
+             }
+            }
+           }
+          }
+         }
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "slug": "seznam-pobocek-dopravy",
+     "summary": "Seznam poboček dopravy",
+     "method": "get",
+     "description": "Seznam poboček jde získat k jakémukoliv typu dopravy.\nPracuje vždy s pobočkami jedné konkrétní dopravy.\n",
+     "operationId": null,
+     "contentTypes": [],
+     "path": "/api/v2/shipments/{id}/affiliates",
+     "deprecated": null,
+     "extensions": {},
+     "servers": [],
+     "parameters": [
+      {
+       "name": "id",
+       "in": "path",
+       "description": "ID dopravy",
+       "required": true,
+       "schema": {
+        "type": "integer"
+       },
+       "style": null,
+       "explode": null,
+       "allowReserved": null,
+       "examples": []
+      },
+      {
+       "name": "page",
+       "in": "query",
+       "description": "stránka",
+       "required": false,
+       "schema": {
+        "type": "integer",
+        "default": 1
+       },
+       "style": null,
+       "explode": null,
+       "allowReserved": null,
+       "examples": []
+      }
+     ],
+     "security": null,
+     "requestBody": {
+      "content": [],
+      "description": null,
+      "required": null
+     },
+     "responses": [
+      {
+       "statusCode": "200",
+       "links": null,
+       "description": "OK",
+       "content": [
+        {
+         "examples": [],
+         "mediaType": "application/json",
+         "encoding": null,
+         "schema": {
+          "type": "object",
+          "properties": {
+           "current_page": {
+            "type": "integer",
+            "minimum": 1,
+            "description": "aktuální strana"
+           },
+           "current_page_items": {
+            "type": "integer",
+            "description": "počet položek na aktuální straně",
+            "example": 1
+           },
+           "number_of_items": {
+            "type": "integer",
+            "description": "celkový počet položek",
+            "example": 1
+           },
+           "number_of_pages": {
+            "type": "integer",
+            "description": "celkový počet stran",
+            "example": 1
+           },
+           "affiliates": {
+            "type": "array",
+            "description": "pole objektů pobočkami",
+            "items": {
+             "type": "object",
+             "properties": {
+              "affiliate_id": {
+               "type": "string",
+               "description": "ID pobočky"
+              },
+              "name": {
+               "type": "string",
+               "description": "název pobočky"
+              },
+              "street": {
+               "type": "string",
+               "description": "ulice"
+              },
+              "city": {
+               "type": "string",
+               "description": "město"
+              },
+              "zip": {
+               "type": "string",
+               "description": "PSČ"
+              },
+              "country": {
+               "type": "string",
+               "description": "kód země dle [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)",
+               "example": "cz",
+               "__$ref": "#/components/schemas/Country"
+              },
+              "note": {
+               "type": [
+                "string",
+                "null"
+               ],
+               "description": "poznámka"
+              }
+             }
+            }
+           }
+          }
+         }
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "slug": "vytvoreni-pobocky-dopravy",
+     "summary": "Vytvoření pobočky dopravy",
+     "method": "post",
+     "description": "Pobočky lze vytvářet pouze u vlastního typu dopravy.\nPokud se pokusíte vytvořit pobočky u dopravy jiného typu, API vrátí chybu 403.\n",
+     "operationId": null,
+     "contentTypes": [
+      "application/json"
+     ],
+     "path": "/api/v2/shipments/{id}/affiliates",
+     "deprecated": null,
+     "extensions": {},
+     "servers": [],
+     "parameters": [
+      {
+       "name": "id",
+       "in": "path",
+       "description": "ID dopravy",
+       "required": true,
+       "schema": {
+        "type": "integer"
+       },
+       "style": null,
+       "explode": null,
+       "allowReserved": null,
+       "examples": []
+      }
+     ],
+     "security": null,
+     "requestBody": {
+      "content": [
+       {
+        "mediaType": "application/json",
+        "encoding": [],
+        "examples": [],
+        "schema": {
+         "type": "object",
+         "required": [
+          "affiliates"
+         ],
+         "properties": {
+          "affiliates": {
+           "type": "array",
+           "items": {
+            "type": "object",
+            "required": [
+             "name",
+             "street",
+             "city",
+             "zip",
+             "country"
+            ],
+            "properties": {
+             "affiliate_id": {
+              "type": "string",
+              "description": "ID pobočky, pokud není uvedeno použije se interní ID,\nmůže obsahovat pouze alfanumerické znaky bez mezer a bez diakritiky\n"
+             },
+             "name": {
+              "type": "string",
+              "description": "název pobočky"
+             },
+             "street": {
+              "type": "string",
+              "description": "ulice"
+             },
+             "city": {
+              "type": "string",
+              "description": "město"
+             },
+             "zip": {
+              "type": "string",
+              "description": "PSČ"
+             },
+             "country": {
+              "type": "string",
+              "description": "kód země dle [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)",
+              "example": "cz",
+              "__$ref": "#/components/schemas/Country"
+             },
+             "note": {
+              "type": "string",
+              "description": "poznámka"
+             }
+            }
+           }
+          }
+         }
+        }
+       }
+      ],
+      "description": null,
+      "required": true
+     },
+     "responses": [
+      {
+       "statusCode": "200",
+       "links": null,
+       "description": "OK",
+       "content": [
+        {
+         "examples": [],
+         "mediaType": "application/json",
+         "encoding": null,
+         "schema": {
+          "type": "object",
+          "properties": {
+           "affiliates": {
+            "type": "array",
+            "items": {
+             "type": "object",
+             "properties": {
+              "created_yn": {
+               "type": "boolean",
+               "description": "informace o úspěšném vytvoření položky"
+              },
+              "messages": {
+               "type": "array",
+               "description": "chybové zprávy",
+               "items": {
+                "type": "object",
+                "properties": {
+                 "object": {
+                  "type": "string",
+                  "nullable": true,
+                  "description": "název objektu (část JSONu), kterého se zpráva týká"
+                 },
+                 "property": {
+                  "type": "string",
+                  "nullable": true,
+                  "description": "hodnota, které se zpráva týká"
+                 },
+                 "message": {
+                  "type": "string",
+                  "description": "text zprávy"
+                 },
+                 "level": {
+                  "type": "string",
+                  "enum": [
+                   "info",
+                   "warning",
+                   "error",
+                   "fatal_error"
+                  ],
+                  "description": "úroveň chyby:\n- `info` - informační sdělení\n- `warning` - varování\n- `error` - chyba, pravděpodobně nedošlo ke zpracování\n- `fatal_error` - chyba API, kontaktujte technickou podporu"
+                 }
+                }
+               },
+               "__$ref": "#/components/schemas/ErrorMessages"
+              }
+             }
+            }
+           }
+          }
+         }
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "slug": "smazani-pobocky-dopravy",
+     "summary": "Smazání pobočky dopravy",
+     "method": "delete",
+     "description": "Pobočky lze smazat pouze u vlastního typu dopravy.\nPokud se pokusíte smazat pobočky u dopravy jiného typu, API vrátí chybu 403.\n",
+     "operationId": null,
+     "contentTypes": [],
+     "path": "/api/v2/shipments/{id}/affiliates",
+     "deprecated": null,
+     "extensions": {},
+     "servers": [],
+     "parameters": [
+      {
+       "name": "id",
+       "in": "path",
+       "description": "ID dopravy",
+       "required": true,
+       "schema": {
+        "type": "integer"
+       },
+       "style": null,
+       "explode": null,
+       "allowReserved": null,
+       "examples": []
+      },
+      {
+       "name": "affiliate_ids",
+       "in": "query",
+       "description": "ID poboček oddělené středníkem `;` nebo jako pole",
+       "required": false,
+       "schema": {
+        "oneOf": [
+         {
+          "type": "string",
+          "description": "hodnoty oddělené středníkem `;`\\\nnapříklad `1;2;3`\n"
+         },
+         {
+          "type": "array",
+          "items": {
+           "type": "integer"
+          }
+         }
+        ],
+        "__$ref": "#/components/schemas/QueryParameterArrayInt"
+       },
+       "style": null,
+       "explode": null,
+       "allowReserved": null,
+       "examples": []
+      },
+      {
+       "name": "delete_all_yn",
+       "in": "query",
+       "description": "pokud je `TRUE`, smaže všechny pobočky dopravy",
+       "required": false,
+       "schema": {
+        "type": "boolean"
+       },
+       "style": null,
+       "explode": null,
+       "allowReserved": null,
+       "examples": []
+      }
+     ],
+     "security": null,
+     "requestBody": {
+      "content": [],
+      "description": null,
+      "required": null
+     },
+     "responses": [
+      {
+       "statusCode": "200",
+       "links": null,
+       "description": "OK",
+       "content": [
+        {
+         "examples": [],
+         "mediaType": "application/json",
+         "encoding": null,
+         "schema": {
+          "type": "object",
+          "properties": {
+           "affiliates": {
+            "type": "array",
+            "items": {
+             "type": "object",
+             "properties": {
+              "affiliate_id": {
+               "type": "string",
+               "description": "ID pobočky"
+              },
+              "deleted_yn": {
+               "type": "boolean",
+               "description": "informace o úspěšném smazání položky"
+              },
+              "messages": {
+               "type": "array",
+               "description": "chybové zprávy",
+               "items": {
+                "type": "object",
+                "properties": {
+                 "object": {
+                  "type": "string",
+                  "nullable": true,
+                  "description": "název objektu (část JSONu), kterého se zpráva týká"
+                 },
+                 "property": {
+                  "type": "string",
+                  "nullable": true,
+                  "description": "hodnota, které se zpráva týká"
+                 },
+                 "message": {
+                  "type": "string",
+                  "description": "text zprávy"
+                 },
+                 "level": {
+                  "type": "string",
+                  "enum": [
+                   "info",
+                   "warning",
+                   "error",
+                   "fatal_error"
+                  ],
+                  "description": "úroveň chyby:\n- `info` - informační sdělení\n- `warning` - varování\n- `error` - chyba, pravděpodobně nedošlo ke zpracování\n- `fatal_error` - chyba API, kontaktujte technickou podporu"
+                 }
+                }
+               },
+               "__$ref": "#/components/schemas/ErrorMessages"
+              }
+             }
+            }
+           }
+          }
+         }
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "slug": "seznam-skupin-dopravy",
+     "summary": "Seznam skupin dopravy",
+     "method": "get",
+     "description": "Více o skupinách doprav v Upgates e-shopech naleznete zde: https://www.upgates.cz/a/zvlastni-zasilky#skupiny-doprav\n",
+     "operationId": null,
+     "contentTypes": [],
+     "path": "/api/v2/shipments/groups",
+     "deprecated": null,
+     "extensions": {},
+     "servers": [],
+     "parameters": [
+      {
+       "name": "page",
+       "in": "query",
+       "description": "stránka",
+       "required": false,
+       "schema": {
+        "type": "integer",
+        "default": 1
+       },
+       "style": null,
+       "explode": null,
+       "allowReserved": null,
+       "examples": []
+      }
+     ],
+     "security": null,
+     "requestBody": {
+      "content": [],
+      "description": null,
+      "required": null
+     },
+     "responses": [
+      {
+       "statusCode": "200",
+       "links": null,
+       "description": "OK",
+       "content": [
+        {
+         "examples": [],
+         "mediaType": "application/json",
+         "encoding": null,
+         "schema": {
+          "type": "object",
+          "properties": {
+           "current_page": {
+            "type": "integer",
+            "minimum": 1,
+            "description": "aktuální strana"
+           },
+           "current_page_items": {
+            "type": "integer",
+            "description": "počet položek na aktuální straně",
+            "example": 1
+           },
+           "number_of_items": {
+            "type": "integer",
+            "description": "celkový počet položek",
+            "example": 1
+           },
+           "number_of_pages": {
+            "type": "integer",
+            "description": "celkový počet stran",
+            "example": 1
+           },
+           "groups": {
+            "type": "array",
+            "description": "pole objektů pobočkami",
+            "items": {
+             "type": "object",
+             "properties": {
+              "id": {
+               "type": "integer",
+               "description": "ID skupiny"
+              },
+              "name": {
+               "type": "string",
+               "description": "název"
+              },
+              "position": {
+               "type": "integer",
+               "description": "pozice"
+              }
+             }
+            }
+           }
+          }
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "extensions": {},
+   "next": {
+    "name": "Faktury",
+    "slug": "faktury",
+    "extensions": {}
+   },
+   "prev": {
+    "name": "Dostupnosti",
+    "slug": "dostupnosti",
+    "extensions": {}
+   }
+  }
+ }
+}

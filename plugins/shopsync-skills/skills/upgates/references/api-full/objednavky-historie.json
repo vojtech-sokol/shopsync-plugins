@@ -1,0 +1,294 @@
+{
+ "schema": {
+  "servers": [],
+  "description": null,
+  "summary": null,
+  "title": "API",
+  "url": null,
+  "version": "2",
+  "tag": {
+   "name": "Objednávky - historie",
+   "description": "- unikátním identifikátorem objednávek je číslo objednávky (`order_number`)\n- pro práci s objednávkami lze využívat **[webhooky](/webhooks/orders)**\n- více o objednávkách v Upgates e-shopech najdete [zde](https://www.upgates.cz/a/objednavka)",
+   "operations": [
+    {
+     "slug": "seznam",
+     "summary": "Seznam",
+     "method": "get",
+     "description": "Vrací seznam událostí z historie objednávky.\nData historie mohou obsahovat HTML značky.\n",
+     "operationId": null,
+     "contentTypes": [],
+     "path": "/api/v2/orders/{order_number}/history",
+     "deprecated": null,
+     "extensions": {},
+     "servers": [],
+     "parameters": [
+      {
+       "name": "order_number",
+       "in": "path",
+       "description": "Číslo objednávky",
+       "required": true,
+       "schema": {
+        "type": "string"
+       },
+       "style": null,
+       "explode": null,
+       "allowReserved": null,
+       "examples": []
+      }
+     ],
+     "security": null,
+     "requestBody": {
+      "content": [],
+      "description": null,
+      "required": null
+     },
+     "responses": [
+      {
+       "statusCode": "200",
+       "links": null,
+       "description": "OK",
+       "content": [
+        {
+         "examples": [],
+         "mediaType": "application/json",
+         "encoding": null,
+         "schema": {
+          "type": "object",
+          "properties": {
+           "number_of_items": {
+            "type": "integer",
+            "description": "počet položek historie"
+           },
+           "history": {
+            "type": "array",
+            "description": "pole objektů s událostmi historie",
+            "items": {
+             "type": "object",
+             "properties": {
+              "event": {
+               "type": "string",
+               "description": "název události"
+              },
+              "user_name": {
+               "type": "string",
+               "description": "jméno uživatele, který událost provedl"
+              },
+              "changes": {
+               "type": "array",
+               "description": "pole objektů se změnami",
+               "items": {
+                "type": "object",
+                "properties": {
+                 "name": {
+                  "type": "string",
+                  "description": "název změny"
+                 },
+                 "before": {
+                  "type": "string",
+                  "nullable": true,
+                  "description": "hodnota před změnou"
+                 },
+                 "after": {
+                  "type": "string",
+                  "nullable": true,
+                  "description": "hodnota po změně"
+                 }
+                }
+               }
+              },
+              "admin_yn": {
+               "type": "boolean",
+               "description": "zastaralý parametr. Dříve určoval, jestli událost pochází z e-shopu nebo z administrace.\nPokud pochází událost z API, bude `true`.\nMísto něj použijte `origin`.\n"
+              },
+              "origin": {
+               "type": "string",
+               "enum": [
+                "admin",
+                "support",
+                "frontend",
+                "api",
+                "import",
+                "system",
+                "paymentGateway",
+                "paymentPairing"
+               ],
+               "description": "zdroj, ze kterého událost historie pochází"
+              },
+              "data": {
+               "type": "array",
+               "description": "pole objektů s daty",
+               "items": {
+                "type": "object",
+                "properties": {
+                 "name": {
+                  "type": "string",
+                  "description": "název"
+                 },
+                 "value": {
+                  "type": "string",
+                  "description": "hodnota"
+                 }
+                }
+               }
+              },
+              "creation_time": {
+               "type": "string",
+               "format": "date-time",
+               "description": "datum a čas události",
+               "example": "2026-04-28T13:57:48+02:00",
+               "__$ref": "#/components/schemas/DateTime"
+              }
+             }
+            }
+           }
+          }
+         }
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "slug": "pridani-zaznamu",
+     "summary": "Přidání záznamu",
+     "method": "post",
+     "description": "Přidá záznam do historie objednávky. Jeden požadavek znamená přidání jednoho záznamu do historie.\nSlouží hlavně pro systémy třetích stran, které chtějí informovat administrátora e-shopu o tom,\nže proběhla nějaká událost. Čas události nelze upravovat. Pokud chcete, můžete si poslat čas v datech události.\n",
+     "operationId": null,
+     "contentTypes": [
+      "application/json"
+     ],
+     "path": "/api/v2/orders/{order_number}/history",
+     "deprecated": null,
+     "extensions": {},
+     "servers": [],
+     "parameters": [
+      {
+       "name": "order_number",
+       "in": "path",
+       "description": "Číslo objednávky",
+       "required": true,
+       "schema": {
+        "type": "string"
+       },
+       "style": null,
+       "explode": null,
+       "allowReserved": null,
+       "examples": []
+      }
+     ],
+     "security": null,
+     "requestBody": {
+      "content": [
+       {
+        "mediaType": "application/json",
+        "encoding": [],
+        "examples": [],
+        "schema": {
+         "type": "object",
+         "required": [
+          "data"
+         ],
+         "properties": {
+          "data": {
+           "type": "array",
+           "description": "pole objektů s daty historie",
+           "items": {
+            "type": "object",
+            "required": [
+             "name",
+             "value"
+            ],
+            "properties": {
+             "name": {
+              "type": "string",
+              "description": "název, ořízne se na délku max. 50 znaků a odstraní se HTML značky",
+              "maxLength": 50
+             },
+             "value": {
+              "type": "string",
+              "description": "hodnota, ořízne se na délku max. 500 znaků a odstraní se HTML značky",
+              "maxLength": 500
+             }
+            }
+           }
+          }
+         }
+        }
+       }
+      ],
+      "description": null,
+      "required": true
+     },
+     "responses": [
+      {
+       "statusCode": "200",
+       "links": null,
+       "description": "OK",
+       "content": [
+        {
+         "examples": [],
+         "mediaType": "application/json",
+         "encoding": null,
+         "schema": {
+          "type": "object",
+          "properties": {
+           "updated": {
+            "type": "boolean",
+            "description": "příznak, zda došlo k aktualizaci"
+           },
+           "messages": {
+            "type": "array",
+            "description": "chybové zprávy",
+            "items": {
+             "type": "object",
+             "properties": {
+              "object": {
+               "type": "string",
+               "nullable": true,
+               "description": "název objektu (část JSONu), kterého se zpráva týká"
+              },
+              "property": {
+               "type": "string",
+               "nullable": true,
+               "description": "hodnota, které se zpráva týká"
+              },
+              "message": {
+               "type": "string",
+               "description": "text zprávy"
+              },
+              "level": {
+               "type": "string",
+               "enum": [
+                "info",
+                "warning",
+                "error",
+                "fatal_error"
+               ],
+               "description": "úroveň chyby:\n- `info` - informační sdělení\n- `warning` - varování\n- `error` - chyba, pravděpodobně nedošlo ke zpracování\n- `fatal_error` - chyba API, kontaktujte technickou podporu"
+              }
+             }
+            },
+            "__$ref": "#/components/schemas/ErrorMessages"
+           }
+          }
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "extensions": {},
+   "next": {
+    "name": "Objednávky - přílohy",
+    "slug": "objednavky-prilohy",
+    "extensions": {}
+   },
+   "prev": {
+    "name": "Objednávky",
+    "slug": "objednavky",
+    "extensions": {}
+   }
+  }
+ }
+}

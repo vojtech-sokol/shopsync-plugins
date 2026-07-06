@@ -1,0 +1,837 @@
+{
+ "schema": {
+  "servers": [],
+  "description": null,
+  "summary": null,
+  "title": "API",
+  "url": null,
+  "version": "2",
+  "tag": {
+   "name": "Dostupnosti",
+   "description": "- více o dostupnostech v Upgates e-shopech naleznete [zde](https://www.upgates.cz/a/dostupnosti).",
+   "operations": [
+    {
+     "slug": "seznam-dostupnosti",
+     "summary": "Seznam dostupností",
+     "method": "get",
+     "description": "Seznam dostupností je dostupný po jednotlivých stranách,\nvýstup je omezený na 50 položek na stránku.\n",
+     "operationId": null,
+     "contentTypes": [],
+     "path": "/api/v2/availabilities",
+     "deprecated": null,
+     "extensions": {},
+     "servers": [],
+     "parameters": [
+      {
+       "name": "ids",
+       "in": "query",
+       "description": "ID dostupností oddělené středníkem `;` nebo jako pole",
+       "required": false,
+       "schema": {
+        "oneOf": [
+         {
+          "type": "string",
+          "description": "hodnoty oddělené středníkem `;`\\\nnapříklad `1;2;3`\n"
+         },
+         {
+          "type": "array",
+          "items": {
+           "type": "integer"
+          }
+         }
+        ],
+        "__$ref": "#/components/schemas/QueryParameterArrayInt"
+       },
+       "style": null,
+       "explode": null,
+       "allowReserved": null,
+       "examples": []
+      },
+      {
+       "name": "page",
+       "in": "query",
+       "description": "stránka",
+       "required": false,
+       "schema": {
+        "type": "integer",
+        "default": 1
+       },
+       "style": null,
+       "explode": null,
+       "allowReserved": null,
+       "examples": []
+      },
+      {
+       "name": "type",
+       "in": "query",
+       "description": null,
+       "required": false,
+       "schema": {
+        "type": "string",
+        "enum": [
+         "OnRequest",
+         "NotAvailable",
+         "InStock",
+         "Custom"
+        ],
+        "description": "typ dostupnosti:\n- `OnRequest` - na dotaz\n- `NotAvailable` - není skladem\n- `InStock` - skladem\n- `Custom` - vlastní\n",
+        "default": "InStock",
+        "__$ref": "#/components/schemas/AvailabilityType"
+       },
+       "style": null,
+       "explode": null,
+       "allowReserved": null,
+       "examples": []
+      }
+     ],
+     "security": null,
+     "requestBody": {
+      "content": [],
+      "description": null,
+      "required": null
+     },
+     "responses": [
+      {
+       "statusCode": "200",
+       "links": null,
+       "description": "OK",
+       "content": [
+        {
+         "examples": [],
+         "mediaType": "application/json",
+         "encoding": null,
+         "schema": {
+          "type": "object",
+          "properties": {
+           "current_page": {
+            "type": "integer",
+            "minimum": 1,
+            "description": "aktuální strana"
+           },
+           "current_page_items": {
+            "type": "integer",
+            "description": "počet položek na aktuální straně",
+            "example": 1
+           },
+           "number_of_items": {
+            "type": "integer",
+            "description": "celkový počet položek",
+            "example": 1
+           },
+           "number_of_pages": {
+            "type": "integer",
+            "description": "celkový počet stran",
+            "example": 1
+           },
+           "availabilities": {
+            "type": "array",
+            "description": "pole objektů s dostupnostmi",
+            "items": {
+             "type": "object",
+             "properties": {
+              "id": {
+               "type": "integer",
+               "description": "ID dostupnosti"
+              },
+              "default_yn": {
+               "type": "boolean",
+               "description": "výchozí"
+              },
+              "type": {
+               "type": "string",
+               "enum": [
+                "OnRequest",
+                "NotAvailable",
+                "InStock",
+                "Custom"
+               ],
+               "description": "typ dostupnosti:\n- `OnRequest` - na dotaz\n- `NotAvailable` - není skladem\n- `InStock` - skladem\n- `Custom` - vlastní\n",
+               "__$ref": "#/components/schemas/AvailabilityType"
+              },
+              "stock_from": {
+               "type": "integer",
+               "nullable": true,
+               "description": "skladový limit"
+              },
+              "dispatch_days": {
+               "type": "integer",
+               "nullable": true,
+               "description": "max. doba do expedice (počet dnů)"
+              },
+              "delivery_days": {
+               "type": "integer",
+               "nullable": true,
+               "description": "doba doručení (počet dnů)"
+              },
+              "color": {
+               "type": "string",
+               "nullable": true,
+               "description": "barva stavu v HTML HEX formátu"
+              },
+              "descriptions": {
+               "type": "array",
+               "items": {
+                "type": "object",
+                "properties": {
+                 "language": {
+                  "type": "string",
+                  "description": "kód jazyka dle [ISO 639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes)",
+                  "example": "cz",
+                  "__$ref": "#/components/schemas/Language"
+                 },
+                 "name": {
+                  "type": "string",
+                  "description": "název"
+                 },
+                 "note": {
+                  "type": "string",
+                  "nullable": true,
+                  "description": "poznámka"
+                 }
+                }
+               }
+              }
+             }
+            }
+           }
+          }
+         }
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "slug": "aktualizace-dostupnosti",
+     "summary": "Aktualizace dostupností",
+     "method": "put",
+     "description": null,
+     "operationId": null,
+     "contentTypes": [
+      "application/json"
+     ],
+     "path": "/api/v2/availabilities",
+     "deprecated": null,
+     "extensions": {},
+     "servers": [],
+     "parameters": [],
+     "security": null,
+     "requestBody": {
+      "content": [
+       {
+        "mediaType": "application/json",
+        "encoding": [],
+        "examples": [],
+        "schema": {
+         "type": "object",
+         "required": [
+          "availabilities"
+         ],
+         "properties": {
+          "availabilities": {
+           "type": "array",
+           "description": "pole objektů s dostupnostmi",
+           "items": {
+            "type": "object",
+            "required": [
+             "id",
+             "descriptions"
+            ],
+            "properties": {
+             "id": {
+              "type": "integer",
+              "description": "ID dostupnosti"
+             },
+             "type": {
+              "type": "string",
+              "enum": [
+               "OnRequest",
+               "NotAvailable",
+               "InStock",
+               "Custom"
+              ],
+              "description": "typ dostupnosti:\n- `OnRequest` - na dotaz\n- `NotAvailable` - není skladem\n- `InStock` - skladem\n- `Custom` - vlastní\n",
+              "__$ref": "#/components/schemas/AvailabilityType"
+             },
+             "stock_from": {
+              "type": "integer",
+              "description": "skladový limit"
+             },
+             "dispatch_days": {
+              "type": "integer",
+              "description": "max. doba do expedice (počet dnů)"
+             },
+             "delivery_days": {
+              "type": "integer",
+              "description": "doba doručení (počet dnů)"
+             },
+             "color": {
+              "type": "string",
+              "description": "barva stavu v HTML HEX formátu"
+             },
+             "descriptions": {
+              "type": "array",
+              "description": "pole lokalizovaných popisů",
+              "items": {
+               "type": "object",
+               "required": [
+                "language",
+                "name"
+               ],
+               "properties": {
+                "language": {
+                 "type": "string",
+                 "description": "kód jazyka dle [ISO 639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes)",
+                 "example": "cz",
+                 "__$ref": "#/components/schemas/Language"
+                },
+                "name": {
+                 "type": "string",
+                 "description": "název"
+                },
+                "note": {
+                 "type": "string",
+                 "description": "poznámka"
+                }
+               }
+              }
+             }
+            }
+           }
+          }
+         }
+        }
+       }
+      ],
+      "description": null,
+      "required": true
+     },
+     "responses": [
+      {
+       "statusCode": "200",
+       "links": null,
+       "description": "OK",
+       "content": [
+        {
+         "examples": [],
+         "mediaType": "application/json",
+         "encoding": null,
+         "schema": {
+          "type": "object",
+          "properties": {
+           "availabilities": {
+            "type": "array",
+            "description": "pole objektů s dostupnostmi",
+            "items": {
+             "type": "object",
+             "properties": {
+              "id": {
+               "type": "integer",
+               "description": "ID dostupnosti"
+              },
+              "updated_yn": {
+               "type": "boolean",
+               "description": "informace o úspěšné aktualizaci položky"
+              },
+              "messages": {
+               "type": "array",
+               "description": "chybové zprávy",
+               "items": {
+                "type": "object",
+                "properties": {
+                 "object": {
+                  "type": "string",
+                  "nullable": true,
+                  "description": "název objektu (část JSONu), kterého se zpráva týká"
+                 },
+                 "property": {
+                  "type": "string",
+                  "nullable": true,
+                  "description": "hodnota, které se zpráva týká"
+                 },
+                 "message": {
+                  "type": "string",
+                  "description": "text zprávy"
+                 },
+                 "level": {
+                  "type": "string",
+                  "enum": [
+                   "info",
+                   "warning",
+                   "error",
+                   "fatal_error"
+                  ],
+                  "description": "úroveň chyby:\n- `info` - informační sdělení\n- `warning` - varování\n- `error` - chyba, pravděpodobně nedošlo ke zpracování\n- `fatal_error` - chyba API, kontaktujte technickou podporu"
+                 }
+                }
+               },
+               "__$ref": "#/components/schemas/ErrorMessages"
+              }
+             }
+            }
+           }
+          }
+         }
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "slug": "vytvoreni-dostupnosti",
+     "summary": "Vytvoření dostupností",
+     "method": "post",
+     "description": "Název `descriptions` musí být vždy ve všech jazycích, ty které chybí se vezmou z výchozího jazyka, pokud není tak z prvního co je na řadě.",
+     "operationId": null,
+     "contentTypes": [
+      "application/json"
+     ],
+     "path": "/api/v2/availabilities",
+     "deprecated": null,
+     "extensions": {},
+     "servers": [],
+     "parameters": [],
+     "security": null,
+     "requestBody": {
+      "content": [
+       {
+        "mediaType": "application/json",
+        "encoding": [],
+        "examples": [],
+        "schema": {
+         "type": "object",
+         "required": [
+          "availabilities"
+         ],
+         "properties": {
+          "availabilities": {
+           "type": "array",
+           "description": "pole objektů s dostupnostmi",
+           "items": {
+            "type": "object",
+            "required": [
+             "descriptions"
+            ],
+            "properties": {
+             "type": {
+              "type": "string",
+              "enum": [
+               "OnRequest",
+               "NotAvailable",
+               "InStock",
+               "Custom"
+              ],
+              "description": "typ dostupnosti:\n- `OnRequest` - na dotaz\n- `NotAvailable` - není skladem\n- `InStock` - skladem\n- `Custom` - vlastní\n",
+              "default": "InStock",
+              "__$ref": "#/components/schemas/AvailabilityType"
+             },
+             "stock_from": {
+              "type": "integer",
+              "description": "skladový limit"
+             },
+             "dispatch_days": {
+              "type": "integer",
+              "description": "max. doba do expedice (počet dnů)"
+             },
+             "delivery_days": {
+              "type": "integer",
+              "description": "doba doručení (počet dnů)"
+             },
+             "color": {
+              "type": "string",
+              "description": "barva stavu v HTML HEX formátu"
+             },
+             "descriptions": {
+              "type": "array",
+              "description": "pole lokalizovaných popisů",
+              "items": {
+               "type": "object",
+               "required": [
+                "language",
+                "name"
+               ],
+               "properties": {
+                "language": {
+                 "type": "string",
+                 "description": "kód jazyka dle [ISO 639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes)",
+                 "example": "cz",
+                 "__$ref": "#/components/schemas/Language"
+                },
+                "name": {
+                 "type": "string",
+                 "description": "název"
+                },
+                "note": {
+                 "type": "string",
+                 "description": "poznámka"
+                }
+               }
+              }
+             }
+            }
+           }
+          }
+         }
+        }
+       }
+      ],
+      "description": null,
+      "required": true
+     },
+     "responses": [
+      {
+       "statusCode": "200",
+       "links": null,
+       "description": "OK",
+       "content": [
+        {
+         "examples": [],
+         "mediaType": "application/json",
+         "encoding": null,
+         "schema": {
+          "type": "object",
+          "properties": {
+           "availabilities": {
+            "type": "array",
+            "description": "pole objektů s dostupnostmi",
+            "items": {
+             "type": "object",
+             "properties": {
+              "id": {
+               "type": "integer",
+               "description": "ID dostupnosti"
+              },
+              "inserted_yn": {
+               "type": "boolean",
+               "description": "informace o úspěšném vytvoření položky"
+              },
+              "messages": {
+               "type": "array",
+               "description": "chybové zprávy",
+               "items": {
+                "type": "object",
+                "properties": {
+                 "object": {
+                  "type": "string",
+                  "nullable": true,
+                  "description": "název objektu (část JSONu), kterého se zpráva týká"
+                 },
+                 "property": {
+                  "type": "string",
+                  "nullable": true,
+                  "description": "hodnota, které se zpráva týká"
+                 },
+                 "message": {
+                  "type": "string",
+                  "description": "text zprávy"
+                 },
+                 "level": {
+                  "type": "string",
+                  "enum": [
+                   "info",
+                   "warning",
+                   "error",
+                   "fatal_error"
+                  ],
+                  "description": "úroveň chyby:\n- `info` - informační sdělení\n- `warning` - varování\n- `error` - chyba, pravděpodobně nedošlo ke zpracování\n- `fatal_error` - chyba API, kontaktujte technickou podporu"
+                 }
+                }
+               },
+               "__$ref": "#/components/schemas/ErrorMessages"
+              }
+             }
+            }
+           }
+          }
+         }
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "slug": "detail-dostupnosti",
+     "summary": "Detail dostupnosti",
+     "method": "get",
+     "description": null,
+     "operationId": null,
+     "contentTypes": [],
+     "path": "/api/v2/availabilities/{id}",
+     "deprecated": null,
+     "extensions": {},
+     "servers": [],
+     "parameters": [
+      {
+       "name": "id",
+       "in": "path",
+       "description": "ID dostupnosti",
+       "required": true,
+       "schema": {
+        "type": "integer"
+       },
+       "style": null,
+       "explode": null,
+       "allowReserved": null,
+       "examples": []
+      }
+     ],
+     "security": null,
+     "requestBody": {
+      "content": [],
+      "description": null,
+      "required": null
+     },
+     "responses": [
+      {
+       "statusCode": "200",
+       "links": null,
+       "description": "OK",
+       "content": [
+        {
+         "examples": [],
+         "mediaType": "application/json",
+         "encoding": null,
+         "schema": {
+          "type": "object",
+          "properties": {
+           "current_page": {
+            "type": "integer",
+            "minimum": 1,
+            "description": "aktuální strana"
+           },
+           "current_page_items": {
+            "type": "integer",
+            "description": "počet položek na aktuální straně",
+            "example": 1
+           },
+           "number_of_items": {
+            "type": "integer",
+            "description": "celkový počet položek",
+            "example": 1
+           },
+           "number_of_pages": {
+            "type": "integer",
+            "description": "celkový počet stran",
+            "example": 1
+           },
+           "availabilities": {
+            "type": "array",
+            "description": "pole objektů s dostupnostmi",
+            "items": {
+             "type": "object",
+             "properties": {
+              "id": {
+               "type": "integer",
+               "description": "ID dostupnosti"
+              },
+              "default_yn": {
+               "type": "boolean",
+               "description": "výchozí"
+              },
+              "type": {
+               "type": "string",
+               "enum": [
+                "OnRequest",
+                "NotAvailable",
+                "InStock",
+                "Custom"
+               ],
+               "description": "typ dostupnosti:\n- `OnRequest` - na dotaz\n- `NotAvailable` - není skladem\n- `InStock` - skladem\n- `Custom` - vlastní\n",
+               "__$ref": "#/components/schemas/AvailabilityType"
+              },
+              "stock_from": {
+               "type": "integer",
+               "nullable": true,
+               "description": "skladový limit"
+              },
+              "dispatch_days": {
+               "type": "integer",
+               "nullable": true,
+               "description": "max. doba do expedice (počet dnů)"
+              },
+              "delivery_days": {
+               "type": "integer",
+               "nullable": true,
+               "description": "doba doručení (počet dnů)"
+              },
+              "color": {
+               "type": "string",
+               "nullable": true,
+               "description": "barva stavu v HTML HEX formátu"
+              },
+              "descriptions": {
+               "type": "array",
+               "items": {
+                "type": "object",
+                "properties": {
+                 "language": {
+                  "type": "string",
+                  "description": "kód jazyka dle [ISO 639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes)",
+                  "example": "cz",
+                  "__$ref": "#/components/schemas/Language"
+                 },
+                 "name": {
+                  "type": "string",
+                  "description": "název"
+                 },
+                 "note": {
+                  "type": "string",
+                  "nullable": true,
+                  "description": "poznámka"
+                 }
+                }
+               }
+              }
+             }
+            }
+           }
+          }
+         }
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "slug": "smazani-dostupnosti",
+     "summary": "Smazání dostupností",
+     "method": "delete",
+     "description": null,
+     "operationId": null,
+     "contentTypes": [],
+     "path": "/api/v2/availabilities/{id}",
+     "deprecated": null,
+     "extensions": {},
+     "servers": [],
+     "parameters": [
+      {
+       "name": "id",
+       "in": "path",
+       "description": "ID dostupnosti",
+       "required": true,
+       "schema": {
+        "type": "integer"
+       },
+       "style": null,
+       "explode": null,
+       "allowReserved": null,
+       "examples": []
+      },
+      {
+       "name": "ids",
+       "in": "query",
+       "description": "ID dostupností oddělené středníkem `;` nebo jako pole",
+       "required": false,
+       "schema": {
+        "oneOf": [
+         {
+          "type": "string",
+          "description": "hodnoty oddělené středníkem `;`\\\nnapříklad `1;2;3`\n"
+         },
+         {
+          "type": "array",
+          "items": {
+           "type": "integer"
+          }
+         }
+        ],
+        "__$ref": "#/components/schemas/QueryParameterArrayInt"
+       },
+       "style": null,
+       "explode": null,
+       "allowReserved": null,
+       "examples": []
+      }
+     ],
+     "security": null,
+     "requestBody": {
+      "content": [],
+      "description": null,
+      "required": null
+     },
+     "responses": [
+      {
+       "statusCode": "200",
+       "links": null,
+       "description": "OK",
+       "content": [
+        {
+         "examples": [],
+         "mediaType": "application/json",
+         "encoding": null,
+         "schema": {
+          "type": "object",
+          "properties": {
+           "availabilities": {
+            "type": "array",
+            "description": "pole objektů s dostupnostmi",
+            "items": {
+             "type": "object",
+             "properties": {
+              "id": {
+               "type": "integer",
+               "description": "ID dostupnosti"
+              },
+              "deleted_yn": {
+               "type": "boolean",
+               "description": "informace o úspěšném smazání položky"
+              },
+              "messages": {
+               "type": "array",
+               "description": "chybové zprávy",
+               "items": {
+                "type": "object",
+                "properties": {
+                 "object": {
+                  "type": "string",
+                  "nullable": true,
+                  "description": "název objektu (část JSONu), kterého se zpráva týká"
+                 },
+                 "property": {
+                  "type": "string",
+                  "nullable": true,
+                  "description": "hodnota, které se zpráva týká"
+                 },
+                 "message": {
+                  "type": "string",
+                  "description": "text zprávy"
+                 },
+                 "level": {
+                  "type": "string",
+                  "enum": [
+                   "info",
+                   "warning",
+                   "error",
+                   "fatal_error"
+                  ],
+                  "description": "úroveň chyby:\n- `info` - informační sdělení\n- `warning` - varování\n- `error` - chyba, pravděpodobně nedošlo ke zpracování\n- `fatal_error` - chyba API, kontaktujte technickou podporu"
+                 }
+                }
+               },
+               "__$ref": "#/components/schemas/ErrorMessages"
+              }
+             }
+            }
+           }
+          }
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "extensions": {},
+   "next": {
+    "name": "Dopravy",
+    "slug": "dopravy",
+    "extensions": {}
+   },
+   "prev": {
+    "name": "Články",
+    "slug": "clanky",
+    "extensions": {}
+   }
+  }
+ }
+}
