@@ -29,7 +29,7 @@ Skills that give Claude Code detailed API references, PHP client patterns and da
 ## Install
 
 ```
-/plugin marketplace add <github-user>/claude_plugin
+/plugin marketplace add vojtech-sokol/shopsync-plugins
 /plugin install shopsync-skills@shopsync-plugins
 ```
 
