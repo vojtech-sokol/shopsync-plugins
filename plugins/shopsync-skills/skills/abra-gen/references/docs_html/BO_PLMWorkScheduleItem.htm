@@ -1,0 +1,940 @@
+<?xml version="1.0" encoding="windows-1250"?>
+<html xmlns="http://www.w3.org/TR/xhtml1/strict" xmlns:msxsl="urn:schemas-microsoft-com:xslt" xmlns:user="http://mycompany.com/mynamespace" xmlns:dt="urn:schemas-microsoft-com:datatypes">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=windows-1250"/>
+		<link rel="stylesheet" type="text/css" href="../GxDoc.css"/>
+		<title>Business objekt - PLMWorkScheduleItem</title>
+	</head>
+	<BODY>
+		
+		<H2>Business objekt - PLMWorkScheduleItem</H2>
+		<DL>
+			<DD>Popis:</DD>
+			<DT>Dílenský úkon</DT>
+			<DD>CLSID:</DD>
+			<DT>{5DD7FB93-9558-4980-9E42-5B77708D4F1B}</DT>
+			<DD>PackedCLSID:</DD>
+			<DT>MJXXIRESMQ04NBM2FHVR13EJ3G</DT>
+			<DD>User fields:</DD>
+			<DT>A</DT>
+			<DD>Default DynSource:</DD>
+			<DT><A HREF="DynSQL_PAXBMEOECPM4PICETMCVGVA5TO.htm">PAXBMEOECPM4PICETMCVGVA5TO</A></DT>
+			<DD>PersistCLSID</DD>
+			<DT><A HREF="PersistentClasses_0LHLOZTY4TQ4LCOXLFAJNJXSFO.htm">0LHLOZTY4TQ4LCOXLFAJNJXSFO</A></DT>
+		</DL>
+		<H3>Položky</H3>
+		<table>
+			<tr>
+				<th class="font_bold">Název</th>
+				<th class="font_bold">Label</th>
+				<th class="font_bold">Typ</th>
+				<th class="font_bold">Délka</th>
+				<th class="font_bold">Persistent</th>
+				<th class="font_bold">ROnly</th>
+				<th class="font_bold">Popis</th>
+			</tr>
+			<tr>
+				<td>
+					<A>BasedJobOrder</A>
+				</td>
+				<td>Dle výr. příkazu</td>
+				<td>dtBoolean</td>
+				<td>1/0</td>
+				<td>N</td>
+				<td>N</td>
+				<td>Úkon podle výrobního příkazu</td>
+			</tr>
+			<tr>
+				<td>
+					<A>BusOrderOID</A>
+				</td>
+				<td>ID/zak.</td>
+				<td>dtString</td>
+				<td>10/0</td>
+				<td>N</td>
+				<td>N</td>
+				<td>ID zakázky</td>
+			</tr>
+			<tr>
+				<td>
+					<A>CanStartText</A>
+				</td>
+				<td>Může začít</td>
+				<td>dtString</td>
+				<td>20/0</td>
+				<td>N</td>
+				<td>N</td>
+				<td>Může začít</td>
+			</tr>
+			<tr>
+				<td>
+					<A>ClassID</A>
+				</td>
+				<td>ID třídy</td>
+				<td>dtString</td>
+				<td>26/0</td>
+				<td>N</td>
+				<td>A</td>
+				<td>ID třídy</td>
+			</tr>
+			<tr>
+				<td>
+					<A HREF="BO_22AHIVDVAVE13C5S00CA141B44.htm">ConfirmedBy_ID</A>
+				</td>
+				<td>Potvrdil</td>
+				<td>dtString</td>
+				<td>10/0</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Potvrdil</td>
+			</tr>
+			<tr>
+				<td>
+					<A>CRPBeginTime</A>
+				</td>
+				<td>Naplánovano od</td>
+				<td>dtDateTime</td>
+				<td>10/0</td>
+				<td>N</td>
+				<td>N</td>
+				<td>Začátek úkonu v hlavní variantě kapacitního plánu</td>
+			</tr>
+			<tr>
+				<td>
+					<A>CRPEndTime</A>
+				</td>
+				<td>Naplánovano do</td>
+				<td>dtDateTime</td>
+				<td>10/0</td>
+				<td>N</td>
+				<td>N</td>
+				<td>Konec úkonu v hlavní variantě kapacitního plánu</td>
+			</tr>
+			<tr>
+				<td>
+					<A>DateFrom$Date</A>
+				</td>
+				<td>Datum</td>
+				<td>dtDate</td>
+				<td>10/0</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Datum naplánovaného úkonu</td>
+			</tr>
+			<tr>
+				<td>
+					<A>DisplayName</A>
+				</td>
+				<td>Název</td>
+				<td>dtString</td>
+				<td>100/0</td>
+				<td>N</td>
+				<td>A</td>
+				<td>Zobrazovací název</td>
+			</tr>
+			<tr>
+				<td>
+					<A HREF="BO_K2WTYL304VD13ACL03KIU0CLP4.htm">DocumentBusOrder_ID</A>
+				</td>
+				<td>Zakázka</td>
+				<td>dtString</td>
+				<td>10/0</td>
+				<td>N</td>
+				<td>N</td>
+				<td>Zakázka na dokladu</td>
+			</tr>
+			<tr>
+				<td>
+					<A HREF="BO_QOKMKIQUJF34L3DUICTBWEDQJC.htm">DocumentBusProject_ID</A>
+				</td>
+				<td>Projekt</td>
+				<td>dtString</td>
+				<td>10/0</td>
+				<td>N</td>
+				<td>N</td>
+				<td>Projekt na dokladu</td>
+			</tr>
+			<tr>
+				<td>
+					<A HREF="BO_KAWTYL304VD13ACL03KIU0CLP4.htm">DocumentBusTransaction_ID</A>
+				</td>
+				<td>Obch. případ</td>
+				<td>dtString</td>
+				<td>10/0</td>
+				<td>N</td>
+				<td>N</td>
+				<td>Obchodní případ na dokladu</td>
+			</tr>
+			<tr>
+				<td>
+					<A>DocumentDisplayName</A>
+				</td>
+				<td>Název/dokl.</td>
+				<td>dtString</td>
+				<td>30/0</td>
+				<td>N</td>
+				<td>N</td>
+				<td>Název výrobního dokladu</td>
+			</tr>
+			<tr>
+				<td>
+					<A HREF="BO_O1X54EUXPZCL35CH000ILPWJF4.htm">DocumentDivision_ID</A>
+				</td>
+				<td>Středisko</td>
+				<td>dtString</td>
+				<td>10/0</td>
+				<td>N</td>
+				<td>N</td>
+				<td>Středisko na dokladu</td>
+			</tr>
+			<tr>
+				<td>
+					<A HREF="BO_4K3EXM5PQBCL35CH000ILPWJF4.htm">DocumentFirm_ID</A>
+				</td>
+				<td>Firma</td>
+				<td>dtString</td>
+				<td>10/0</td>
+				<td>N</td>
+				<td>N</td>
+				<td>Firma na dokladu</td>
+			</tr>
+			<tr>
+				<td>
+					<A>DocumentOID</A>
+				</td>
+				<td>ID/dokl.</td>
+				<td>dtString</td>
+				<td>10/0</td>
+				<td>N</td>
+				<td>N</td>
+				<td>ID výrobního dokladu</td>
+			</tr>
+			<tr>
+				<td>
+					<A>DocumentPlannedAt</A>
+				</td>
+				<td>Plán. začátek/dokl.</td>
+				<td>dtDate</td>
+				<td>10/0</td>
+				<td>N</td>
+				<td>N</td>
+				<td>Plánovaný začátek podle dokladu</td>
+			</tr>
+			<tr>
+				<td>
+					<A>DocumentPriority</A>
+				</td>
+				<td>Priorita/dokl.</td>
+				<td>dtInteger</td>
+				<td>1/0</td>
+				<td>N</td>
+				<td>N</td>
+				<td>Priorita výrobního dokladu</td>
+			</tr>
+			<tr>
+				<td>
+					<A>DocumentScheduledAt</A>
+				</td>
+				<td>Plán. dokončení/dokl.</td>
+				<td>dtDate</td>
+				<td>10/0</td>
+				<td>N</td>
+				<td>N</td>
+				<td>Plánované dokončení podle dokladu</td>
+			</tr>
+			<tr>
+				<td>
+					<A HREF="BO_C3V5QDVZ5BDL342M01C0CX3FCC.htm">DocumentStoreCard_ID</A>
+				</td>
+				<td>Skladová karta/dokl.</td>
+				<td>dtString</td>
+				<td>10/0</td>
+				<td>N</td>
+				<td>N</td>
+				<td>Skladová karta dokladu</td>
+			</tr>
+			<tr>
+				<td>
+					<A>Fixed</A>
+				</td>
+				<td>Fixováno</td>
+				<td>dtBoolean</td>
+				<td>1/0</td>
+				<td>N</td>
+				<td>A</td>
+				<td>Fixováno</td>
+			</tr>
+			<tr>
+				<td>
+					<A>ID</A>
+				</td>
+				<td>Vlastní ID</td>
+				<td>dtString</td>
+				<td>10/0</td>
+				<td>N</td>
+				<td>A</td>
+				<td>Vlastní ID</td>
+			</tr>
+			<tr>
+				<td>
+					<A>IsPhantom</A>
+				</td>
+				<td>Duplicitní</td>
+				<td>dtBoolean</td>
+				<td>1/0</td>
+				<td>N</td>
+				<td>N</td>
+				<td>Duplicitní úkon pro požadavek, ke kterému existuje jiný úkon pro příkaz</td>
+			</tr>
+			<tr>
+				<td>
+					<A HREF="BO_HRKADG42X2H4BJ2RL5KUAUG3PK.htm">JORoutine_ID</A>
+				</td>
+				<td>Operace výrobního příkazu</td>
+				<td>dtString</td>
+				<td>10/0</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Odkaz na operaci výrobního příkazu</td>
+			</tr>
+			<tr>
+				<td>
+					<A>MissedQuantity</A>
+				</td>
+				<td>Chyb. množství v ev.jedn.</td>
+				<td>dtFloat</td>
+				<td>15/6</td>
+				<td>N</td>
+				<td>A</td>
+				<td>Chybějící množství v evidenčních jednotkách</td>
+			</tr>
+			<tr>
+				<td>
+					<A>MissedTime</A>
+				</td>
+				<td>Chybějící čas</td>
+				<td>dtFloat</td>
+				<td>15/4</td>
+				<td>N</td>
+				<td>A</td>
+				<td>Chybějící čas</td>
+			</tr>
+			<tr>
+				<td>
+					<A>MissedUnitQuantity</A>
+				</td>
+				<td>Chyb. množství</td>
+				<td>dtFloat</td>
+				<td>15/3</td>
+				<td>N</td>
+				<td>N</td>
+				<td>Chybějící množství</td>
+			</tr>
+			<tr>
+				<td>
+					<A>NodeIndex</A>
+				</td>
+				<td>Pořadí uzlu</td>
+				<td>dtInteger</td>
+				<td>1/0</td>
+				<td>N</td>
+				<td>N</td>
+				<td>Pořadí uzlu</td>
+			</tr>
+			<tr>
+				<td>
+					<A>NodeTreeLevel</A>
+				</td>
+				<td>Úroveň</td>
+				<td>dtInteger</td>
+				<td>1/0</td>
+				<td>N</td>
+				<td>N</td>
+				<td>Úroveň uzlu</td>
+			</tr>
+			<tr>
+				<td>
+					<A>NoInRoutine</A>
+				</td>
+				<td>Pořadí v op.</td>
+				<td>dtInteger</td>
+				<td>1/0</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Pořadí vzniku v operaci</td>
+			</tr>
+			<tr>
+				<td>
+					<A>ObjVersion</A>
+				</td>
+				<td>Verze objektu</td>
+				<td>dtInteger</td>
+				<td>1/0</td>
+				<td>A</td>
+				<td>A</td>
+				<td>Verze objektu</td>
+			</tr>
+			<tr>
+				<td>
+					<A>PlannedQuantity</A>
+				</td>
+				<td>Plán. množství v ev.jedn.</td>
+				<td>dtFloat</td>
+				<td>15/6</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Plánované množství v evidenčních jednotkách</td>
+			</tr>
+			<tr>
+				<td>
+					<A>PlannedTime</A>
+				</td>
+				<td>Plánovaný čas</td>
+				<td>dtFloat</td>
+				<td>15/4</td>
+				<td>N</td>
+				<td>A</td>
+				<td>Plánovaný čas</td>
+			</tr>
+			<tr>
+				<td>
+					<A>PlannedUnitQuantity</A>
+				</td>
+				<td>Plán. množství</td>
+				<td>dtFloat</td>
+				<td>15/3</td>
+				<td>N</td>
+				<td>N</td>
+				<td>Plánované množství</td>
+			</tr>
+			<tr>
+				<td>
+					<A>Priority</A>
+				</td>
+				<td>Pořadí</td>
+				<td>dtFloat</td>
+				<td>15/6</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Pořadí v dílenském plánu</td>
+			</tr>
+			<tr>
+				<td>
+					<A>QUnit</A>
+				</td>
+				<td>Jednotka</td>
+				<td>dtString</td>
+				<td>5/0</td>
+				<td>N</td>
+				<td>N</td>
+				<td>Měrná jednotka</td>
+			</tr>
+			<tr>
+				<td>
+					<A>RealizedQuantity</A>
+				</td>
+				<td>Real. množství v ev.jedn.</td>
+				<td>dtFloat</td>
+				<td>15/6</td>
+				<td>N</td>
+				<td>A</td>
+				<td>Realizované množství v evidenčních jednotkách</td>
+			</tr>
+			<tr>
+				<td>
+					<A>RealizedTime</A>
+				</td>
+				<td>Realizovaný čas</td>
+				<td>dtFloat</td>
+				<td>15/4</td>
+				<td>N</td>
+				<td>A</td>
+				<td>Realizovaný čas</td>
+			</tr>
+			<tr>
+				<td>
+					<A>RealizedUnitQuantity</A>
+				</td>
+				<td>Real. množství</td>
+				<td>dtFloat</td>
+				<td>15/3</td>
+				<td>N</td>
+				<td>N</td>
+				<td>Realizované množství</td>
+			</tr>
+			<tr>
+				<td>
+					<A HREF="BO_RMBJ1K5KJKJOVGZZPKYSUS5N3O.htm">ReqRoutine_ID</A>
+				</td>
+				<td>Operace požadavku</td>
+				<td>dtString</td>
+				<td>10/0</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Odkaz na operaci požadavku na výrobu</td>
+			</tr>
+			<tr>
+				<td>
+					<A HREF="BO_MJXXIRESMQ04NBM2FHVR13EJ3G.htm">RequestWSI_ID</A>
+				</td>
+				<td>Úkon požadavku</td>
+				<td>dtString</td>
+				<td>10/0</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Odkaz na odpovídající dílenský úkon požadavku na výrobu</td>
+			</tr>
+			<tr>
+				<td>
+					<A>RoutineAdvanceQuantity</A>
+				</td>
+				<td>Předstih/op.</td>
+				<td>dtFloat</td>
+				<td>15/6</td>
+				<td>N</td>
+				<td>N</td>
+				<td>Předstih podle operace</td>
+			</tr>
+			<tr>
+				<td>
+					<A>RoutineBatch</A>
+				</td>
+				<td>Dávková/op.</td>
+				<td>dtBoolean</td>
+				<td>1/0</td>
+				<td>N</td>
+				<td>N</td>
+				<td>Dávková podle operace</td>
+			</tr>
+			<tr>
+				<td>
+					<A>RoutineCompulsoryOperation</A>
+				</td>
+				<td>Povinné/op.</td>
+				<td>dtInteger</td>
+				<td>1/0</td>
+				<td>N</td>
+				<td>N</td>
+				<td>Povinné podle operace</td>
+			</tr>
+			<tr>
+				<td>
+					<A>RoutineCooperation</A>
+				</td>
+				<td>Kooperace/op.</td>
+				<td>dtBoolean</td>
+				<td>1/0</td>
+				<td>N</td>
+				<td>N</td>
+				<td>Kooperace podle operace</td>
+			</tr>
+			<tr>
+				<td>
+					<A>RoutineFinished</A>
+				</td>
+				<td>Dokončující/op.</td>
+				<td>dtBoolean</td>
+				<td>1/0</td>
+				<td>N</td>
+				<td>N</td>
+				<td>Dokončující podle operace</td>
+			</tr>
+			<tr>
+				<td>
+					<A>RoutineMissedQuantity</A>
+				</td>
+				<td>Chyb. množstí/op.</td>
+				<td>dtFloat</td>
+				<td>15/6</td>
+				<td>N</td>
+				<td>N</td>
+				<td>Chybějící množstí na operaci</td>
+			</tr>
+			<tr>
+				<td>
+					<A>RoutineMissedTime</A>
+				</td>
+				<td>Chyb. čas/op.</td>
+				<td>dtFloat</td>
+				<td>15/4</td>
+				<td>N</td>
+				<td>N</td>
+				<td>Chybějící čas na operaci</td>
+			</tr>
+			<tr>
+				<td>
+					<A>RoutineMissedUnitQuantity</A>
+				</td>
+				<td>Chyb. jedn. množství/op.</td>
+				<td>dtFloat</td>
+				<td>15/6</td>
+				<td>N</td>
+				<td>N</td>
+				<td>Chybějící jedn. množství na operaci</td>
+			</tr>
+			<tr>
+				<td>
+					<A>RoutineNote</A>
+				</td>
+				<td>Poznámka operace</td>
+				<td>dtString</td>
+				<td>1024/0</td>
+				<td>N</td>
+				<td>N</td>
+				<td>Poznámka operace</td>
+			</tr>
+			<tr>
+				<td>
+					<A HREF="BO_CWZXHJPRJFDOFBQI04IH1H4TZK.htm">RoutinePhase_ID</A>
+				</td>
+				<td>Etapa/op.</td>
+				<td>dtString</td>
+				<td>10/0</td>
+				<td>N</td>
+				<td>N</td>
+				<td>Etapa podle operace</td>
+			</tr>
+			<tr>
+				<td>
+					<A>RoutinePlannedQuantity</A>
+				</td>
+				<td>Plán. množství/op.</td>
+				<td>dtFloat</td>
+				<td>15/6</td>
+				<td>N</td>
+				<td>N</td>
+				<td>Plánované množství na operaci</td>
+			</tr>
+			<tr>
+				<td>
+					<A>RoutinePlannedTime</A>
+				</td>
+				<td>Plán. čas/op.</td>
+				<td>dtFloat</td>
+				<td>15/4</td>
+				<td>N</td>
+				<td>N</td>
+				<td>Plánovaný čas na operaci</td>
+			</tr>
+			<tr>
+				<td>
+					<A>RoutinePlannedUnitQuantity</A>
+				</td>
+				<td>Plán. jedn. množství/op.</td>
+				<td>dtFloat</td>
+				<td>15/6</td>
+				<td>N</td>
+				<td>N</td>
+				<td>Plánované jedn. množství na operaci</td>
+			</tr>
+			<tr>
+				<td>
+					<A>RoutinePosition</A>
+				</td>
+				<td>Pořadí/op.</td>
+				<td>dtInteger</td>
+				<td>1/0</td>
+				<td>N</td>
+				<td>N</td>
+				<td>Pořadí na operaci</td>
+			</tr>
+			<tr>
+				<td>
+					<A>RoutineQUnit</A>
+				</td>
+				<td>Jednotka/op.</td>
+				<td>dtString</td>
+				<td>5/0</td>
+				<td>N</td>
+				<td>N</td>
+				<td>Jednotka operace</td>
+			</tr>
+			<tr>
+				<td>
+					<A>RoutineRealizedQuantity</A>
+				</td>
+				<td>Real. množstí/op.</td>
+				<td>dtFloat</td>
+				<td>15/6</td>
+				<td>N</td>
+				<td>N</td>
+				<td>Realizované množstí na operaci</td>
+			</tr>
+			<tr>
+				<td>
+					<A>RoutineRealizedTime</A>
+				</td>
+				<td>Real. čas/op.</td>
+				<td>dtFloat</td>
+				<td>15/4</td>
+				<td>N</td>
+				<td>N</td>
+				<td>Realizovaný čas na operaci</td>
+			</tr>
+			<tr>
+				<td>
+					<A>RoutineRealizedUnitQuantity</A>
+				</td>
+				<td>Real. jedn. množství/op.</td>
+				<td>dtFloat</td>
+				<td>15/6</td>
+				<td>N</td>
+				<td>N</td>
+				<td>Realizované jedn. množství na operaci</td>
+			</tr>
+			<tr>
+				<td>
+					<A>RoutineRealizedWorkerQuantity</A>
+				</td>
+				<td>Real. množství pracovníka/op.</td>
+				<td>dtFloat</td>
+				<td>15/6</td>
+				<td>N</td>
+				<td>N</td>
+				<td>Realizované množství pracovníka na operaci</td>
+			</tr>
+			<tr>
+				<td>
+					<A>RoutineRealizedWorkerTime</A>
+				</td>
+				<td>Real. čas pracovníka/op.</td>
+				<td>dtFloat</td>
+				<td>15/4</td>
+				<td>N</td>
+				<td>N</td>
+				<td>Realizovaný čas pracovníka na operaci</td>
+			</tr>
+			<tr>
+				<td>
+					<A>RoutineRealizedWorkerUnitQuantity</A>
+				</td>
+				<td>Real. jedn. množství pracovníka/op.</td>
+				<td>dtFloat</td>
+				<td>15/6</td>
+				<td>N</td>
+				<td>N</td>
+				<td>Realizované jedn. množství pracovníka na operaci</td>
+			</tr>
+			<tr>
+				<td>
+					<A>RoutineRealizedWPlaceQuantity</A>
+				</td>
+				<td>Real. množství pracoviště/op.</td>
+				<td>dtFloat</td>
+				<td>15/6</td>
+				<td>N</td>
+				<td>N</td>
+				<td>Realizované množství pracoviště na operaci</td>
+			</tr>
+			<tr>
+				<td>
+					<A>RoutineRealizedWPlaceTime</A>
+				</td>
+				<td>Real. čas pracoviště/op.</td>
+				<td>dtFloat</td>
+				<td>15/4</td>
+				<td>N</td>
+				<td>N</td>
+				<td>Realizovaný čas pracoviště na operaci</td>
+			</tr>
+			<tr>
+				<td>
+					<A>RoutineRealizedWPlaceUnitQuantity</A>
+				</td>
+				<td>Real. jedn. množství pracoviště/op.</td>
+				<td>dtFloat</td>
+				<td>15/6</td>
+				<td>N</td>
+				<td>N</td>
+				<td>Realizované jedn. množství pracoviště na operaci</td>
+			</tr>
+			<tr>
+				<td>
+					<A HREF="BO_FW1OLEWGUU443ICX0SUSZKK32S.htm">RoutineSalaryClass_ID</A>
+				</td>
+				<td>Tarifní třída/op.</td>
+				<td>dtString</td>
+				<td>10/0</td>
+				<td>N</td>
+				<td>N</td>
+				<td>Tarifní třída podle operace</td>
+			</tr>
+			<tr>
+				<td>
+					<A>RoutineSuspend</A>
+				</td>
+				<td>Pozastavit do konce směny</td>
+				<td>dtBoolean</td>
+				<td>1/0</td>
+				<td>N</td>
+				<td>N</td>
+				<td>V kapacitním plánu se budou následné operace plánovat až po skončení směny</td>
+			</tr>
+			<tr>
+				<td>
+					<A>RoutineSynergyRate</A>
+				</td>
+				<td>Součinnost/op.</td>
+				<td>dtFloat</td>
+				<td>15/6</td>
+				<td>N</td>
+				<td>N</td>
+				<td>Míra součinnosti podle operace</td>
+			</tr>
+			<tr>
+				<td>
+					<A>RoutineTAC</A>
+				</td>
+				<td>TAC/op.</td>
+				<td>dtFloat</td>
+				<td>15/6</td>
+				<td>N</td>
+				<td>N</td>
+				<td>TAC podle operace</td>
+			</tr>
+			<tr>
+				<td>
+					<A>RoutineTBC</A>
+				</td>
+				<td>TBC/op.</td>
+				<td>dtFloat</td>
+				<td>15/6</td>
+				<td>N</td>
+				<td>N</td>
+				<td>TBC podle operace</td>
+			</tr>
+			<tr>
+				<td>
+					<A>RoutineTitle</A>
+				</td>
+				<td>Operace</td>
+				<td>dtString</td>
+				<td>150/0</td>
+				<td>N</td>
+				<td>N</td>
+				<td>Název operace technologického postupu</td>
+			</tr>
+			<tr>
+				<td>
+					<A>RoutineUnitRate</A>
+				</td>
+				<td>RoutineUnitRate</td>
+				<td>dtFloat</td>
+				<td>15/6</td>
+				<td>N</td>
+				<td>N</td>
+				<td>RoutineUnitRate</td>
+			</tr>
+			<tr>
+				<td>
+					<A HREF="BO_5XGE0QFOGIWOB5ANMTYRIVKJ0O.htm">RoutineWorkPlace_ID</A>
+				</td>
+				<td>Pracoviště/op.</td>
+				<td>dtString</td>
+				<td>10/0</td>
+				<td>N</td>
+				<td>N</td>
+				<td>Pracoviště podle operace</td>
+			</tr>
+			<tr>
+				<td>
+					<A HREF="BO_JUYDYRLFDPF4B1QMSVOVAAOQ0O.htm">Rows</A>(Collection)(Owned)</td>
+				<td>Řádky</td>
+				<td>dtString</td>
+				<td>10/0</td>
+				<td>N</td>
+				<td>N</td>
+				<td>Řádky</td>
+			</tr>
+			<tr>
+				<td>
+					<A HREF="BO_IUJRYG0W2QO4P4EVGKFTY3RUOO.htm">ShiftType_ID</A>
+				</td>
+				<td>Druh směny</td>
+				<td>dtString</td>
+				<td>10/0</td>
+				<td>N</td>
+				<td>N</td>
+				<td>Druh naplánované směny</td>
+			</tr>
+			<tr>
+				<td>
+					<A>Status</A>
+				</td>
+				<td>Stav</td>
+				<td>dtInteger</td>
+				<td>1/0</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Stav</td>
+			</tr>
+			<tr>
+				<td>
+					<A>StatusText</A>
+				</td>
+				<td>Stav</td>
+				<td>dtString</td>
+				<td>20/0</td>
+				<td>N</td>
+				<td>N</td>
+				<td>Stav textově</td>
+			</tr>
+			<tr>
+				<td>
+					<A HREF="BO_C3V5QDVZ5BDL342M01C0CX3FCC.htm">StoreCard_ID</A>
+				</td>
+				<td>Skladová karta</td>
+				<td>dtString</td>
+				<td>10/0</td>
+				<td>N</td>
+				<td>N</td>
+				<td>Vyráběná skladová karta</td>
+			</tr>
+			<tr>
+				<td>
+					<A>Title</A>
+				</td>
+				<td>Popis</td>
+				<td>dtString</td>
+				<td>100/0</td>
+				<td>N</td>
+				<td>N</td>
+				<td>Popis</td>
+			</tr>
+			<tr>
+				<td>
+					<A>UnitRate</A>
+				</td>
+				<td>Vztah</td>
+				<td>dtFloat</td>
+				<td>15/3</td>
+				<td>N</td>
+				<td>N</td>
+				<td>Vztah</td>
+			</tr>
+			<tr>
+				<td>
+					<A HREF="BO_53FKKCM5GGGOZ3TF2DJ3E40GSK.htm">Worker_ID</A>
+				</td>
+				<td>Pracovník</td>
+				<td>dtString</td>
+				<td>10/0</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Odkaz na pracovníka ve výrobě</td>
+			</tr>
+			<tr>
+				<td>
+					<A HREF="BO_5XGE0QFOGIWOB5ANMTYRIVKJ0O.htm">WorkPlace_ID</A>
+				</td>
+				<td>Pracoviště</td>
+				<td>dtString</td>
+				<td>10/0</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Odkaz na pracoviště / kap. jednotku</td>
+			</tr>
+		</table>
+		<P><EM>Generated by ABRA Software a.s. 15.12.2023 16:41</EM></P>
+	</BODY>
+</html>

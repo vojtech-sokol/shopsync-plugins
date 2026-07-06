@@ -1,0 +1,632 @@
+<?xml version="1.0" encoding="windows-1250"?>
+<html xmlns="http://www.w3.org/TR/xhtml1/strict" xmlns:msxsl="urn:schemas-microsoft-com:xslt" xmlns:user="http://mycompany.com/mynamespace" xmlns:dt="urn:schemas-microsoft-com:datatypes">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=windows-1250"/>
+		<link rel="stylesheet" type="text/css" href="../GxDoc.css"/>
+		<title>Business objekt - AnnualClearing</title>
+	</head>
+	<BODY>
+		
+		<H2>Business objekt - AnnualClearing</H2>
+		<DL>
+			<DD>Popis:</DD>
+			<DT>Roční zúčtování</DT>
+			<DD>CLSID:</DD>
+			<DT>{8E0AD99D-F295-4A41-A928-0EAA8BE72992}</DT>
+			<DD>PackedCLSID:</DD>
+			<DT>NRGKP3OPYD0OPEDC1UPCRTTDMC</DT>
+			<DD>User fields:</DD>
+			<DT>A</DT>
+			<DD>Default DynSource:</DD>
+			<DT><A HREF="DynSQL_QUCRLM40B1Q4RCUJMQZ53X45WW.htm">QUCRLM40B1Q4RCUJMQZ53X45WW</A></DT>
+			<DD>PersistCLSID</DD>
+			<DT><A HREF="PersistentClasses_VY1FCT0MQ4441510ZWICOGVF4W.htm">VY1FCT0MQ4441510ZWICOGVF4W</A></DT>
+		</DL>
+		<H3>Položky</H3>
+		<table>
+			<tr>
+				<th class="font_bold">Název</th>
+				<th class="font_bold">Label</th>
+				<th class="font_bold">Typ</th>
+				<th class="font_bold">Délka</th>
+				<th class="font_bold">Persistent</th>
+				<th class="font_bold">ROnly</th>
+				<th class="font_bold">Popis</th>
+			</tr>
+			<tr>
+				<td>
+					<A>AnnualClearing</A>
+				</td>
+				<td>Přeplatek na dani</td>
+				<td>dtFloat</td>
+				<td>13/2</td>
+				<td>N</td>
+				<td>A</td>
+				<td>Přeplatek na dani</td>
+			</tr>
+			<tr>
+				<td>
+					<A>Arrears</A>
+				</td>
+				<td>Nedoplatek</td>
+				<td>dtFloat</td>
+				<td>13/2</td>
+				<td>N</td>
+				<td>N</td>
+				<td>Nedoplatek daně</td>
+			</tr>
+			<tr>
+				<td>
+					<A>CalculatedTax</A>
+				</td>
+				<td>Vypočtená daň před slevou</td>
+				<td>dtFloat</td>
+				<td>13/2</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Vypočtená daň před slevou</td>
+			</tr>
+			<tr>
+				<td>
+					<A>CalculatedTaxBonus</A>
+				</td>
+				<td>Spočtený daň. bonus</td>
+				<td>dtFloat</td>
+				<td>13/2</td>
+				<td>N</td>
+				<td>A</td>
+				<td>Spočtený daňový bonus</td>
+			</tr>
+			<tr>
+				<td>
+					<A>ClassID</A>
+				</td>
+				<td>ID třídy</td>
+				<td>dtString</td>
+				<td>26/0</td>
+				<td>N</td>
+				<td>A</td>
+				<td>ID třídy</td>
+			</tr>
+			<tr>
+				<td>
+					<A HREF="BO_22AHIVDVAVE13C5S00CA141B44.htm">CorrectedBy_ID</A>
+				</td>
+				<td>Opravil</td>
+				<td>dtString</td>
+				<td>10/0</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Opravil</td>
+			</tr>
+			<tr>
+				<td>
+					<A HREF="BO_22AHIVDVAVE13C5S00CA141B44.htm">CreatedBy_ID</A>
+				</td>
+				<td>Vytvořil</td>
+				<td>dtString</td>
+				<td>10/0</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Vytvořil</td>
+			</tr>
+			<tr>
+				<td>
+					<A>DateOfClosing$DATE</A>
+				</td>
+				<td>Datum uzavření</td>
+				<td>dtDateTime</td>
+				<td>10/0</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Datum uzavření ročního zúčtování</td>
+			</tr>
+			<tr>
+				<td>
+					<A>DecreasedTaxBase</A>
+				</td>
+				<td>Snížený základ</td>
+				<td>dtFloat</td>
+				<td>13/2</td>
+				<td>N</td>
+				<td>N</td>
+				<td>Snížený základ daně po odpočtech</td>
+			</tr>
+			<tr>
+				<td>
+					<A>Dirty</A>
+				</td>
+				<td>Cizí doklad</td>
+				<td>dtBoolean</td>
+				<td>1/0</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Doklad vzniklý v jiném systému</td>
+			</tr>
+			<tr>
+				<td>
+					<A>DisplayName</A>
+				</td>
+				<td>Číslo dok.</td>
+				<td>dtString</td>
+				<td>24/0</td>
+				<td>N</td>
+				<td>A</td>
+				<td>Číslo dokladu</td>
+			</tr>
+			<tr>
+				<td>
+					<A>DocDate$DATE</A>
+				</td>
+				<td>Datum dok.</td>
+				<td>dtDateTime</td>
+				<td>10/0</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Datum dokladu</td>
+			</tr>
+			<tr>
+				<td>
+					<A HREF="BO_OFTMKVQH3ZD13ACL03KIU0CLP4.htm">DocQueue_ID</A>
+				</td>
+				<td>Zdrojová řada</td>
+				<td>dtString</td>
+				<td>10/0</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Zdrojová řada</td>
+			</tr>
+			<tr>
+				<td>
+					<A HREF="BO_CPP5AZU1CVF13JXS00KEZYD5AW.htm">Employee_ID</A>
+				</td>
+				<td>Zaměstnanec</td>
+				<td>dtString</td>
+				<td>10/0</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Zaměstnanec</td>
+			</tr>
+			<tr>
+				<td>
+					<A>EmployeePremium</A>
+				</td>
+				<td>Zaměstnanecká prémie</td>
+				<td>dtFloat</td>
+				<td>13/2</td>
+				<td>N</td>
+				<td>A</td>
+				<td>Zaměstnanecká prémie</td>
+			</tr>
+			<tr>
+				<td>
+					<A>EmployeePremiumCorrection</A>
+				</td>
+				<td>Zam.prémie - korekce</td>
+				<td>dtFloat</td>
+				<td>13/2</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Suma zaměstnanecké prémie nesprávně vyplacené zaměstnavatelem</td>
+			</tr>
+			<tr>
+				<td>
+					<A>EmplPremCalc</A>
+				</td>
+				<td>Počítat zam.prémii</td>
+				<td>dtBoolean</td>
+				<td>1/0</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Počítat zaměstnaneckou prémii</td>
+			</tr>
+			<tr>
+				<td>
+					<A>EmplPremTableAgreement</A>
+				</td>
+				<td>Měsíce dohod</td>
+				<td>dtString</td>
+				<td>13/0</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Měsíce dohod</td>
+			</tr>
+			<tr>
+				<td>
+					<A>EmplPremTableWR</A>
+				</td>
+				<td>Měsíce pr.poměrů</td>
+				<td>dtString</td>
+				<td>13/0</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Měsíce pr.poměrů</td>
+			</tr>
+			<tr>
+				<td>
+					<A>FirstHalfYearIncome</A>
+				</td>
+				<td>Vykonával závislou činnost, z které obdržel zdanitelné příjmy 2022/01 až 2022/06</td>
+				<td>dtBoolean</td>
+				<td>1/0</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Vykonával závislou činnost, z které obdržel zdanitelné příjmy 2022/01 až 2022/06</td>
+			</tr>
+			<tr>
+				<td>
+					<A>HalfYearTotalTaxAdvantage</A>
+				</td>
+				<td>Celkový daňový bonus za půl roku - interní</td>
+				<td>dtFloat</td>
+				<td>13/2</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Celkový daňový bonus za půl roku - interní</td>
+			</tr>
+			<tr>
+				<td>
+					<A>HealthInsurance</A>
+				</td>
+				<td>Zdravotní poj.</td>
+				<td>dtFloat</td>
+				<td>13/2</td>
+				<td>N</td>
+				<td>A</td>
+				<td>Zdravotní pojištění</td>
+			</tr>
+			<tr>
+				<td>
+					<A>ID</A>
+				</td>
+				<td>Vlastní ID</td>
+				<td>dtString</td>
+				<td>10/0</td>
+				<td>N</td>
+				<td>A</td>
+				<td>Vlastní ID</td>
+			</tr>
+			<tr>
+				<td>
+					<A>IgnoreMinimum</A>
+				</td>
+				<td>Ignoruj minimum</td>
+				<td>dtBoolean</td>
+				<td>1/0</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Ignoruj minimum pro přenos přeplatku</td>
+			</tr>
+			<tr>
+				<td>
+					<A>IsComputed</A>
+				</td>
+				<td>Spočteno</td>
+				<td>dtBoolean</td>
+				<td>1/0</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Roční zúčtování spočteno</td>
+			</tr>
+			<tr>
+				<td>
+					<A>NewRelatedDocument_ID</A>
+				</td>
+				<td>ID dokladu pro připojení</td>
+				<td>dtString</td>
+				<td>10/0</td>
+				<td>N</td>
+				<td>N</td>
+				<td>ID dokladu pro připojení</td>
+			</tr>
+			<tr>
+				<td>
+					<A>NewRelatedType</A>
+				</td>
+				<td>Typ relace</td>
+				<td>dtInteger</td>
+				<td>6/0</td>
+				<td>N</td>
+				<td>N</td>
+				<td>Typ relace</td>
+			</tr>
+			<tr>
+				<td>
+					<A>NumPersonalNumber</A>
+				</td>
+				<td>Os.číslo numericky</td>
+				<td>dtInteger</td>
+				<td>10/0</td>
+				<td>N</td>
+				<td>A</td>
+				<td>Numerická část osobního čísla</td>
+			</tr>
+			<tr>
+				<td>
+					<A>OAPensSavingBaseCut</A>
+				</td>
+				<td>SDS uplatněné do základu daně</td>
+				<td>dtFloat</td>
+				<td>13/2</td>
+				<td>A</td>
+				<td>N</td>
+				<td>SDS uplatněné do základu daně</td>
+			</tr>
+			<tr>
+				<td>
+					<A>ObjVersion</A>
+				</td>
+				<td>Verze objektu</td>
+				<td>dtInteger</td>
+				<td>1/0</td>
+				<td>A</td>
+				<td>A</td>
+				<td>Verze objektu</td>
+			</tr>
+			<tr>
+				<td>
+					<A>OrdNumber</A>
+				</td>
+				<td>Pořadové číslo</td>
+				<td>dtInteger</td>
+				<td>6/0</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Pořadové číslo</td>
+			</tr>
+			<tr>
+				<td>
+					<A>Overpaid</A>
+				</td>
+				<td>Přeplatek</td>
+				<td>dtFloat</td>
+				<td>13/2</td>
+				<td>N</td>
+				<td>N</td>
+				<td>Přeplatek daně</td>
+			</tr>
+			<tr>
+				<td>
+					<A>PaidTax</A>
+				</td>
+				<td>Zaplacené zálohy</td>
+				<td>dtFloat</td>
+				<td>13/2</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Zaplacené zálohy na daň</td>
+			</tr>
+			<tr>
+				<td>
+					<A HREF="BO_CAQPAYUOXVCL3ACL03KIU0CLP4.htm">Period_ID</A>
+				</td>
+				<td>Období</td>
+				<td>dtString</td>
+				<td>10/0</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Období</td>
+			</tr>
+			<tr>
+				<td>
+					<A>PersonalNumber</A>
+				</td>
+				<td>Os. číslo</td>
+				<td>dtString</td>
+				<td>10/0</td>
+				<td>N</td>
+				<td>A</td>
+				<td>Osobní číslo</td>
+			</tr>
+			<tr>
+				<td>
+					<A HREF="BO_1GI5RYL2RPX4NCO2XS2ZBPM4LC.htm">Rows</A>(Collection)(Owned)</td>
+				<td>Řádky</td>
+				<td>dtString</td>
+				<td>10/0</td>
+				<td>N</td>
+				<td>N</td>
+				<td>Řádky</td>
+			</tr>
+			<tr>
+				<td>
+					<A>SocialInsurance</A>
+				</td>
+				<td>Sociální poj.</td>
+				<td>dtFloat</td>
+				<td>13/2</td>
+				<td>N</td>
+				<td>A</td>
+				<td>Sociální pojištění</td>
+			</tr>
+			<tr>
+				<td>
+					<A>TaxBaseRounding</A>
+				</td>
+				<td>Zaok.základu</td>
+				<td>dtInteger</td>
+				<td>0/0</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Zaokrouhlení základu daně</td>
+			</tr>
+			<tr>
+				<td>
+					<A>TaxBonusOverPaid</A>
+				</td>
+				<td>Přeplatek daň. bonusu</td>
+				<td>dtFloat</td>
+				<td>13/2</td>
+				<td>N</td>
+				<td>A</td>
+				<td>Přeplatek daňového bonusu</td>
+			</tr>
+			<tr>
+				<td>
+					<A>TaxBonusRefund</A>
+				</td>
+				<td>Vrácení neopr.vypl. bonusu</td>
+				<td>dtFloat</td>
+				<td>13/2</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Vrácení neoprávněně vyplaceného daňového bonusu</td>
+			</tr>
+			<tr>
+				<td>
+					<A>TaxFreeIncomesForBonusLimit</A>
+				</td>
+				<td>Celkové nezdanitelné příjmy pro daňový bonus</td>
+				<td>dtFloat</td>
+				<td>13/2</td>
+				<td>N</td>
+				<td>A</td>
+				<td>Celkové nezdanitelné příjmy pro uplatnění nároku na daňový bonus</td>
+			</tr>
+			<tr>
+				<td>
+					<A>TaxRounding</A>
+				</td>
+				<td>Zaok.daně</td>
+				<td>dtInteger</td>
+				<td>0/0</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Zaokrouhlení daně</td>
+			</tr>
+			<tr>
+				<td>
+					<A>TotalBases</A>
+				</td>
+				<td>Celkem základ</td>
+				<td>dtFloat</td>
+				<td>13/2</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Celkem základ</td>
+			</tr>
+			<tr>
+				<td>
+					<A>TotalCountOffs</A>
+				</td>
+				<td>Celkem odpočty</td>
+				<td>dtFloat</td>
+				<td>13/2</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Celkem odpočty</td>
+			</tr>
+			<tr>
+				<td>
+					<A>TotalIncome</A>
+				</td>
+				<td>Celk.příjem</td>
+				<td>dtFloat</td>
+				<td>13/2</td>
+				<td>N</td>
+				<td>A</td>
+				<td>Celkový příjem</td>
+			</tr>
+			<tr>
+				<td>
+					<A>TotalInsurance</A>
+				</td>
+				<td>Celk.pojistné</td>
+				<td>dtFloat</td>
+				<td>13/2</td>
+				<td>N</td>
+				<td>A</td>
+				<td>Celkem zaplacené pojistné</td>
+			</tr>
+			<tr>
+				<td>
+					<A>TotalTaxAdvantage</A>
+				</td>
+				<td>Daňové zvýhodnění</td>
+				<td>dtFloat</td>
+				<td>13/2</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Daňové zvýhodnění (§35c)</td>
+			</tr>
+			<tr>
+				<td>
+					<A>TotalTaxAdvantWithoutLimits</A>
+				</td>
+				<td>Celkové daňové zvýhodnění bez omezení</td>
+				<td>dtFloat</td>
+				<td>13/2</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Celkové daňové zvýhodnění bez omezení</td>
+			</tr>
+			<tr>
+				<td>
+					<A>TotalTaxBonus</A>
+				</td>
+				<td>Vyplacený daňový bonus</td>
+				<td>dtFloat</td>
+				<td>13/2</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Vyplacený daňový bonus</td>
+			</tr>
+			<tr>
+				<td>
+					<A>TotalTaxDiscount</A>
+				</td>
+				<td>Sleva na dani</td>
+				<td>dtFloat</td>
+				<td>13/2</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Sleva na dani (§35ba)</td>
+			</tr>
+			<tr>
+				<td>
+					<A HREF="BO_G2POM1Q3C3F13JXS00KEZYD5AW.htm">Transferred_ID</A>
+				</td>
+				<td>Přeneseno do ML</td>
+				<td>dtString</td>
+				<td>10/0</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Přeneseno do ML</td>
+			</tr>
+			<tr>
+				<td>
+					<A>TransferredAsText</A>
+				</td>
+				<td>Přeneseno do ML</td>
+				<td>dtString</td>
+				<td>16/0</td>
+				<td>N</td>
+				<td>N</td>
+				<td>Přeneseno do ML</td>
+			</tr>
+			<tr>
+				<td>
+					<A>YearOfClearing</A>
+				</td>
+				<td>Rok zúčtování</td>
+				<td>dtInteger</td>
+				<td>4/0</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Rok zúčtování</td>
+			</tr>
+			<tr>
+				<td>
+					<A>YearTaxBonus</A>
+				</td>
+				<td>Rozdíl na daň. bonusu</td>
+				<td>dtFloat</td>
+				<td>13/2</td>
+				<td>N</td>
+				<td>A</td>
+				<td>Rozdíl na daňovém bonusu</td>
+			</tr>
+		</table>
+		<P><EM>Generated by ABRA Software a.s. 15.12.2023 16:41</EM></P>
+	</BODY>
+</html>

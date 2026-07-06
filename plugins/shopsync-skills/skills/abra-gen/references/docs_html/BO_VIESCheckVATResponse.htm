@@ -1,0 +1,292 @@
+<?xml version="1.0" encoding="windows-1250"?>
+<html xmlns="http://www.w3.org/TR/xhtml1/strict" xmlns:msxsl="urn:schemas-microsoft-com:xslt" xmlns:user="http://mycompany.com/mynamespace" xmlns:dt="urn:schemas-microsoft-com:datatypes">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=windows-1250"/>
+		<link rel="stylesheet" type="text/css" href="../GxDoc.css"/>
+		<title>Business objekt - VIESCheckVATResponse</title>
+	</head>
+	<BODY>
+		
+		<H2>Business objekt - VIESCheckVATResponse</H2>
+		<DL>
+			<DD>Popis:</DD>
+			<DT>Ověření DIČ v systému VIES</DT>
+			<DD>CLSID:</DD>
+			<DT>{029205C9-4AB9-4BE6-A832-18C27B26F8EE}</DT>
+			<DD>PackedCLSID:</DD>
+			<DT>T42T40PTDFN4RE1M331BQDRSXS</DT>
+			<DD>User fields:</DD>
+			<DT>A</DT>
+			<DD>Default DynSource:</DD>
+			<DT><A HREF="DynSQL_05SHMSVTSYTO32PNVYSTPDN1JC.htm">05SHMSVTSYTO32PNVYSTPDN1JC</A></DT>
+			<DD>PersistCLSID</DD>
+			<DT><A HREF="PersistentClasses_WO0EGBNMKAO4F5LOSWCZEAAV24.htm">WO0EGBNMKAO4F5LOSWCZEAAV24</A></DT>
+		</DL>
+		<H3>Položky</H3>
+		<table>
+			<tr>
+				<th class="font_bold">Název</th>
+				<th class="font_bold">Label</th>
+				<th class="font_bold">Typ</th>
+				<th class="font_bold">Délka</th>
+				<th class="font_bold">Persistent</th>
+				<th class="font_bold">ROnly</th>
+				<th class="font_bold">Popis</th>
+			</tr>
+			<tr>
+				<td>
+					<A>ClassID</A>
+				</td>
+				<td>ID třídy</td>
+				<td>dtString</td>
+				<td>26/0</td>
+				<td>N</td>
+				<td>A</td>
+				<td>ID třídy</td>
+			</tr>
+			<tr>
+				<td>
+					<A>DisplayName</A>
+				</td>
+				<td>Název</td>
+				<td>dtString</td>
+				<td>100/0</td>
+				<td>N</td>
+				<td>A</td>
+				<td>Zobrazovací název</td>
+			</tr>
+			<tr>
+				<td>
+					<A HREF="BO_4K3EXM5PQBCL35CH000ILPWJF4.htm">Firm_ID</A>
+				</td>
+				<td>Firma</td>
+				<td>dtString</td>
+				<td>10/0</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Odkaz na firmu, jejíž DIČ se kontroluje</td>
+			</tr>
+			<tr>
+				<td>
+					<A>CheckMessage</A>
+				</td>
+				<td>Zpráva z provedeného ověření</td>
+				<td>dtString</td>
+				<td>500/0</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Zpráva z provedeného ověření DIČ v systému VIES</td>
+			</tr>
+			<tr>
+				<td>
+					<A>ID</A>
+				</td>
+				<td>Vlastní ID</td>
+				<td>dtString</td>
+				<td>10/0</td>
+				<td>N</td>
+				<td>A</td>
+				<td>Vlastní ID</td>
+			</tr>
+			<tr>
+				<td>
+					<A>ObjVersion</A>
+				</td>
+				<td>Verze objektu</td>
+				<td>dtInteger</td>
+				<td>1/0</td>
+				<td>A</td>
+				<td>A</td>
+				<td>Verze objektu</td>
+			</tr>
+			<tr>
+				<td>
+					<A>RequestDate$DATE</A>
+				</td>
+				<td>Datum požadavku na ověření</td>
+				<td>dtDateTime</td>
+				<td>10/0</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Datum požadavku na ověření DIČ vrácené systémem VIES</td>
+			</tr>
+			<tr>
+				<td>
+					<A>RequestIdentifier</A>
+				</td>
+				<td>Identifikátor požadavku na ověření DIČ</td>
+				<td>dtString</td>
+				<td>50/0</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Jednoznačná identifikace odpovědi na ověření DIČ generovaná systémem VIES ("unikátní číslo konzultac</td>
+			</tr>
+			<tr>
+				<td>
+					<A>ResponseDateTime$DATE</A>
+				</td>
+				<td>Datum a čas odpovědi</td>
+				<td>dtDateTime</td>
+				<td>10/0</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Datum a čas odpovědi na požadavek ověření DIČ</td>
+			</tr>
+			<tr>
+				<td>
+					<A>TraderAddress</A>
+				</td>
+				<td>Kompletní adresa subjektu v systému VIES</td>
+				<td>dtString</td>
+				<td>200/0</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Kompletní adresa kontrolovaného subjektu (firmy) v systému VIES</td>
+			</tr>
+			<tr>
+				<td>
+					<A>TraderCity</A>
+				</td>
+				<td>Město subjektu</td>
+				<td>dtString</td>
+				<td>60/0</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Město kontrolovaného subjektu (firmy) </td>
+			</tr>
+			<tr>
+				<td>
+					<A>TraderCityMatch</A>
+				</td>
+				<td>Shoda města subjektu</td>
+				<td>dtInteger</td>
+				<td>1/0</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Shoda města kontrolovaného subjektu (firmy)?</td>
+			</tr>
+			<tr>
+				<td>
+					<A>TraderCompanyType</A>
+				</td>
+				<td>Typ subjektu</td>
+				<td>dtString</td>
+				<td>30/0</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Typ kontrolovaného subjektu (firmy) </td>
+			</tr>
+			<tr>
+				<td>
+					<A>TraderCompanyTypeMatch</A>
+				</td>
+				<td>Shoda typu subjektu</td>
+				<td>dtInteger</td>
+				<td>1/0</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Shoda typu kontrolovaného subjektu (firmy)?</td>
+			</tr>
+			<tr>
+				<td>
+					<A>TraderName</A>
+				</td>
+				<td>Název subjektu v systému VIES</td>
+				<td>dtString</td>
+				<td>100/0</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Název kontrolovaného subjektu (firmy) v systému VIES</td>
+			</tr>
+			<tr>
+				<td>
+					<A>TraderNameMatch</A>
+				</td>
+				<td>Shoda názvu subjektu</td>
+				<td>dtInteger</td>
+				<td>1/0</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Shoda názvu kontrolovaného subjektu (firmy)?</td>
+			</tr>
+			<tr>
+				<td>
+					<A>TraderPostcode</A>
+				</td>
+				<td>PSČ subjektu</td>
+				<td>dtString</td>
+				<td>10/0</td>
+				<td>A</td>
+				<td>N</td>
+				<td>PSČ kontrolovaného subjektu (firmy) </td>
+			</tr>
+			<tr>
+				<td>
+					<A>TraderPostcodeMatch</A>
+				</td>
+				<td>Shoda PSČ subjektu</td>
+				<td>dtInteger</td>
+				<td>1/0</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Shoda PSČ kontrolovaného subjektu (firmy)?</td>
+			</tr>
+			<tr>
+				<td>
+					<A>TraderStreet</A>
+				</td>
+				<td>Ulice subjektu</td>
+				<td>dtString</td>
+				<td>60/0</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Ulice kontrolovaného subjektu (firmy) </td>
+			</tr>
+			<tr>
+				<td>
+					<A>TraderStreetMatch</A>
+				</td>
+				<td>Shoda ulice subjektu</td>
+				<td>dtInteger</td>
+				<td>1/0</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Shoda ulice kontrolovaného subjektu (firmy)?</td>
+			</tr>
+			<tr>
+				<td>
+					<A>VATIdentNumber</A>
+				</td>
+				<td>DIČ</td>
+				<td>dtString</td>
+				<td>20/0</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Ověřované DIČ</td>
+			</tr>
+			<tr>
+				<td>
+					<A>VATIdentNumberStatus</A>
+				</td>
+				<td>Stav DIČ</td>
+				<td>dtInteger</td>
+				<td>1/0</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Stav DIČ vzhledem k ověření v systému VIES</td>
+			</tr>
+			<tr>
+				<td>
+					<A>VATIdentNumberStatusAsText</A>
+				</td>
+				<td>Stav DIČ - text</td>
+				<td>dtString</td>
+				<td>100/0</td>
+				<td>N</td>
+				<td>N</td>
+				<td>Stav DIČ vzhledem k ověření v systému VIES - text</td>
+			</tr>
+		</table>
+		<P><EM>Generated by ABRA Software a.s. 15.12.2023 16:41</EM></P>
+	</BODY>
+</html>

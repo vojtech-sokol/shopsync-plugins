@@ -1,0 +1,18 @@
+{
+  "name": "vojtech-plugins",
+  "owner": {
+    "name": "Vojtech Sokol",
+    "email": "vojtech.sokol@gmail.com"
+  },
+  "description": "Claude Code plugins for Czech ERP and e-shop integration development",
+  "plugins": [
+    {
+      "name": "shopsync-skills",
+      "source": "./plugins/shopsync-skills",
+      "description": "Dev helper skills for ERP and e-shop integrations: Pohoda, Money S3/S4/S5, ABRA Flexi, ABRA Gen, Helios Inuvio/Nephrite, Shoptet, PrestaShop, WooCommerce, CREATIVE sites, base (BaseLinker), Brani WMS, plus a skill-builder helper.",
+      "version": "1.0.0",
+      "category": "development",
+      "tags": ["erp", "eshop", "integration", "pohoda", "money", "abra", "shoptet", "woocommerce", "prestashop"]
+    }
+  ]
+}

@@ -1,0 +1,610 @@
+<?xml version="1.0" encoding="windows-1250"?>
+<html xmlns="http://www.w3.org/TR/xhtml1/strict" xmlns:msxsl="urn:schemas-microsoft-com:xslt" xmlns:user="http://mycompany.com/mynamespace" xmlns:dt="urn:schemas-microsoft-com:datatypes">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=windows-1250"/>
+		<link rel="stylesheet" type="text/css" href="../GxDoc.css"/>
+		<title>Business objekt - AssetDepreciation</title>
+	</head>
+	<BODY>
+		
+		<H2>Business objekt - AssetDepreciation</H2>
+		<DL>
+			<DD>Popis:</DD>
+			<DT>Měsíční odpis majetku</DT>
+			<DD>CLSID:</DD>
+			<DT>{2AA027A0-6630-11D5-84A0-00105AD7F7B9}</DT>
+			<DD>PackedCLSID:</DD>
+			<DT>O0NU0ELKGVEL315000C5PPZRR4</DT>
+			<DD>User fields:</DD>
+			<DT>A</DT>
+			<DD>Default DynSource:</DD>
+			<DT><A HREF="DynSQL_JKZQX5C0JREL315000C5PPZRR4.htm">JKZQX5C0JREL315000C5PPZRR4</A></DT>
+			<DD>PersistCLSID</DD>
+			<DT><A HREF="PersistentClasses_FQQFB54QGREL315000C5PPZRR4.htm">FQQFB54QGREL315000C5PPZRR4</A></DT>
+		</DL>
+		<H3>Položky</H3>
+		<table>
+			<tr>
+				<th class="font_bold">Název</th>
+				<th class="font_bold">Label</th>
+				<th class="font_bold">Typ</th>
+				<th class="font_bold">Délka</th>
+				<th class="font_bold">Persistent</th>
+				<th class="font_bold">ROnly</th>
+				<th class="font_bold">Popis</th>
+			</tr>
+			<tr>
+				<td>
+					<A>AccBasePrice</A>
+				</td>
+				<td>Účet.vstup.c.</td>
+				<td>dtFloat</td>
+				<td>13/2</td>
+				<td>A</td>
+				<td>A</td>
+				<td>Účetní vstupní cena</td>
+			</tr>
+			<tr>
+				<td>
+					<A>AccBasePriceFinal</A>
+				</td>
+				<td>Konc.účet.vstup.c.</td>
+				<td>dtFloat</td>
+				<td>13/2</td>
+				<td>N</td>
+				<td>A</td>
+				<td>Koncová účetní vstupní cena (na konci měsíce)</td>
+			</tr>
+			<tr>
+				<td>
+					<A>AccDate$DATE</A>
+				</td>
+				<td>Datum z.</td>
+				<td>dtDateTime</td>
+				<td>10/0</td>
+				<td>A</td>
+				<td>A</td>
+				<td>Datum zaúčtování</td>
+			</tr>
+			<tr>
+				<td>
+					<A>AccDepreciation</A>
+				</td>
+				<td>Účetní odpis</td>
+				<td>dtFloat</td>
+				<td>13/2</td>
+				<td>A</td>
+				<td>A</td>
+				<td>Účetní odpis</td>
+			</tr>
+			<tr>
+				<td>
+					<A HREF="BO_S4AINFUSBREL314Z00C5PPZRR4.htm">AccDepreciationGroup_ID</A>
+				</td>
+				<td>Účet.odp.skup.</td>
+				<td>dtString</td>
+				<td>10/0</td>
+				<td>A</td>
+				<td>A</td>
+				<td>Účetní odpisová skupina</td>
+			</tr>
+			<tr>
+				<td>
+					<A HREF="BO_OBTMKVQH3ZD13ACL03KIU0CLP4.htm">AccDocQueue_ID</A>
+				</td>
+				<td>Úč.řada dokl.</td>
+				<td>dtString</td>
+				<td>10/0</td>
+				<td>A</td>
+				<td>A</td>
+				<td>Účetní řada dokladů</td>
+			</tr>
+			<tr>
+				<td>
+					<A>Accounted</A>
+				</td>
+				<td>Číslo dokladu</td>
+				<td>dtBoolean</td>
+				<td>1/0</td>
+				<td>N</td>
+				<td>A</td>
+				<td>Primární číslo dokladu, pokud byl odpis zaúčtován</td>
+			</tr>
+			<tr>
+				<td>
+					<A>AccountedAsText</A>
+				</td>
+				<td>Zaúčtován</td>
+				<td>dtString</td>
+				<td>9/0</td>
+				<td>N</td>
+				<td>A</td>
+				<td>Zaúčtován</td>
+			</tr>
+			<tr>
+				<td>
+					<A>AccRemainderPriceFinal</A>
+				</td>
+				<td>Konc.účet.zůst.c.</td>
+				<td>dtFloat</td>
+				<td>13/2</td>
+				<td>N</td>
+				<td>A</td>
+				<td>Koncová účetní zůstatková cena (na konci měsíce)</td>
+			</tr>
+			<tr>
+				<td>
+					<A>AccRemainderPriceInitial</A>
+				</td>
+				<td>Poč.účet.zůst.c.</td>
+				<td>dtFloat</td>
+				<td>13/2</td>
+				<td>A</td>
+				<td>A</td>
+				<td>Počáteční účetní zůstatková cena</td>
+			</tr>
+			<tr>
+				<td>
+					<A HREF="BO_K2WTYL304VD13ACL03KIU0CLP4.htm">BusOrder_ID</A>
+				</td>
+				<td>Zakázka</td>
+				<td>dtString</td>
+				<td>10/0</td>
+				<td>A</td>
+				<td>A</td>
+				<td>Zakázka</td>
+			</tr>
+			<tr>
+				<td>
+					<A HREF="BO_QOKMKIQUJF34L3DUICTBWEDQJC.htm">BusProject_ID</A>
+				</td>
+				<td>Projekt</td>
+				<td>dtString</td>
+				<td>10/0</td>
+				<td>A</td>
+				<td>A</td>
+				<td>Projekt</td>
+			</tr>
+			<tr>
+				<td>
+					<A HREF="BO_KAWTYL304VD13ACL03KIU0CLP4.htm">BusTransaction_ID</A>
+				</td>
+				<td>Obch.případ</td>
+				<td>dtString</td>
+				<td>10/0</td>
+				<td>A</td>
+				<td>A</td>
+				<td>Obchodní případ</td>
+			</tr>
+			<tr>
+				<td>
+					<A>ClassID</A>
+				</td>
+				<td>ID třídy</td>
+				<td>dtString</td>
+				<td>26/0</td>
+				<td>N</td>
+				<td>A</td>
+				<td>ID třídy</td>
+			</tr>
+			<tr>
+				<td>
+					<A HREF="BO_CAOV3F4IN3EL315000C5PPZRR4.htm">Components</A>(Collection)(Owned)</td>
+				<td>Prvky</td>
+				<td>dtString</td>
+				<td>10/0</td>
+				<td>N</td>
+				<td>A</td>
+				<td>Prvky</td>
+			</tr>
+			<tr>
+				<td>
+					<A HREF="BO_22AHIVDVAVE13C5S00CA141B44.htm">CorrectedBy_ID</A>
+				</td>
+				<td>Opravil</td>
+				<td>dtString</td>
+				<td>10/0</td>
+				<td>A</td>
+				<td>A</td>
+				<td>Opravil</td>
+			</tr>
+			<tr>
+				<td>
+					<A HREF="BO_22AHIVDVAVE13C5S00CA141B44.htm">CreatedBy_ID</A>
+				</td>
+				<td>Pořídil</td>
+				<td>dtString</td>
+				<td>10/0</td>
+				<td>A</td>
+				<td>A</td>
+				<td>Pořídil</td>
+			</tr>
+			<tr>
+				<td>
+					<A>D_Month</A>
+				</td>
+				<td>Měsíc</td>
+				<td>dtInteger</td>
+				<td>0/0</td>
+				<td>A</td>
+				<td>A</td>
+				<td>Měsíc</td>
+			</tr>
+			<tr>
+				<td>
+					<A>D_Year</A>
+				</td>
+				<td>Rok</td>
+				<td>dtInteger</td>
+				<td>0/0</td>
+				<td>A</td>
+				<td>A</td>
+				<td>Rok</td>
+			</tr>
+			<tr>
+				<td>
+					<A>DecreaseOfAccBasePrice</A>
+				</td>
+				<td>Sníž.účet.vstup.c.</td>
+				<td>dtFloat</td>
+				<td>13/2</td>
+				<td>A</td>
+				<td>A</td>
+				<td>Snížení účetní vstupní ceny</td>
+			</tr>
+			<tr>
+				<td>
+					<A>DecreaseOfAccRemainderPrice</A>
+				</td>
+				<td>Sníž.účet.zůst.c.</td>
+				<td>dtFloat</td>
+				<td>13/2</td>
+				<td>A</td>
+				<td>A</td>
+				<td>Snížení účetní zůstatkové ceny</td>
+			</tr>
+			<tr>
+				<td>
+					<A>DecreaseOfTaxBasePrice</A>
+				</td>
+				<td>Sníž.daň.vstup.c.</td>
+				<td>dtFloat</td>
+				<td>13/2</td>
+				<td>A</td>
+				<td>A</td>
+				<td>Snížení daňové vstupní ceny</td>
+			</tr>
+			<tr>
+				<td>
+					<A>DecreaseOfTaxRemainderPrice</A>
+				</td>
+				<td>Sníž.daň.zůst.c.</td>
+				<td>dtFloat</td>
+				<td>13/2</td>
+				<td>A</td>
+				<td>A</td>
+				<td>Snížení daňové zůstatkové ceny</td>
+			</tr>
+			<tr>
+				<td>
+					<A>DeprecCorrectionSubsidy</A>
+				</td>
+				<td>Korekce odpisu z dotace</td>
+				<td>dtFloat</td>
+				<td>13/2</td>
+				<td>A</td>
+				<td>A</td>
+				<td>Korekce odpisu z důvodu dotace</td>
+			</tr>
+			<tr>
+				<td>
+					<A>DisplayName</A>
+				</td>
+				<td>Název</td>
+				<td>dtString</td>
+				<td>100/0</td>
+				<td>N</td>
+				<td>A</td>
+				<td>Zobrazovací název</td>
+			</tr>
+			<tr>
+				<td>
+					<A HREF="BO_O1X54EUXPZCL35CH000ILPWJF4.htm">Division_ID</A>
+				</td>
+				<td>Středisko</td>
+				<td>dtString</td>
+				<td>10/0</td>
+				<td>A</td>
+				<td>A</td>
+				<td>Středisko</td>
+			</tr>
+			<tr>
+				<td>
+					<A>DocDate$DATE</A>
+				</td>
+				<td>Datum</td>
+				<td>dtDateTime</td>
+				<td>10/0</td>
+				<td>A</td>
+				<td>A</td>
+				<td>Datum dokladu</td>
+			</tr>
+			<tr>
+				<td>
+					<A HREF="BO_OFTMKVQH3ZD13ACL03KIU0CLP4.htm">DocQueue_ID</A>
+				</td>
+				<td>Řada dokl.</td>
+				<td>dtString</td>
+				<td>10/0</td>
+				<td>A</td>
+				<td>A</td>
+				<td>Řada dokladů</td>
+			</tr>
+			<tr>
+				<td>
+					<A>EndDepreciationDate$DATE</A>
+				</td>
+				<td>Datum konce odepisování</td>
+				<td>dtDateTime</td>
+				<td>10/0</td>
+				<td>A</td>
+				<td>A</td>
+				<td>Datum konce odepisování úč. odpisů pro prodloužení doby úč. odepisování</td>
+			</tr>
+			<tr>
+				<td>
+					<A>ID</A>
+				</td>
+				<td>Vlastní ID</td>
+				<td>dtString</td>
+				<td>10/0</td>
+				<td>N</td>
+				<td>A</td>
+				<td>Vlastní ID</td>
+			</tr>
+			<tr>
+				<td>
+					<A>IncreaseAcc</A>
+				</td>
+				<td>Zvýšení účet.c.</td>
+				<td>dtFloat</td>
+				<td>13/2</td>
+				<td>A</td>
+				<td>A</td>
+				<td>Zvýšení účetní ceny</td>
+			</tr>
+			<tr>
+				<td>
+					<A>IncreaseTax</A>
+				</td>
+				<td>Zvýšení daň.c.</td>
+				<td>dtFloat</td>
+				<td>13/2</td>
+				<td>A</td>
+				<td>A</td>
+				<td>Zvýšení daňové ceny</td>
+			</tr>
+			<tr>
+				<td>
+					<A>IsValorisation</A>
+				</td>
+				<td>Označení typu změny ceny</td>
+				<td>dtBoolean</td>
+				<td>1/0</td>
+				<td>A</td>
+				<td>A</td>
+				<td>Označení typu změny ceny</td>
+			</tr>
+			<tr>
+				<td>
+					<A>IsValorisationAsText</A>
+				</td>
+				<td>Označení typu změny ceny text.</td>
+				<td>dtString</td>
+				<td>1/0</td>
+				<td>N</td>
+				<td>A</td>
+				<td>Označení typu změny ceny textově</td>
+			</tr>
+			<tr>
+				<td>
+					<A>MonthAndYear</A>
+				</td>
+				<td>měsíc/rok</td>
+				<td>dtString</td>
+				<td>7/0</td>
+				<td>N</td>
+				<td>A</td>
+				<td>měsíc/rok</td>
+			</tr>
+			<tr>
+				<td>
+					<A>ObjVersion</A>
+				</td>
+				<td>Verze objektu</td>
+				<td>dtInteger</td>
+				<td>1/0</td>
+				<td>A</td>
+				<td>A</td>
+				<td>Verze objektu</td>
+			</tr>
+			<tr>
+				<td>
+					<A>OffsetNr</A>
+				</td>
+				<td>OffsetNr</td>
+				<td>dtInteger</td>
+				<td>4/0</td>
+				<td>A</td>
+				<td>A</td>
+				<td>OffsetNr</td>
+			</tr>
+			<tr>
+				<td>
+					<A>OrdNumber</A>
+				</td>
+				<td>Čís.dokl.</td>
+				<td>dtInteger</td>
+				<td>6/0</td>
+				<td>A</td>
+				<td>A</td>
+				<td>Číslo dokladu</td>
+			</tr>
+			<tr>
+				<td>
+					<A>Origin</A>
+				</td>
+				<td>Původ</td>
+				<td>dtInteger</td>
+				<td>0/0</td>
+				<td>A</td>
+				<td>A</td>
+				<td>Původ</td>
+			</tr>
+			<tr>
+				<td>
+					<A>OriginOfAccAsText</A>
+				</td>
+				<td>Původ</td>
+				<td>dtString</td>
+				<td>8/0</td>
+				<td>N</td>
+				<td>A</td>
+				<td>Původ</td>
+			</tr>
+			<tr>
+				<td>
+					<A>OriginOfTaxAsText</A>
+				</td>
+				<td>Původ</td>
+				<td>dtString</td>
+				<td>8/0</td>
+				<td>N</td>
+				<td>A</td>
+				<td>Původ</td>
+			</tr>
+			<tr>
+				<td>
+					<A HREF="BO_S0ODIDCD1NEL314Z00C5PPZRR4.htm">Parent_ID</A>
+				</td>
+				<td>Vlastník</td>
+				<td>dtString</td>
+				<td>10/0</td>
+				<td>A</td>
+				<td>A</td>
+				<td>Vlastník</td>
+			</tr>
+			<tr>
+				<td>
+					<A HREF="BO_CAQPAYUOXVCL3ACL03KIU0CLP4.htm">Period_ID</A>
+				</td>
+				<td>Období</td>
+				<td>dtString</td>
+				<td>10/0</td>
+				<td>A</td>
+				<td>A</td>
+				<td>Období</td>
+			</tr>
+			<tr>
+				<td>
+					<A>RestAccValueRate</A>
+				</td>
+				<td>Zbytková hodnota [%]</td>
+				<td>dtFloat</td>
+				<td>10/2</td>
+				<td>A</td>
+				<td>A</td>
+				<td>Zbytková účetní hodnota majetku po skončení odepisování</td>
+			</tr>
+			<tr>
+				<td>
+					<A>TaxBasePrice</A>
+				</td>
+				<td>Daň.vstup.c.</td>
+				<td>dtFloat</td>
+				<td>13/2</td>
+				<td>A</td>
+				<td>A</td>
+				<td>Daňová vstupní cena</td>
+			</tr>
+			<tr>
+				<td>
+					<A>TaxBasePriceFinal</A>
+				</td>
+				<td>Konc.daň.vstup.c.</td>
+				<td>dtFloat</td>
+				<td>13/2</td>
+				<td>N</td>
+				<td>A</td>
+				<td>Koncová daňová vstupní cena (na konci měsíce)</td>
+			</tr>
+			<tr>
+				<td>
+					<A>TaxDepreciation</A>
+				</td>
+				<td>Daňový odpis</td>
+				<td>dtFloat</td>
+				<td>13/2</td>
+				<td>A</td>
+				<td>A</td>
+				<td>Daňový odpis</td>
+			</tr>
+			<tr>
+				<td>
+					<A HREF="BO_O4LMSVMRZJE1314Z00C5PPZRR4.htm">TaxDepreciationGroup_ID</A>
+				</td>
+				<td>Daň.odp.skup.</td>
+				<td>dtString</td>
+				<td>10/0</td>
+				<td>A</td>
+				<td>A</td>
+				<td>Daňová odpisová skupina</td>
+			</tr>
+			<tr>
+				<td>
+					<A>TaxRemainderPriceFinal</A>
+				</td>
+				<td>Konc.daň.zůst.c.</td>
+				<td>dtFloat</td>
+				<td>13/2</td>
+				<td>N</td>
+				<td>A</td>
+				<td>Koncová daňová zůstatková cena (na konci měsíce)</td>
+			</tr>
+			<tr>
+				<td>
+					<A>TaxRemainderPriceInitial</A>
+				</td>
+				<td>Poč.daň.zůst.c.</td>
+				<td>dtFloat</td>
+				<td>13/2</td>
+				<td>A</td>
+				<td>A</td>
+				<td>Počáteční daňová zůstatková cena</td>
+			</tr>
+			<tr>
+				<td>
+					<A HREF="BO_CAQPAYUOXVCL3ACL03KIU0CLP4.htm">VirtualPeriod_ID</A>
+				</td>
+				<td>Období</td>
+				<td>dtString</td>
+				<td>10/0</td>
+				<td>A</td>
+				<td>A</td>
+				<td>Virtuální období</td>
+			</tr>
+			<tr>
+				<td>
+					<A>VirtualPeriodAsText</A>
+				</td>
+				<td>Období</td>
+				<td>dtString</td>
+				<td>15/0</td>
+				<td>N</td>
+				<td>A</td>
+				<td>Virtuální období textově</td>
+			</tr>
+		</table>
+		<P><EM>Generated by ABRA Software a.s. 15.12.2023 16:41</EM></P>
+	</BODY>
+</html>

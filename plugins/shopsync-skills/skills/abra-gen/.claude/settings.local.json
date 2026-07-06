@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(mkdir -p \"C:/Users/Vojtech Sokol/.claude/skills/abra-gen/references/docs_html\")",
+      "Bash(cp \"C:/Users/Vojtech Sokol/Documents/share/podklady/abra_gen/docs_html/\"BO_*.htm \"C:/Users/Vojtech Sokol/.claude/skills/abra-gen/references/docs_html/\")"
+    ]
+  }
+}

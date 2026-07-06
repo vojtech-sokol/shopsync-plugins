@@ -1,0 +1,33 @@
+# Typy atributů
+
+| Vlastnost | Hodnota |
+|---|---|
+| **Evidence Path** | `typ-atributu` |
+| **Evidence Type** | `TYP_ATRIBUTU` |
+| **Import Status** | NOT_DOCUMENTED |
+| **DB Name** | `cTypAtribut` |
+| **Ext ID Supported** | false |
+| **API URL** | `https://demo.flexibee.eu/c/demo/typ-atributu` |
+| **Properties URL** | `https://demo.flexibee.eu/c/demo/typ-atributu/properties` |
+
+## Vlastnosti (17)
+
+| Vlastnost | Název | Typ | DB | Povinné | Zápis | Max. délka | Číslice | Des. místa | FK evidence | Popis |
+|---|---|---|---|---|---|---|---|---|---|---|
+| `id` | ID | integer | IdTypAtribut | ne | ne | - | - | - | - | ID |
+| `lastUpdate` | Poslední změna | datetime | lastUpdate | ne | ne | - | - | - | - | Poslední změna |
+| `kod` | Zkratka | string | Kod | **ANO** | ANO | 20 | - | - | - | Zkratka |
+| `nazev` | Název | string | Nazev | **ANO** | ANO | 255 | - | - | - | Název |
+| `nazevA` | Název EN | string | NazevA | ne | ANO | 255 | - | - | - | Název EN |
+| `nazevB` | Název DE | string | NazevB | ne | ANO | 255 | - | - | - | Název DE |
+| `nazevC` | Název FR | string | NazevC | ne | ANO | 255 | - | - | - | Název FR |
+| `poznam` | Poznámka | string | Poznam | ne | ANO | - | - | - | - | Poznámka |
+| `popis` | Popis | string | Popis | ne | ANO | - | - | - | - | Popis |
+| `visible` | Zobrazovat | logic | Show | ne | ANO | - | - | - | - | Zobrazovat |
+| `platiOd` | Platí od roku | integer | PlatiOd | ne | ANO | - | - | - | - | Platí od |
+| `platiDo` | Platí do roku | integer | PlatiDo | ne | ANO | - | - | - | - | Platí do |
+| `typAtributK` | Typ atributu | select | TypAtributK | **ANO** | ANO | 50 | - | - | - | Typ atributu |
+| `beanKeysA` | Místa použití | string | BeanKeysA | ne | ANO | - | - | - | - | Místa použití |
+| `standard` | Standartní | logic | Standard | ne | ne | - | - | - | - | Standartní |
+| `uuid` | Uuid | string | Uuid | ne | ne | 50 | - | - | - | Univerzální unikátní identifikátor |
+| `mj` | MJ | relation | IdMj | ne | ANO | - | - | - | `merna-jednotka` | MJ |

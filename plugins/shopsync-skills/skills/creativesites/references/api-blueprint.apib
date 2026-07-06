@@ -1,0 +1,4037 @@
+FORMAT: 1A
+HOST: https://csapi.example.com/
+
+# CREATIVE sites API v1.4.4
+
+CREATIVE sites API documentation.
+
+## Authorization
+
+The **authorization header must be present** for all requests. Needed credentials are obtained from our sales representatives.
+
+**Request is authorized only after:**
+ - sending auth header with [Basic Auth](https://en.wikipedia.org/wiki/Basic_access_authentication),
+ - and sending request from allowed IP address.
+ - API only accepts JSON data in requests.
+ 
+## Requests & Responses
+### Allowed HTTPS requests
+- `POST` - To create resource 
+- `PUT` - Update resource
+- `GET` - Get a resource or list of resources
+- `DELETE` - To delete resource
+
+### Server Responses
+- **200** `OK` - the request was successful (some API calls may return 201 instead).
+- **201** `Created` - the request was successful and a resource was created.
+- **204** `No Content` - the request was successful but there is no representation to return (i.e. the response is empty).
+- **400** `Bad Request` - the request could not be understood or was missing required parameters.
+- **401** `Unauthorized` - authentication failed or user doesn't have permissions for requested operation.
+- **403** `Forbidden` - access denied.
+- **404** `Not Found` - resource was not found.
+- **405** `Method Not Allowed` - requested method is not supported for resource.
+- **426** `Upgrade Required` - method available in higher Plan only, given in the Upgrade header field.
+- **429** `Too Many Requests` - too many requests in a given time period (contact sales for your Plan upgrade).
+
+## Changelog
+
+- `2019-05-23` Client activity logs (requests/responses) have been added.
+- `2019-07-24` Optional filter parameters for products have been added.
+- `2019-09-28` autoAssignParents parameter for products have been added (if set to 'true' the product will be automaticaly assigned to all parent categories of the given category list).
+- `2019-10-01` PUT and POST methods for orders have been added.
+- `2019-10-24` Optional filter parameters for orders have been added.
+- `2019-10-29` Optional filter parameters for customers have been added.
+- `2019-11-05` Methods for working with coupons have been added.
+- `2019-11-20` Methods for getting activity logs (requests/responses) have been added.
+- `2019-11-29` Weight parameter for product variants has been added.
+- `2019-12-05` Webhook functionality has been added.
+- `2019-12-13` Optional filter parameters foractivity log have been added (filterByPhrase, filterByMethod).
+- `2019-12-19` Request queue for POST and PUT methods has been added (Semaphore).
+- `2020-02-03` 'availableFrom' option added for product variants (non-standard function, please contact sales).
+- `2020-03-13` 'imagesDesc' option added for products.
+- `2020-03-17` 'image' option added for categories (in product helper methods).
+- `2020-05-15` 'deliveryPointId' parameter added for orders (only for GET methods).
+- `2020-12-04` 'virtualVariantName' parameter added for products.
+- `2021-02-16` Invoices documentaion extended.
+- `2021-03-03` 'creditDiscount' and 'voluntaryContribution' parameter added for orders (only for GET methods).
+- `2021-03-17` Customer PUT and POST methods now enable to send encrypted user password.
+- `2021-03-19` 'domain' option added for customers.
+- `2021-03-19` Method for customer authentication was added.
+- `2021-03-25` Sending Social login option added (google, facebook, apple).
+- `2021-03-25` Methods for GDPR data proccessing was added.
+- `2021-05-18` 'localImagePath' option added for product variants (non-standard function, please contact sales).
+- `2021-09-13` 'currency' parameter is now required for updating product prices.
+- `2021-10-07` product 'url' for GET Orders has been added.
+- `2021-10-11` 'adminNote' option added for orders.
+- `2021-10-11` 'invoiceNumber' option added for GET orders.
+- `2021-10-11` Information about Currency format, rate and symbols are now available via GET 'currencies' in order helper methods.
+- `2022-03-09` 'uom' (Units of measurement) option added for order items.
+- `2022-04-07` Added multilang support for products, categories and availabilities.
+- `2022-06-23` Added cash rounding support ('cashPaymentRounding' value is automaticaly added to order and 'isCash' parameter is available to set in payment methods).
+- `2022-08-25` Added custom store availability for products (non-standard function, please contact sales).
+- `2022-10-11` Added custom store availability for (batch) products methods (non-standard function, please contact sales).
+- `2022-10-26` GET logs endpoint updated (now runnig thru elastic search).
+- `2023-05-25` POST 'ordernotifications' endpoint added for sending mail notifications concerning orders (non-standard function, please contact sales).
+- `2023-05-31` Added multilang support for payment and shipping.
+- `2023-06-27` Added product Pack (Sets) support.
+- `2023-07-12` Added product image metadata - "modified" date (non-standard function, please contact sales).
+- `2023-09-06` Optional filter parameters for products have been added.
+- `2023-10-31` Optional param 'abortOnError' for BATCH product methods have been added.
+- `2023-11-06` Added 'shippingBlacklist' parameter for products methods (non-standard function, please contact sales).
+- `2023-12-21` Added additional (read-only) payment data 'transactionDetails' for orders (implemented for GoPay, more will be added in the future).
+- `2024-01-31` BATCH order status update method has been added.
+- `2024-01-31` Optional param 'abortOnError' for BATCH order status update has been added.
+- `2024-06-24` Optional param 'attachDocumentType' for order status update has been added (non-standard function, please contact sales).
+- `2024-06-24` Multi document mode added for Invoice management (non-standard function, please contact sales).
+- `2024-06-24` Methods for Individual price discounts for specific customers have been added (non-standard function, please contact sales).
+- `2024-12-20` Added support for DPD delivery points in Order methods.
+- `2025-03-07` Added methods for working with OSS product tax rates (non-standard function, please contact sales).
+- `2025-10-09` Added optional param 'taxRate' for Shipping methods allowing to set specific tax rate for shipping (shipping tax rate is also visible in GET orders methods).
+- `2026-05-12` Added methods for working with Articles (blog posts) and URL lookup endpoint.
+
+**Last modified:** 2026-05-12 00:00
+
+# Group Product Helpers
+
+Complementary methods for working with propaymentducts (getting information about categories, groups, etc.).
+
+#### Categories [/helper-categories]
+
+Methods for working with categories.
+
+#### Note:
+- `parentId` of root categories has to be set to `0`.
+- Only categories with no sub-categories can be removed.
+- Deleting a category also automatically removes the category relation to products. 
+
+### GET category [GET /categories/{id}]
+
++ Parameters
+    + id: `102109` (number, required) - Category ID
+
++ Request (application/json)
+    + Headers
+    
+            Authorization: Basic QWxhZGRpbjpPcGVuU2VzYW1l
+        
++ Response 200 (application/json)
+    + Attributes (Category)
+    
+### GET categories [GET /categories]
+
++ Request (application/json)
+    + Headers
+    
+            Authorization: Basic QWxhZGRpbjpPcGVuU2VzYW1l
+        
++ Response 200 (application/json)
+    + Attributes 
+        + categoryList (array[Category])
+    
+### PUT category [PUT /categories/{id}]
+
++ Parameters
+    + id: `102109` (number, required) - Category ID
+
++ Request (application/json)
+    + Attributes
+        + categoryList (array[Category])
+         
+    + Headers
+    
+            Authorization: Basic QWxhZGRpbjpPcGVuU2VzYW1l
+            
++ Response 200 (application/json)
+    + Body
+    
+            {
+                "message": "Update successful.",
+                "categoryList": [
+                    102109
+                ]
+            }
+
+### POST categories [POST /categories]
+
++ Request (application/json)
+    + Attributes
+        + categoryList (array[Category])
+    + Headers
+    
+            Authorization: Basic QWxhZGRpbjpPcGVuU2VzYW1l
+            
++ Response 201 (application/json)
+    + Body
+    
+            {
+                "message": "Import successful.",
+                "categoryList": [
+                    102109,
+                    102110,
+                    102111
+                ]
+            }
+            
+### DELETE categories [DELETE /categories/{id}]
+
++ Parameters
+    + id: `102109` (number, required) - Category ID
+
++ Request (application/json)
+    + Headers
+        
+            Authorization: Basic QWxhZGRpbjpPcGVuU2VzYW1l
+        
++ Response 200 (application/json)
+    + Body
+    
+            {
+                "message": "Category '102109' was removed."
+            }
+            
+#### Product groups [/helper-groups]
+
+Methods for working with groups.
+
+### GET group [GET /groups/{id}]
+
++ Parameters
+    + id: `3` (number, required) - Special group ID
+
++ Request (application/json)
+    + Headers
+        
+            Authorization: Basic QWxhZGRpbjpPcGVuU2VzYW1l
+        
++ Response 200 (application/json)
+    + Attributes (Special)
+
+### GET groups [GET /groups]
+
++ Request (application/json)
+    + Headers
+        
+            Authorization: Basic QWxhZGRpbjpPcGVuU2VzYW1l
+        
++ Response 200 (application/json)
+    + Attributes
+        + groupList (array[Special])
+
+### PUT group [PUT /groups/{id}]
+
++ Parameters
+    + id: `3` (number, required) - Special group ID
+
++ Request (application/json)
+    + Attributes
+        + groupList (array[Special])
+    
+    + Headers
+    
+            Authorization: Basic QWxhZGRpbjpPcGVuU2VzYW1l
+            
++ Response 200 (application/json)
+    + Body
+    
+            {
+                "groupList": 3
+            }
+
+### POST groups [POST /groups]
+
++ Request (application/json)
+    + Attributes
+        + groupList (array[Special])
+    + Headers
+    
+            Authorization: Basic QWxhZGRpbjpPcGVuU2VzYW1l
+            
++ Response 201 (application/json)
+    + Body
+    
+            {
+                "groupList": [
+                    3,
+                    4
+                ]
+            }
+            
+### DELETE group [DELETE /groups/{id}]
+
++ Parameters
+    + id: `3` (number, required) - Special group ID
+
++ Request (application/json)
+    + Headers
+        
+            Authorization: Basic QWxhZGRpbjpPcGVuU2VzYW1l
+        
++ Response 200 (application/json)
+    + Body
+    
+            {
+                "message": "Special group '3' was removed."
+            }
+
+#### Product availabilities [/helper-availabilities]
+
+Methods for working with availabilities.
+
+#### Note:
+- Deleting availability also automatically removes the availability from products and variants. 
+
+### GET availability [GET /availabilities/{id}]
+
++ Parameters
+    + id: `21` (number, required) - Availability ID
+
++ Request (application/json)
+    + Headers
+        
+            Authorization: Basic QWxhZGRpbjpPcGVuU2VzYW1l
+        
++ Response 200 (application/json)
+    + Attributes (Availability)
+
+### GET availabilities [GET /availabilities]
+
++ Request (application/json)
+    + Headers
+        
+            Authorization: Basic QWxhZGRpbjpPcGVuU2VzYW1l
+        
++ Response 200 (application/json)
+    + Attributes 
+        + availList (array[Availability])
+
+### PUT availability [PUT /availabilities/{id}]
+
++ Parameters
+    + id: `21` (number, required) - Availability ID
+
++ Request (application/json)
+     + Attributes
+        + availList (array[Availability])
+    + Headers
+        
+            Authorization: Basic QWxhZGRpbjpPcGVuU2VzYW1l
+        
++ Response 200 (application/json)
+    + Body
+    
+            {
+                "availList": 21
+            }
+
+### POST availabilities [POST /availabilities]
+
++ Request (application/json)
+    + Headers
+        
+            Authorization: Basic QWxhZGRpbjpPcGVuU2VzYW1l
+        
++ Response 201 (application/json)
+    + Attributes
+        + availList (array[Availability])
+    + Body
+    
+            {
+                "availList": [
+                    12,
+                    13
+                ]
+            }
+            
+### DELETE availability [DELETE /availabilities/{id}]
+
++ Parameters
+    + id: `108` (number, required) - Availability ID
+
++ Request (application/json)
+    + Headers
+        
+            Authorization: Basic QWxhZGRpbjpPcGVuU2VzYW1l
+        
++ Response 200 (application/json)
+    + Body
+    
+            {
+                "message": "Availability '108' was removed."
+            }
+
+#### Attributes [/helper-attributes]
+
+Methods for working with attributes.
+
+#### Note:
+- Removing an attribute is possible only if no products have this attribute set. 
+
+### GET attribute [GET /attributes/{id}]
+
++ Parameters
+    + id: `21` (number, required) - Attribute ID
+
++ Request (application/json)
+    + Headers
+        
+            Authorization: Basic QWxhZGRpbjpPcGVuU2VzYW1l
+        
++ Response 200 (application/json)
+   + Attributes (Attribute)
+
+### GET attributes [GET /attributes]
+
++ Request (application/json)
+    + Headers
+        
+            Authorization: Basic QWxhZGRpbjpPcGVuU2VzYW1l
+        
++ Response 200 (application/json)
+    + Attributes
+        + attributeList (array[Attribute])
+
+### PUT attribute [PUT /attributes/{id}]
+
++ Parameters
+    + id: `21` (number, required) - Attribute ID
+
++ Request (application/json)
+    + Attributes
+        + attributeList (array[Attribute])
+    + Headers
+        
+            Authorization: Basic QWxhZGRpbjpPcGVuU2VzYW1l
+        
++ Response 200 (application/json)
+    + Body
+    
+            {
+                "attributeList": 21
+            }
+
+### POST attributes [POST /attributes]
+
++ Request (application/json)
+    + Attributes
+        + attributeList (array[Attribute])
+    + Headers
+        
+            Authorization: Basic QWxhZGRpbjpPcGVuU2VzYW1l
+        
++ Response 201 (application/json)
+    + Body
+    
+            {
+                "attributeList": [
+                    21,
+                    22,
+                    23
+                ]
+            }
+            
+### DELETE attribute [DELETE /attributes/{id}]
+
++ Parameters
+    + id: `21` (number, required) - Attribute ID
+
++ Request (application/json)
+    + Headers
+        
+            Authorization: Basic QWxhZGRpbjpPcGVuU2VzYW1l
+        
++ Response 200 (application/json)
+    + Body
+    
+            {
+                "message": "Attribute '21' was removed."
+            }
+
+#### Parameters [/helper-parameters]
+
+Methods for working with parameters.
+
+### GET parameter [GET /parameters/{id}]
+
++ Parameters
+    + id: `21` (number, required) - Parameter ID
+
++ Request (application/json)
+    + Headers
+        
+            Authorization: Basic QWxhZGRpbjpPcGVuU2VzYW1l
+        
++ Response 200 (application/json)
+    + Attributes (ParameterName)
+            
+### GET parameters [GET /parameters]
+
++ Request (application/json)
+    + Headers
+        
+            Authorization: Basic QWxhZGRpbjpPcGVuU2VzYW1l
+        
++ Response 200 (application/json)
+    + Attributes
+        + paramList (array[ParameterName])
+
+### PUT parameter [PUT /parameters/{id}]
+
++ Parameters
+    + id: `21` (number, required) - Parameter ID
+
++ Request (application/json)
+    + Attributes
+        + paramList (array[ParameterName])
+    + Headers
+        
+            Authorization: Basic QWxhZGRpbjpPcGVuU2VzYW1l
+        
++ Response 200 (application/json)
+    + Body
+    
+            {
+                "paramList": 21
+            }
+            
+### POST parameters [POST /parameters]
+
++ Request (application/json)
+    + Attributes
+        + paramList (array[ParameterName])
+    + Headers
+        
+            Authorization: Basic QWxhZGRpbjpPcGVuU2VzYW1l
+        
++ Response 201 (application/json)
+    + Body
+    
+            {
+                "paramList": [
+                    21,
+                    22
+                ]
+            }
+
+### DELETE parameter [DELETE /parameters/{id}]
+
++ Parameters
+    + id: `86` (number, required) - Parameter ID
+
++ Request (application/json)
+    + Headers
+        
+            Authorization: Basic QWxhZGRpbjpPcGVuU2VzYW1l
+        
++ Response 200 (application/json)
+    + Body
+    
+            {
+                "message": "Parameter '86' was removed."
+            }
+
+#### Manufacturers [/helper-manufacturers]
+
+Methods for working with manufacturers.
+
+#### Note:
+- Deleting the manufacturer also automatically removes the manufacturer relation to products. 
+
+### GET manufacturer [GET /manufacturers/{id}]
+
++ Parameters
+    + id: `86` (number, required) - Manufacturer ID
+
++ Request (application/json)
+    + Headers
+        
+            Authorization: Basic QWxhZGRpbjpPcGVuU2VzYW1l
+        
++ Response 200 (application/json)
+   + Attributes (Manufacturer)
+            
+### GET manufacturers [GET /manufacturers]
+
++ Request (application/json)
+    + Headers
+        
+            Authorization: Basic QWxhZGRpbjpPcGVuU2VzYW1l
+        
++ Response 200 (application/json)
+    + Attributes
+        + manufacturerList (array[Manufacturer])
+   
+### PUT manufacturer [PUT /manufacturers/{id}]
+
++ Parameters
+    + id: `86` (number, required) - Manufacturer ID
+
++ Request (application/json)
+    + Attributes
+        + manufacturerList (array[Manufacturer])
+    + Headers
+        
+            Authorization: Basic QWxhZGRpbjpPcGVuU2VzYW1l
+        
++ Response 200 (application/json)
+    + Body
+    
+            {
+                "message": "Update successful.",
+                "manufacturerList": [
+                    86
+                ]
+            }
+            
+### POST manufacturers [POST /manufacturers]
+
++ Request (application/json)
+    + Attributes
+        + manufacturerList (array[Manufacturer])
+    + Headers
+        
+            Authorization: Basic QWxhZGRpbjpPcGVuU2VzYW1l
+        
++ Response 201 (application/json)
+    + Body
+    
+            {
+                "message": "Import successful.",
+                "manufacturerList": [
+                    86,
+                    87
+                ]
+            }
+
+### DELETE manufacturer [DELETE /manufacturers/{id}]
+
++ Parameters
+    + id: `86` (number, required) - Manufacturer ID
+
++ Request (application/json)
+    + Headers
+        
+            Authorization: Basic QWxhZGRpbjpPcGVuU2VzYW1l
+        
++ Response 200 (application/json)
+    + Body
+    
+            {
+                "message" : "Manufacturer '86' was removed."
+            }
+
+#### Units of measurement [/helper-uom]
+
+Methods for working with units of measurement.
+
+#### Note:
+- Only units with no products attached can be removed.
+
+### GET unit of measurement [GET /uom/{id}]
+
++ Parameters
+    + id: `2` (number, required) - Unit of measurement ID
+
++ Request (application/json)
+    + Headers
+    
+            Authorization: Basic QWxhZGRpbjpPcGVuU2VzYW1l
+        
++ Response 200 (application/json)
+    + Attributes (Uom)
+    
+### GET units of measurement [GET /uom]
+
++ Request (application/json)
+    + Headers
+    
+            Authorization: Basic QWxhZGRpbjpPcGVuU2VzYW1l
+        
++ Response 200 (application/json)
+    + Attributes 
+        + uomList (array[Uom])
+    
+### PUT unit of measurement [PUT /uom/{id}]
+
++ Parameters
+    + id: `2` (number, required) - Unit of measurement ID
+
++ Request (application/json)
+    + Attributes
+        + uomList (array[Uom])
+         
+    + Headers
+    
+            Authorization: Basic QWxhZGRpbjpPcGVuU2VzYW1l
+            
++ Response 200 (application/json)
+    + Body
+    
+            {
+                "uomList": 2
+            }
+
+### POST units of measurement [POST /uom]
+
++ Request (application/json)
+    + Attributes
+        + uomList (array[Uom])
+    + Headers
+    
+            Authorization: Basic QWxhZGRpbjpPcGVuU2VzYW1l
+            
++ Response 201 (application/json)
+    + Body
+    
+            {
+                "uomList": [
+                    2,
+                    3
+                ]
+            }
+            
+### DELETE unit of measurement [DELETE /uom/{id}]
+
++ Parameters
+    + id: `2` (number, required) - Unit of measurement ID
+
++ Request (application/json)
+    + Headers
+        
+            Authorization: Basic QWxhZGRpbjpPcGVuU2VzYW1l
+        
++ Response 200 (application/json)
+    + Body
+    
+            {
+                "message": "Unit of measurement '2' was removed."
+            }
+
+#### Stores [/helper-stores]
+
+Methods for working with custom delivery points (Stores).
+
+#### Note:
+- Non-standard function, please contact sales.
+- *Only `GET` methods are allowed*.
+
+### GET store [GET /stores/{id}]
+
++ Parameters
+    + id: `2` (number, required) - Store ID
+
++ Request (application/json)
+    + Headers
+    
+            Authorization: Basic QWxhZGRpbjpPcGVuU2VzYW1l
+        
++ Response 200 (application/json)
+    + Attributes
+        + storeList (array[Store])
+    
+### GET stores [GET /stores]
+
++ Request (application/json)
+    + Headers
+    
+            Authorization: Basic QWxhZGRpbjpPcGVuU2VzYW1l
+        
++ Response 200 (application/json)
+    + Attributes 
+        + storeList (array[Store])
+
+#### Stock types [/helper-stocktypes]
+
+#### Note:
+- The list of available stock types is dynamically generated
+- The keys represent the names of stocks, and the values are keys for other endpoints
+- Check usage in `POST`, `GET` and `PUT` `/products`
+
+### GET stocktypes [GET /stocktypes]
+
++ Request (application/json)
+    + Headers
+    
+            Authorization: Basic QWxhZGRpbjpPcGVuU2VzYW1l
+
++ Response 200 (application/json)
+    + Attributes
+        + stockTypesList (array[StockTypes])
+        
+
+#### OSS product rates [/helper-ossproductrates]
+
+Methods for setting and getting OSS product tax rates.
+
+#### Note:
+-  Usable only when OSS functionality is active (Non-standard function, please contact sales)
+- `abortOnError` **param is now available.** Default value is set to *true*. When set to false a partial update is allowed (meaning valid items are processed even if some of the items in batch request are invalid).
+- When the `POST` method is used on a product that already has an OSS rate set for the given country the rate will be **updated**.
+
+### GET OSS rate [GET /ossproductrates/{id}]
+
++ Parameters
+    + id: `1234` (number) - Product ID
+
++ Request (application/json)
+    + Headers
+    
+            Authorization: Basic QWxhZGRpbjpPcGVuU2VzYW1l
+
++ Response 200 (application/json)
+    + Attributes
+        + OssProductRateList (array[OssProductRateList])
+
+### GET OSS rates [GET /ossproductrates]
+
++ Request (application/json)
+    + Headers
+    
+            Authorization: Basic QWxhZGRpbjpPcGVuU2VzYW1l
+
++ Response 200 (application/json)
+    + Attributes
+        + OssProductRateList (array[OssProductRateList])
+        
+        
+### POST OSS rates [POST /ossproductrates]
+
++ Request (application/json)
+    + Attributes
+        + abortOnError: `true` (boolean)
+        + userPriceDiscountList (array[OssProductRateList])
+    + Headers
+        
+            Authorization: Basic QWxhZGRpbjpPcGVuU2VzYW1l
+        
++ Response 200 (application/json)
+    + Body
+    
+            {
+                "message": "Update partially failed.",
+                "OssProductRateList": [
+                    1234,
+                    456
+                ],
+                "errors" : []
+            }
+    
+# Group Order Helpers
+
+Complementary methods for working with orders (getting information about payment methods, order states, etc.).
+
+#### Payment methods [/helper-payments]
+
+Methods for working with order payment methods.
+
+#### Note:
+- If `allowedShopperGroup` is set to `0` the payment is visible for every shopper group.
+
+### GET payment method [GET /payments/{id}]
+
++ Parameters
+    + id: `2` (number, required) - Payment method ID
+    
++ Request (application/json)
+    + Headers
+        
+            Authorization: Basic QWxhZGRpbjpPcGVuU2VzYW1l
+        
++ Response 200 (application/json)
+    + Attributes (Payment)
+
+### GET payment methods [GET /payments]
+
++ Request (application/json)
+    + Headers
+        
+            Authorization: Basic QWxhZGRpbjpPcGVuU2VzYW1l
+        
++ Response 200 (application/json)
+    + Attributes
+        + paymentMethodList (array[Payment])
+        
+### PUT payment method [PUT /payments/{id}]
+
++ Parameters
+    + id: `2` (number, required) - Payment method ID
+
++ Request (application/json)
+    + Attributes
+        + paymentMethodList (array[Payment])
+         
+    + Headers
+    
+            Authorization: Basic QWxhZGRpbjpPcGVuU2VzYW1l
+            
++ Response 200 (application/json)
+    + Body
+    
+            {
+                "message": "Update successful.",
+                "paymentMethodList": [
+                    2
+                ]
+            }
+
+### POST payment methods [POST /payments]
+
++ Request (application/json)
+    + Attributes
+        + paymentMethodList (array[Payment])
+    + Headers
+    
+            Authorization: Basic QWxhZGRpbjpPcGVuU2VzYW1l
+            
++ Response 201 (application/json)
+    + Body
+    
+            {
+                "message": "Import successful.",
+                "paymentMethodList": [
+                    2,
+                    3
+                ]
+            }
+            
+### DELETE payment method [DELETE /payments/{id}]
+
++ Parameters
+    + id: `2` (number, required) - Payment method ID
+
++ Request (application/json)
+    + Headers
+        
+            Authorization: Basic QWxhZGRpbjpPcGVuU2VzYW1l
+        
++ Response 200 (application/json)
+    + Body
+    
+            {
+                "message": "Payment method '2' was removed."
+            }
+
+#### Shipping methods [/helper-shippings]
+
+Methods for working with order shipping methods.
+
+#### Note:
+- `PUT`, `POST` will be added in the near future.
+- list of available country codes for `allowedCountries` in shipping methods can be found in `GET country codes` method.
+- if values of `allowedShopperGroups`, `allowedPaymentMethods` are set as an **empty array** the shipping is automaticaly available for all shopper groups and payment methods.
+
+### GET shipping method [GET /shippings/{id}]
+
++ Parameters
+    + id: `2` (number, required) - Shipping method ID
+    
++ Request (application/json)
+    + Headers
+        
+            Authorization: Basic QWxhZGRpbjpPcGVuU2VzYW1l
+        
++ Response 200 (application/json)
+    + Attributes (Shipping)
+
+### GET shipping methods [GET /shippings]
+
++ Request (application/json)
+    + Headers
+        
+            Authorization: Basic QWxhZGRpbjpPcGVuU2VzYW1l
+        
++ Response 200 (application/json)
+    + Attributes
+        + shippingMethodList (array[Shipping])
+        
+### GET country codes [GET /countrycodes]
+
++ Request (application/json)
+    + Headers
+        
+            Authorization: Basic QWxhZGRpbjpPcGVuU2VzYW1l
+        
++ Response 200 (application/json)
+    + Attributes
+        + countryCodeList (CountryCodes)
+        
+### PUT shipping method [PUT /shippings/{id}]
+
++ Parameters
+    + id: `2` (number, required) - Shipping method ID
+
++ Request (application/json)
+    + Attributes
+        + shippingMethodList (array[Shipping])
+         
+    + Headers
+    
+            Authorization: Basic QWxhZGRpbjpPcGVuU2VzYW1l
+            
++ Response 200 (application/json)
+    + Body
+    
+            {
+                "message": "Update successful.",
+                "shippingMethodList": [
+                    2
+                ]
+            }
+
+### POST shipping methods [POST /shippings]
+
++ Request (application/json)
+    + Attributes
+        + shippingMethodList (array[Shipping])
+    + Headers
+    
+            Authorization: Basic QWxhZGRpbjpPcGVuU2VzYW1l
+            
++ Response 201 (application/json)
+    + Body
+    
+            {
+                "message": "Import successful.",
+                "shippingMethodList": [
+                    2,
+                    3
+                ]
+            }
+        
+### DELETE shipping method [DELETE /shippings/{id}]
+
++ Parameters
+    + id: `2` (number, required) - Shipping method ID
+
++ Request (application/json)
+    + Headers
+        
+            Authorization: Basic QWxhZGRpbjpPcGVuU2VzYW1l
+        
++ Response 200 (application/json)
+    + Body
+    
+            {
+                "message": "Shipping method '2' was removed."
+            }
+
+#### Order States [/helper-order-states]
+
+Methods for working with order states.
+
+#### Note:
+- `reserved` states can't be removed via API
+- allowed order codes are `A - Z`, `0 - 9`
+- allowed order meanings are `neutral`, `positive` and `negative`
+
+### GET order status [GET /orderstates/{id}]
+
++ Parameters
+   + id: `3` (number, required) - Order status ID
+   
++ Request (application/json)
+    + Headers
+    
+            Authorization: Basic QWxhZGRpbjpPcGVuU2VzYW1l
+
++ Response 200 (application/json)
+    + Attributes (OrderStatus)
+
+### GET order states [GET /orderstates]
+
++ Request (application/json)
+    + Headers
+    
+            Authorization: Basic QWxhZGRpbjpPcGVuU2VzYW1l
+
++ Response 200 (application/json)
+    + Attributes
+        + orderstatusList (array[OrderStatus])
+        
+### PUT order status [PUT /orderstates/{id}]
+
++ Parameters
+    + id: `86` (number, required) - Order status ID
+
++ Request (application/json)
+    + Attributes
+        + orderstatusList (array[OrderStatus])
+    + Headers
+        
+            Authorization: Basic QWxhZGRpbjpPcGVuU2VzYW1l
+        
++ Response 200 (application/json)
+    + Body
+    
+            {
+                "orderstatusList": 86
+            }
+            
+### POST order states [POST /orderstates]
+
++ Request (application/json)
+    + Attributes
+        + orderstatusList (array[OrderStatus])
+    + Headers
+        
+            Authorization: Basic QWxhZGRpbjpPcGVuU2VzYW1l
+        
++ Response 201 (application/json)
+    + Attributes
+        + orderstatusList (array[OrderStatus])
+    + Body
+    
+            {
+                "orderstatusList": [
+                    86,
+                    87
+                ]
+            }
+
+### DELETE order status [DELETE /orderstates/{id}]
+
++ Parameters
+    + id: `86` (number, required) - Order status ID
+
++ Request (application/json)
+    + Headers
+        
+            Authorization: Basic QWxhZGRpbjpPcGVuU2VzYW1l
+        
++ Response 200 (application/json)
+    + Body
+    
+            {
+                "message" : "Order status '86' was removed."
+            }
+
+#### Currencies [/helper-currencies]
+
+Methods for working with currencies.
+
+### GET currency [GET /currencies/{id}]
+
++ Parameters
+    + id: `2` (number, required) - Currency ID
+    
++ Request (application/json)
+    + Headers
+        
+            Authorization: Basic QWxhZGRpbjpPcGVuU2VzYW1l
+        
++ Response 200 (application/json)
+    + Attributes (Currency)
+
+### GET currencies [GET /currencies]
+
++ Request (application/json)
+    + Headers
+        
+            Authorization: Basic QWxhZGRpbjpPcGVuU2VzYW1l
+        
++ Response 200 (application/json)
+    + Attributes
+        + currencyList (array[Currency])
+
+        
+#### Order notifications [/helper-ordernotifications]
+
+Methods for working with order notifications.
+
+#### Note:
+- **Multiple notifications** can be sent at once by appending data to `notificationList` array.
+- Maximum allowed size per attachment is **5 MB**.
+- Supported attachment **file extensions** are `jpg`, `jpeg`, `png`, `gif`, `doc`, `docx`, `txt`, `pdf`.
+
+### POST order notifications [POST /ordernotifications]
+
++ Request (application/json)
+    + Attributes
+        + notificationList (array[OrderNotification])
+    + Headers
+    
+            Authorization: Basic QWxhZGRpbjpPcGVuU2VzYW1l
+            
++ Response 200 (application/json)
+    + Body
+    
+            {
+                "message": "Sending successful.",
+                "notificationList": [
+                    12345
+                ]
+            }
+
+#### Order multi doc. invoice settings [/helper-invoicesettings]
+
+Methods for setting up multi doc. invoice rules.
+
+#### Note:
+- methods will be actived upon contacting our sales department.
+
+### GET invoice setting [GET /invoices/manage/{type}]
+
++ Parameters
+    + type: `invoice` (string, required) - Type of document
+    
++ Request (application/json)
+    + Headers
+    
+            Authorization: Basic QWxhZGRpbjpPcGVuU2VzYW1l
+            
++ Response 200 (application/json)
+    + Attributes
+        + manageList (array[InvoiceSettings])
+
+### GET invoice settings [GET /invoices/manage]
+
++ Request (application/json)
+    + Headers
+    
+            Authorization: Basic QWxhZGRpbjpPcGVuU2VzYW1l
+            
++ Response 200 (application/json)
+    + Attributes
+        + manageList (array[InvoiceSettings])
+        
+### PUT invoice settings [PUT /invoices/manage/{type}]
+
++ Parameters
+    + type: `invoice` (string, required) - Type of document
+
++ Request (application/json)
+    + Attributes
+        + manageList (array[InvoiceSettings])
+    + Headers
+    
+            Authorization: Basic QWxhZGRpbjpPcGVuU2VzYW1l
+            
++ Response 200 (application/json)
+    + Body
+    
+            {
+                "message": "Update successful.",
+                "manageList": [
+                    12345
+                ]
+            }
+        
+### POST invoice settings [POST /invoices/manage]
+
++ Request (application/json)
+    + Attributes
+        + manageList (array[InvoiceSettings])
+    + Headers
+    
+            Authorization: Basic QWxhZGRpbjpPcGVuU2VzYW1l
+            
++ Response 200 (application/json)
+    + Body
+    
+            {
+                "message": "Import successful.",
+                "manageList": [
+                    12345
+                ]
+            }
+
+# Group Customer Helpers
+
+Complementary methods for working with customers (getting information about shopper groups, etc.).
+
+#### Shopper groups [/helper-shoppergroups]
+
+Methods for working with shopper groups.
+
+#### Note:
+- Removing a shopper group is possible only if no users are in this shopper group. 
+
+### GET shoppergroup [GET /shoppergroups/{id}]
+
++ Parameters
+    + id: `5` (number, required) - Shopper group ID
+
++ Request (application/json)
+    + Headers
+        
+            Authorization: Basic QWxhZGRpbjpPcGVuU2VzYW1l
+        
++ Response 200 (application/json)
+    + Attributes (ShopperGroup)
+
+### GET shoppergroups [GET /shoppergroups]
+
++ Request (application/json)
+    + Headers
+        
+            Authorization: Basic QWxhZGRpbjpPcGVuU2VzYW1l
+        
++ Response 200 (application/json)
+    + Attributes 
+        + shoppergroupList (array[ShopperGroup])
+
+### PUT shoppergroup [PUT /shoppergroups/{id}]
+
++ Parameters
+    + id: `5` (number, required) - Shopper group ID
+
++ Request (application/json)
+    + Attributes
+        + shoppergroupList (array[ShopperGroup])
+    + Headers
+        
+            Authorization: Basic QWxhZGRpbjpPcGVuU2VzYW1l
+        
++ Response 200 (application/json)
+    + Body
+    
+            {
+                "shoppergroupList": 5
+            }
+
+### POST shoppergroups [POST /shoppergroups]
+
++ Request (application/json)
+    + Attributes
+        + shoppergroupList (array[ShopperGroup])
+    + Headers
+        
+            Authorization: Basic QWxhZGRpbjpPcGVuU2VzYW1l
+        
++ Response 201 (application/json)
+    + Body
+    
+            {
+                "shoppergroupList": [
+                    5,
+                    30
+                ]
+            }
+
+### DELETE shoppergroup [DELETE /shoppergroups/{id}]
+
++ Parameters
+    + id: `5` (number, required) - Shopper group ID
+
++ Request (application/json)
+    + Headers
+    
+            Authorization: Basic QWxhZGRpbjpPcGVuU2VzYW1l
+            
++ Response 200 (application/json)
+    + Body
+    
+            {
+                "message": "Shopper group '5' was removed."
+            }
+            
+            
+#### GDPR [/helper-gdpr]
+
+Methods for working with GDPR.
+
+#### Note:
+- only `GET` and `POST` methods are allowed for GDPR versions and approvals due to GDPR principes. 
+
+### GET GDPR forms types [GET /gdpr/forms]
+
++ Request (application/json)
+    + Headers
+        
+            Authorization: Basic QWxhZGRpbjpPcGVuU2VzYW1l
+        
++ Response 200 (application/json)
+    + Attributes
+        + formList (GdprForms)
+    
+### GET GDPR versions [GET /gdpr/versions]
+
++ Request (application/json)
+    + Headers
+        
+            Authorization: Basic QWxhZGRpbjpPcGVuU2VzYW1l
+        
++ Response 200 (application/json)
+    + Attributes
+        + gdprVersionList (array[GdprVersion])
+    
+### GET GDPR version [GET /gdpr/versions/{id}]
+
++ Parameters
+    + id: `5` (number, required) - GDPR version ID
+
++ Request (application/json)
+    + Headers
+        
+            Authorization: Basic QWxhZGRpbjpPcGVuU2VzYW1l
+        
++ Response 200 (application/json)
+    + Attributes
+        + gdprVersionList (array[GdprVersion])
+    
+### POST GDPR versions [POST /gdpr/versions]
+
++ Request (application/json)
+    + Attributes
+        + gdprVersionList (array[GdprVersion])
+    + Headers
+        
+            Authorization: Basic QWxhZGRpbjpPcGVuU2VzYW1l
+        
+
++ Response 201 (application/json)
+    + Body
+    
+            {
+               "message": "Import successful.",
+                "gdprVersionList": [
+                    18,
+                    19,
+                    20
+                ]
+            }
+            
+### POST GDPR user approval [POST /gdpr/approvals]
+
++ Request (application/json)
+    + Attributes
+        + gdprApprovalList (array[GdprApproval])
+    + Headers
+        
+            Authorization: Basic QWxhZGRpbjpPcGVuU2VzYW1l
+        
+
++ Response 201 (application/json)
+    + Body
+    
+            {
+               "message": "Import successful.",
+                "gdprApprovalList": [
+                    1821,
+                    1859
+                ]
+            }
+            
+#### Individual price discounts [/helper-user-discounts]
+
+Methods for working with individual price discounts for specific customers.
+
+#### Note:
+- Non-standard function, please contact sales
+- `abortOnError` **param is now available.** Default value is set to *true*. When set to false a partial update is allowed (meaning valid items are processed even if some of the items in batch request are invalid).
+- to **DELETE** an specific discount record set `discountValue` to *zero* (0).
+
+### PUT (batch) customer discount [PUT /users/discount]
+
++ Request (application/json)
+    + Attributes
+        + abortOnError: `true` (boolean)
+        + userPriceDiscountList (array[PriceDiscountUpdate])
+    + Headers
+        
+            Authorization: Basic QWxhZGRpbjpPcGVuU2VzYW1l
+        
++ Response 200 (application/json)
+    + Body
+    
+            {
+                "message": "Update successful."
+                "userPriceDiscountList": [
+                    5,
+                    30
+                ]
+            }
+
+
+# Group Products
+
+Methods for working with products.
+
+## Selecting [/products-select]
+
+Gets product information. Default item cout per page is set to `200` per request.
+
+#### Optional pagination parameters:
+- `perPage` - item count per page (maximum allowed value is `1000`) 
+- `page` - page number
+
+#### Optional filter parameters:
+- `list` - lists / returns only selected values of given records (selecting is allowed only for top level values like `sku`, `stock`, `publish` but not `type` in `parameters`)
+- `filterBy` - column name (only top level values like `cdate`, `mdate`, `sku`) 
+- `values` - comma separated list of values to be filtered by (%2C encoded comma)
+- `from` - available only if 'filterBy' is set to `cdate` or `mdate`
+- `to` - available only if 'filterBy' is set to `cdate` or `mdate`
+
+### GET product [GET /products/{id}]
+
++ Parameters
+   + id: `101815` (number, required) - Product ID
+   
++ Request (application/json)
+    + Headers
+    
+            Authorization: Basic QWxhZGRpbjpPcGVuU2VzYW1l
+
++ Response 200 (application/json)
+    + Attributes (Product)
+
+### GET products [GET /products{?page,perPage,list,filterBy,values,from,to}]
+
++ Parameters
+   + page: `3` (number, optional) - Page number
+   + perPage: `500` (number, optional) - Item count per page
+        + Default: `200`
+   + list: `sku,stock,publish` (string, optional) - List of values to return separated by comma (%2C encoded comma)
+   + filterBy: `sku` (string, optional) - Column name (only top level values like cdate, mdate, sku) 
+   + values: `SKU01C,SKU02D` (string, optional) - comma separated list of filtering values (%2C encoded comma)
+   + from: `2019-09-20 10:52:11` (string, optional) - Available only if 'filterBy' is set to cdate or mdate
+   + to: `2019-09-25 23:15:51` (string, optional) - Available only if 'filterBy' is set to cdate or mdate
+
++ Request (application/json)
+    + Headers
+    
+            Authorization: Basic QWxhZGRpbjpPcGVuU2VzYW1l
+   
++ Response 200 (application/json)
+    + Attributes 
+        + metaData (MetaData)
+        + productList (array[Product])
+        
+
+## Import & Update [/products-import]
+
+The `POST` method creates new product/s and the `PUT` method updates specific product. 
+
+#### Note:
+- `PUT (batch) product stocks & availabilities` method is aimed for batch/mass stock updating. Using this method over `PUT product` for stock and availability update is **strongly advised.**
+- `PUT (batch) product prices` method is aimed for batch/mass price updating similarly to batch stocks update.
+- `abortOnError` param is now available for **batch** methods. Default value is set to `true`. When set to `false` a partial update is allowed (meaning valid items are processed even if some of the items in batch request are invalid). 
+- `stock_type1` and `stock_type2` are dynamically generated from `GET stocktypes`
+- **WARNING:** `taxRate` moved from `priceList` array to root product structure to reflect shop behavior
+- **WARNING:** variant prices have to be entered with or without tax depending on the shop settings (applies for `PUT and POST /products` and `PUT /products/price`) 
+
+### PUT product [PUT /products/{id}]
+
++ Parameters
+    + id: `101815` (number, required) - Product ID
+
++ Request (application/json)
+    + Headers
+    
+            Authorization: Basic QWxhZGRpbjpPcGVuU2VzYW1l
+           
+    + Attributes
+        + productList (array[ProductUpdate])
+        
++ Response 200 (application/json)
+    + Body
+    
+            "message": "Update successful.",
+            "productList": [
+                101815
+            ]
+
+### PUT (batch) product stocks & availabilities [PUT /products/stock]
+
++ Request (application/json)
+    + Headers
+    
+            Authorization: Basic QWxhZGRpbjpPcGVuU2VzYW1l
+
+    + Attributes
+        + abortOnError: `true` (boolean)
+        + stockList (array[StockAvail])
+        
++ Response 200 (application/json)
+    + Body
+    
+            {
+                "message": "Update successful."
+                "stockList": [
+                    101815
+                ],
+                "errors": []
+            }
+            
+### PUT (batch) product prices [PUT /products/price]
+
++ Request (application/json)
+    + Headers
+    
+            Authorization: Basic QWxhZGRpbjpPcGVuU2VzYW1l
+
+    + Attributes
+        + abortOnError: `true` (boolean)
+        + priceList (array[BatchPrice])
+        
++ Response 200 (application/json)
+    + Body
+    
+            {
+               "message": "Update successful.",
+               "priceList": [
+                    101815
+                ],
+                "errors": []
+            }
+
+### POST products [POST /products]
+
++ Request (application/json)
+    + Headers
+    
+            Authorization: Basic QWxhZGRpbjpPcGVuU2VzYW1l
+           
+    + Attributes
+        + productList (array[Product])
+
++ Response 201 (application/json)
+    + Body
+    
+            {
+                "message": "Import successful.",
+                "productList": [
+                    101815,
+                    101816,
+                    101817
+                ]
+            }
+            
+## Removing [/products-delete]
+
+Removes specific product.
+
+### DELETE product [DELETE /products/{id}]
+
++ Parameters
+    + id: `101815` (number, required) - Product ID
+
++ Request (application/json)
+    + Headers
+    
+            Authorization: Basic QWxhZGRpbjpPcGVuU2VzYW1l
+            
++ Response 200 (application/json)
+    + Body
+    
+            {
+                "message": "Product '101815' was removed."
+            }
+
+# Group Orders
+
+Methods for working with orders.
+
+## Selecting [/order-select]
+
+Gets order information. Default item cout per page is set to `200` per request.
+
+#### Optional pagination parameters:
+- `perPage` - item count per page (maximum allowed value is `1000`) 
+- `page` - page number
+
+#### Optional filter parameters:
+- `filterBy` - column name (only top level values like `cdate`, `mdate`, `orderStatus`) 
+- `values` - comma separated list of values to be filtered by (%2C encoded comma)
+- `from` - available only if 'filterBy' is set to `cdate` or `mdate`
+- `to` - available only if 'filterBy' is set to `cdate` or `mdate`
+- `addOrderHistory` - adds order status history to result
+- `addTrackingUrl` - adds tracking url to result (if exists and APP 160 is activated)
+- `domain` - filters orders by domain of origin
+
+### GET order [GET /orders/{id}]
+
++ Parameters
+    + id: `101815` (number, required) - Order ID
+    
++ Request (application/json)
+    + Headers
+    
+            Authorization: Basic QWxhZGRpbjpPcGVuU2VzYW1l
+            
++ Response 200 (application/json)
+    + Attributes (Order)
+
+### GET orders [GET /orders{?page,perPage,filterBy,values,from,to,domain}]
+
++ Parameters
+   + page: `3` (number, optional) - Page number
+   + perPage: `500` (number, optional) - Item count per page
+        + Default: `200`
+    + filterBy: `orderStatus` (string, optional) - Column name (only top level values like cdate, mdate, orderStatus) 
+    + values: `S,D,C` (string, optional) - comma separated list of filtering values (%2C encoded comma)
+    + from: `2019-09-20 10:52:11` (string, optional) - Available only if 'filterBy' is set to cdate or mdate
+    + to: `2019-09-25 23:15:51` (string, optional) - Available only if 'filterBy' is set to cdate or mdate
+    + addOrderHistory: true (boolean, optional) - Adds order status history to result
+    + addTrackingUrl: true (boolean, optional) - Adds tracking url to result (if exists and APP 160 is activated)
+    + domain: `www.domain.com` (string, optional) - Filters orders by domain of origin
+
++ Request (application/json)
+    + Headers
+    
+            Authorization: Basic QWxhZGRpbjpPcGVuU2VzYW1l
+            
++ Response 200 (application/json)
+    + Attributes 
+        + metaData (MetaData)
+        + orderList (array[Order])
+
+## Import & Update [/order-import]
+
+The `POST` method creates new order/s and the `PUT` method updates specific order.
+
+#### Note:
+- A valid `phone` number must contain **16 characters or less** (allowed characters are: **'0-9, +, [space], /, -, –'** of which these three: **'/, -, –'** will be converted to [space])
+- Please mind that the data structures and required fields for `PUT` and `POST orders` metod are **different**.
+- With `POST orders` the shipping address is only updated when the address `id` is given, when the address `id` is missing or not existing a new shipping address will be created. 
+- `abortOnError` param is now available for **batch** order status update method. Default value is set to `true`. When set to `false` a partial update is allowed (meaning valid items are processed even if some of the items in batch request are invalid). 
+- The domain of the order changes based on the currency (prices must be in the provided currency).
+    - supported currencies: `CZK, HUF, PLN, BGN, RON, UAH`
+
+### PUT order [PUT /orders/{id}]
+
++ Parameters
+    + id: `101815` (number, required) - Order ID
+    
++ Request (application/json)
+    + Attributes
+        + orderList (array[OrderUpdate])
+    + Headers
+    
+            Authorization: Basic QWxhZGRpbjpPcGVuU2VzYW1l
+   
++ Response 200 (application/json)
+    + Body
+    
+            {
+                "orderList": 101815
+            }
+                     
+### PUT order status [PUT /orders/status/{id}]
+
++ Parameters
+    + id: `101815` (number, required) - Order ID
+    
++ Request (application/json)
+    + Attributes
+        + orderList: (OrderStatusOnOrder)
+
+    + Headers
+    
+            Authorization: Basic QWxhZGRpbjpPcGVuU2VzYW1l
+   
++ Response 200 (application/json)
+    + Body
+    
+            {
+                "message": "Update successful.", 
+                "orderList": [
+                101815
+                ]
+            }
+            
+### PUT (batch) order statuses [PUT /orders/status]
+
++ Request (application/json)
+    + Attributes
+        + abortOnError: `true` (boolean)
+        + orderList: (array[OrderStatusOnOrder]) 
+
+    + Headers
+    
+            Authorization: Basic QWxhZGRpbjpPcGVuU2VzYW1l
+   
++ Response 200 (application/json)
+    + Body
+    
+            {
+                "message": "Update successful.", 
+                "orderList": [
+                101815
+                ]
+            }
+
+### POST orders [POST /orders]
+
++ Request (application/json)
+    + Attributes
+        + orderList (array[OrderCreate])
+    + Headers
+    
+            Authorization: Basic QWxhZGRpbjpPcGVuU2VzYW1l
+   
++ Response 201 (application/json)
+    + Body
+    
+            {
+                "orderList": [
+                    101815,
+                    101816
+                ]
+            }
+
+## Removing [/order-delete]
+
+Removes specific order.
+
+#### Note:
+- after the order is removed the stock level of ordered items is updated to the state before the order was placed.
+
+### DELETE order [DELETE /orders/{id}]
+
++ Parameters
+    + id: `101815` (number, required) - Order ID
+    
++ Request (application/json)
+    + Headers
+    
+            Authorization: Basic QWxhZGRpbjpPcGVuU2VzYW1l
+            
++ Response 200 (application/json)
+    + Body
+    
+            {
+                "message": "Order '101815' was removed."
+            }
+
+
+# Group Invoices
+
+There are **three sets of methods** for working with invoices. 
+
+#### Note:
+- The **first "basic mode"** is active by default and is used only for getting basic information such as if the invoce exists, when it was created and other. *Only `GET` method is allowed*.
+- The **second "single doc. mode"** is actived upon contacting our sales department. This set of methods allows uploading own invoices in PDF format. *All methods are allowed (`GET`, `PUT`, `POST`, `DELETE`)*.
+- The **third "multi doc. mode"** is actived upon contacting our sales department. This set of methods allows uploading mulitple documents per order (invoices, creditnotes, proforma and etc.) in PDF format. *All methods are allowed (`GET`, `PUT`, `POST`, `DELETE`)*.
+- Document types and other settings for `multi doc. mode` can be set by using the **Order multi doc. invoice settings** methods in **Order Heplers** section
+
+## Selecting "basic mode" [/invoices-select]
+
+### GET invoice [GET /invoices/{id}]
+
++ Parameters
+    + id: `2` (number, required) - Order ID
+    
++ Request (application/json)
+    + Headers
+    
+            Authorization: Basic QWxhZGRpbjpPcGVuU2VzYW1l
+
++ Response 200 (application/json)
+    + Attributes (InvoiceBasic)
+
+### GET invoices [GET /invoices]
+
++ Request (application/json)
+    + Headers
+    
+            Authorization: Basic QWxhZGRpbjpPcGVuU2VzYW1l
+            
++ Response 200 (application/json)
+    + Attributes
+        + invoiceList (array[InvoiceBasic])
+        
+## Selecting "single doc. mode" [/invoices-select-single]
+
+### GET invoice [GET /invoices/{id}]
+
++ Parameters
+    + id: `2` (number, required) - Order ID
+    
++ Request (application/json)
+    + Headers
+    
+            Authorization: Basic QWxhZGRpbjpPcGVuU2VzYW1l
+
++ Response 200 (application/json)
+    + Attributes (InvoiceSingle)
+
+### GET invoices [GET /invoices]
+
++ Request (application/json)
+    + Headers
+    
+            Authorization: Basic QWxhZGRpbjpPcGVuU2VzYW1l
+            
++ Response 200 (application/json)
+    + Attributes
+        + invoiceList (array[InvoiceSingle])
+        
+## Selecting "multi doc. mode" [/invoices-select-multi]
+        
+### GET invoice [GET /invoices/{id}]
+
++ Parameters
+    + id: `2` (number, required) - Order ID
+    
++ Request (application/json)
+    + Headers
+    
+            Authorization: Basic QWxhZGRpbjpPcGVuU2VzYW1l
+
++ Response 200 (application/json)
+    + Attributes (InvoiceMulti)
+
+### GET invoices [GET /invoices]
+
++ Request (application/json)
+    + Headers
+    
+            Authorization: Basic QWxhZGRpbjpPcGVuU2VzYW1l
+            
++ Response 200 (application/json)
+    + Attributes
+        + invoiceList (array[InvoiceMulti])
+            
+## Import & Update "single doc. mode" [/invoices-import-single]
+
+### PUT invoice [PUT /invoices/{id}]
+
++ Parameters
+    + id: `2` (number, required) - Order ID
+    
++ Request (application/json)
+    + Attributes
+        + invoiceList (array[InvoiceSingle])
+    + Headers
+    
+            Authorization: Basic QWxhZGRpbjpPcGVuU2VzYW1l
+
++ Response 200 (application/json)
+     + Body
+    
+            {
+                "invoiceList": 2
+            }
+
+### POST invoices [POST /invoices]
+
++ Request (application/json)
+    + Attributes
+        + invoiceList (array[InvoiceSingle])
+    + Headers
+    
+            Authorization: Basic QWxhZGRpbjpPcGVuU2VzYW1l
+            
++ Response 201 (application/json)
+    + Body
+    
+            {
+                "invoiceList": [
+                    2,
+                    3
+                ]
+            }
+
+## Import & Update "multi doc. mode" [/invoices-import-multi]
+
+### PUT invoice [PUT /invoices/{id}]
+
++ Parameters
+    + id: `2` (number, required) - Order ID
+    
++ Request (application/json)
+    + Attributes
+        + invoiceList (array[InvoiceMulti])
+    + Headers
+    
+            Authorization: Basic QWxhZGRpbjpPcGVuU2VzYW1l
+
++ Response 200 (application/json)
+     + Body
+    
+            {
+                "invoiceList": 2
+            }
+
+### POST invoices [POST /invoices]
+
++ Request (application/json)
+    + Attributes
+        + invoiceList (array[InvoiceMulti])
+    + Headers
+    
+            Authorization: Basic QWxhZGRpbjpPcGVuU2VzYW1l
+            
++ Response 201 (application/json)
+    + Body
+    
+            {
+                "invoiceList": [
+                    2,
+                    3
+                ]
+            }
+
+## Removing [/invoices-delete]
+
+### DELETE invoice [DELETE /invoices/{id}]
+
++ Parameters
+    + id: `2` (number, required) - Order ID
+    
++ Request (application/json)
+    + Headers
+    
+            Authorization: Basic QWxhZGRpbjpPcGVuU2VzYW1l
+            
++ Response 200 (application/json)
+    + Body
+    
+            {
+                "message": "Invoice assigned to order '2' was removed."
+            }
+
+
+# Group Customers
+Methods for working with customers.
+
+## Selecting [/users-select]
+
+#### Optional pagination parameters:
+- `perPage` - item count per page (maximum allowed value is `1000`) 
+- `page` - page number
+
+#### Optional filter parameters:
+- `filterBy` - column name (only top level values like `cdate`, `mdate`, `orderStatus`) 
+- `values` - comma separated list of values to be filtered by (%2C encoded comma)
+- `from` - available only if 'filterBy' is set to `cdate` or `mdate`
+- `to` - available only if 'filterBy' is set to `cdate` or `mdate`
+
+#### Note:
+- `priceDiscount` is available only fo `GET` methods (non-standard function, please contact sales)
+
+### GET customer [GET /users/{id}]
+
++ Parameters
+   + id: `236` (number, required) - Customer ID
+   
++ Request (application/json)
+    + Headers
+    
+            Authorization: Basic QWxhZGRpbjpPcGVuU2VzYW1l
+
++ Response 200 (application/json)
+    + Attributes (Customer)
+
+### GET customers [GET /users{?page,perPage,filterBy,values,from,to}]
+
++ Parameters
+   + page: `3` (number, optional) - Page number
+   + perPage: `500` (number, optional) - Item count per page
+        + Default: `200`
+    + filterBy: `orderStatus` (string, optional) - Column name (only top level values like cdate, mdate, orderStatus) 
+    + values: `S,D,C` (string, optional) - comma separated list of filtering values (%2C encoded comma)
+    + from: `2019-09-20 10:52:11` (string, optional) - Available only if 'filterBy' is set to cdate or mdate
+    + to: `2019-09-25 23:15:51` (string, optional) - Available only if 'filterBy' is set to cdate or mdate
+
++ Request (application/json)
+    + Headers
+    
+            Authorization: Basic QWxhZGRpbjpPcGVuU2VzYW1l
+
++ Response 200 (application/json)
+    + Attributes
+        + metaData (MetaData)
+        + customerList (array[Customer])
+        
+## Authentication [/users-auth]
+
+Checks the correctness of given customer credentials (please contact sales). Currently there are **two method** to check customer authentication:
+- with **standard credentials** sending email and password
+- with **social login** sending hybrid auth identifier and provider
+
+#### Note:
+- When sending customer `password` following criteria **must** be met:
+    - OpenSSL **cipher method** must be choosen / configured (please contact sales)
+    - OpenSSL **secret passphrase** must be choosen / configured (please contact sales)
+    - `initializationVector` parameter is required when sending encrypted password
+    - both `password` and `initializationVector` have to be Base64 encoded
+
+### POST customer authentication [POST /users/auth]
+
++ Request Standard credentials (application/json)
+    + Attributes (CustomerAuthNormal)
+    + Headers
+    
+            Authorization: Basic QWxhZGRpbjpPcGVuU2VzYW1l
+            
++ Request Social login (application/json)
+    + Attributes (CustomerAuthHybrid)
+    + Headers
+    
+            Authorization: Basic QWxhZGRpbjpPcGVuU2VzYW1l
+            
++ Response 200 (application/json)
+     + Body
+    
+            {
+                "message": "Customer was successfully authenticated.",
+                "auth": {
+                    "email": "john.smith@gmail.com",
+                    "id": 456
+                }
+            }
+            
++ Response 401 (application/json)
+     + Body
+    
+            {
+                "message": "Customer authentication failed, wrong credentials."
+            }
+
+## Import & Update [/users-import]
+
+#### Note:
+- When using `POST customers` the **shipping** address `id` is not required
+- When using `PUT customers` the **shipping** address `id` is required for updating existing address, if `id` is not provided another address will be added automatically (with a newly generated id)
+- A valid `phone` number must contain **16 characters or less** (allowed characters are: **'0-9, +, [space], /, -, –'** of which these three: **'/, -, –'** will be converted to [space])
+- When sending customer `password` following criteria **must** be met:
+    - OpenSSL **cipher method** must be choosen / configured (please contact sales)
+    - OpenSSL **secret passphrase** must be choosen / configured (please contact sales)
+    - `initializationVector` parameter is required when sending encrypted password
+    - both `password` and `initializationVector` have to be Base64 encoded
+- When sending **social login information** following criteria **must** be met:
+    - `hybridAuthIdentifier` parameter is required (please contact sales)
+    - `provider` parameter is required (please contact sales)
+    - `domain` parameter is required
+
+### PUT customer [PUT /users/{id}]
+
++ Parameters
+    + id: `236` (number, required) - Customer ID
+    
++ Request (application/json)
+    + Attributes
+        + customerList (array[CustomerNoGdpr])
+    + Headers
+    
+            Authorization: Basic QWxhZGRpbjpPcGVuU2VzYW1l
+
++ Response 200 (application/json)
+     + Body
+    
+            {
+                "message": "Update succesful.",
+                "customerList": [
+                    236
+                ]
+            }
+
+### POST customers [POST /users]
+
++ Request (application/json)
+    + Attributes
+        + customerList (array[CustomerNoGdpr])
+    + Headers
+    
+            Authorization: Basic QWxhZGRpbjpPcGVuU2VzYW1l
+            
++ Response 201 (application/json)
+    + Body
+    
+            {
+                "message": "Import succesful.",
+                "customerList": [
+                    236,
+                    237
+                ]
+            }
+
+## Removing [/users-delete]
+
+### DELETE customer [DELETE /users/{id}]
+
++ Parameters
+    + id: `236` (number, required) - Customer ID
+    
++ Request (application/json)
+    + Headers
+    
+            Authorization: Basic QWxhZGRpbjpPcGVuU2VzYW1l
+            
++ Response 200 (application/json)
+    + Body
+    
+            {
+                "message": "Customer '236' was removed."
+            }
+
+# Group Coupons
+
+Methods for working with coupons.
+
+## Selecting [/coupons-select]
+
+#### Optional filter parameters:
+- `filterBy` - column name (only top level values like `cdate`, `mdate`, `orderStatus`) 
+- `values` - comma separated list of values to be filtered by (%2C encoded comma)
+- `from` - available only if 'filterBy' is set to `validFrom` or `validTo`
+- `to` - available only if 'filterBy' is set to `validFrom` or `validTo`
+
+### GET coupon [GET /coupons/{id}]
+
++ Parameters
+    + id: `128` (number, required) - Coupon code
+
++ Response 200 (application/json)
+     + Attributes (Coupon)
+        
+### GET coupons [GET /coupons{?filterBy,values,from,to}]
+
++ Parameters
+    + filterBy: `code` (string, optional) - Column name (only top level values like cdate, mdate, orderStatus) 
+    + values: `x435asdf` (string, optional) - comma separated list of filtering values (%2C encoded comma)
+    + from: `2019-09-20 10:52:11` (string, optional) - Available only if 'filterBy' is set to validFrom or validTo
+    + to: `2019-09-25 23:15:51` (string, optional) - Available only if 'filterBy' is set to validFrom or validTo
+
++ Request (application/json)
+    + Headers
+    
+            Authorization: Basic QWxhZGRpbjpPcGVuU2VzYW1l
+
++ Response 200 (application/json)
+    + Attributes
+        + couponList (array[Coupon])
+        
+### GET archived coupons [GET /coupons/archived]
+
++ Request (application/json)
+    + Headers
+    
+            Authorization: Basic QWxhZGRpbjpPcGVuU2VzYW1l
+
++ Response 200 (application/json)
+    + Attributes
+        + couponList (array[Coupon])
+
+
+## Import & Update [/coupons-import]
+
+#### Note:
+- existing coupons can't be archived with the `PUT` method, please use the `ARCHIVE` method
+- if no coupon code is present when creating new coupons the coupon code will be generated **automaticaly** 
+
+### PUT coupon [PUT /coupons/{id}]
+
++ Parameters
+    + id: `236` (number, required) - Coupon ID
+    
++ Request (application/json)
+    + Attributes
+        + couponList (array[Coupon])
+    + Headers
+    
+            Authorization: Basic QWxhZGRpbjpPcGVuU2VzYW1l
+
++ Response 200 (application/json)
+     + Body
+    
+            {
+                "message": "Update succesful.",
+                "couponList": [
+                    236
+                ]
+            }
+
+### POST coupons [POST /coupons]
+
++ Request (application/json)
+    + Attributes
+        + couponList (array[Coupon])
+    + Headers
+    
+            Authorization: Basic QWxhZGRpbjpPcGVuU2VzYW1l
+            
++ Response 201 (application/json)
+    + Body
+    
+            {
+                "message": "Import succesful.",
+                "couponList": [
+                    236,
+                    237
+                ]
+            }
+
+## Archiving [/coupons-archive]
+
+#### Note:
+- coupons can't be deleted for security reasons, they are archived instead.
+
+### ARCHIVE coupon [DELETE /coupons/{id}]
+
++ Parameters
+    + id: `236` (number, required) - Coupon ID
+    
++ Request (application/json)
+    + Headers
+    
+            Authorization: Basic QWxhZGRpbjpPcGVuU2VzYW1l
+            
++ Response 200 (application/json)
+    + Body
+    
+            {
+                "message": "Coupon '236' was archived."
+            }
+
+# Group Static fields
+
+Add custom (static) fields to structures like orders, products, customers, etc.
+
+#### Note:
+- for placing a static field into **root** structure use `root` value for parent `parent`.
+- for placing a static field into **sub** structure use `>` to separate array key path (for example setting parent to `address > billing` will result into adding a static value to order billing address).
+- if `makeDynamic` field is set to `true` the value of the field is no longer static and can be filled with standard POST an PUT methods (these field can be placed only in root structure),
+- dynamic fields are default set as a `string` (256 characters), more types (boolean, int, float) will be added in near future.
+
+## Fields in orders [/order-static]
+
+### GET (order) field [GET /staticfields/orders/{id}]
+
++ Parameters
+    + id: `2` (number, required) - Static field ID
+    
++ Request (application/json)
+    + Headers
+    
+            Authorization: Basic QWxhZGRpbjpPcGVuU2VzYW1l
+            
++ Response 200 (application/json)
+    + Attributes (StaticField)
+
+### GET (order) fields [GET /staticfields/orders]
+
++ Request (application/json)
+    + Headers
+    
+            Authorization: Basic QWxhZGRpbjpPcGVuU2VzYW1l
+            
++ Response 200 (application/json)
+    + Attributes
+        + staticFields (array[StaticField])
+
+### PUT (order) fields [PUT /staticfields/orders/{id}]
+
++ Parameters
+    + id: `2` (number, required) - Static field ID
+    
++ Request (application/json)
+    + Attributes
+        + staticFields (array[StaticField])
+    + Headers
+    
+            Authorization: Basic QWxhZGRpbjpPcGVuU2VzYW1l
+            
++ Response 200 (application/json)
+    + Body
+    
+            {
+                "message": "Update successful.",
+                "staticFields": [
+                    2
+                ]
+            }
+
+### POST (order) fields [POST /staticfields/orders]
+
++ Request (application/json)
+    + Attributes
+        + staticFields (array[StaticField])
+    + Headers
+    
+            Authorization: Basic QWxhZGRpbjpPcGVuU2VzYW1l
+            
++ Response 201 (application/json)
+    + Body
+    
+            {
+                "message": "Import successful.",
+                "staticFields": [
+                    2,
+                    3
+                ]
+            }
+
+### DELETE (order) field [DELETE /staticfields/orders/{id}]
+
++ Parameters
+    + id: `2` (number, required) - Static field ID
+    
++ Request (application/json)
+    + Headers
+    
+            Authorization: Basic QWxhZGRpbjpPcGVuU2VzYW1l
+            
++ Response 200 (application/json)
+    + Body
+    
+            {
+                "message": "Static field '2' was removed."
+            }
+            
+## Fields in customers [/users-static]
+
+### GET (customers) field [GET /staticfields/users/{id}]
+
++ Parameters
+    + id: `2` (number, required) - Static field ID
+    
++ Request (application/json)
+    + Headers
+    
+            Authorization: Basic QWxhZGRpbjpPcGVuU2VzYW1l
+            
++ Response 200 (application/json)
+    + Attributes (StaticField)
+
+### GET (customers) fields [GET /staticfields/users]
+
++ Request (application/json)
+    + Headers
+    
+            Authorization: Basic QWxhZGRpbjpPcGVuU2VzYW1l
+            
++ Response 200 (application/json)
+    + Attributes
+        + staticFields (array[StaticField])
+
+### PUT (customers) fields [PUT /staticfields/users/{id}]
+
++ Parameters
+    + id: `2` (number, required) - Static field ID
+    
++ Request (application/json)
+    + Attributes
+        + staticFields (array[StaticField])
+    + Headers
+    
+            Authorization: Basic QWxhZGRpbjpPcGVuU2VzYW1l
+            
++ Response 200 (application/json)
+    + Body
+    
+            {
+                "message": "Update successful.",
+                "staticFields": [
+                    2
+                ]
+            }
+
+### POST (customers) fields [POST /staticfields/users]
+
++ Request (application/json)
+    + Attributes
+        + staticFields (array[StaticField])
+    + Headers
+    
+            Authorization: Basic QWxhZGRpbjpPcGVuU2VzYW1l
+            
++ Response 201 (application/json)
+    + Body
+    
+            {
+                "message": "Import successful.",
+                "staticFields": [
+                    2,
+                    3
+                ]
+            }
+
+### DELETE (customers) field [DELETE /staticfields/users/{id}]
+
++ Parameters
+    + id: `2` (number, required) - Static field ID
+    
++ Request (application/json)
+    + Headers
+    
+            Authorization: Basic QWxhZGRpbjpPcGVuU2VzYW1l
+            
++ Response 200 (application/json)
+    + Body
+    
+            {
+                "message": "Static field '2' was removed."
+            }
+            
+## Fields in products [/products-static]
+
+### GET (products) field [GET /staticfields/products/{id}]
+
++ Parameters
+    + id: `2` (number, required) - Static field ID
+    
++ Request (application/json)
+    + Headers
+    
+            Authorization: Basic QWxhZGRpbjpPcGVuU2VzYW1l
+            
++ Response 200 (application/json)
+    + Attributes (StaticField)
+
+### GET (products) fields [GET /staticfields/products]
+
++ Request (application/json)
+    + Headers
+    
+            Authorization: Basic QWxhZGRpbjpPcGVuU2VzYW1l
+            
++ Response 200 (application/json)
+    + Attributes
+        + staticFields (array[StaticField])
+
+### PUT (products) fields [PUT /staticfields/products/{id}]
+
++ Parameters
+    + id: `2` (number, required) - Static field ID
+    
++ Request (application/json)
+    + Attributes
+        + staticFields (array[StaticField])
+    + Headers
+    
+            Authorization: Basic QWxhZGRpbjpPcGVuU2VzYW1l
+            
++ Response 200 (application/json)
+    + Body
+    
+            {
+                "message": "Update successful.",
+                "staticFields": [
+                    2
+                ]
+            }
+
+### POST (products) fields [POST /staticfields/products]
+
++ Request (application/json)
+    + Attributes
+        + staticFields (array[StaticField])
+    + Headers
+    
+            Authorization: Basic QWxhZGRpbjpPcGVuU2VzYW1l
+            
++ Response 201 (application/json)
+    + Body
+    
+            {
+                "message": "Import successful.",
+                "staticFields": [
+                    2,
+                    3
+                ]
+            }
+
+### DELETE (products) field [DELETE /staticfields/products/{id}]
+
++ Parameters
+    + id: `2` (number, required) - Static field ID
+    
++ Request (application/json)
+    + Headers
+    
+            Authorization: Basic QWxhZGRpbjpPcGVuU2VzYW1l
+            
++ Response 200 (application/json)
+    + Body
+    
+            {
+                "message": "Static field '2' was removed."
+            }
+
+
+# Group Webhooks
+
+Configure a webhook that will fire whenever a specific action is triggered via e-shop (for example when a order is created or an order status is changed).
+
+#### Note:
+All data sent after triggering a hook is sent from e-shop via `POST` request with **following headers** to the selected destination `url`:
+- `User-Agent: CSAPI/hooks`,
+- `X-CSAPI-Type: ` (order, customers, etc.),
+- `X-CSAPI-Event: ` (onOrderCreate, onOrderStatusChange, etc.).
+- the request payload/content is sent as **JSON**
+
+## Hooks for orders [/order-hook]
+
+### GET (order) hook [GET /hooks/orders/{id}]
+
++ Parameters
+    + id: `101815` (number, required) - Hook ID
+    
++ Request (application/json)
+    + Headers
+    
+            Authorization: Basic QWxhZGRpbjpPcGVuU2VzYW1l
+            
++ Response 200 (application/json)
+    + Attributes (OrderHook)
+    
+### GET (order) hooks [GET /hooks/orders]
+
++ Request (application/json)
+    + Headers
+    
+            Authorization: Basic QWxhZGRpbjpPcGVuU2VzYW1l
+            
++ Response 200 (application/json)
+    + Attributes
+        + webhooks (array[OrderHook])
+        
+### PUT (order) hook [PUT /hooks/orders/{id}]
+
++ Parameters
+    + id: `101815` (number, required) - Hook ID
+    
++ Request (application/json)
+    + Attributes
+        + webhooks (array[OrderHook])
+    + Headers
+    
+            Authorization: Basic QWxhZGRpbjpPcGVuU2VzYW1l
+   
++ Response 200 (application/json)
+    + Body
+    
+            {
+                "webhooks": 101815
+            }
+            
+
+### POST (order) hooks [POST /hooks/orders]
+
++ Request (application/json)
+    + Attributes
+        + webhooks (array[OrderHook])
+    + Headers
+    
+            Authorization: Basic QWxhZGRpbjpPcGVuU2VzYW1l
+   
++ Response 201 (application/json)
+    + Body
+    
+            {
+                "webhooks": [
+                    101815,
+                    101816
+                ]
+            }
+
+### DELETE (order) hook [DELETE /hooks/orders/{id}]
+
++ Parameters
+    + id: `101815` (number, required) - Hook ID
+    
++ Request (application/json)
+    + Headers
+    
+            Authorization: Basic QWxhZGRpbjpPcGVuU2VzYW1l
+            
++ Response 200 (application/json)
+    + Body
+    
+            {
+                "message": "Hook '101815' was removed."
+            }
+            
+## Hooks for customers [/customer-hook]
+
+### GET (customer) hook [GET /hooks/users/{id}]
+
++ Parameters
+    + id: `101815` (number, required) - Hook ID
+    
++ Request (application/json)
+    + Headers
+    
+            Authorization: Basic QWxhZGRpbjpPcGVuU2VzYW1l
+            
++ Response 200 (application/json)
+    + Attributes (CustomerHook)
+    
+### GET (customer) hooks [GET /hooks/users]
+
++ Request (application/json)
+    + Headers
+    
+            Authorization: Basic QWxhZGRpbjpPcGVuU2VzYW1l
+            
++ Response 200 (application/json)
+    + Attributes
+        + webhooks (array[CustomerHook])
+        
+### PUT (customer) hook [PUT /hooks/users/{id}]
+
++ Parameters
+    + id: `101815` (number, required) - Hook ID
+    
++ Request (application/json)
+    + Attributes
+        + webhooks (array[CustomerHook])
+    + Headers
+    
+            Authorization: Basic QWxhZGRpbjpPcGVuU2VzYW1l
+   
++ Response 200 (application/json)
+    + Body
+    
+            {
+                "webhooks": 101815
+            }
+            
+
+### POST (customer) hooks [POST /hooks/users]
+
++ Request (application/json)
+    + Attributes
+        + webhooks (array[CustomerHook])
+    + Headers
+    
+            Authorization: Basic QWxhZGRpbjpPcGVuU2VzYW1l
+   
++ Response 201 (application/json)
+    + Body
+    
+            {
+                "webhooks": [
+                    101815,
+                    101816
+                ]
+            }
+
+### DELETE (customer) hook [DELETE /hooks/users/{id}]
+
++ Parameters
+    + id: `101815` (number, required) - Hook ID
+    
++ Request (application/json)
+    + Headers
+    
+            Authorization: Basic QWxhZGRpbjpPcGVuU2VzYW1l
+            
++ Response 200 (application/json)
+    + Body
+    
+            {
+                "message": "Hook '101815' was removed."
+            }
+
+            
+
+# Group Articles
+
+Methods for working with articles (blog posts).
+
+## Selecting [/articles-select]
+
+Gets article information. Default item count per page is set to `200` per request.
+
+#### Optional pagination parameters:
+- `perPage` - item count per page (maximum allowed value is `1000`)
+- `page` - page number
+
+#### Optional filter parameters:
+- `filterBy` - column name to filter by (only top level values like `cdate`, `mdate`, `title`)
+- `values` - comma separated list of values to filter by (%2C encoded comma)
+- `from` - available only if `filterBy` is set to `cdate` or `mdate`
+- `to` - available only if `filterBy` is set to `cdate` or `mdate`
+
+### GET article [GET /articles/{id}]
+
++ Parameters
+    + id: `192` (number, required) - Article ID
+
++ Request (application/json)
+    + Headers
+
+            Authorization: Basic QWxhZGRpbjpPcGVuU2VzYW1l
+
++ Response 200 (application/json)
+    + Attributes
+        + articleList (array[Article])
+
+### GET articles [GET /articles{?page,perPage,filterBy,values,from,to}]
+
++ Parameters
+    + page: `1` (number, optional) - Page number
+    + perPage: `200` (number, optional) - Item count per page
+        + Default: `200`
+    + filterBy: `cdate` (string, optional) - Column name to filter by (only top level values like `cdate`, `mdate`, `title`)
+    + values: `2024-01-01,2024-06-01` (string, optional) - Comma separated list of filtering values (%2C encoded comma)
+    + from: `2024-01-01 00:00:00` (string, optional) - Available only if `filterBy` is set to `cdate` or `mdate`
+    + to: `2024-12-31 23:59:59` (string, optional) - Available only if `filterBy` is set to `cdate` or `mdate`
+
++ Request (application/json)
+    + Headers
+
+            Authorization: Basic QWxhZGRpbjpPcGVuU2VzYW1l
+
++ Response 200 (application/json)
+    + Attributes
+        + metaData (ArticleMetaData)
+        + articleList (array[Article])
+
+## Import & Update [/articles-import]
+
+The `POST` method creates new article/s and the `PUT` method updates a specific article.
+
+#### Note:
+- `title` and `authorId` are required for POST (import).
+- `sef` is auto-generated from `title` if not provided on import.
+- `visibleFrom` and `visibleTo` accept date-time string or `null`.
+- `hiddenOnDomains` accepts a list of domain hostnames configured in the shop.
+- `access` accepts one of: `public`, `registered`, `administrator`.
+- `mainImage` accepts a URL — the image will be downloaded and stored by the server.
+- `translations` keys are language ISO codes (e.g. `sk`, `cz`).
+
+### PUT article [PUT /articles/{id}]
+
++ Parameters
+    + id: `192` (number, required) - Article ID
+
++ Request (application/json)
+    + Headers
+
+            Authorization: Basic QWxhZGRpbjpPcGVuU2VzYW1l
+
+    + Attributes
+        + articleList (array[ArticleUpdate])
+
++ Response 200 (application/json)
+    + Body
+
+            {
+                "message": "Update successful.",
+                "articleList": [
+                    192
+                ]
+            }
+
+### POST articles [POST /articles]
+
++ Request (application/json)
+    + Headers
+
+            Authorization: Basic QWxhZGRpbjpPcGVuU2VzYW1l
+
+    + Attributes
+        + articleList (array[ArticleImport])
+
++ Response 201 (application/json)
+    + Body
+
+            {
+                "message": "Import successful.",
+                "articleList": [
+                    192,
+                    193
+                ]
+            }
+
+### DELETE article [DELETE /articles/{id}]
+
++ Parameters
+    + id: `192` (number, required) - Article ID
+
++ Request (application/json)
+    + Headers
+
+            Authorization: Basic QWxhZGRpbjpPcGVuU2VzYW1l
+
++ Response 200 (application/json)
+    + Body
+
+            {
+                "message": "Article '192' was removed."
+            }
+
+# Group URLs
+
+Methods for getting SEF URLs for products, categories and articles. Useful for resolving canonical URLs or building sitemaps. All translations across configured languages are always returned.
+
+#### Supported entity types:
+- `product` - e-shop product
+- `category` - e-shop category
+- `article` - blog article
+
+#### Optional pagination parameters:
+- `perPage` - item count per page (maximum allowed value is `1000`)
+- `page` - page number
+
+## URL lookup [/urls-info]
+
+### GET URL [GET /urls/{entityType}/{id}]
+
++ Parameters
+    + entityType (enum[string], required) - Entity type
+        + `product` - E-shop product
+        + `category` - E-shop category
+        + `article` - Blog article
+    + id: `101815` (number, required) - Entity ID
+
++ Request (application/json)
+    + Headers
+
+            Authorization: Basic QWxhZGRpbjpPcGVuU2VzYW1l
+
++ Response 200 (application/json)
+    + Body
+
+            {
+                "metaData": [],
+                "urlList": [
+                    {
+                        "id": 101815,
+                        "url": "https://www.example.com/fancy-sport-t-shirt",
+                        "translations": {
+                            "cz": "https://cz.example.com/fancy-sport-t-shirt"
+                        }
+                    }
+                ]
+            }
+
+### GET URLs [GET /urls/{entityType}{?page,perPage}]
+
++ Parameters
+    + entityType (enum[string], required) - Entity type
+        + `product` - E-shop product
+        + `category` - E-shop category
+        + `article` - Blog article
+    + page: `1` (number, optional) - Page number
+    + perPage: `200` (number, optional) - Item count per page
+        + Default: `200`
+
++ Request (application/json)
+    + Headers
+
+            Authorization: Basic QWxhZGRpbjpPcGVuU2VzYW1l
+
++ Response 200 (application/json)
+    + Body
+
+            {
+                "metaData": {
+                    "page": 1,
+                    "perPage": 200,
+                    "total": 312,
+                    "pages": 2
+                },
+                "urlList": [
+                    {
+                        "id": 101815,
+                        "url": "https://www.example.com/fancy-sport-t-shirt",
+                        "translations": {
+                            "cz": "https://cz.example.com/fancy-sport-t-shirt"
+                        }
+                    },
+                    {
+                        "id": 192,
+                        "url": "https://www.example.com/blog/my-article",
+                        "translations": {
+                            "cz": "https://cz.example.com/blog/muj-clanek"
+                        }
+                    }
+                ]
+            }
+
+# Group Error handling
+
+Methods for better understanding of error handling.
+
+## Basic information [/error-info]
+
+### GET error code description [GET /errorcodes/{id}]
+
++ Parameters
+    + id: `1001` (number, required) - Error code
+
++ Response 200 (application/json)
+    + Body
+    
+            {
+                "errorCodes": {
+                    "1001": "Product with given sku already exists."
+                }
+            }
+
+### GET error code descriptions [GET /errorcodes]
+
++ Response 200 (application/json)
+     + Attributes
+        + errorCodes (ErrorCodes)
+        
+        
+# Group Logs
+
+Methods for getting information about requests done in the past. 
+
+#### Note:
+- logged data from `GET` requests is truncated (as it is not so important) to minimize the log size.
+
+## Obtaining activity logs [/logs-info]
+
+#### Optional filter parameters:
+- `filterByPhrase` - search by phrase (case insensitive, both request and response content is searched) 
+- `filterByMethod` - search by method (GET, POST, PUT, DELETE)
+- both filter parameters can be used concurrently.
+
+### GET log [GET /logs/{date}{?filterByPhrase,filterByMethod}]
+
+Gets information about all requests from the given `date`.
+
++ Parameters
+    + date: `2019-11-18` (string, required) - Log date
+    + filterByPhrase: `T-shirt` (string, optional) - search by phrase (case insensitive, both request and response content is searched)
+    + filterByMethod: `PUT` (string, optional) - search by method (GET, POST, PUT, DELETE) 
+    
+
++ Response 200 (application/json)
+     + Attributes
+        + logs (Log)
+
+
+## Data Structures
+## Product
++ id: `101815` (number) - Product ID
++ sku: `IOF21346` (string, required) - Product Code (SKU)
++ ean: `8596164008607` (string) - Ean code
++ name: `Fancy sport T-shirt` (string) - Product name
++ sef: `fancy-sport-t-shirt` (string) - Product sef name
++ description: `Great for all kind of things` (string) - Product description
++ shortDescription: `Great T-shirt` (string) - Product short description
++ mainImage: `https://www.example.com/path/to/image/image01.jpg` (string) - Main image URL
++ imageList: (array) - List o secondary images
+    + `https://www.example.com/path/to/image/image02.jpg` (string) - Image URL
++ imagesDesc: `Fancy sport T-shirt image description` (string) - Description of secondary images (Alt text) 
++ publish: `true` (boolean) - Product visibility
++ unsaleable: `false` (boolean) - Product is unsaleable
++ permanentlyUnavailable: `false` (boolean) - Product is permanently unavailable
++ availability: `108` (number) - Availability ID
++ availableFrom: `2017-07-26` (string) - Date when the product will be available
++ specialGroupList: (array) - List of product special groups 
+    + `17` (number) - Special group ID
+    + `2` (number) - Special group ID
++ cdate: `2017-07-20 16:20:34` (string) - Product creation date
++ mdate: `2019-05-02 09:25:43` (string) - Product modification date
++ manufacturer: `302` (number) - Manufacturer ID
++ primaryCategory: `102426` (number) - Primary category ID
++ categories: (array) - List of product categories
+    + `102426` (number) - Product category ID
+    + `102427` (number) - Product category ID
++ autoAssignParents: `false` (boolean) - If set to 'true' the product will be automaticaly assigned to all parent categories of the given category list
++ stock: `39` (number) - Product quantity (on stock)
++ supplierStock: `15` (number) - Product supplier quantity (on supplier stock)
++ stock_type1: `12` (number) - Product stock type quantity (dynamic stock types are obtained via GET /stocktypes)
++ stock_type2: `12` (number) - Product stock type quantity (dynamic stock types are obtained via GET /stocktypes)
++ weight: `2.5` (number) - Product weight
++ weightUnit: `kg` (string) - Product weight unit (kg, pounds)
++ uomId: `2` (number) - Unit of measurement ID
++ taxRate: `20` (number) - Product Tax Rate
++ virtualVariantId: `sport-shirts-spring-19`  (string) - Virtual variant identifier
++ virtualVariantName: `red`  (string) - Virtual variant name
++ activeVariants: (array) - Code List of product variants
+    + `product-code-variant-1` (string) - Variant code
++ variants: (array[Variant]) - List of product variants
++ parameters:  (array[Parameter]) - List of product parameters
++ priceList:  (array[Price]) - List of product prices
++ metaTitle: `Great T-shirt` (string) - Product meta title (optional, if no value is provided a system generated value is used instead)
++ metaDesc: `Great for all kind of things` (string) - Product meta description (optional, if no value is provided a system generated value is used instead)
++ metaKeywords: `shirt, sport, fasion` (string) - Product meta keywords
++ translations: (object) - Product translations
+    + cz: (object)
+        + name: (string) - Product name translation
+        + sef: (string) - Product sef translation
+        + shortDescription: (string) - Product short description translation
+        + description: (string) - Product description translation
+        + metaTitle: (string) - Product meta title translation
+        + metaDesc: (string) - Product meta description translation
+        + metaKeywords: (string) - Product meta keywords translation
++ store: (array[ProductStore]) - List of product stores (non-standard function)
++ set: (array[Set]) - List of set items (non-standard function for variants)
++ imageMetaData: (object) - Image Meta Data  (non-standard function)
+    + mainImage: (object)
+        + url: `https://www.example.com/path/to/image/image01.jpg` (string) - Main image URL
+        + mdate: `2023-07-11 23:15:51` (string) - Image modification date
+    + imageList: (array) - Array of secondary images meta data
+        + (object)
+            + url: `https://www.example.com/path/to/image/image02.jpg` (string) - Secondary image URL
+            + mdate: `2023-07-11 23:15:51` (string) - Image modification date
++ shippingBlacklist: (array) - List of blacklisted shipping rates (non-standard function)
+    + `27` (number) - Shipping rate ID
+    + `266` (number) - Shipping rate ID
+
+## ProductUpdate
++ id: `101815` (number) - Product ID
++ sku: `IOF21346` (string) - Product Code (SKU)
++ ean: `8596164008607` (string) - Ean code
++ name: `Fancy sport T-shirt` (string) - Product name
++ sef: `fancy-sport-t-shirt` (string) - Product sef name
++ description: `Great for all kind of things` (string) - Product description
++ shortDescription: `Great T-shirt` (string) - Product short description
++ mainImage: `https://www.example.com/path/to/image/image01.jpg` (string) - Main image URL
++ imageList: (array) - List o secondary images
+    + `https://www.example.com/path/to/image/image02.jpg` (string) - Image URL
++ imagesDesc: `Fancy sport T-shirt image description` (string) - Description of secondary images (Alt text) 
++ publish: `true` (boolean) - Product visibility
++ unsaleable: `false` (boolean) - Product is unsaleable
++ permanentlyUnavailable: `false` (boolean) - Product is permanently unavailable
++ availability: `108` (number) - Availability ID
++ availableFrom: `2017-07-26` (string) - Date when the product will be available
++ specialGroupList: (array) - List of product special groups 
+    + `17` (number) - Special group ID
+    + `2` (number) - Special group ID
++ cdate: `2017-07-20 16:20:34` (string) - Product creation date
++ mdate: `2019-05-02 09:25:43` (string) - Product modification date
++ manufacturer: `302` (number) - Manufacturer ID
++ primaryCategory: `102426` (number) - Primary category ID
++ categories: (array) - List of product categories
+    + `102426` (number) - Product category ID
+    + `102427` (number) - Product category ID
++ autoAssignParents: `false` (boolean) - If set to 'true' the product will be automaticaly assigned to all parent categories of the given category list
++ stock: `39` (number) - Product quantity (on stock)
++ supplierStock: `15` (number) - Product supplier quantity (on supplier stock)
++ stock_type1: `12` (number) - Product stock type quantity (dynamic stock types are obtained via GET /stocktypes)
++ stock_type2: `12` (number) - Product stock type quantity (dynamic stock types are obtained via GET /stocktypes)
++ weight: `2.5` (number) - Product weight
++ weightUnit: `kg` (string) - Product weight unit (kg, pounds)
++ uomId: `2` (number) - Unit of measurement ID
++ taxRate: `20` (number) - Product Tax Rate
++ virtualVariantId: `sport-shirts-spring-19`  (string) - Virtual variant identifier
++ virtualVariantName: `red`  (string) - Virtual variant name
++ activeVariants: (array) - Code List of product variants
+    + `product-code-variant-1` (string) - Variant code
++ variants: (array[VariantUpdate]) - List of product variants
++ parameters:  (array[Parameter]) - List of product parameters
++ priceList:  (array[PriceUpdate]) - List of product prices
++ metaTitle: `Great T-shirt` (string) - Product meta title (optional, if no value is provided a system generated value is used instead)
++ metaDesc: `Great for all kind of things` (string) - Product meta description (optional, if no value is provided a system generated value is used instead)
++ metaKeywords: `shirt, sport, fasion` (string) - Product meta keywords
++ translations: (object) - Product translations
+    + cz: (object)
+        + name: (string) - Product name translation
+        + sef: (string) - Product sef translation
+        + shortDescription: (string) - Product short description translation
+        + description: (string) - Product description translation
+        + metaTitle: (string) - Product meta title translation
+        + metaDesc: (string) - Product meta description translation
+        + metaKeywords: (string) - Product meta keywords translation
++ store: (array[ProductStore]) - List of product stores (non-standard function)
++ set: (array[SetUpdate]) - List of set items (non-standard function for variants)
++ shippingBlacklist: (array) - List of blacklisted shipping rates (non-standard function)
+    + `27` (number) - Shipping rate ID
+    + `266` (number) - Shipping rate ID
+    
+## Variant
++ code: `product-code-variant-1` (string, required) - Variant code
++ ean: `8596164008594` (string) - Variant ean code
++ stock: `7` (number) - Variant quantity (on stock)
++ supplierStock: `15` (number) - Variant supplier quantity (on supplier stock)
++ price: `8.53` (number) - Variant price
++ priceInclVAT: `10.236` (number) - Variant price with VAT
++ oldPrice: `12.19` (number) - Variant recommended retail price
++ oldPriceInclVAT: `14.63` (number) - Variant recommended retail price with VAT
++ availability: `108` (number) - Variant availability ID
++ weight: `2.5` (number) - Variant weight
++ availableFrom: `2020-02-23` (string) - Date when the variant will be available (non-standard function for variants, please contact sales)
++ localImagePath: `/images/variant-image-01.jpg` (string) - Local variant image path (existing image must be provided, these kind of images are created via e-shop Media manager)
++ values: (array[VariantValue], required) - List of variant values
++ store: (array[ProductStore]) - List of product stores (non-standard function)
+
+## VariantUpdate
++ code: `product-code-variant-1` (string, required) - Variant code
++ ean: `8596164008594` (string) - Variant ean code
++ stock: `7` (number) - Variant quantity (on stock)
++ price: `8.53` (number) - Variant price
++ priceInclVAT: `10.236` (number) - Variant price with VAT
++ oldPrice: `12.19` (number) - Variant recommended retail price
++ oldPriceInclVAT: `14.63` (number) - Variant recommended retail price with VAT
++ availability: `108` (number) - Variant availability ID
++ weight: `2.5` (number) - Variant weight
++ availableFrom: `2020-02-23` (string) - Date when the variant will be available (non-standard function for variants, please contact sales)
++ localImagePath: `/images/variant-image-01.jpg` (string) - Local variant image path (existing image must be provided, these kind of images are created via e-shop Media manager)
++ values: (array[VariantValue], required) - List of variant values
++ store: (array[ProductStore]) - List of product stores (non-standard function)
+   
+## VariantValue
++ id: `22` (number, required) - Attribute ID (in case of custom text attributes the ID is represented as string 'custom_X')
++ name: `Size` (string) - Name
++ value: `XL` (string, required) - Value
+
+## Parameter
++ id: `143` (number, required) - Parameter ID
++ type: `0` (number) - Parameter type ID (0 - text, other types will be added later)
++ name: `Fabric` (string) - Name
++ value: `100% Cotton` (string, required) - Value
++ translations: (object, required) 
+    + sk: (object, required)
+        + name: `Látka`
+        + value: `100% Bavlna`
+
+## Price
++ sgpId: `5` (number, required) - Shopper group ID
++ price: `10.23000` (number, required) - Product price for that shopper group
++ priceInclVAT: `12.28000` (number) - Product price for that shopper group with VAT
++ oldPrice: `14.63000` (number) - RRP for that shopper group
++ oldPriceInclVAT: `17.56000` (number) - RRP for that shopper group with VAT
++ purchasePrice: `0` (number) - Purchase price for that shopper group
++ purchasePriceInclVAT: `0` (number) - Purchase price for that shopper group with VAT
++ currency: `EUR` (string, required) - Currency
+
+## PriceUpdate
++ sgpId: `5` (number, required) - Shopper group ID
++ price: `10.23000` (number) - Product price for that shopper group
++ priceInclVAT: `12.28000` (number) - Product price for that shopper group with VAT
++ oldPrice: `14.63000` (number) - RRP for that shopper group
++ oldPriceInclVAT: `17.56000` (number) - RRP for that shopper group with VAT
++ purchasePrice: `0` (number) - Purchase price for that shopper group
++ purchasePriceInclVAT: `0` (number) - Purchase price for that shopper group with VAT
++ currency: `EUR` (string, required) - Currency
+
+## ArticleMetaData
++ page: `1` (number) - Page number
++ perPage: `200` (number) - Item count per page
++ total: `45` (number) - Total item count
++ pages: `1` (number) - Page count
+
+## MetaData
++ pages: `4` (number) - Page count
++ perPage: `200` (number) - Item count per page
++ page: `1` (number) - Page number
++ list: `sku,stock,publish` (string) - List of values to return separated by comma (%2C encoded comma)
++ filterBy: `cdate` (string) - Column name to filter by (only top level values like cdate, mdate, orderStatus)
++ from: `2017-12-20 16:20:34` (string) - Available only if 'filterBy' is set to cdate or mdate
++ to: `2019-05-02 09:25:43` (string) - Available only if 'filterBy' is set to cdate or mdate
++ values: `S,D,C` (string) - Comma separated list of filtering values (%2C encoded comma)
+
+## Category
++ id: `102109` (number) - Category ID
++ parent: `100986` (number, required) - Parent category ID
++ name: `Summer collection 2019` (string, required) - Category name
++ sef: `summer-collection-2019` (string) - Category nice URL
++ publish: `true` (boolean) - Category visibility
++ order: `4` (number) - Category ordering (categories without set ordering are shown first)
++ image: `https://www.example.com/path/to/image/image01.jpg` (string) - Category image URL
++ metaTitle: `Top summer collection 2019` (string) - Category meta title (optional, if no value is provided a system generated value is used instead)
++ metaDesc: `Summer season clotes late 2019` (string) - Category meta description
++ metaKeywords: `clotes, summer, sale` (string) - Category meta keywords
++ translations: (object) - Category translations
+    + cz: (object)
+        + name: (string) - Category name translation
+        + sef: (string) - Category sef translation
+        + metaTitle: (string) - Category meta title translation
+        + metaDesc: (string) - Category meta description translation
+        + metaKeywords: (string) - Category meta keywords translation 
+
+## Special
++ id: `2` (number) - Special group ID
++ name: `Sale` (string, required) - Special group name
++ productCount: `79` (number) - Count of products with that special group
+
+## Availability
++ id: `21` (number) - Availability ID
++ name: `On stock` (string, required) - Availability name
++ pricePortalDays: `2` (number) - Number of days to deliver to customer (mainly used for price portals)
++ translations: (object) - Availability translations
+    + cz: (object)
+        + name: (string) - Availability name translation
+
+## ShopperGroup
++ id: `5` (number) - Shopper group ID
++ name: `Dealer` (string, required) - Shopper group name
+
+## Attribute
++ id: `5` (number) - Attribute ID
++ name: `Color` (string, required) - Attribute name
++ translations: (object, required) 
+    + sk: (object, required)
+        + name: `Farba`
+
+## ParameterName
++ id: `143` (number) - Parameter ID
++ type: `0` (number, required) - Parameter type ID (0 - text, other types will be added later)
++ name: `Fabric` (string, required) - Name
++ translations: (object, required) 
+    + sk: (object, required)
+        + name: `Látka`
+
+## Manufacturer
++ id: `86` (number) - Manufacturer ID
++ name: `Reebok` (string, required) - Name
++ translations: (object, required) 
+    + sk: (object, required)
+        + name: `Reebok`
+
+## Order
++ id: `101815` (number, required) - Order ID
++ cdate: `2017-12-20 16:20:34` (string) - Order creation date
++ mdate: `2019-05-02 09:25:43` (string) - Order modification date
++ note: `Hurry up with the delivery please.` (string) - Customer note
++ adminNote: `Check availability with Tim.` (string) - Order Admin note
++ orderStatus: `C` (string) - Order status (more information on 'order status' in Order Helpers->Order States)
++ currency: `EUR` (string, required) - Currency
++ currencyRate: `1` (number, required) - Currency rate
++ customerId: `223` (number, required) - Customer ID
++ invoiceNumber: `20210203` (string, required) - Invoice ID (if exists)
++ subtotalPrice: `27.30` (number) - Items sum without VAT
++ totalPrice: `36.29` (number, required) - Total order value with tax (totalPrice = subtotalPrice + tax + shipping fee + payment fee - discount)
++ tax: `6.05` (number, required) - Order tax (shipping and billing tax are included)
++ address: (object, required) - Shipping and billing address
+    + billing: (BillingAddress, required) - Billing address
+    + shipping: (OrderShippingAddress) - Shipping address
+    + customerStaticFields: (object) - List of customer static field values (if they exist)
++ items: (array[OrderItem], required) - Order items
++ payment: (OrderPayment, required) - Payment method
++ shipping: (OrderShipping, required) - Shipping method
++ discount: (Discount) - Discount information
++ voluntaryContribution: `1.23` (number) - Voluntary contribution value
++ creditDiscount: `9.99` (number) - Credit discount value
++ cashPaymentRounding: `0.12` (number) - Cash payment Rounding 
++ ship_id: `4913355914` (string) - Shipping tracking id 
+
+## OrderCreate
++ id: `101815` (number) - Order ID
++ cdate: `2017-12-20 16:20:34` (string) - Order creation date
++ mdate: `2019-05-02 09:25:43` (string) - Order modification date
++ note: `Hurry up with the delivery please.` (string) - Customer note
++ adminNote: `Check availability with Tim.` (string) - Order Admin note
++ orderStatus: `C` (string) - Order status (more information on 'order status' in Order Helpers->Order States)
++ currency: `EUR` (string, required) - Currency
++ currencyRate: `1` (number, required) - Currency rate
++ customerId: `223` (number, required) - Customer ID
++ address: (object, required) - Shipping and billing address
+    + shipping: (OrderShippingAddress) - Shipping address
++ items: (array[OrderItemCreate], required) - Order items
++ payment: (OrderPaymentCreate, required) - Payment method
++ shipping: (OrderShippingCreate, required) - Shipping method
++ discount: (DiscountCreate) - Discount information
++ ship_id: `4913355914` (string) - Shipping tracking id 
+
+## OrderUpdate
++ id: `101815` (number) - Order ID
++ cdate: `2017-12-20 16:20:34` (string) - Order creation date
++ mdate: `2019-05-02 09:25:43` (string) - Order modification date
++ orderStatus: `C` (string) - Order status (more information on 'order status' in Order Helpers->Order States)
++ adminNote: `Check availability with Tim.` (string) - Order Admin note
++ currency: `EUR` (string) - Currency
++ currencyRate: `1` (number) - Currency rate
++ customerId: `223` (number) - Customer ID
++ address: (object, required) - Shipping and billing address
+    + billing: (BillingAddress) - Billing address
+    + shipping: (OrderShippingAddress) - Shipping address
++ items: (array[OrderItemUpdate]) - Order items
++ payment: (OrderPaymentCreate) - Payment method
++ shipping: (OrderShippingCreate) - Shipping method
++ discount: (DiscountCreate) - Discount information
++ ship_id: `4913355914` (string) - Shipping tracking id 
+
+## BillingAddress
++ name: `John` (string, required) - Name
++ surname: `Smith` (string, required) - Surname
++ email: `john.smith@gmail.com` (string, required) - Email
++ phone: `0999123456` (string, required) - Phone, a valid number must contain 16 characters or less (allowed characters are: **'0-9, +, [space], /, -, –'** of which these three: **'/, -, –'** will be converted to [space])
++ street: `Street 12` (string, required) - Street
++ city: `Bratislava` (string, required) - City
++ zip: `83104` (string, required) - Postal code
++ country: `Slovakia` (string) - Country
++ countryCode: `SVK` (string, required) - Country code
++ company: `Best John Company s.r.o.` (string) - Company name
++ ico: `123456789` (string) - Company ID
++ dic: `123456789` (string) - Company TAX ID
++ icDph: `SK123456789` (string) - Company VAT ID
+
+## ShippingAddress
++ id: `1348` (number) - Shipping address ID
++ `default`: `true` (boolean) - IF set to 'true' the given address will be preselected on the checkout page
++ addressName: `Home address` (string) - Address name
++ name: `John` (string, required) - Name
++ surname: `Smith` (string, required) - Surname
++ email: `john.smith@gmail.com` (string, required) - Email
++ phone: `0999123456` (string, required) - Phone, a valid number must contain 16 characters or less (allowed characters are: **'0-9, +, [space], /, -, –'** of which these three: **'/, -, –'** will be converted to [space])
++ street: `Main street` (string, required) - Street
++ city: `Trenčín` (string) - City
++ zip: `91101` (string, required) - Postal code
++ country: `Slovakia` (string) - Country
++ countryCode: `SVK` (string, required) - Country code (complete list of country codes can be found in Order Helpers->Shipping methods->GET country codes)
++ company: (string) - Company name
+
+## OrderShippingAddress
++ id: `1348` (number) - Shipping address ID
++ addressName: `Home address` (string) - Address name
++ name: `John` (string, required) - Name
++ surname: `Smith` (string, required) - Surname
++ email: `john.smith@gmail.com` (string, required) - Email
++ phone: `0999123456` (string, required) - Phone, a valid number must contain 16 characters or less (allowed characters are: **'0-9, +, [space], /, -, –'** of which these three: **'/, -, –'** will be converted to [space])
++ street: `Main street` (string, required) - Street
++ city: `Trenčín` (string) - City
++ zip: `91101` (string, required) - Postal code
++ country: `Slovakia` (string) - Country
++ countryCode: `SVK` (string, required) - Country code (complete list of country codes can be found in Order Helpers->Shipping methods->GET country codes)
++ company: (string) - Company name
+
+## OrderItem
++ id: `101815` (number, required) - Product ID
++ itemId: `453` (number) - Order item ID
++ sku: `IOF21346` (string, required) - Product Code (SKU)
++ ean: `8596164008607` (string) - Ean code
++ name: `Fancy sport T-shirt` (string) - Product name
++ quantity: `6` (number, required) - Product quantity
++ uom: `ks` (string) - Product unit of measurement
++ price: `4.55` (number, required) - Product unit price without VAT
++ priceInclVAT: `5.46` (number) - Product unit price with VAT
++ taxRate: `20` (number, required) - Product TaxRate (value given as a percentage)
++ isVariant: `true` (boolean, required) - IF set to 'true' the given SKU counts as a product variant code
++ url: `https://www.example.com/url/to/product/` (string) - Product URL
++ values: (VariantValue) - Variant values (only needed if item is a variant)
++ itemNote: `3 of 5 items have been restocked` (string) - Item note (non-standard function, please contact sales)
+
+## OrderItemCreate
++ id: `101815` (number, required) - Product ID
++ sku: `IOF21346` (string, required) - Product Code (SKU)
++ ean: `8596164008607` (string) - Ean code
++ name: `Fancy sport T-shirt` (string) - Product name
++ quantity: `6` (number, required) - Product quantity
++ price: `4.55` (number, required) - Product unit price without VAT
++ priceInclVAT: `5.46` (number) - Product unit price with VAT
++ isVariant: `true` (boolean, required) - IF set to 'true' the given SKU counts as a product variant code
+
+## OrderItemUpdate
++ id: `101815` (number, required) - Product ID
++ itemId: `453` (number) - Order item ID (required if you want to update an existing item)
++ sku: `IOF21346` (string, required) - Product Code (SKU)
++ ean: `8596164008607` (string) - Ean code
++ name: `Fancy sport T-shirt` (string) - Product name
++ quantity: `6` (number, required) - Product quantity
++ price: `4.55` (number, required) - Product unit price without VAT
++ priceInclVAT: `5.46` (number) - Product unit price with VAT
++ isVariant: `true` (boolean, required) - IF set to 'true' the given SKU counts as a product variant code
++ itemNote: `3 of 5 items have been restocked` (string) - Item note (non-standard function, please contact sales)
+
+## Payment
++ id: `1234` (number) - Payment ID
++ name: `Card payment` (string, required) - Payment name
++ value: `0` (number, required) - Payment value
++ valueType: `total` (string, required) - Value type (percent or total)
++ cod: `false` (boolean) - Cash on delivery
++ publish: `true` (boolean) - Payment visibility
++ allowedShopperGroup: `0` (number) - Payment value
++ isCash: `false` (boolean) - Cash Payment
++ translations: (object) - Payment translations
+    + cz: (object)
+        + name: (string) - Payment name translation
+
+## OrderPayment
++ id: `1234` (number, required) - Payment method ID
++ name: `Card payment` (string) - Payment method name
++ value: `0` (number, required) - Payment value
++ cod: `false` (boolean, required) - Cash on delivery
++ transactionDetails: (object) - Additional (read-only) payment data (limited support, more payment types will be added in the future)
+    + type: `GoPay` (string) - type of payment service
+    + id: `1345` (string) - transaction ID
+    + state: `PAID` (string) - transaction state
+    + refundAmount: `0` (number) - refunded amount
+
+## OrderPaymentCreate
++ id: `1234` (number, required) - Payment ID
+
+## OrderShipping
++ id: `54` (number, required) - Shipping ID
++ name: `Parcel courier` (string) - Shipping name
++ value: `2.99` (number, required) - Shipping value
++ deliveryPointId: `67891` (number) - Delivery Point ID (if the shipping method has it)
++ externalDeliveryPointId: `KRA35N` (string) - External Delivery Point ID (included in response only if the shipping method has it)
++ taxRate: `20` (number) - Shipping TaxRate (value given as a percentage)
+
+## OrderShippingCreate
++ id: `54` (number, required) - Shipping ID
++ name: `Parcel courier` (string) - Shipping name
++ value: `2.99` (number, required) - Shipping value
+
+## Shipping
++ id: `16` (number) - Shipping ID
++ name: `Parcel Courier` (string, required) - Shipping name
++ publish: `true` (boolean) - Shipping visibility
++ value: `2.99` (number, required) - Shipping value
++ packageFee: `4.50` (number) - Additional package fee
++ zipRangeStart: `0` (number) - ZIP range from
++ zipRangeEnd: `99999` (number) - ZIP range to
++ weightRangeStart: `0` (number) - Weight range from 
++ weightRangeEnd: `9999999.999` (number) - Weight range to 
++ priceRangeStart: `0` (number) - Price range from 
++ priceRangeEnd: `999999.99` (number) - Price range to 
++ allowedShopperGroups: (array) - List of allowed shopper groups
+    + 5 (number)
+    + 30 (number)
++ allowedPaymentMethods: (array) - List of allowed payments
+    + 1 (number)
+    + 2 (number)
+    + 3 (number)
++ allowedCountries: (array) - List of allowed countries (list of country codes can be found in 'GET country codes' method) 
+    + SVK
+    + CZE
++ translations: (object) - Shipping translations
+    + cz: (object)
+        + name: (string) - Shipping name translation
++ taxRate: `20` (number) - Shipping TaxRate (value given as a percentage)
+
+## Discount
++ code: `s79jb0r2` (string) - Coupon code
++ value: `2` (number, required) - Coupon value
+
+## DiscountCreate
++ value: `2` (number, required) - Coupon value
+
+## OrderHook
++ id: `2` (number) - Hook ID
++ event: (enum, required) - Event that triggers the hook
+    + `onOrderCreate` - Fires when order is created
+    + `onOrderStatusChange` - Fires when order status is changed (returns only status change data)
+    + `onOrderStatusChangeVerbose` - Fires when order status is changed (returns all order data)
++ active: `true` (boolean, required) - Hook state
++ url: `www.external-site.example/path/to/hook` (string, required) - Location where the data will be send
++ orderStatus: (array) - List of order states that will trigger the hook
+    + `C`
+    + `X`
++ orderMeaning: (array) - List of order status meanings that will trigger the hook (neutral, positive, negative)
+    + `neutral`
++ cdate: `2017-12-07 16:20:34` (string) - Hook creation date
++ mdate: `2019-05-22 09:25:43` (string) - Hook modification date
+
+## CustomerHook
++ id: `2` (number) - Hook ID
++ event: (enum, required) - Event that triggers the hook
+    + `onCustomerCreate` - Fires when customer is created
+    + `onCustomerChange` - Fires when customer is changed
++ active: `true` (boolean, required) - Hook state
++ url: `www.external-site.example/path/to/hook` (string, required) - Location where the data will be send
++ cdate: `2017-12-07 16:20:34` (string) - Hook creation date
++ mdate: `2019-05-22 09:25:43` (string) - Hook modification date
+
+## OrderStatus
++ id: `2` (number) - Order status ID
++ name: `Processing order` (string, required) - Order status name
++ code: `C` (string, required) - Order status code
++ color: `ffd700` (string) - Order status color (only for GET methods)
++ meaning: `neutral` (string, required) - Order status meaning (neutral, positive, negative)
++ orderCount: `C` (string) - Number of orders with this status
++ reserved: `true` (boolean) - States with value set to true can't be removed (this value is set only from e-shop side)
++ translations: (object, required) 
+    + sk: (object, required)
+        + name: `Objednávka sa spracováva`
+
+## StaticField
++ id: `2` (number) - Static field ID
++ parent: `address > billing` (string, required) - Static field location (for placing in root use 'root' value)
++ label: `productCodeColumn` (string, required) - Static field label  / column name
++ value: `SKP` (string) - Static field value
++ makeDynamic: `false` (boolean) - IF set to 'true' the given label counts as a column name
++ cdate: `2017-12-07 16:20:34` (string) - Static field creation date
++ mdate: `2019-05-22 09:25:43` (string) - Static field modification date
+
+## InvoiceBasic
++ id: `2` (number, required) - Order ID
++ invoiceNumber: `112102154` (string, required) - Invoice number
++ cdate: `2017-12-07 16:20:34` (string) - Invoice creation date
++ dueDays: `14` (string) - Number of days when the invoice is due
+
+## InvoiceSingle
++ id: `2` (number, required) - Order ID
++ url: `https://csapi.example.com/?di=7wYOBjBGC0cmh86J06kg12sBCPWyD` (string, required) - Invocie location for download o upload
++ cdate: `2017-12-07 16:20:34` (string) - Invoice creation date
+
+## InvoiceMulti
++ id: `2` (number, required) - Order ID
++ files: (array[InvoiceFiles], required) - Array of attached documents
+    
+##InvoiceFiles
++ documentType: `creditnote` (enum, required) - Type of document
+    + invoice
+    + creditnote
+    + proforma
+    + deliverynote
++ url: `https://csapi.example.com/?dim=7wYOBjBGC0cmh86J06kg12sBCPWyD` (string, required) - Document location for download or upload
++ cdate: `2017-12-07 16:20:34` (string) - Document creation date
+
+## StockAvail
++ id: `101815` (number) - Product ID
++ sku: `IOF21346` (string, required) - Product Code (SKU)
++ publish: `true` (boolean) - Product visibility
++ availability: `108` (number) - Availability ID
++ stock: `39` (number, required) - Product quantity (on stock)
++ supplierStock: `15` (number) - Product supplier quantity (on supplier stock)
++ stock_type1: `12` (number) - Product stock type quantity (dynamic stock types are obtained via GET /stocktypes)
++ stock_type2: `12` (number) - Product stock type quantity (dynamic stock types are obtained via GET /stocktypes)
++ availableFrom: `2020-02-23` (string) - Date when the product or variant will be available (non-standard function for variants, please contact sales)
++ isVariant: `false` (boolean, required) - IF set to 'true' the given SKU counts as a product variant code
++ store: (array[ProductStore]) - List of product stores (non-standard function)
+
+## BatchPrice
++ id: `213` (number) - Product ID
++ sku: `IOF21346` (string, required) - Product Code (SKU)
++ sgpId: `5` (number, required) - Shopper group ID
++ price: `10.23000` (number) - Product price for that shopper group
++ priceInclVAT: `12.28000` (number) - Product price for that shopper group with VAT
++ oldPrice: `14.63000` (number) - RRP for that shopper group
++ oldPriceInclVAT: `17.56000` (number) - RRP for that shopper group with VAT
++ purchasePrice: `0` (number) - Purchase price for that shopper group
++ purchasePriceInclVAT: `0` (number) - Purchase price for that shopper group with VAT
++ currency: `EUR` (string, required) - Currency
++ isVariant: `false` (boolean, required) - IF set to 'true' the given SKU counts as a product variant code
+
+## Gdpr
++ id: `18` (number, required) - GDPR record ID
++ date: `2017-12-07 16:20:34` (string, required) - Date of approval with GDPR conditions
++ version: `1` (number, required) - Version of GDPR document the customer has agreed with
++ formId: `6` (number, required) - Form ID where the customer agreed to GDPR conditions
++ formName: `Module Newsletter` (string) - Form name where the customer agreed to GDPR conditions
+
+## SocialLogin
++ hybridAuthIdentifier: `1323123123123547763356752` (string, required) - Unique user's ID on the connected provider.
++ provider: `google` (enum, required) - Provider name
+    + google
+    + facebook
+    + apple
+
+## Customer
++ id: `487` (number, required) - Customer ID
++ active: `true` (boolean) - Customer visibility
++ cdate: `2017-12-07 16:20:34` (string) - Customer creation date
++ mdate: `2019-05-22 09:25:43` (string) - Customer modification date
++ email: `john.smith@gmail.com` (string, required) - Customer Email
++ socialLogin(array[SocialLogin])
++ sgpId: `32` (number,) - Customer shopper group ID
++ sgpName: `Wholesale` (string) - Customer shopper group name
++ domain: `www.domain.sk` (string) - Customer registration domain (used mainly on multidomain e-shops)
++ address: (object, required) - Shipping and billing address
+    + billing: (BillingAddress, required) - Billing address
+    + shipping: (array[ShippingAddress]) - Shipping address
++ gdpr: (object) - List of GDPR records
+    + items: (Gdpr)
++ priceDiscount: (array[PriceDiscount]) - Individual price discounts for this customer (non-standard function, please contact sales)
+       
+## PriceDiscount
++ identifier: `SKU_1324` (string, required) - Product SKU when 'isPrefix' is set to 'false', wildcard otherwise
++ discountValue: `25` (number, required) - Discounted price
++ isPrefix: `false` (boolean, required) - Whether identifier represents the exact product SKU or just the beginning o the SKU (wildcard)
+
+## PriceDiscountUpdate
++ userId: `123456` (number, required) - User ID
++ identifier: `SKU_1324` (string, required) - Product SKU when 'isPrefix' is set to 'false', wildcard otherwise
++ discountValue: `25` (number, required) - Discounted price
++ isPrefix: `false` (boolean, required) - Whether identifier represents the exact product SKU or just the beginning o the SKU (wildcard)
+    
+## CustomerNoGdpr
++ id: `487` (number, required) - Customer ID
++ active: `true` (boolean) - Customer visibility
++ cdate: `2017-12-07 16:20:34` (string) - Customer creation date
++ mdate: `2019-05-22 09:25:43` (string) - Customer modification date
++ email: `john.smith@gmail.com` (string, required) - Customer Email
++ password: `QlNQOE5rVERCZVNoRDNlZkNYUUdJZz09` (string) - Base64 encoded password encrypted with OpenSSL 
++ initializationVector: `6M4kGlnZ4a0PIqQa+kp92A==` (string) - Base64 encoded Initialization Vector (needed for password decryption)
++ socialLogin(array[SocialLogin])
++ sgpId: `32` (number,) - Customer shopper group ID
++ sgpName: `Wholesale` (string) - Customer shopper group name
++ domain: `www.domain.sk` (string) - Customer registration domain (used mainly on multidomain e-shops)
++ address: (object, required) - Shipping and billing address
+    + billing: (BillingAddress, required) - Billing address
+    + shipping: (array[ShippingAddress]) - Shipping address
+
+## Uom
++ id: `2` (number) - Unit of measurement ID
++ name: `m2` (string, required) - Unit of measurement name
++ productCount: `263` (number) - Number of products with this unit of measurement
+
+## Coupon
++ id: `113` (number) - Coupon ID
++ archived: `false` (boolean) - IF set to 'true' the coupon has been already used or deleted
++ code: `h1f6r7d5` (string) - Coupon code
++ percentOrTotal: (enum, required) - Coupon value type
+    + `percent` - Percentual discount
+    + `total` - Fixed amount
++ type: (enum, required) - Coupon type 
+    + `gift` - One time use coupon (gift)
+    + `permanent` - Permanent coupon 
++ value: `5` (number, required) - Coupon value 
++ cdate: `2016-11-23 13:20:06` (string) - Coupon creation date
++ note: `5% summer sale` (string) - Coupon comment 
++ validFrom: `2019-10-30 09:53:57` (string) - Coupon valid from date 
++ validTo: `2019-10-30 09:53:57` (string) - Coupon valid to date
++ minOrderValue: `40` (number) - Minimal order value
++ currency: `EUR` (string) - Coupon currency
+
+## ErrorCodes
++ exists: (object) - codes begin with 1xxx
++ 1001: `Product with given sku already exists.`
++ 1002: `Product with given id already exists.`
++ 1003: `Manufacturer with given id already exists.`
++ 1004: `Manufacturer with given name already exists.`
++ 1005: `Category with given id already exists.`
++ 1006: `Payment with given id already exists.`
++ 1007: `Shipping with given id already exists.`
++ 1008: `Order with given id already exists.`
++ 1009: `Static field with given id already exists.`
++ 1010: `Static field with given label already exists.`
++ 1011: `Hook with given id already exists.`
++ 1012: `Address with given id already exists.`
++ 1013: `Coupon with given id already exists.`
++ 1014: `Coupon with given code already exists.`
++ 1015: `Parameter with given id already exists.`
++ 1016: `Invoice with given id already exists.`
++ 1017: `Given document type already exists.`
++ doesn't exists: (object) - codes begin with 2xxx
++ 2000: `Doesn't exists.`
++ 2001: `Product doesn't exists.`
++ 2002: `Availability doesn't exists.`
++ 2003: `Special group doesn't exists.`
++ 2004: `Manufacturer doesn't exists.`
++ 2005: `Category doesn't exists.`
++ 2006: `Unit of measurement doesn't exists.`
++ 2007: `Attribute doesn't exists.`
++ 2008: `Parameter doesn't exists.`
++ 2009: `Shopper group doesn't exists.`
++ 2010: `Variant doesn't exists.`
++ 2011: `Product price doesn't exists.`
++ 2012: `Parent category doesn't exists.`
++ 2013: `Primary category doesn't exists.`
++ 2014: `Payment method doesn't exists.`
++ 2015: `Shipping method doesn't exists.`
++ 2016: `Country code doesn't exists.`
++ 2017: `Order doesn't exists.`
++ 2018: `Order status doesn't exists.`
++ 2019: `Order items doesn't exist.`
++ 2020: `Customer doesn't exist.`
++ 2021: `Static field doesn't exist.`
++ 2022: `Order doesn't exist.`
++ 2023: `Hook doesn't exist.`
++ 2024: `Coupon doesn't exist.`
++ 2025: `Language doesn't exist.`
++ 2026: `GDPR version doesn't exist.`
++ 2027: `GDPR form doesn't exist.`
++ 2028: `Variant image doesn't exist.`
++ 2029: `Currency doesn't exist.`
++ 2030: `Invoice doesn't exist.`
++ 2031: `Store doesn't exist.`
++ 2032: `Set product doesn't exists.`
++ 2033: `Supplier stock doesn't exists.`
++ 2034: `Document type doesn't exists.`
++ 2035: `Order associated to this invoice doesn't exists.`
++ 2036: `Tax rate doesn't exists.`
++ 2037: `Author doesn't exist.`
++ 2038: `Article doesn't exist.`
++ validation: (object) - codes begin with 3xxx
++ 3001: `Product data validation failed.`
++ 3002: `Stock data validation failed.`
++ 3003: `Id has to be a number.`
++ 3004: `Price data validation failed.`
++ 3005: `Manufacturer data validation failed.`
++ 3006: `Category data validation failed.`
++ 3007: `Payment data validation failed.`
++ 3008: `Shipping data validation failed.`
++ 3009: `Order data validation failed.`
++ 3010: `Order status change data validation failed.`
++ 3011: `Static field data validation failed.`
++ 3012: `Hook data validation failed.`
++ 3013: `Coupon data validation failed.`
++ 3014: `Phone validation failed.`
++ 3015: `GDPR data validation failed.`
++ 3016: `GDPR approval data validation failed.`
++ 3017: `Invoice data validation failed.`
++ 3018: `Invalid datetime format.`
++ 3019: `Availability data validation failed.`
++ 3020: `Notification data validation failed.`
++ 3021: `Item data validation failed.`
++ 3022: `Export data validation failed.`
++ 3023: `Price discount data validation failed.`
++ 3024: `Invoice manage data validation failed.`
++ 3025: `Failed to download file from url.`
++ 3026: `Invalid tax rate.`
++ 3027: `Article data validation failed.`
++ limit: (object) - codes begin with 4xxx
++ 4001: `PerPage range exceeded.`
++ 4002: `Page range exceeded.`
++ 4003: `Only one price per shopper group is allowed.`
++ 4004: `Only categories with no sub-categories can be removed.`
++ 4005: `Zip range exceeded.`
++ 4006: `Weight range exceeded.`
++ 4007: `Price range exceeded.`
++ 4008: `Item is out of stock.`
++ 4009: `Unallowed export type.`
++ 4010: `Maximum documents per order reached.`
++ upgrade: (object) - codes begin with 5xxx
++ 5001: `Setting unavailable, upgrade is required.`
++ 5002: `Endpoint unavailable.`
++ 5003: `SFTP account for doesn't exists, upgrade is required.`
++ required: (object) - codes begin with 6xxx
++ 6001: `When updating store availabilities product sku is required.`
++ 6002: `When updating store availabilities variant code is required.`
++ 6003: `Admin login required.`
++ 6004: `Store admin login required.`
++ 6005: `Main store admin login required.`
++ custom: (object) - codes begin with 9xxx
++ 9001: `No suitable items to export.`
++ 9002: `Export failed, see supplier API response.`
+
+    
+## CountryCodes
++ AUT: `Austria`
++ BEL: `Belgium`
++ BIH: `Bosnia and Herzegovina`
++ BGR: `Bulgaria`
++ HRV: `Croatia`
++ CZE: `Czech Republic`
++ DNK: `Denmark`
++ EST: `Estonia`
++ FIN: `Finland`
++ FRA: `France`
++ DEU: `Germany`
++ GBR: `Great Britain`
++ GUO: `Guam`
++ HUN: `Hungary`
++ ISL: `Iceland`
++ IRS: `Ireland`
++ ITA: `Italy`
++ LVA: `Latvia`
++ LIT: `Lithuania`
++ LUX: `Luxembourg`
++ HOL: `Netherlands`
++ NOR: `Norway`
++ OTH: `Others`
++ PLN: `Poland`
++ POR: `Portugal`
++ ROM: `Romania`
++ SRB: `Serbia and Montenegro`
++ SVK: `Slovakia`
++ SVN: `Slovenia`
++ ESP: `Spain`
++ SWE: `Sweden`
++ CHE: `Switzerland`
++ TUN: `Tunisia`
++ TUR: `Turkey`
+
+## Log
++ date: `2019-08-15` (string) - Log date
++ mdate: `2019-11-11 14:50:23` (string) - Log modification date
++ log: (object)
+    + content: (array[LogContent]) - Log content
+
+## LogContent
++ time: `2019-08-16 10:08:02` (string) - Date / time of making the request
++ auth: `127.0.0.1` (string) - basic information about the request initiator
++ method: `GET orders/123` (string) - Request method
++ request: `-` (string) - Escaped request body content
++ response: `{\"orderList\":[...]}` (string) - Escaped response body content
++ status: `200` (string) - returned http status code
++ duration: `155 ms` (string) - Request / response duration in miliseconds
+
+## CustomerAuthNormal
++ email: `john.smith@gmail.com` (string, required) - Customer email
++ password: `MHlOeldFK01Pa0N3bmJwWGRRcndYUT09` (string, required) - Base64 encoded password encrypted with OpenSSL
++ initializationVector: `+wnBvewkAVDrqUxZ+t6LWA==` (string, required) - Base64 encoded Initialization Vector (needed for password decryption)
+
+## CustomerAuthHybrid
++ hybridAuthIdentifier: `1323123123123547763356752` (string, required) - Unique user's ID on the connected provider.
++ provider: `google` (enum, required) - Provider name
+    + google
+    + facebook
+    + apple
+    
+## GdprForms
++ 1: `Watch dog`
++ 2: `Email a friend`
++ 3: `Product question`
++ 4: `Contact form`
++ 5: `Registration form`
++ 6: `Module Newsletter`
++ 7: `Comment`
++ 8: `Did you find a better price?`
++ 100: `Checkout`
++ 400: `Product reservation`
++ 499: `Custom form`
++ 500: `Module with contact form`
++ 501: `Module competition`
++ 505: `Contact form - universal`
++ 999: `First login`
+
+## GdprVersion
++ id: `18` (number) - GDRP version ID
++ cdate: `2021-04-21 11:31:56` (string, required) - creation date of the GDPR version
++ lang: `sk` (string, required) - GDPR version language
++ gdprText: `<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>` (string, required) - GDRP text content
+
+## GdprApproval
++ gdprVersion: `18` (number, required) - GDRP version that the user agreed with
++ formId: `499` (number, required) - GDPR form type (page / form where the user agreed with terms and conditions)
++ email: `john.smith@creativesites.sk` (string, required) - user email
++ cdate: `2021-04-22 09:46:02` (string, required) - date when the user agreed with terms and conditions
+
+## Currency
++ id: `158` (number) - Currency ID
++ code: `EUR` (string) - Currency code
++ name: `Euro` (string) - Currency name
++ rate: `1` (number) - Currency rate
++ symbol: `&euro;` (string) - Currency symbol
++ decimals: `2` (number) - Currency decimal count
++ decimalSymbol: `,` (string) - Currency decimal symbol
++ thousandSymbol: `.` (string) - Currency thousand separator symbol
+
+## Store
++ id: `12345` (number) - Store ID
++ store: `Branch store A1` (string) - Store name
++ street: `Main street 16` (string) - Store address
++ city: `Bratislava` (string) - Store city
++ zip: `83104` (string) - Store zip code
++ country: `Slovakia` (string) - Store country
++ active: `true` (boolean) - Store
+
+## ProductStore
++ storeId: `12345` (number, required) - Store ID
++ storeName: `Branch store A1` (string) - Store name
++ stock: `8` (number, required) - Stock count in this store
+
+## OrderNotification
++ orderId: `12345` (number, required) - Order ID
++ subject: `E-mail subject` (string, required) - E-mail subject text
++ body: `E-mail content` (string, required) - E-mail content (supports HTML)
++ attachments: (array) - Array of attachment URLs
+    + `https://external.url/to/attachemnt/01.pdf`
+    + `https://external.url/to/attachemnt/02.doc`
+    
+## Set
++ productId: `12345` (number, required) - Set product ID
++ sku: `DTK1234-8` (string) - Set product code
++ price: `90` (number, required) - Price value (type of value depends on priceType)
++ priceType: (enum, required) - Set item price type
+    + `percent` - Item price is defined as percentual value of the original item price
+    + `total` - Item price is defined as fixed value
+    + `subtract` - Item price is defined as subtraction of the original item price
++ quantity: `2` (number, required) - Quantity of the product in set
++ visible: `true` (boolean, required) - Show set product on parent product page
+
+## SetUpdate
++ productId: `12345` (number, required) - Set product ID
++ sku: `DTK1234-8` (string) - Set product code
++ price: `90` (number) - Price value (type of value depends on priceType)
++ priceType: (enum) - Set item price type
+    + `percent` - Item price is defined as percentual value of the original item price
+    + `total` - Item price is defined as fixed value
+    + `subtract` - Item price is defined as subtraction of the original item price
++ quantity: `2` (number) - Quantity of the product in set
++ visible: `true` (boolean) - Show set product on parent product page
+
+## OrderStatusOnOrder
++ id: `1234` (number, required) - Order ID
++ orderStatus: `C` (string, required) - Order status
++ notifyCustomer: `true` (boolean, required) - If set to true customer will receive an notification e-mail
++ attachDocumentType: (enum) - Type of document to attach via e-mail (non-standard function, please contact sales)
+    + `invoice` - Invoice
+    + `creditnote` - Credit note
+    + `proforma` - Advance invoice
+    + `deliverynote` - Delivery note 
+        
+## StockTypes
++ stock1: `stock_type1` (string) - stock type
++ stock2: `stock_type2` (string) - stock type
+
+## InvoiceSettings
++ invoice (object)
+    + documentType: (enum, required) - Type of document
+        + `invoice` - Invoice
+        + `creditnote` - Credit note
+        + `proforma` - Advance invoice
+        + `deliverynote` - Delivery note 
+    + attachmentStatusList: (array, required) - order states whitelist that trigger adding selected document as email attachment when changing order status
+        + P
+        + C
+    + iconSuffix: `F` (string) - Visual document icon modifier (shows up in shop administration) 
+
+
+## OssProductRateList
++ id: `1234` (number, required) - Product ID
++ sku: `DTK1234-8` (string) - Product code (SKU)
++ countryCode: `SVK` (string, required) - Country code
++ taxRate: `23` (number, required) - Product TaxRate (value given as a percentage between 0-100)
+
+## Article
++ id: `192` (number) - Article ID
++ title: `My Blog Post` (string) - Article title
++ perex: `Short introduction text` (string) - Article perex (intro text)
++ content: `Full article body` (string) - Article full content
++ sef: `https://www.example.com/blog/my-blog-post` (string) - Article SEF URL (absolute, including domain)
++ mainImage: `https://www.example.com/images/article/my-blog-post.jpg` (string) - Main image URL
++ authorId: `42` (number) - Author user ID
++ author: `John Doe` (string) - Author name
++ access (enum) - Article access level
+    + `public` - Visible to everyone
+    + `registered` - Visible to registered users only
+    + `administrator` - Visible to administrators only
++ visibleFrom: `2024-01-01 00:00:00` (string, nullable) - Date from which the article is visible (null = no restriction)
++ visibleTo: `2024-12-31 23:59:59` (string, nullable) - Date until which the article is visible (null = no restriction)
++ hiddenOnDomains: (array) - List of domain hostnames on which the article is hidden
+    + `shop2.example.com` (string) - Domain hostname
++ metaTitle: `My Blog Post - SEO Title` (string) - SEO meta title
++ metaDesc: `Short meta description for search engines` (string) - SEO meta description
++ metaKeywords: `blog, example, article` (string) - SEO meta keywords
++ cdate: `2024-01-15 10:00:00` (string) - Article creation date
++ mdate: `2024-03-20 14:30:00` (string) - Article modification date
++ translations: (object) - Article translations
+    + cz: (object)
+        + title: (string) - Article title translation
+        + perex: (string) - Article perex translation
+        + content: (string) - Article content translation
+        + sef: (string) - Article SEF URL translation (absolute, including domain)
+        + metaTitle: (string) - SEO meta title translation
+        + metaDesc: (string) - SEO meta description translation
+        + metaKeywords: (string) - SEO meta keywords translation
+
+## ArticleImport
++ title: `My Blog Post` (string, required) - Article title
++ authorId: `42` (number, required) - Author user ID
++ perex: `Short introduction text` (string) - Article perex (intro text)
++ content: `Full article body` (string) - Article full content
++ sef: `my-blog-post` (string) - Article SEF slug (auto-generated from title if not provided)
++ mainImage: `https://www.example.com/images/source/my-blog-post.jpg` (string) - Main image URL (image will be downloaded by server)
++ access (enum) - Article access level
+    + `public` - Visible to everyone
+    + `registered` - Visible to registered users only
+    + `administrator` - Visible to administrators only
++ visibleFrom: `2024-01-01 00:00:00` (string, nullable) - Date from which the article is visible
++ visibleTo: `2024-12-31 23:59:59` (string, nullable) - Date until which the article is visible
++ hiddenOnDomains: (array) - List of domain hostnames on which the article is hidden
+    + `shop2.example.com` (string) - Domain hostname
++ metaTitle: `My Blog Post - SEO Title` (string) - SEO meta title
++ metaDesc: `Short meta description for search engines` (string) - SEO meta description
++ metaKeywords: `blog, example, article` (string) - SEO meta keywords
++ cdate: `2024-01-15 10:00:00` (string) - Article creation date (defaults to current date if not provided)
++ mdate: `2024-03-20 14:30:00` (string) - Article modification date (defaults to current date if not provided)
++ translations: (object) - Article translations
+    + cz: (object)
+        + title: (string) - Article title translation
+        + perex: (string) - Article perex translation
+        + content: (string) - Article content translation
+        + sef: (string) - Article SEF slug translation
+
+## ArticleUpdate
++ title: `My Blog Post` (string) - Article title
++ authorId: `42` (number) - Author user ID
++ perex: `Short introduction text` (string) - Article perex (intro text)
++ content: `Full article body` (string) - Article full content
++ sef: `my-blog-post` (string) - Article SEF slug
++ mainImage: `https://www.example.com/images/source/my-blog-post.jpg` (string) - Main image URL (image will be downloaded by server)
++ access (enum) - Article access level
+    + `public` - Visible to everyone
+    + `registered` - Visible to registered users only
+    + `administrator` - Visible to administrators only
++ visibleFrom: `2024-01-01 00:00:00` (string, nullable) - Date from which the article is visible
++ visibleTo: `2024-12-31 23:59:59` (string, nullable) - Date until which the article is visible
++ hiddenOnDomains: (array) - List of domain hostnames on which the article is hidden
+    + `shop2.example.com` (string) - Domain hostname
++ metaTitle: `My Blog Post - SEO Title` (string) - SEO meta title
++ metaDesc: `Short meta description for search engines` (string) - SEO meta description
++ metaKeywords: `blog, example, article` (string) - SEO meta keywords
++ cdate: `2024-01-15 10:00:00` (string) - Article creation date
++ mdate: `2024-03-20 14:30:00` (string) - Article modification date
++ translations: (object) - Article translations
+    + cz: (object)
+        + title: (string) - Article title translation
+        + perex: (string) - Article perex translation
+        + content: (string) - Article content translation
+        + sef: (string) - Article SEF slug translation

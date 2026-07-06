@@ -1,0 +1,673 @@
+<?xml version="1.0" encoding="windows-1250"?>
+<html xmlns="http://www.w3.org/TR/xhtml1/strict" xmlns:msxsl="urn:schemas-microsoft-com:xslt" xmlns:user="http://mycompany.com/mynamespace" xmlns:dt="urn:schemas-microsoft-com:datatypes">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=windows-1250"/>
+		<link rel="stylesheet" type="text/css" href="../GxDoc.css"/>
+		<title>Business objekt - WageListPartial</title>
+	</head>
+	<BODY>
+		
+		<H2>Business objekt - WageListPartial</H2>
+		<DL>
+			<DD>Popis:</DD>
+			<DT>Mzdový list dílčí</DT>
+			<DD>CLSID:</DD>
+			<DT>{76E47EE0-419F-11D6-BFB8-0020AFF92537}</DT>
+			<DD>PackedCLSID:</DD>
+			<DT>W1ZICXOZCBF13JXS00KEZYD5AW</DT>
+			<DD>User fields:</DD>
+			<DT>A</DT>
+			<DD>Default DynSource:</DD>
+			<DT><A HREF="DynSQL_S1S3INSZCZF13JXS00KEZYD5AW.htm">S1S3INSZCZF13JXS00KEZYD5AW</A></DT>
+			<DD>PersistCLSID</DD>
+			<DT><A HREF="PersistentClasses_JRIQY24XC3F13JXS00KEZYD5AW.htm">JRIQY24XC3F13JXS00KEZYD5AW</A></DT>
+		</DL>
+		<H3>Položky</H3>
+		<table>
+			<tr>
+				<th class="font_bold">Název</th>
+				<th class="font_bold">Label</th>
+				<th class="font_bold">Typ</th>
+				<th class="font_bold">Délka</th>
+				<th class="font_bold">Persistent</th>
+				<th class="font_bold">ROnly</th>
+				<th class="font_bold">Popis</th>
+			</tr>
+			<tr>
+				<td>
+					<A HREF="BO_3SWW11YWDQ0451OXZXU2XDUZKW.htm">AdditionalCharges</A>(Collection)(Owned)</td>
+				<td>Příplatky</td>
+				<td>dtString</td>
+				<td>10/0</td>
+				<td>N</td>
+				<td>N</td>
+				<td>Příplatky</td>
+			</tr>
+			<tr>
+				<td>
+					<A>AfterWorkingRelation</A>
+				</td>
+				<td>Po skončení PP</td>
+				<td>dtBoolean</td>
+				<td>1/0</td>
+				<td>A</td>
+				<td>A</td>
+				<td>ML zadán po skončení pracovního poměru</td>
+			</tr>
+			<tr>
+				<td>
+					<A>AverageWage</A>
+				</td>
+				<td>Průměr</td>
+				<td>dtFloat</td>
+				<td>13/4</td>
+				<td>A</td>
+				<td>A</td>
+				<td>Průměr na pracovněprávní účely</td>
+			</tr>
+			<tr>
+				<td>
+					<A>CalcAvgNetWage</A>
+				</td>
+				<td>Probíhá výpočet PČM</td>
+				<td>dtBoolean</td>
+				<td>1/0</td>
+				<td>N</td>
+				<td>N</td>
+				<td>Probíhá výpočet průměrné čisté mzdy</td>
+			</tr>
+			<tr>
+				<td>
+					<A HREF="BO_C22J315FYT44VD5PK4XSHZH5P0.htm">CalcCharts</A>(Collection)(Owned)</td>
+				<td>Výpočtová schémata</td>
+				<td>dtString</td>
+				<td>10/0</td>
+				<td>N</td>
+				<td>N</td>
+				<td>Výpočtová schémata</td>
+			</tr>
+			<tr>
+				<td>
+					<A>CalculationDate$DATE</A>
+				</td>
+				<td>Datum a čas výpočtu mzdového listu</td>
+				<td>dtDateTime</td>
+				<td>10/0</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Datum a čas výpočtu mzdového listu</td>
+			</tr>
+			<tr>
+				<td>
+					<A>CalculationOrder</A>
+				</td>
+				<td>Pořadí výpočtu</td>
+				<td>dtInteger</td>
+				<td>15/0</td>
+				<td>N</td>
+				<td>A</td>
+				<td>Udává jako kolikátý, od daného zaměstnance, se mzdový list počítá.</td>
+			</tr>
+			<tr>
+				<td>
+					<A>CalendarDuty</A>
+				</td>
+				<td>Úvazek</td>
+				<td>dtFloat</td>
+				<td>10/2</td>
+				<td>N</td>
+				<td>A</td>
+				<td>Prac. úvazek převzatý z prac.kalendáře (h)</td>
+			</tr>
+			<tr>
+				<td>
+					<A>ClassID</A>
+				</td>
+				<td>ID třídy</td>
+				<td>dtString</td>
+				<td>26/0</td>
+				<td>N</td>
+				<td>A</td>
+				<td>ID třídy</td>
+			</tr>
+			<tr>
+				<td>
+					<A>CommonDisplayName</A>
+				</td>
+				<td>Spol. ML</td>
+				<td>dtString</td>
+				<td>16/0</td>
+				<td>N</td>
+				<td>A</td>
+				<td>Mzdový list společný</td>
+			</tr>
+			<tr>
+				<td>
+					<A>CommonIsComputed</A>
+				</td>
+				<td>Spol. ML vyp.</td>
+				<td>dtBoolean</td>
+				<td>1/0</td>
+				<td>N</td>
+				<td>A</td>
+				<td>Mzdový list společný je vypočten</td>
+			</tr>
+			<tr>
+				<td>
+					<A HREF="BO_22AHIVDVAVE13C5S00CA141B44.htm">CorrectedBy_ID</A>
+				</td>
+				<td>Opravil</td>
+				<td>dtString</td>
+				<td>10/0</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Opravil</td>
+			</tr>
+			<tr>
+				<td>
+					<A HREF="BO_22AHIVDVAVE13C5S00CA141B44.htm">CreatedBy_ID</A>
+				</td>
+				<td>Vytvořil</td>
+				<td>dtString</td>
+				<td>10/0</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Vytvořil</td>
+			</tr>
+			<tr>
+				<td>
+					<A>DisplayName</A>
+				</td>
+				<td>Číslo dok.</td>
+				<td>dtString</td>
+				<td>24/0</td>
+				<td>N</td>
+				<td>A</td>
+				<td>Číslo dokladu</td>
+			</tr>
+			<tr>
+				<td>
+					<A>DocDate$DATE</A>
+				</td>
+				<td>Datum dok.</td>
+				<td>dtDateTime</td>
+				<td>10/0</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Datum dokladu</td>
+			</tr>
+			<tr>
+				<td>
+					<A HREF="BO_OFTMKVQH3ZD13ACL03KIU0CLP4.htm">DocQueue_ID</A>
+				</td>
+				<td>Zdrojová řada</td>
+				<td>dtString</td>
+				<td>10/0</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Zdrojová řada</td>
+			</tr>
+			<tr>
+				<td>
+					<A HREF="BO_CPP5AZU1CVF13JXS00KEZYD5AW.htm">Employee_ID</A>
+				</td>
+				<td>Zaměstnanec</td>
+				<td>dtString</td>
+				<td>10/0</td>
+				<td>N</td>
+				<td>N</td>
+				<td>Zaměstnanec</td>
+			</tr>
+			<tr>
+				<td>
+					<A>GrossWageTotal</A>
+				</td>
+				<td>Hrubá mzda</td>
+				<td>dtFloat</td>
+				<td>13/2</td>
+				<td>A</td>
+				<td>A</td>
+				<td>Hrubá mzda celkem</td>
+			</tr>
+			<tr>
+				<td>
+					<A>HolidayDrawDays</A>
+				</td>
+				<td>Čerp. dovolená celkem (d)</td>
+				<td>dtFloat</td>
+				<td>10/2</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Čerpaná dovolená celkem (d)</td>
+			</tr>
+			<tr>
+				<td>
+					<A>HolidayDrawHours</A>
+				</td>
+				<td>Čerp. dovolená celkem (h)</td>
+				<td>dtFloat</td>
+				<td>10/2</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Čerpaná dovolená celkem (hodiny)</td>
+			</tr>
+			<tr>
+				<td>
+					<A>HolidayNumerator</A>
+				</td>
+				<td>Čitatel pro dov.</td>
+				<td>dtFloat</td>
+				<td>13/2</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Čitatel průměru pro dovolenou</td>
+			</tr>
+			<tr>
+				<td>
+					<A>HolidayTotal</A>
+				</td>
+				<td>Čerp. dovolená (h)</td>
+				<td>dtFloat</td>
+				<td>10/2</td>
+				<td>A</td>
+				<td>A</td>
+				<td>Čerpaná dovolená celkem (h)</td>
+			</tr>
+			<tr>
+				<td>
+					<A HREF="BO_YQBWF5A23ZF13FG501C0C2VN0K.htm">HolidayType_ID</A>
+				</td>
+				<td>Typ dovolené</td>
+				<td>dtString</td>
+				<td>10/0</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Preferovaný druh dovolené</td>
+			</tr>
+			<tr>
+				<td>
+					<A>ID</A>
+				</td>
+				<td>Vlastní ID</td>
+				<td>dtString</td>
+				<td>10/0</td>
+				<td>N</td>
+				<td>A</td>
+				<td>Vlastní ID</td>
+			</tr>
+			<tr>
+				<td>
+					<A>IsComputed</A>
+				</td>
+				<td>Vypočteno</td>
+				<td>dtBoolean</td>
+				<td>1/0</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Mzdový list je vypočten</td>
+			</tr>
+			<tr>
+				<td>
+					<A>MainWorkingRelation</A>
+				</td>
+				<td>Hl. prac. poměr</td>
+				<td>dtBoolean</td>
+				<td>1/0</td>
+				<td>N</td>
+				<td>A</td>
+				<td>Hlavní pracovní poměr</td>
+			</tr>
+			<tr>
+				<td>
+					<A>MonthFund</A>
+				</td>
+				<td>Měs. fond</td>
+				<td>dtFloat</td>
+				<td>10/2</td>
+				<td>A</td>
+				<td>A</td>
+				<td>Měsíční fond pracovní doby (h)</td>
+			</tr>
+			<tr>
+				<td>
+					<A>NewRelatedDocument_ID</A>
+				</td>
+				<td>ID dokladu pro připojení</td>
+				<td>dtString</td>
+				<td>10/0</td>
+				<td>N</td>
+				<td>N</td>
+				<td>ID dokladu pro připojení</td>
+			</tr>
+			<tr>
+				<td>
+					<A>NewRelatedType</A>
+				</td>
+				<td>Typ relace</td>
+				<td>dtInteger</td>
+				<td>6/0</td>
+				<td>N</td>
+				<td>N</td>
+				<td>Typ relace</td>
+			</tr>
+			<tr>
+				<td>
+					<A>ObjVersion</A>
+				</td>
+				<td>Verze objektu</td>
+				<td>dtInteger</td>
+				<td>1/0</td>
+				<td>A</td>
+				<td>A</td>
+				<td>Verze objektu</td>
+			</tr>
+			<tr>
+				<td>
+					<A>OldRewardLongTermTotal</A>
+				</td>
+				<td>Dlouhodobé odměny celk</td>
+				<td>dtFloat</td>
+				<td>13/2</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Dlouhodobé odměny celkem (pro výpočet prům. na náhrady)</td>
+			</tr>
+			<tr>
+				<td>
+					<A>OldRewardPeriodLength</A>
+				</td>
+				<td>Délka obd., za které jsou odměny</td>
+				<td>dtInteger</td>
+				<td>15/0</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Délka období, za které jsou odměny (pro výpočet prům. na náhrady)</td>
+			</tr>
+			<tr>
+				<td>
+					<A>OldSixMonthsReward</A>
+				</td>
+				<td>Pololetní odměny</td>
+				<td>dtFloat</td>
+				<td>13/2</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Převedené pololetní odměny (pro výpočet prům. na náhrady)</td>
+			</tr>
+			<tr>
+				<td>
+					<A>OldTwelveMonthsReward</A>
+				</td>
+				<td>Roční odměny</td>
+				<td>dtFloat</td>
+				<td>13/2</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Převedené roční odměny (pro výpočet prům. na náhrady)</td>
+			</tr>
+			<tr>
+				<td>
+					<A>OrdNumber</A>
+				</td>
+				<td>Pořadové číslo</td>
+				<td>dtInteger</td>
+				<td>6/0</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Pořadové číslo</td>
+			</tr>
+			<tr>
+				<td>
+					<A>PaidHoliday</A>
+				</td>
+				<td>Propl. dovolená (d)</td>
+				<td>dtFloat</td>
+				<td>10/2</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Proplacená dovolená (d)</td>
+			</tr>
+			<tr>
+				<td>
+					<A>PaidHolidayHours</A>
+				</td>
+				<td>Propl. dovolená (h)</td>
+				<td>dtFloat</td>
+				<td>15/2</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Proplacená dovolená (hodiny)</td>
+			</tr>
+			<tr>
+				<td>
+					<A>PaidHolidayTotal</A>
+				</td>
+				<td>Propl. dovolená (h)</td>
+				<td>dtFloat</td>
+				<td>10/2</td>
+				<td>A</td>
+				<td>A</td>
+				<td>Proplacená dovolená celkem (h).</td>
+			</tr>
+			<tr>
+				<td>
+					<A HREF="BO_CAQPAYUOXVCL3ACL03KIU0CLP4.htm">Period_ID</A>
+				</td>
+				<td>Období</td>
+				<td>dtString</td>
+				<td>10/0</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Období</td>
+			</tr>
+			<tr>
+				<td>
+					<A>Pers_LastName</A>
+				</td>
+				<td>Příjmení</td>
+				<td>dtString</td>
+				<td>30/0</td>
+				<td>N</td>
+				<td>A</td>
+				<td>Příjmení</td>
+			</tr>
+			<tr>
+				<td>
+					<A>Pers_NumPersonalNumber</A>
+				</td>
+				<td>Os.číslo numericky</td>
+				<td>dtInteger</td>
+				<td>10/0</td>
+				<td>N</td>
+				<td>A</td>
+				<td>Numerická část osobního čísla</td>
+			</tr>
+			<tr>
+				<td>
+					<A>Pers_PersonalNumber</A>
+				</td>
+				<td>Os.číslo</td>
+				<td>dtString</td>
+				<td>10/0</td>
+				<td>N</td>
+				<td>A</td>
+				<td>Osobní číslo</td>
+			</tr>
+			<tr>
+				<td>
+					<A>SickBenefitDenominator</A>
+				</td>
+				<td>Jmenovatel pro ND</td>
+				<td>dtFloat</td>
+				<td>13/2</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Jmenovatel průměru pro ND</td>
+			</tr>
+			<tr>
+				<td>
+					<A>SickBenefitNumerator</A>
+				</td>
+				<td>Čitatel pro ND</td>
+				<td>dtFloat</td>
+				<td>13/2</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Čitatel průměru pro ND</td>
+			</tr>
+			<tr>
+				<td>
+					<A>TotalAbsence</A>
+				</td>
+				<td>Nepřítomnost</td>
+				<td>dtFloat</td>
+				<td>10/2</td>
+				<td>A</td>
+				<td>A</td>
+				<td>Celková nepřítomnost (h)</td>
+			</tr>
+			<tr>
+				<td>
+					<A>TotalWorkTime</A>
+				</td>
+				<td>Odpr. čas (hod)</td>
+				<td>dtFloat</td>
+				<td>10/2</td>
+				<td>A</td>
+				<td>A</td>
+				<td>Celkem odpracovaný čas - přepočteno na hod.</td>
+			</tr>
+			<tr>
+				<td>
+					<A HREF="BO_R0XBLZOPCZN45D303CPPRLW5GO.htm">WageCompensations</A>(Collection)(Owned)</td>
+				<td>Náhrady</td>
+				<td>dtString</td>
+				<td>10/0</td>
+				<td>N</td>
+				<td>N</td>
+				<td>Náhrady mzdy</td>
+			</tr>
+			<tr>
+				<td>
+					<A>WageForUnit</A>
+				</td>
+				<td>Jedn. mzda</td>
+				<td>dtFloat</td>
+				<td>13/2</td>
+				<td>A</td>
+				<td>A</td>
+				<td>Jednotková mzda (za hodinu)</td>
+			</tr>
+			<tr>
+				<td>
+					<A HREF="BO_G2POM1Q3C3F13JXS00KEZYD5AW.htm">WageListCommon_ID</A>
+				</td>
+				<td>Spol. ML</td>
+				<td>dtString</td>
+				<td>10/0</td>
+				<td>N</td>
+				<td>N</td>
+				<td>Souhrnný ML</td>
+			</tr>
+			<tr>
+				<td>
+					<A>WageListFrom</A>
+				</td>
+				<td>ML od data</td>
+				<td>dtDateTime</td>
+				<td>10/0</td>
+				<td>N</td>
+				<td>A</td>
+				<td>Prv. den platnosti ML s ohledem na zahájení a ukončení PP</td>
+			</tr>
+			<tr>
+				<td>
+					<A>WageListRealFrom</A>
+				</td>
+				<td>ML od data nástupu</td>
+				<td>dtDateTime</td>
+				<td>10/0</td>
+				<td>N</td>
+				<td>A</td>
+				<td>Prv. den plat. ML s ohledem na skut. zahájení a ukončení PP</td>
+			</tr>
+			<tr>
+				<td>
+					<A>WageListTo</A>
+				</td>
+				<td>ML do data</td>
+				<td>dtDateTime</td>
+				<td>10/0</td>
+				<td>N</td>
+				<td>A</td>
+				<td>Posl. den platnosti ML s ohledem na zahájení a ukončení PP</td>
+			</tr>
+			<tr>
+				<td>
+					<A HREF="BO_S51PUQKVOHROLBZSHX100ELLC0.htm">WageOperations</A>(Collection)(Owned)</td>
+				<td>Výkony</td>
+				<td>dtString</td>
+				<td>10/0</td>
+				<td>N</td>
+				<td>N</td>
+				<td>Výkony</td>
+			</tr>
+			<tr>
+				<td>
+					<A HREF="BO_QUCSC0QN3JF13FG501C0C2VN0K.htm">WagePeriod_ID</A>
+				</td>
+				<td>Období</td>
+				<td>dtString</td>
+				<td>10/0</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Mzdové období</td>
+			</tr>
+			<tr>
+				<td>
+					<A>WLSickTo</A>
+				</td>
+				<td>ND do data</td>
+				<td>dtDateTime</td>
+				<td>10/0</td>
+				<td>N</td>
+				<td>A</td>
+				<td>Nemocenské dávky v rámci mzdového listu do data</td>
+			</tr>
+			<tr>
+				<td>
+					<A>WorkingFund</A>
+				</td>
+				<td>Fond pr. doby</td>
+				<td>dtFloat</td>
+				<td>10/2</td>
+				<td>A</td>
+				<td>A</td>
+				<td>Reálný fond prac.doby s ohled.na zahájení a ukončení PP (h)</td>
+			</tr>
+			<tr>
+				<td>
+					<A HREF="BO_RFW3EQ50IEVOF2F5F33OWL1GXC.htm">WorkingRelation_ID</A>
+				</td>
+				<td>Pr. poměr</td>
+				<td>dtString</td>
+				<td>10/0</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Pracovní poměr</td>
+			</tr>
+			<tr>
+				<td>
+					<A>XMLImported</A>
+				</td>
+				<td>Importovaný ML</td>
+				<td>dtBoolean</td>
+				<td>1/0</td>
+				<td>A</td>
+				<td>A</td>
+				<td>Importovaný ML</td>
+			</tr>
+		</table>
+		<P><EM>Generated by ABRA Software a.s. 15.12.2023 16:41</EM></P>
+	</BODY>
+</html>

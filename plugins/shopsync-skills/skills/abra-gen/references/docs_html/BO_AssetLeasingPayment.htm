@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="windows-1250"?>
+<html xmlns="http://www.w3.org/TR/xhtml1/strict" xmlns:msxsl="urn:schemas-microsoft-com:xslt" xmlns:user="http://mycompany.com/mynamespace" xmlns:dt="urn:schemas-microsoft-com:datatypes">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=windows-1250"/>
+		<link rel="stylesheet" type="text/css" href="../GxDoc.css"/>
+		<title>Business objekt - AssetLeasingPayment</title>
+	</head>
+	<BODY>
+		
+		<H2>Business objekt - AssetLeasingPayment</H2>
+		<DL>
+			<DD>Popis:</DD>
+			<DT>Splátka majetku na leasing</DT>
+			<DD>CLSID:</DD>
+			<DT>{21646FD8-0126-4B4F-989E-6178E2A2BB53}</DT>
+			<DD>PackedCLSID:</DD>
+			<DT>V1RQCCDA05BORA4YG5WI5CPVEG</DT>
+			<DD>User fields:</DD>
+			<DT>A</DT>
+			<DD>Default DynSource:</DD>
+			<DT>Undefined</DT>
+			<DD>PersistCLSID</DD>
+			<DT><A HREF="PersistentClasses_V1BSMASZM044PGYUYTR01SCVI4.htm">V1BSMASZM044PGYUYTR01SCVI4</A></DT>
+		</DL>
+		<H3>Položky</H3>
+		<table>
+			<tr>
+				<th class="font_bold">Název</th>
+				<th class="font_bold">Label</th>
+				<th class="font_bold">Typ</th>
+				<th class="font_bold">Délka</th>
+				<th class="font_bold">Persistent</th>
+				<th class="font_bold">ROnly</th>
+				<th class="font_bold">Popis</th>
+			</tr>
+			<tr>
+				<td>
+					<A>ClassID</A>
+				</td>
+				<td>ID třídy</td>
+				<td>dtString</td>
+				<td>26/0</td>
+				<td>N</td>
+				<td>A</td>
+				<td>ID třídy</td>
+			</tr>
+			<tr>
+				<td>
+					<A>DisplayName</A>
+				</td>
+				<td>Název</td>
+				<td>dtString</td>
+				<td>100/0</td>
+				<td>N</td>
+				<td>A</td>
+				<td>Zobrazovací název</td>
+			</tr>
+			<tr>
+				<td>
+					<A>HireAmount</A>
+				</td>
+				<td>Nájemné bez daně</td>
+				<td>dtFloat</td>
+				<td>13/2</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Částka nájemného včetně částky pojištění- bez daně</td>
+			</tr>
+			<tr>
+				<td>
+					<A>HireAmountVAT</A>
+				</td>
+				<td>Nájemné DPH</td>
+				<td>dtFloat</td>
+				<td>13/2</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Částka nájemného vč. pojištění - DPH</td>
+			</tr>
+			<tr>
+				<td>
+					<A HREF="BO_1DHHWWVMXVD13ACQ03KIU0CLP4.htm">HireDoc_ID</A>
+				</td>
+				<td>Odkaz na vygenerovaný interní doklad na nájemné</td>
+				<td>dtString</td>
+				<td>10/0</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Odkaz na vygenerovaný interní doklad na nájemné</td>
+			</tr>
+			<tr>
+				<td>
+					<A>HireInsuaranceAmount</A>
+				</td>
+				<td>Pojištění</td>
+				<td>dtFloat</td>
+				<td>13/2</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Částka pojištění bez daně</td>
+			</tr>
+			<tr>
+				<td>
+					<A>ID</A>
+				</td>
+				<td>Vlastní ID</td>
+				<td>dtString</td>
+				<td>10/0</td>
+				<td>N</td>
+				<td>A</td>
+				<td>Vlastní ID</td>
+			</tr>
+			<tr>
+				<td>
+					<A>IsGenerated</A>
+				</td>
+				<td>Předpis platby námi generovaný</td>
+				<td>dtBoolean</td>
+				<td>1/0</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Předpis platby námi generovaný</td>
+			</tr>
+			<tr>
+				<td>
+					<A>ObjVersion</A>
+				</td>
+				<td>Verze objektu</td>
+				<td>dtInteger</td>
+				<td>1/0</td>
+				<td>A</td>
+				<td>A</td>
+				<td>Verze objektu</td>
+			</tr>
+			<tr>
+				<td>
+					<A HREF="BO_051DUSC0DBDL3ACT03KIU0CLP4.htm">Parent_ID</A>
+				</td>
+				<td>Vlastník</td>
+				<td>dtString</td>
+				<td>10/0</td>
+				<td>A</td>
+				<td>A</td>
+				<td>Vlastník</td>
+			</tr>
+			<tr>
+				<td>
+					<A>PaymentDate$DATE</A>
+				</td>
+				<td>Splatno</td>
+				<td>dtDateTime</td>
+				<td>10/0</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Datum splatnosti splátky</td>
+			</tr>
+			<tr>
+				<td>
+					<A HREF="BO_K53SX0HB4NDL3BLX00C5OG4NF4.htm">PaymentOrder_ID</A>
+				</td>
+				<td>Odkaz na vygenerovanou žádost o platební příkaz</td>
+				<td>dtString</td>
+				<td>10/0</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Odkaz na vygenerovanou žádost o platební příkaz</td>
+			</tr>
+			<tr>
+				<td>
+					<A HREF="BO_05UWJSK233DL3CBW01K0LEYWLS.htm">ToPayDoc_ID</A>
+				</td>
+				<td>Odkaz na doklad, který je předpisem leasingové splátky.</td>
+				<td>dtString</td>
+				<td>10/0</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Odkaz na doklad, který je předpisem leasingové splátky.</td>
+			</tr>
+			<tr>
+				<td>
+					<A>ToPayDoc_Type</A>
+				</td>
+				<td>Druh dokladu předpisu leasingové splátky</td>
+				<td>dtString</td>
+				<td>2/0</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Druh dokladu předpisu leasingové splátky</td>
+			</tr>
+			<tr>
+				<td>
+					<A>ToPayTotalAmount</A>
+				</td>
+				<td>Částka k úhradě</td>
+				<td>dtFloat</td>
+				<td>13/2</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Celková částka k úhradě včetně daně</td>
+			</tr>
+			<tr>
+				<td>
+					<A>ToPayVAT</A>
+				</td>
+				<td>DPH k úhradě</td>
+				<td>dtFloat</td>
+				<td>13/2</td>
+				<td>A</td>
+				<td>N</td>
+				<td>DPH obsažené v částce k úhradě</td>
+			</tr>
+		</table>
+		<P><EM>Generated by ABRA Software a.s. 15.12.2023 16:41</EM></P>
+	</BODY>
+</html>

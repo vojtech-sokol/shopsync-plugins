@@ -1,0 +1,270 @@
+<?xml version="1.0" encoding="windows-1250"?>
+<html xmlns="http://www.w3.org/TR/xhtml1/strict" xmlns:msxsl="urn:schemas-microsoft-com:xslt" xmlns:user="http://mycompany.com/mynamespace" xmlns:dt="urn:schemas-microsoft-com:datatypes">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=windows-1250"/>
+		<link rel="stylesheet" type="text/css" href="../GxDoc.css"/>
+		<title>Business objekt - CRPCalcMethod</title>
+	</head>
+	<BODY>
+		
+		<H2>Business objekt - CRPCalcMethod</H2>
+		<DL>
+			<DD>Popis:</DD>
+			<DT>Metoda výpočtu kapacitního plánu</DT>
+			<DD>CLSID:</DD>
+			<DT>{BD517FB0-3AFB-42AA-92B1-AA113D812324}</DT>
+			<DD>PackedCLSID:</DD>
+			<DT>Q1ZP3JJVBEP454PLPCCNV0D34K</DT>
+			<DD>User fields:</DD>
+			<DT>A</DT>
+			<DD>Default DynSource:</DD>
+			<DT><A HREF="DynSQL_US05NAIRKMQ4JGUHSRMJ1NNIT4.htm">US05NAIRKMQ4JGUHSRMJ1NNIT4</A></DT>
+			<DD>PersistCLSID</DD>
+			<DT><A HREF="PersistentClasses_XILVQIV4CHQOHCPJB3NIGKCPDG.htm">XILVQIV4CHQOHCPJB3NIGKCPDG</A></DT>
+		</DL>
+		<H3>Položky</H3>
+		<table>
+			<tr>
+				<th class="font_bold">Název</th>
+				<th class="font_bold">Label</th>
+				<th class="font_bold">Typ</th>
+				<th class="font_bold">Délka</th>
+				<th class="font_bold">Persistent</th>
+				<th class="font_bold">ROnly</th>
+				<th class="font_bold">Popis</th>
+			</tr>
+			<tr>
+				<td>
+					<A>CapacityKind</A>
+				</td>
+				<td>Způsob - kapacita</td>
+				<td>dtInteger</td>
+				<td>1/0</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Způsob plánování s ohledem na kapacitu buňky</td>
+			</tr>
+			<tr>
+				<td>
+					<A>ClassID</A>
+				</td>
+				<td>ID třídy</td>
+				<td>dtString</td>
+				<td>26/0</td>
+				<td>N</td>
+				<td>A</td>
+				<td>ID třídy</td>
+			</tr>
+			<tr>
+				<td>
+					<A>Code</A>
+				</td>
+				<td>Kód</td>
+				<td>dtString</td>
+				<td>20/0</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Kód</td>
+			</tr>
+			<tr>
+				<td>
+					<A>ConsiderMaterialDispon</A>
+				</td>
+				<td>Dostupnost materiálu</td>
+				<td>dtBoolean</td>
+				<td>1/0</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Nastavení způsobí zaplánování až od času disponibility materiálu</td>
+			</tr>
+			<tr>
+				<td>
+					<A>ConsiderSemiFinProdDispon</A>
+				</td>
+				<td>Nedostupnost polotovaru</td>
+				<td>dtBoolean</td>
+				<td>1/0</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Nastavení způsobí předřazení dokladů při nedisponibilitě polotovaru</td>
+			</tr>
+			<tr>
+				<td>
+					<A>DisplayName</A>
+				</td>
+				<td>Název</td>
+				<td>dtString</td>
+				<td>100/0</td>
+				<td>N</td>
+				<td>A</td>
+				<td>Zobrazovací název</td>
+			</tr>
+			<tr>
+				<td>
+					<A HREF="BO_Q1ZP3JJVBEP454PLPCCNV0D34K.htm">ForwardMethod_ID</A>
+				</td>
+				<td>Metoda pro přeplánování</td>
+				<td>dtString</td>
+				<td>10/0</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Odpovídající metoda pro přeplánování</td>
+			</tr>
+			<tr>
+				<td>
+					<A>Hidden</A>
+				</td>
+				<td>Skrytý</td>
+				<td>dtBoolean</td>
+				<td>1/0</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Pozastavení platnosti</td>
+			</tr>
+			<tr>
+				<td>
+					<A>ID</A>
+				</td>
+				<td>Vlastní ID</td>
+				<td>dtString</td>
+				<td>10/0</td>
+				<td>N</td>
+				<td>A</td>
+				<td>Vlastní ID</td>
+			</tr>
+			<tr>
+				<td>
+					<A>IsBackward</A>
+				</td>
+				<td>Dozadná</td>
+				<td>dtBoolean</td>
+				<td>1/0</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Dozadná</td>
+			</tr>
+			<tr>
+				<td>
+					<A>IsIgnoredStartDate</A>
+				</td>
+				<td>Ignorovat datum spuštění</td>
+				<td>dtBoolean</td>
+				<td>1/0</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Ignorovat datum spuštění</td>
+			</tr>
+			<tr>
+				<td>
+					<A>IsPublic</A>
+				</td>
+				<td>Veřejná</td>
+				<td>dtBoolean</td>
+				<td>1/0</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Veřejná (viditelná)</td>
+			</tr>
+			<tr>
+				<td>
+					<A>IsSystem</A>
+				</td>
+				<td>Systémová</td>
+				<td>dtBoolean</td>
+				<td>1/0</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Systémová (předdefinovaná)</td>
+			</tr>
+			<tr>
+				<td>
+					<A>IsTogetherOnExtrem</A>
+				</td>
+				<td>Přetížit datum</td>
+				<td>dtBoolean</td>
+				<td>1/0</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Nenaplánované úkony se vloží společně na krajní datum</td>
+			</tr>
+			<tr>
+				<td>
+					<A>IsWithPrevious</A>
+				</td>
+				<td>Včetně závislých úkonů</td>
+				<td>dtBoolean</td>
+				<td>1/0</td>
+				<td>N</td>
+				<td>N</td>
+				<td>Plánování včetně závislých úkonů</td>
+			</tr>
+			<tr>
+				<td>
+					<A>Name</A>
+				</td>
+				<td>Název</td>
+				<td>dtString</td>
+				<td>160/0</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Název</td>
+			</tr>
+			<tr>
+				<td>
+					<A>ObjVersion</A>
+				</td>
+				<td>Verze objektu</td>
+				<td>dtInteger</td>
+				<td>1/0</td>
+				<td>A</td>
+				<td>A</td>
+				<td>Verze objektu</td>
+			</tr>
+			<tr>
+				<td>
+					<A>OrigPersistID</A>
+				</td>
+				<td>Originální hodnota ID</td>
+				<td>dtString</td>
+				<td>10/0</td>
+				<td>N</td>
+				<td>A</td>
+				<td>Originální hodnota ID metody, vzniklé například klonováním</td>
+			</tr>
+			<tr>
+				<td>
+					<A>SortDocumentKind</A>
+				</td>
+				<td>Řazení dokladů</td>
+				<td>dtInteger</td>
+				<td>1/0</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Způsob řazení výrobních dokladů</td>
+			</tr>
+			<tr>
+				<td>
+					<A>SortWSItemKind</A>
+				</td>
+				<td>Řazení úkonů</td>
+				<td>dtInteger</td>
+				<td>1/0</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Způsob řazení dílenských úkonů</td>
+			</tr>
+			<tr>
+				<td>
+					<A>SupposedDateKind</A>
+				</td>
+				<td>Způsob - datum</td>
+				<td>dtInteger</td>
+				<td>1/0</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Předpokládané naplánované datum podle</td>
+			</tr>
+		</table>
+		<P><EM>Generated by ABRA Software a.s. 15.12.2023 16:41</EM></P>
+	</BODY>
+</html>

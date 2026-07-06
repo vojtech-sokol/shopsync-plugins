@@ -1,0 +1,798 @@
+<?xml version="1.0" encoding="windows-1250"?>
+<html xmlns="http://www.w3.org/TR/xhtml1/strict" xmlns:msxsl="urn:schemas-microsoft-com:xslt" xmlns:user="http://mycompany.com/mynamespace" xmlns:dt="urn:schemas-microsoft-com:datatypes">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=windows-1250"/>
+		<link rel="stylesheet" type="text/css" href="../GxDoc.css"/>
+		<title>Business objekt - PLMJOSetParsQueue</title>
+	</head>
+	<BODY>
+		
+		<H2>Business objekt - PLMJOSetParsQueue</H2>
+		<DL>
+			<DD>Popis:</DD>
+			<DT>Parametry řady výrobních příkazů</DT>
+			<DD>CLSID:</DD>
+			<DT>{55DBE7F9-4AFC-43D7-9103-E4DCFECE3B9C}</DT>
+			<DD>PackedCLSID:</DD>
+			<DT>ZBNXQPJWDFFOB4C3WNIJXNLVNK</DT>
+			<DD>User fields:</DD>
+			<DT>A</DT>
+			<DD>Default DynSource:</DD>
+			<DT><A HREF="DynSQL_TXTQXNVN1554J45VQ1Y3NXJTES.htm">TXTQXNVN1554J45VQ1Y3NXJTES</A></DT>
+			<DD>PersistCLSID</DD>
+			<DT><A HREF="PersistentClasses_5TXEYHWBS0JONCZBYW1CUHJHU4.htm">5TXEYHWBS0JONCZBYW1CUHJHU4</A></DT>
+		</DL>
+		<H3>Položky</H3>
+		<table>
+			<tr>
+				<th class="font_bold">Název</th>
+				<th class="font_bold">Label</th>
+				<th class="font_bold">Typ</th>
+				<th class="font_bold">Délka</th>
+				<th class="font_bold">Persistent</th>
+				<th class="font_bold">ROnly</th>
+				<th class="font_bold">Popis</th>
+			</tr>
+			<tr>
+				<td>
+					<A HREF="BO_W0JQ3RIV5FD13ACL03KIU0CLP4.htm">AccPresetDef_ID</A>
+				</td>
+				<td>Účetní předkontace</td>
+				<td>dtString</td>
+				<td>10/0</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Účetní předkontace pro souhrnné pracovní lístky</td>
+			</tr>
+			<tr>
+				<td>
+					<A HREF="BO_W0JQ3RIV5FD13ACL03KIU0CLP4.htm">AccPresetDefForFP_ID</A>
+				</td>
+				<td>Úč. předkontace Dok. výrobky</td>
+				<td>dtString</td>
+				<td>10/0</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Účetní předkontace pro dokončené výrobky</td>
+			</tr>
+			<tr>
+				<td>
+					<A>AfterJOStartUp</A>
+				</td>
+				<td>Po spuštění VP vygenerovat</td>
+				<td>dtInteger</td>
+				<td>0/0</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Po spuštění VP vygenerovat</td>
+			</tr>
+			<tr>
+				<td>
+					<A>AfterPR</A>
+				</td>
+				<td>Po vytvoření PHV generovat</td>
+				<td>dtInteger</td>
+				<td>1/0</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Po vytvoření PHV generovat</td>
+			</tr>
+			<tr>
+				<td>
+					<A>AllowRepairTransOp</A>
+				</td>
+				<td>Umožnit opravit</td>
+				<td>dtInteger</td>
+				<td>0/0</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Umožnit opravit dobu trvání na již přeneseném pracovním lístku</td>
+			</tr>
+			<tr>
+				<td>
+					<A HREF="BO_GSOF0GVELBCO50DTXAWJRL5K1W.htm">AutoServerScheduler_ID</A>
+				</td>
+				<td>Úloha autoserveru</td>
+				<td>dtString</td>
+				<td>10/0</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Plánovaná úloha autoserveru pro automatické ocenění</td>
+			</tr>
+			<tr>
+				<td>
+					<A HREF="BO_K2WTYL304VD13ACL03KIU0CLP4.htm">AWTBusOrder_ID</A>
+				</td>
+				<td>SPL - zakázka</td>
+				<td>dtString</td>
+				<td>10/0</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Zakázka pro souhrnný pracovní lístek</td>
+			</tr>
+			<tr>
+				<td>
+					<A HREF="BO_QOKMKIQUJF34L3DUICTBWEDQJC.htm">AWTBusProject_ID</A>
+				</td>
+				<td>SPL - projekt</td>
+				<td>dtString</td>
+				<td>10/0</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Projekt pro souhrnný pracovní lístek</td>
+			</tr>
+			<tr>
+				<td>
+					<A HREF="BO_KAWTYL304VD13ACL03KIU0CLP4.htm">AWTBusTransaction_ID</A>
+				</td>
+				<td>SPL - obch. případ</td>
+				<td>dtString</td>
+				<td>10/0</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Obchodní případ pro souhrnný pracovní lístek</td>
+			</tr>
+			<tr>
+				<td>
+					<A>AWTByBusOrder</A>
+				</td>
+				<td>SPL dle zakázek</td>
+				<td>dtBoolean</td>
+				<td>1/0</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Slučovat souhrnné pracovní lístky podle zakázek</td>
+			</tr>
+			<tr>
+				<td>
+					<A>AWTByBusProject</A>
+				</td>
+				<td>SPL dle projektů</td>
+				<td>dtBoolean</td>
+				<td>1/0</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Slučovat souhrnné pracovní lístky podle projektů</td>
+			</tr>
+			<tr>
+				<td>
+					<A>AWTByBusTransaction</A>
+				</td>
+				<td>SPL dle obch. případů</td>
+				<td>dtBoolean</td>
+				<td>1/0</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Slučovat souhrnné pracovní lístky podle obchodních případů</td>
+			</tr>
+			<tr>
+				<td>
+					<A>AWTByDate</A>
+				</td>
+				<td>SPL dle data</td>
+				<td>dtInteger</td>
+				<td>1/0</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Slučovat souhrnné pracovní lístky podle data ukončení</td>
+			</tr>
+			<tr>
+				<td>
+					<A>AWTByDivision</A>
+				</td>
+				<td>SPL dle střediska</td>
+				<td>dtBoolean</td>
+				<td>1/0</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Slučovat souhrnné pracovní lístky podle středisek</td>
+			</tr>
+			<tr>
+				<td>
+					<A>AWTByJobOrder</A>
+				</td>
+				<td>SPL dle výr. projektů</td>
+				<td>dtBoolean</td>
+				<td>1/0</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Slučovat souhrnné pracovní lístky podle výrobních příkazů</td>
+			</tr>
+			<tr>
+				<td>
+					<A HREF="BO_O1X54EUXPZCL35CH000ILPWJF4.htm">AWTDivision_ID</A>
+				</td>
+				<td>SPL - středisko</td>
+				<td>dtString</td>
+				<td>10/0</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Středisko pro souhrnný pracovní lístek</td>
+			</tr>
+			<tr>
+				<td>
+					<A HREF="BO_W0JQ3RIV5FD13ACL03KIU0CLP4.htm">BalanceAccPresetDef_ID</A>
+				</td>
+				<td>Úč. předkontace VNV</td>
+				<td>dtString</td>
+				<td>10/0</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Účetní předkontace pro vyrovnání nedokončené výroby</td>
+			</tr>
+			<tr>
+				<td>
+					<A HREF="BO_W0JQ3RIV5FD13ACL03KIU0CLP4.htm">BalanceDepAccPresetDef_ID</A>
+				</td>
+				<td>Úč. předkontace nezapočtených VNV</td>
+				<td>dtString</td>
+				<td>10/0</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Účetní předkontace pro vyrovnání nedokončené výroby s nezapočtenými vst. doklady</td>
+			</tr>
+			<tr>
+				<td>
+					<A HREF="BO_OFTMKVQH3ZD13ACL03KIU0CLP4.htm">BalanceDepDocQueue_ID</A>
+				</td>
+				<td>Řada nezapočtených VNV</td>
+				<td>dtString</td>
+				<td>10/0</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Řada dokladů pro vyrovnání nedokončené výroby s nezapočtenými vst. doklady</td>
+			</tr>
+			<tr>
+				<td>
+					<A HREF="BO_OFTMKVQH3ZD13ACL03KIU0CLP4.htm">BalanceDocQueue_ID</A>
+				</td>
+				<td>Řada VNV</td>
+				<td>dtString</td>
+				<td>10/0</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Řada dokladů pro vyrovnání nedokončené výroby</td>
+			</tr>
+			<tr>
+				<td>
+					<A>BatchOperationOver</A>
+				</td>
+				<td>Povolit předimenzovat dávkovou operaci</td>
+				<td>dtBoolean</td>
+				<td>1/0</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Povolit předimenzovat dávkovou operaci</td>
+			</tr>
+			<tr>
+				<td>
+					<A>ClassID</A>
+				</td>
+				<td>ID třídy</td>
+				<td>dtString</td>
+				<td>26/0</td>
+				<td>N</td>
+				<td>A</td>
+				<td>ID třídy</td>
+			</tr>
+			<tr>
+				<td>
+					<A>ConsumablesInIncome</A>
+				</td>
+				<td>Spotřební mat. v příjmu</td>
+				<td>dtInteger</td>
+				<td>0/0</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Zahrnout spotřební materiál v ceně příjmu</td>
+			</tr>
+			<tr>
+				<td>
+					<A>CooperationInIncome</A>
+				</td>
+				<td>Koop. v příjmu</td>
+				<td>dtBoolean</td>
+				<td>1/0</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Zahrnovat kooperaci do ceny příjmu</td>
+			</tr>
+			<tr>
+				<td>
+					<A>Correction</A>
+				</td>
+				<td>Korekce</td>
+				<td>dtInteger</td>
+				<td>0/0</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Korekce rozdílů v dalším přenosu</td>
+			</tr>
+			<tr>
+				<td>
+					<A HREF="BO_SFMSB5W15BDL3CL100C4RHECN0.htm">DefaultSupposedStore_ID</A>
+				</td>
+				<td>Výchozí předpokládaný sklad</td>
+				<td>dtString</td>
+				<td>10/0</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Výchozí předpokládaný sklad pro SCM</td>
+			</tr>
+			<tr>
+				<td>
+					<A>DisplayName</A>
+				</td>
+				<td>Název</td>
+				<td>dtString</td>
+				<td>100/0</td>
+				<td>N</td>
+				<td>A</td>
+				<td>Zobrazovací název</td>
+			</tr>
+			<tr>
+				<td>
+					<A HREF="BO_OFTMKVQH3ZD13ACL03KIU0CLP4.htm">DocQueue_ID</A>
+				</td>
+				<td>Řada dokladu</td>
+				<td>dtString</td>
+				<td>10/0</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Odkaz na řadu dokladu</td>
+			</tr>
+			<tr>
+				<td>
+					<A HREF="BO_OFTMKVQH3ZD13ACL03KIU0CLP4.htm">DocQueueForAWT_ID</A>
+				</td>
+				<td>Řada dokladu</td>
+				<td>dtString</td>
+				<td>10/0</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Řada dokladu pro souhrnné pracovní lístky</td>
+			</tr>
+			<tr>
+				<td>
+					<A HREF="BO_OFTMKVQH3ZD13ACL03KIU0CLP4.htm">DocQueueForFP_ID</A>
+				</td>
+				<td>Řada Dok. výrobky</td>
+				<td>dtString</td>
+				<td>10/0</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Řada dokladu pro dokončené výrobky</td>
+			</tr>
+			<tr>
+				<td>
+					<A HREF="BO_OFTMKVQH3ZD13ACL03KIU0CLP4.htm">DocQueueForSemiFP_ID</A>
+				</td>
+				<td>Řada dokončených polotovarů</td>
+				<td>dtString</td>
+				<td>10/0</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Řada dokladů pro dokončené výrobky - polotovary</td>
+			</tr>
+			<tr>
+				<td>
+					<A HREF="BO_NK0Q4EQET4HOPEYEMHGAGI4VN4.htm">DocumentCategoryForTesting_ID</A>
+				</td>
+				<td>Kategorie dokumentů pro testování</td>
+				<td>dtString</td>
+				<td>10/0</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Kategorie dokumentů pro testování</td>
+			</tr>
+			<tr>
+				<td>
+					<A>EnableExpiredStoreBatch</A>
+				</td>
+				<td>Výdej expirované šarže/sér.č</td>
+				<td>dtInteger</td>
+				<td>1/0</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Umožnit výdej expirované šarže/sér.č</td>
+			</tr>
+			<tr>
+				<td>
+					<A>FewFinishedQSoftValidation</A>
+				</td>
+				<td>Kontrolovat menší počet přijatých výrobků</td>
+				<td>dtBoolean</td>
+				<td>1/0</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Při ukončení příkazu kontrolovat, zda počet výrobků přijatých na sklad je menší než množství příkazu</td>
+			</tr>
+			<tr>
+				<td>
+					<A>GeneralExpenseInIncome</A>
+				</td>
+				<td>Správ. režie v příjmu</td>
+				<td>dtBoolean</td>
+				<td>1/0</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Zahrnovat správní režie do ceny příjmu</td>
+			</tr>
+			<tr>
+				<td>
+					<A>GroupBusOrder</A>
+				</td>
+				<td>Seskupit dle zakázky</td>
+				<td>dtBoolean</td>
+				<td>1/0</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Seskupit pracovní lístky při přenosu dle zakázky</td>
+			</tr>
+			<tr>
+				<td>
+					<A>GroupBusProject</A>
+				</td>
+				<td>Seskupit dle projektu</td>
+				<td>dtBoolean</td>
+				<td>1/0</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Seskupit pracovní lístky při přenosu dle projektu</td>
+			</tr>
+			<tr>
+				<td>
+					<A>GroupBusTransaction</A>
+				</td>
+				<td>Seskupit dle obchodního případu</td>
+				<td>dtBoolean</td>
+				<td>1/0</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Seskupit pracovní lístky při přenosu dle obchodního případu</td>
+			</tr>
+			<tr>
+				<td>
+					<A>GroupDate</A>
+				</td>
+				<td>Seskupit dle datumu</td>
+				<td>dtInteger</td>
+				<td>0/0</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Seskupit pracovní lístky při přenosu dle datumu</td>
+			</tr>
+			<tr>
+				<td>
+					<A>GroupDivision</A>
+				</td>
+				<td>Seskupit dle střediska</td>
+				<td>dtBoolean</td>
+				<td>1/0</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Seskupit pracovní lístky při přenosu dle střediska</td>
+			</tr>
+			<tr>
+				<td>
+					<A>ID</A>
+				</td>
+				<td>Vlastní ID</td>
+				<td>dtString</td>
+				<td>10/0</td>
+				<td>N</td>
+				<td>A</td>
+				<td>Vlastní ID</td>
+			</tr>
+			<tr>
+				<td>
+					<A>IgnoreDateOfExpiration</A>
+				</td>
+				<td>Ignorovat datum expirace při výdeji sériových čísel/šarží</td>
+				<td>dtBoolean</td>
+				<td>1/0</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Ignorovat datum expirace při výdeji sériových čísel/šarží</td>
+			</tr>
+			<tr>
+				<td>
+					<A>InPlan</A>
+				</td>
+				<td>Započítat do kapacitního plánu</td>
+				<td>dtBoolean</td>
+				<td>1/0</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Započítat do kapacitního plánu</td>
+			</tr>
+			<tr>
+				<td>
+					<A>IsRegisterSemiFP</A>
+				</td>
+				<td>Evidovat dokončené polotovary</td>
+				<td>dtBoolean</td>
+				<td>1/0</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Evidovat dokončené výrobky a rodné listy i na polotovarech</td>
+			</tr>
+			<tr>
+				<td>
+					<A>MatDistribOverSoftValidation</A>
+				</td>
+				<td>Při výdeji materiálu kontrolovat překročení vydávaného množství</td>
+				<td>dtBoolean</td>
+				<td>1/0</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Při výdeji materiálu kontrolovat překročení vydávaného množství</td>
+			</tr>
+			<tr>
+				<td>
+					<A>MaterialDistributionOver</A>
+				</td>
+				<td>Povolit předimenzovat výdej</td>
+				<td>dtBoolean</td>
+				<td>1/0</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Povolit předimenzovat výdej materiálu</td>
+			</tr>
+			<tr>
+				<td>
+					<A>MaterialExpenseInIncome</A>
+				</td>
+				<td>Materiálová režie v příjmu</td>
+				<td>dtBoolean</td>
+				<td>1/0</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Zahrnout materiálovou režii do ceny příjmu</td>
+			</tr>
+			<tr>
+				<td>
+					<A>MaterialInIncome</A>
+				</td>
+				<td>Mat. v příjmu</td>
+				<td>dtBoolean</td>
+				<td>1/0</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Zahrnovat materiál do ceny příjmu</td>
+			</tr>
+			<tr>
+				<td>
+					<A>ModeUseMDAfterPR</A>
+				</td>
+				<td>Způsob započítání výdeje materiálu po datu příjmu</td>
+				<td>dtInteger</td>
+				<td>1/0</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Způsob započítání výdeje materiálu po datu příjmu</td>
+			</tr>
+			<tr>
+				<td>
+					<A>ModeUseOpAfterPR</A>
+				</td>
+				<td>Způsob započítání pracovních lístků po datu příjmu</td>
+				<td>dtInteger</td>
+				<td>1/0</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Způsob započítání pracovních lístků po datu příjmu</td>
+			</tr>
+			<tr>
+				<td>
+					<A>ObjVersion</A>
+				</td>
+				<td>Verze objektu</td>
+				<td>dtInteger</td>
+				<td>1/0</td>
+				<td>A</td>
+				<td>A</td>
+				<td>Verze objektu</td>
+			</tr>
+			<tr>
+				<td>
+					<A>OperationsAuto</A>
+				</td>
+				<td>Prac. lístky autom.</td>
+				<td>dtBoolean</td>
+				<td>1/0</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Souhrnné pracovní lístky zpracovávat automaticky</td>
+			</tr>
+			<tr>
+				<td>
+					<A>OverheadCostsInIncome</A>
+				</td>
+				<td>Výr. režie v příjmu</td>
+				<td>dtBoolean</td>
+				<td>1/0</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Zahrnovat výrobní režie do ceny příjmu</td>
+			</tr>
+			<tr>
+				<td>
+					<A>PriceInIncome</A>
+				</td>
+				<td>Pevná cena v příjmu</td>
+				<td>dtInteger</td>
+				<td>0/0</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Zahrnovat pevnou cenu do ceny příjmu</td>
+			</tr>
+			<tr>
+				<td>
+					<A>ProductReceptionOver</A>
+				</td>
+				<td>Povolit předimenzovat příjem hotových výrobků</td>
+				<td>dtBoolean</td>
+				<td>1/0</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Povolit předimenzovat příjem hotových výrobků</td>
+			</tr>
+			<tr>
+				<td>
+					<A>SalariesInIncome</A>
+				</td>
+				<td>Mzdy v příjmu</td>
+				<td>dtBoolean</td>
+				<td>1/0</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Zahrnovat mzdy do ceny příjmu</td>
+			</tr>
+			<tr>
+				<td>
+					<A>SplitOperationsByCalendar</A>
+				</td>
+				<td>Dělit pracovní lístky dle kalendáře na pracovišti</td>
+				<td>dtBoolean</td>
+				<td>1/0</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Dělit pracovní lístky dle kalendáře na pracovišti</td>
+			</tr>
+			<tr>
+				<td>
+					<A>ToleranceMaterialNegative</A>
+				</td>
+				<td>Záporná tolerance výdeje materiálu</td>
+				<td>dtFloat</td>
+				<td>15/3</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Záporná tolerance výdeje materiálu</td>
+			</tr>
+			<tr>
+				<td>
+					<A>ToleranceMaterialPositive</A>
+				</td>
+				<td>Kladná tolerance výdeje materiálu</td>
+				<td>dtFloat</td>
+				<td>15/3</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Kladná tolerance výdeje materiálu</td>
+			</tr>
+			<tr>
+				<td>
+					<A>ToleranceWagesNegative</A>
+				</td>
+				<td>Záporná tolerance mzdy+režie</td>
+				<td>dtFloat</td>
+				<td>15/3</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Záporná tolerance mzdy+režie</td>
+			</tr>
+			<tr>
+				<td>
+					<A>ToleranceWagesPositive</A>
+				</td>
+				<td>Kladná tolerance mzdy+režie</td>
+				<td>dtFloat</td>
+				<td>15/3</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Kladná tolerance mzdy+režie</td>
+			</tr>
+			<tr>
+				<td>
+					<A>Transfer</A>
+				</td>
+				<td>Co přenášet</td>
+				<td>dtInteger</td>
+				<td>0/0</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Co přenášet do mezd</td>
+			</tr>
+			<tr>
+				<td>
+					<A>ValuationPR</A>
+				</td>
+				<td>Oceňovat PHV</td>
+				<td>dtInteger</td>
+				<td>1/0</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Určuje, zda se bude spouštět automatické ocenění PHV</td>
+			</tr>
+			<tr>
+				<td>
+					<A>ValuationTypePR</A>
+				</td>
+				<td>Způsob ocenění PHV</td>
+				<td>dtInteger</td>
+				<td>1/0</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Způsob spouštění ocenění výrobku po PHV</td>
+			</tr>
+			<tr>
+				<td>
+					<A>ValueTransfer1</A>
+				</td>
+				<td>Způsob přenosu</td>
+				<td>dtInteger</td>
+				<td>0/0</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Způsob přenosu hodnoty pro pracovní lístky na výrobu</td>
+			</tr>
+			<tr>
+				<td>
+					<A>ValueTransfer2</A>
+				</td>
+				<td>Způsob přenosu</td>
+				<td>dtInteger</td>
+				<td>0/0</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Způsob přenosu hodnoty pro pracovní lístky na nápravu neshody</td>
+			</tr>
+			<tr>
+				<td>
+					<A HREF="BO_5CDJJUZCD3TO1DWAOHINSMP2MW.htm">WageOperationType1_ID</A>
+				</td>
+				<td>Druh výkonu</td>
+				<td>dtString</td>
+				<td>10/0</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Druh výkonu pro pracovní lístky na výrobu</td>
+			</tr>
+			<tr>
+				<td>
+					<A HREF="BO_5CDJJUZCD3TO1DWAOHINSMP2MW.htm">WageOperationType2_ID</A>
+				</td>
+				<td>Druh výkonu</td>
+				<td>dtString</td>
+				<td>10/0</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Druh výkonu pro pracovní lístky na nápravu neshody</td>
+			</tr>
+			<tr>
+				<td>
+					<A>WastePercentageSoftValidation</A>
+				</td>
+				<td>Kontrolovat, zda jsou ztráty mezi 0 až 100%</td>
+				<td>dtBoolean</td>
+				<td>1/0</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Kontrolovat, zda jsou ztráty mezi 0 až 100%</td>
+			</tr>
+		</table>
+		<P><EM>Generated by ABRA Software a.s. 15.12.2023 16:41</EM></P>
+	</BODY>
+</html>

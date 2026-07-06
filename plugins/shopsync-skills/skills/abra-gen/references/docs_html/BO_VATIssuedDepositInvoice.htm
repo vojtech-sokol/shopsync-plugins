@@ -1,0 +1,1105 @@
+<?xml version="1.0" encoding="windows-1250"?>
+<html xmlns="http://www.w3.org/TR/xhtml1/strict" xmlns:msxsl="urn:schemas-microsoft-com:xslt" xmlns:user="http://mycompany.com/mynamespace" xmlns:dt="urn:schemas-microsoft-com:datatypes">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=windows-1250"/>
+		<link rel="stylesheet" type="text/css" href="../GxDoc.css"/>
+		<title>Business objekt - VATIssuedDepositInvoice</title>
+	</head>
+	<BODY>
+		
+		<H2>Business objekt - VATIssuedDepositInvoice</H2>
+		<DL>
+			<DD>Popis:</DD>
+			<DT>Daňový zálohový list vydaný</DT>
+			<DD>CLSID:</DD>
+			<DT>{16B5FCC0-9FD6-4BAD-BFB1-7F3A988EDB04}</DT>
+			<DD>PackedCLSID:</DD>
+			<DT>S3YFE5QQNYQORJXLJWXDL3QV0K</DT>
+			<DD>User fields:</DD>
+			<DT>A</DT>
+			<DD>Default DynSource:</DD>
+			<DT><A HREF="DynSQL_POAFJFVJWPU4NJHCW2TD00JQHC.htm">POAFJFVJWPU4NJHCW2TD00JQHC</A></DT>
+			<DD>PersistCLSID</DD>
+			<DT><A HREF="PersistentClasses_SVBIMRJZ1KD4ZI2DDA4XGHZGBK.htm">SVBIMRJZ1KD4ZI2DDA4XGHZGBK</A></DT>
+		</DL>
+		<H3>Položky</H3>
+		<table>
+			<tr>
+				<th class="font_bold">Název</th>
+				<th class="font_bold">Label</th>
+				<th class="font_bold">Typ</th>
+				<th class="font_bold">Délka</th>
+				<th class="font_bold">Persistent</th>
+				<th class="font_bold">ROnly</th>
+				<th class="font_bold">Popis</th>
+			</tr>
+			<tr>
+				<td>
+					<A>AccDate$DATE</A>
+				</td>
+				<td>Datum účt.</td>
+				<td>dtDateTime</td>
+				<td>10/0</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Datum účtování</td>
+			</tr>
+			<tr>
+				<td>
+					<A HREF="BO_OBTMKVQH3ZD13ACL03KIU0CLP4.htm">AccDocQueue_ID</A>
+				</td>
+				<td>Účetní řada</td>
+				<td>dtString</td>
+				<td>10/0</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Účetní řada</td>
+			</tr>
+			<tr>
+				<td>
+					<A>AccountingType</A>
+				</td>
+				<td>Jak účtovat</td>
+				<td>dtInteger</td>
+				<td>1/0</td>
+				<td>N</td>
+				<td>N</td>
+				<td>Jak účtovat</td>
+			</tr>
+			<tr>
+				<td>
+					<A HREF="BO_W0JQ3RIV5FD13ACL03KIU0CLP4.htm">AccPresetDef_ID</A>
+				</td>
+				<td>Předkontace</td>
+				<td>dtString</td>
+				<td>10/0</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Předkontace</td>
+			</tr>
+			<tr>
+				<td>
+					<A HREF="BO_4C3EXM5PQBCL35CH000ILPWJF4.htm">Address_ID</A>
+				</td>
+				<td>Vlastní adresa</td>
+				<td>dtString</td>
+				<td>10/0</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Vlastní adresa</td>
+			</tr>
+			<tr>
+				<td>
+					<A>Amount</A>
+				</td>
+				<td>Celkem</td>
+				<td>dtFloat</td>
+				<td>13/2</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Celková částka</td>
+			</tr>
+			<tr>
+				<td>
+					<A>AmountWithoutVAT</A>
+				</td>
+				<td>Celkem bez</td>
+				<td>dtFloat</td>
+				<td>13/2</td>
+				<td>A</td>
+				<td>A</td>
+				<td>Celková částka bez daně</td>
+			</tr>
+			<tr>
+				<td>
+					<A HREF="BO_S1DAHWVT5ND133N4010DELDFKK.htm">BankAccount_ID</A>
+				</td>
+				<td>Bankovní účet</td>
+				<td>dtString</td>
+				<td>10/0</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Odkaz na vlastní bankovní účet.</td>
+			</tr>
+			<tr>
+				<td>
+					<A>ClassID</A>
+				</td>
+				<td>ID třídy</td>
+				<td>dtString</td>
+				<td>26/0</td>
+				<td>N</td>
+				<td>A</td>
+				<td>ID třídy</td>
+			</tr>
+			<tr>
+				<td>
+					<A HREF="BO_CAQPAYUOXVCL3ACL03KIU0CLP4.htm">ClosingPeriod_ID</A>
+				</td>
+				<td>Období uzávěrky</td>
+				<td>dtString</td>
+				<td>10/0</td>
+				<td>A</td>
+				<td>A</td>
+				<td>Období uzávěrky</td>
+			</tr>
+			<tr>
+				<td>
+					<A>Coef</A>
+				</td>
+				<td>Koeficient</td>
+				<td>dtInteger</td>
+				<td>6/0</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Koeficient</td>
+			</tr>
+			<tr>
+				<td>
+					<A>ComputeExchangeRateDiff</A>
+				</td>
+				<td>Počítat uzávěrkový kurzový rozdíl</td>
+				<td>dtBoolean</td>
+				<td>1/0</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Počítat uzávěrkový kurzový rozdíl</td>
+			</tr>
+			<tr>
+				<td>
+					<A>CorrectedAt$DATE</A>
+				</td>
+				<td>Opraveno</td>
+				<td>dtDateTime</td>
+				<td>10/0</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Datum a čas poslední opravy</td>
+			</tr>
+			<tr>
+				<td>
+					<A HREF="BO_22AHIVDVAVE13C5S00CA141B44.htm">CorrectedBy_ID</A>
+				</td>
+				<td>Opravil</td>
+				<td>dtString</td>
+				<td>10/0</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Opravil</td>
+			</tr>
+			<tr>
+				<td>
+					<A>CorrectedUsedAmount</A>
+				</td>
+				<td>Zúčt.vč.korekce</td>
+				<td>dtFloat</td>
+				<td>13/2</td>
+				<td>N</td>
+				<td>A</td>
+				<td>Zúčtováno včetně korekce</td>
+			</tr>
+			<tr>
+				<td>
+					<A>CorrectionAmount</A>
+				</td>
+				<td>Korekční částka</td>
+				<td>dtFloat</td>
+				<td>13/2</td>
+				<td>N</td>
+				<td>A</td>
+				<td>Korekční částka</td>
+			</tr>
+			<tr>
+				<td>
+					<A>CorrectionAmountWithoutVAT</A>
+				</td>
+				<td>Korekční částka bez DPH</td>
+				<td>dtFloat</td>
+				<td>13/2</td>
+				<td>N</td>
+				<td>A</td>
+				<td>Korekční částka bez DPH</td>
+			</tr>
+			<tr>
+				<td>
+					<A HREF="BO_4J5FINKNYNDL3C5P00CA141B44.htm">Country_ID</A>
+				</td>
+				<td>Země</td>
+				<td>dtString</td>
+				<td>10/0</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Země</td>
+			</tr>
+			<tr>
+				<td>
+					<A>CreatedAt$DATE</A>
+				</td>
+				<td>Vytvořeno</td>
+				<td>dtDateTime</td>
+				<td>10/0</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Datum a čas vytvoření</td>
+			</tr>
+			<tr>
+				<td>
+					<A HREF="BO_22AHIVDVAVE13C5S00CA141B44.htm">CreatedBy_ID</A>
+				</td>
+				<td>Vytvořil</td>
+				<td>dtString</td>
+				<td>10/0</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Vytvořil</td>
+			</tr>
+			<tr>
+				<td>
+					<A>CreditAmount</A>
+				</td>
+				<td>Dobr.celkem</td>
+				<td>dtFloat</td>
+				<td>13/2</td>
+				<td>A</td>
+				<td>A</td>
+				<td>Dobropisováno celkem</td>
+			</tr>
+			<tr>
+				<td>
+					<A>CreditAmountWithoutVAT</A>
+				</td>
+				<td>Dobr.celkem bez daně</td>
+				<td>dtFloat</td>
+				<td>13/2</td>
+				<td>A</td>
+				<td>A</td>
+				<td>Dobropisováno celkem bez daně</td>
+			</tr>
+			<tr>
+				<td>
+					<A HREF="BO_4R5FINKNYNDL3C5P00CA141B44.htm">Currency_ID</A>
+				</td>
+				<td>Měna</td>
+				<td>dtString</td>
+				<td>10/0</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Měna</td>
+			</tr>
+			<tr>
+				<td>
+					<A>CurrRate</A>
+				</td>
+				<td>Kurz měny</td>
+				<td>dtFloat</td>
+				<td>10/3</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Kurz měny</td>
+			</tr>
+			<tr>
+				<td>
+					<A>CurrRateInfo</A>
+				</td>
+				<td>Kurz měny textově</td>
+				<td>dtString</td>
+				<td>30/0</td>
+				<td>N</td>
+				<td>A</td>
+				<td>Informace o kurzu měny</td>
+			</tr>
+			<tr>
+				<td>
+					<A>Description</A>
+				</td>
+				<td>Popis</td>
+				<td>dtString</td>
+				<td>50/0</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Popis</td>
+			</tr>
+			<tr>
+				<td>
+					<A>Dirty</A>
+				</td>
+				<td>Zakázané přepočítání</td>
+				<td>dtBoolean</td>
+				<td>1/0</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Zakázané přepočítání dokladu</td>
+			</tr>
+			<tr>
+				<td>
+					<A>DisplayName</A>
+				</td>
+				<td>Číslo dok.</td>
+				<td>dtString</td>
+				<td>24/0</td>
+				<td>N</td>
+				<td>A</td>
+				<td>Číslo dokladu</td>
+			</tr>
+			<tr>
+				<td>
+					<A>DocDate$DATE</A>
+				</td>
+				<td>Datum dok.</td>
+				<td>dtDateTime</td>
+				<td>10/0</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Datum dokladu</td>
+			</tr>
+			<tr>
+				<td>
+					<A HREF="BO_OFTMKVQH3ZD13ACL03KIU0CLP4.htm">DocQueue_ID</A>
+				</td>
+				<td>Zdrojová řada</td>
+				<td>dtString</td>
+				<td>10/0</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Zdrojová řada</td>
+			</tr>
+			<tr>
+				<td>
+					<A>DocUUID</A>
+				</td>
+				<td>GUID dokladu pro exporty</td>
+				<td>dtString</td>
+				<td>26/0</td>
+				<td>A</td>
+				<td>N</td>
+				<td>GUID dokladu pro exporty</td>
+			</tr>
+			<tr>
+				<td>
+					<A>DueDate$DATE</A>
+				</td>
+				<td>Datum splatnosti</td>
+				<td>dtDateTime</td>
+				<td>10/0</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Datum splatnosti.</td>
+			</tr>
+			<tr>
+				<td>
+					<A>DueTerm</A>
+				</td>
+				<td>Délka splatnosti</td>
+				<td>dtInteger</td>
+				<td>3/0</td>
+				<td>N</td>
+				<td>N</td>
+				<td>Délka splatnosti</td>
+			</tr>
+			<tr>
+				<td>
+					<A>ExternalNumber</A>
+				</td>
+				<td>Doplňkové číslo</td>
+				<td>dtString</td>
+				<td>30/0</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Doplňkové číslo</td>
+			</tr>
+			<tr>
+				<td>
+					<A HREF="BO_4K3EXM5PQBCL35CH000ILPWJF4.htm">Firm_ID</A>
+				</td>
+				<td>Firma</td>
+				<td>dtString</td>
+				<td>10/0</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Firma</td>
+			</tr>
+			<tr>
+				<td>
+					<A HREF="BO_AT011EZZ5DFO115YJ1HCZJDXJ4.htm">FirmOffice_ID</A>
+				</td>
+				<td>Provozovna</td>
+				<td>dtString</td>
+				<td>10/0</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Provozovna</td>
+			</tr>
+			<tr>
+				<td>
+					<A>ID</A>
+				</td>
+				<td>Vlastní ID</td>
+				<td>dtString</td>
+				<td>10/0</td>
+				<td>N</td>
+				<td>A</td>
+				<td>Vlastní ID</td>
+			</tr>
+			<tr>
+				<td>
+					<A>IsAccounted</A>
+				</td>
+				<td>Účtováno</td>
+				<td>dtBoolean</td>
+				<td>1/0</td>
+				<td>N</td>
+				<td>A</td>
+				<td>Účtováno</td>
+			</tr>
+			<tr>
+				<td>
+					<A>IsProfit</A>
+				</td>
+				<td>Výnos</td>
+				<td>dtBoolean</td>
+				<td>1/0</td>
+				<td>N</td>
+				<td>N</td>
+				<td>Výnos</td>
+			</tr>
+			<tr>
+				<td>
+					<A>IsReverseChargeDeclared</A>
+				</td>
+				<td>Režim Přenesení daňové povinnosti</td>
+				<td>dtBoolean</td>
+				<td>1/0</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Režim Přenesení daňové povinnosti</td>
+			</tr>
+			<tr>
+				<td>
+					<A HREF="BO_CAQPAYUOXVCL3ACL03KIU0CLP4.htm">LastPaymentPeriod_ID</A>
+				</td>
+				<td>Období posl. platby</td>
+				<td>dtString</td>
+				<td>10/0</td>
+				<td>A</td>
+				<td>A</td>
+				<td>Období poslední platby</td>
+			</tr>
+			<tr>
+				<td>
+					<A>LocalAmount</A>
+				</td>
+				<td>Celkem lokálně</td>
+				<td>dtFloat</td>
+				<td>13/2</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Celková částka lokální</td>
+			</tr>
+			<tr>
+				<td>
+					<A>LocalAmountWithoutVAT</A>
+				</td>
+				<td>Celkem lokálně bez daně</td>
+				<td>dtFloat</td>
+				<td>13/2</td>
+				<td>A</td>
+				<td>A</td>
+				<td>Částka v lokální měně bez daně</td>
+			</tr>
+			<tr>
+				<td>
+					<A>LocalCoef</A>
+				</td>
+				<td>Lokální koeficient</td>
+				<td>dtInteger</td>
+				<td>6/0</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Lokální koeficient</td>
+			</tr>
+			<tr>
+				<td>
+					<A>LocalCorrectedUsedAmount</A>
+				</td>
+				<td>Zúčt.vč.korekce v lok. měně</td>
+				<td>dtFloat</td>
+				<td>13/2</td>
+				<td>N</td>
+				<td>A</td>
+				<td>Zúčtováno včetně korekce v lokální měně</td>
+			</tr>
+			<tr>
+				<td>
+					<A>LocalCorrectionAmount</A>
+				</td>
+				<td>Korekční částka v lok. měně</td>
+				<td>dtFloat</td>
+				<td>13/2</td>
+				<td>N</td>
+				<td>A</td>
+				<td>Korekční částka v lokální měně</td>
+			</tr>
+			<tr>
+				<td>
+					<A>LocalCorrectionAmountWithoutVAT</A>
+				</td>
+				<td>Korekční částka v lok. měně bez DPH</td>
+				<td>dtFloat</td>
+				<td>13/2</td>
+				<td>N</td>
+				<td>A</td>
+				<td>Korekční částka v lokální měně bez DPH</td>
+			</tr>
+			<tr>
+				<td>
+					<A>LocalCreditAmount</A>
+				</td>
+				<td>Dobr.lokálně</td>
+				<td>dtFloat</td>
+				<td>13/2</td>
+				<td>A</td>
+				<td>A</td>
+				<td>Dobropisováno v lokální měně</td>
+			</tr>
+			<tr>
+				<td>
+					<A>LocalCreditAmountWithoutVAT</A>
+				</td>
+				<td>Dobr.lokálně bez daně</td>
+				<td>dtFloat</td>
+				<td>13/2</td>
+				<td>A</td>
+				<td>A</td>
+				<td>Dobropisováno v lokální měně bez daně</td>
+			</tr>
+			<tr>
+				<td>
+					<A>LocalNotPaidAmount</A>
+				</td>
+				<td>Nezaplaceno lokálně</td>
+				<td>dtFloat</td>
+				<td>13/2</td>
+				<td>N</td>
+				<td>N</td>
+				<td>Celkem nezaplaceno lokálně</td>
+			</tr>
+			<tr>
+				<td>
+					<A>LocalPaidAmount</A>
+				</td>
+				<td>Zaplaceno lokálně</td>
+				<td>dtFloat</td>
+				<td>13/2</td>
+				<td>A</td>
+				<td>A</td>
+				<td>Zaplaceno v lokální měně</td>
+			</tr>
+			<tr>
+				<td>
+					<A>LocalPaidCreditAmount</A>
+				</td>
+				<td>Zapl. lokálně na dobropisech</td>
+				<td>dtFloat</td>
+				<td>13/2</td>
+				<td>A</td>
+				<td>A</td>
+				<td>Zaplaceno v lokální měně na dobropisech</td>
+			</tr>
+			<tr>
+				<td>
+					<A HREF="BO_4R5FINKNYNDL3C5P00CA141B44.htm">LocalRefCurrency_ID</A>
+				</td>
+				<td>Lok.ref.měna</td>
+				<td>dtString</td>
+				<td>10/0</td>
+				<td>N</td>
+				<td>A</td>
+				<td>Lokální referenční měna</td>
+			</tr>
+			<tr>
+				<td>
+					<A>LocalRemainUsedAmount</A>
+				</td>
+				<td>Zbývá zúčtovat v lok. měně</td>
+				<td>dtFloat</td>
+				<td>13/2</td>
+				<td>N</td>
+				<td>A</td>
+				<td>Zbývá zúčtovat v lokální měně</td>
+			</tr>
+			<tr>
+				<td>
+					<A>LocalRemainUsedAmountWithoutVAT</A>
+				</td>
+				<td>Zbývá zúčtovat v lok. měně bez DPH</td>
+				<td>dtFloat</td>
+				<td>13/2</td>
+				<td>N</td>
+				<td>A</td>
+				<td>Zbývá zúčtovat v lokální měně bez DPH</td>
+			</tr>
+			<tr>
+				<td>
+					<A>LocalRoundingAmount</A>
+				</td>
+				<td>Zaok.v nulové sazbě lokálně</td>
+				<td>dtFloat</td>
+				<td>13/2</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Zaok.v nulové sazbě lokálně (pouze pro metodu zdola)</td>
+			</tr>
+			<tr>
+				<td>
+					<A>LocalUsedAmount</A>
+				</td>
+				<td>Částka použ.lok.</td>
+				<td>dtFloat</td>
+				<td>13/2</td>
+				<td>A</td>
+				<td>A</td>
+				<td>Částka již použ. na plat.dok. v lok.měně</td>
+			</tr>
+			<tr>
+				<td>
+					<A>LocalUsedAmountWithoutVAT</A>
+				</td>
+				<td>Částka použ. v lok. měně bez DPH</td>
+				<td>dtFloat</td>
+				<td>13/2</td>
+				<td>A</td>
+				<td>A</td>
+				<td>Částka použ. na fakturách v lok. měně bez DPH</td>
+			</tr>
+			<tr>
+				<td>
+					<A HREF="BO_4R5FINKNYNDL3C5P00CA141B44.htm">LocalZone_ID</A>
+				</td>
+				<td>Lokální zóna</td>
+				<td>dtString</td>
+				<td>10/0</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Lokální zóna</td>
+			</tr>
+			<tr>
+				<td>
+					<A>NewRelatedDocument_ID</A>
+				</td>
+				<td>ID dokladu pro připojení</td>
+				<td>dtString</td>
+				<td>10/0</td>
+				<td>N</td>
+				<td>N</td>
+				<td>ID dokladu pro připojení</td>
+			</tr>
+			<tr>
+				<td>
+					<A>NewRelatedType</A>
+				</td>
+				<td>Typ relace</td>
+				<td>dtInteger</td>
+				<td>6/0</td>
+				<td>N</td>
+				<td>N</td>
+				<td>Typ relace</td>
+			</tr>
+			<tr>
+				<td>
+					<A>NotPaidAmount</A>
+				</td>
+				<td>Nezaplaceno</td>
+				<td>dtFloat</td>
+				<td>13/2</td>
+				<td>N</td>
+				<td>N</td>
+				<td>Celkem nezaplaceno</td>
+			</tr>
+			<tr>
+				<td>
+					<A>ObjVersion</A>
+				</td>
+				<td>Verze objektu</td>
+				<td>dtInteger</td>
+				<td>1/0</td>
+				<td>A</td>
+				<td>A</td>
+				<td>Verze objektu</td>
+			</tr>
+			<tr>
+				<td>
+					<A>OrdNumber</A>
+				</td>
+				<td>Pořadové číslo</td>
+				<td>dtInteger</td>
+				<td>6/0</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Pořadové číslo</td>
+			</tr>
+			<tr>
+				<td>
+					<A>PaidAmount</A>
+				</td>
+				<td>Celkem zapl.</td>
+				<td>dtFloat</td>
+				<td>13/2</td>
+				<td>A</td>
+				<td>A</td>
+				<td>Zaplaceno celkem</td>
+			</tr>
+			<tr>
+				<td>
+					<A>PaidCreditAmount</A>
+				</td>
+				<td>Celkem zapl. na dobropisech</td>
+				<td>dtFloat</td>
+				<td>13/2</td>
+				<td>A</td>
+				<td>A</td>
+				<td>Zaplaceno celkem na dobropisech</td>
+			</tr>
+			<tr>
+				<td>
+					<A>PaymentSourcePAmount</A>
+				</td>
+				<td>Placená částka</td>
+				<td>dtFloat</td>
+				<td>13/2</td>
+				<td>N</td>
+				<td>A</td>
+				<td>Placená částka v měně dokladu</td>
+			</tr>
+			<tr>
+				<td>
+					<A HREF="BO_535FINKNYNDL3C5P00CA141B44.htm">PaymentType_ID</A>
+				</td>
+				<td>Způsob úhrady</td>
+				<td>dtString</td>
+				<td>10/0</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Způsob úhrady.</td>
+			</tr>
+			<tr>
+				<td>
+					<A HREF="BO_CAQPAYUOXVCL3ACL03KIU0CLP4.htm">Period_ID</A>
+				</td>
+				<td>Období</td>
+				<td>dtString</td>
+				<td>10/0</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Období</td>
+			</tr>
+			<tr>
+				<td>
+					<A HREF="BO_WEC02QYERNCL35CH000ILPWJF4.htm">Person_ID</A>
+				</td>
+				<td>Osoba</td>
+				<td>dtString</td>
+				<td>10/0</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Osoba</td>
+			</tr>
+			<tr>
+				<td>
+					<A>PricesWithVAT</A>
+				</td>
+				<td>Ceny s daní</td>
+				<td>dtBoolean</td>
+				<td>1/0</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Ceny s daní</td>
+			</tr>
+			<tr>
+				<td>
+					<A HREF="BO_4R5FINKNYNDL3C5P00CA141B44.htm">RefCurrency_ID</A>
+				</td>
+				<td>Ref.měna</td>
+				<td>dtString</td>
+				<td>10/0</td>
+				<td>N</td>
+				<td>A</td>
+				<td>Referenční měna</td>
+			</tr>
+			<tr>
+				<td>
+					<A>RefCurrRate</A>
+				</td>
+				<td>Kurz vztažný</td>
+				<td>dtFloat</td>
+				<td>10/3</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Kurz vztažný</td>
+			</tr>
+			<tr>
+				<td>
+					<A>RemainUsedAmount</A>
+				</td>
+				<td>Zbývá zúčtovat</td>
+				<td>dtFloat</td>
+				<td>13/2</td>
+				<td>N</td>
+				<td>A</td>
+				<td>Zbývá zúčtovat</td>
+			</tr>
+			<tr>
+				<td>
+					<A>RemainUsedAmountWithoutVAT</A>
+				</td>
+				<td>Zbývá zúčtovat bez DPH</td>
+				<td>dtFloat</td>
+				<td>13/2</td>
+				<td>N</td>
+				<td>A</td>
+				<td>Zbývá zúčtovat bez DPH</td>
+			</tr>
+			<tr>
+				<td>
+					<A>RoundingAmount</A>
+				</td>
+				<td>Zaok.v nulové sazbě</td>
+				<td>dtFloat</td>
+				<td>13/2</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Zaok.v nulové sazbě (pouze pro metodu zdola)</td>
+			</tr>
+			<tr>
+				<td>
+					<A HREF="BO_1FC5XHSBZQR4J5GXADRSC2RYM4.htm">Rows</A>(Collection)(Owned)</td>
+				<td>Řádky</td>
+				<td>dtString</td>
+				<td>10/0</td>
+				<td>N</td>
+				<td>N</td>
+				<td>Řádky</td>
+			</tr>
+			<tr>
+				<td>
+					<A>SimplifiedVATDocument</A>
+				</td>
+				<td>Zjednodušený daňový doklad</td>
+				<td>dtBoolean</td>
+				<td>1/0</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Zjednodušený daňový doklad</td>
+			</tr>
+			<tr>
+				<td>
+					<A>TradeType</A>
+				</td>
+				<td>Typ obchodu</td>
+				<td>dtInteger</td>
+				<td>1/0</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Typ obchodu</td>
+			</tr>
+			<tr>
+				<td>
+					<A>TradeTypeDescription</A>
+				</td>
+				<td>Popis typu obchodu</td>
+				<td>dtString</td>
+				<td>100/0</td>
+				<td>N</td>
+				<td>A</td>
+				<td>Popis typu obchodu</td>
+			</tr>
+			<tr>
+				<td>
+					<A>Usable</A>
+				</td>
+				<td>Zúčtovat</td>
+				<td>dtBoolean</td>
+				<td>1/0</td>
+				<td>A</td>
+				<td>A</td>
+				<td>Doklad lze zúčtovat</td>
+			</tr>
+			<tr>
+				<td>
+					<A>UsedAmount</A>
+				</td>
+				<td>Částka použ.</td>
+				<td>dtFloat</td>
+				<td>13/2</td>
+				<td>A</td>
+				<td>A</td>
+				<td>Částka již použ. na plat.dok. v měně dok</td>
+			</tr>
+			<tr>
+				<td>
+					<A>UsedAmountWithoutVAT</A>
+				</td>
+				<td>Částka použ. bez DPH</td>
+				<td>dtFloat</td>
+				<td>13/2</td>
+				<td>A</td>
+				<td>A</td>
+				<td>Částka již použ. na fakturách v měně dok. bez DPH</td>
+			</tr>
+			<tr>
+				<td>
+					<A>VarSymbol</A>
+				</td>
+				<td>VarSymbol</td>
+				<td>dtString</td>
+				<td>30/0</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Variabilní symbol</td>
+			</tr>
+			<tr>
+				<td>
+					<A>VATAdmitDate$DATE</A>
+				</td>
+				<td>Datum plnění</td>
+				<td>dtDateTime</td>
+				<td>10/0</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Datum plnění</td>
+			</tr>
+			<tr>
+				<td>
+					<A>VATByPayment</A>
+				</td>
+				<td>DPH na základě přijetí platby</td>
+				<td>dtBoolean</td>
+				<td>1/0</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Zvláštní úprava uplatnění daně na základě přijetí platby</td>
+			</tr>
+			<tr>
+				<td>
+					<A>VATByPaymentEndDate$DATE</A>
+				</td>
+				<td>Datum ukončení zvl. režimu</td>
+				<td>dtDateTime</td>
+				<td>10/0</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Datum ukončení režimu "DPH na základě přijetí platby" na dokladu</td>
+			</tr>
+			<tr>
+				<td>
+					<A HREF="BO_4J5FINKNYNDL3C5P00CA141B44.htm">VATCountry_ID</A>
+				</td>
+				<td>Země přiznání DPH</td>
+				<td>dtString</td>
+				<td>10/0</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Země přiznání DPH</td>
+			</tr>
+			<tr>
+				<td>
+					<A>VATDate$DATE</A>
+				</td>
+				<td>Datum odvodu/Datum dodání</td>
+				<td>dtDateTime</td>
+				<td>10/0</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Datum odvodu/Datum dodání</td>
+			</tr>
+			<tr>
+				<td>
+					<A>VATDepositVersion</A>
+				</td>
+				<td>Verze DZV</td>
+				<td>dtInteger</td>
+				<td>1/0</td>
+				<td>A</td>
+				<td>A</td>
+				<td>Verze DZV</td>
+			</tr>
+			<tr>
+				<td>
+					<A>VATDocument</A>
+				</td>
+				<td>DPH doklad</td>
+				<td>dtBoolean</td>
+				<td>1/0</td>
+				<td>N</td>
+				<td>N</td>
+				<td>DPH doklad</td>
+			</tr>
+			<tr>
+				<td>
+					<A>VATFromAbovePrecision</A>
+				</td>
+				<td>Přesnost zdanění zaokrouhlení</td>
+				<td>dtInteger</td>
+				<td>1/0</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Přesnost zdanění zaokrouhlení</td>
+			</tr>
+			<tr>
+				<td>
+					<A>VATReportPreference</A>
+				</td>
+				<td>Preference výkazu DPH</td>
+				<td>dtString</td>
+				<td>2/0</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Preference výkazu DPH</td>
+			</tr>
+			<tr>
+				<td>
+					<A>VATReportReference</A>
+				</td>
+				<td>Reference</td>
+				<td>dtString</td>
+				<td>30/0</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Reference</td>
+			</tr>
+			<tr>
+				<td>
+					<A>VATRounding</A>
+				</td>
+				<td>Zaokrouhlení DPH</td>
+				<td>dtInteger</td>
+				<td>1/0</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Zaokrouhlení DPH</td>
+			</tr>
+			<tr>
+				<td>
+					<A>VATVoluntaryPaid</A>
+				</td>
+				<td>Dobrovolné zaplacení daně</td>
+				<td>dtBoolean</td>
+				<td>1/0</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Dobrovolné zaplacení daně</td>
+			</tr>
+			<tr>
+				<td>
+					<A HREF="BO_4R5FINKNYNDL3C5P00CA141B44.htm">Zone_ID</A>
+				</td>
+				<td>Zóna</td>
+				<td>dtString</td>
+				<td>10/0</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Zóna</td>
+			</tr>
+		</table>
+		<P><EM>Generated by ABRA Software a.s. 15.12.2023 16:41</EM></P>
+	</BODY>
+</html>

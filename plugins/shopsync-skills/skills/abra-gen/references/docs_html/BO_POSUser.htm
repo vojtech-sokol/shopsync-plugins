@@ -1,0 +1,424 @@
+<?xml version="1.0" encoding="windows-1250"?>
+<html xmlns="http://www.w3.org/TR/xhtml1/strict" xmlns:msxsl="urn:schemas-microsoft-com:xslt" xmlns:user="http://mycompany.com/mynamespace" xmlns:dt="urn:schemas-microsoft-com:datatypes">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=windows-1250"/>
+		<link rel="stylesheet" type="text/css" href="../GxDoc.css"/>
+		<title>Business objekt - POSUser</title>
+	</head>
+	<BODY>
+		
+		<H2>Business objekt - POSUser</H2>
+		<DL>
+			<DD>Popis:</DD>
+			<DT>Obsluhující</DT>
+			<DD>CLSID:</DD>
+			<DT>{2A60FDE0-CD14-4ED2-9838-004841270AF6}</DT>
+			<DD>PackedCLSID:</DD>
+			<DT>W3YQ0EKOTRD4XA1S01442DSEYS</DT>
+			<DD>User fields:</DD>
+			<DT>A</DT>
+			<DD>Default DynSource:</DD>
+			<DT><A HREF="DynSQL_2SOLNS5BEBJO3DLEPM13GJE3QK.htm">2SOLNS5BEBJO3DLEPM13GJE3QK</A></DT>
+			<DD>PersistCLSID</DD>
+			<DT><A HREF="PersistentClasses_AYMIYPKBMZW45IHPENBRXTCB4K.htm">AYMIYPKBMZW45IHPENBRXTCB4K</A></DT>
+		</DL>
+		<H3>Položky</H3>
+		<table>
+			<tr>
+				<th class="font_bold">Název</th>
+				<th class="font_bold">Label</th>
+				<th class="font_bold">Typ</th>
+				<th class="font_bold">Délka</th>
+				<th class="font_bold">Persistent</th>
+				<th class="font_bold">ROnly</th>
+				<th class="font_bold">Popis</th>
+			</tr>
+			<tr>
+				<td>
+					<A>AutomaticallyRefiscalization</A>
+				</td>
+				<td>Opakovat fiskalizaci</td>
+				<td>dtBoolean</td>
+				<td>1/0</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Automaticky opakovat fiskalizaci po chybě</td>
+			</tr>
+			<tr>
+				<td>
+					<A>ClassID</A>
+				</td>
+				<td>ID třídy</td>
+				<td>dtString</td>
+				<td>26/0</td>
+				<td>N</td>
+				<td>A</td>
+				<td>ID třídy</td>
+			</tr>
+			<tr>
+				<td>
+					<A>CloneBill</A>
+				</td>
+				<td>Kopírovat</td>
+				<td>dtBoolean</td>
+				<td>1/0</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Právo kopírovat účtenky</td>
+			</tr>
+			<tr>
+				<td>
+					<A>DisplayName</A>
+				</td>
+				<td>Název</td>
+				<td>dtString</td>
+				<td>100/0</td>
+				<td>N</td>
+				<td>A</td>
+				<td>Zobrazovací název</td>
+			</tr>
+			<tr>
+				<td>
+					<A>Hidden</A>
+				</td>
+				<td>Skrytý</td>
+				<td>dtBoolean</td>
+				<td>1/0</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Pozastavení platnosti</td>
+			</tr>
+			<tr>
+				<td>
+					<A>ChangePrice</A>
+				</td>
+				<td>Měnit cenu</td>
+				<td>dtBoolean</td>
+				<td>1/0</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Právo obsluhujícího měnit prodejní cenu</td>
+			</tr>
+			<tr>
+				<td>
+					<A>ID</A>
+				</td>
+				<td>Vlastní ID</td>
+				<td>dtString</td>
+				<td>10/0</td>
+				<td>N</td>
+				<td>A</td>
+				<td>Vlastní ID</td>
+			</tr>
+			<tr>
+				<td>
+					<A>MaxDiscount</A>
+				</td>
+				<td>Sleva</td>
+				<td>dtFloat</td>
+				<td>10/2</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Maximální povolená sleva</td>
+			</tr>
+			<tr>
+				<td>
+					<A>MirrorQuantityPrefill</A>
+				</td>
+				<td>Předvyplňovat množství aktuální zásobou</td>
+				<td>dtBoolean</td>
+				<td>1/0</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Právo předvyplňovat nalezené množství aktuální zásobou</td>
+			</tr>
+			<tr>
+				<td>
+					<A>MirrorShortFallExclusion</A>
+				</td>
+				<td>Právo vyjmout manko ze zrcadla z tržeb</td>
+				<td>dtInteger</td>
+				<td>0/0</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Právo vyjmout manko ze zrcadla z tržeb</td>
+			</tr>
+			<tr>
+				<td>
+					<A>MirrorShortFallTransfer</A>
+				</td>
+				<td>Převádět manko ze zrcadla na jiné pokladní místo</td>
+				<td>dtBoolean</td>
+				<td>1/0</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Právo převádět manko ze zrcadla na jiné pokladní místo</td>
+			</tr>
+			<tr>
+				<td>
+					<A>MirrorShowStoreQuantity</A>
+				</td>
+				<td>Ukazovat při zpracování zrcadla požadované zásoby</td>
+				<td>dtBoolean</td>
+				<td>1/0</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Právo ukazovat při zpracování zrcadla požadované (aktuální) zásoby</td>
+			</tr>
+			<tr>
+				<td>
+					<A>ObjVersion</A>
+				</td>
+				<td>Verze objektu</td>
+				<td>dtInteger</td>
+				<td>1/0</td>
+				<td>A</td>
+				<td>A</td>
+				<td>Verze objektu</td>
+			</tr>
+			<tr>
+				<td>
+					<A>OfferOnLogScreen</A>
+				</td>
+				<td>Pozice na přihlašovací obrazovce</td>
+				<td>dtInteger</td>
+				<td>0/0</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Pozice na přihlašovací obrazovce</td>
+			</tr>
+			<tr>
+				<td>
+					<A>OrderFlowsOrderFinishedChange</A>
+				</td>
+				<td>Oprávnění měnit v seznamu bonů stav zpracování</td>
+				<td>dtBoolean</td>
+				<td>1/0</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Oprávnění měnit v seznamu bonů stav zpracování</td>
+			</tr>
+			<tr>
+				<td>
+					<A>OrdersBalanceOOPChange</A>
+				</td>
+				<td>Oprávnění měnit v uzávěrce bonů přebytky výroby</td>
+				<td>dtBoolean</td>
+				<td>1/0</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Oprávnění měnit v uzávěrce bonů přebytky výroby</td>
+			</tr>
+			<tr>
+				<td>
+					<A>OrdersBalanceRetainChange</A>
+				</td>
+				<td>Oprávnění měnit v uzávěrce bonů požadovaný zůstatek zbylé zásoby</td>
+				<td>dtBoolean</td>
+				<td>1/0</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Oprávnění měnit v uzávěrce bonů požadovaný zůstatek zbylé zásoby</td>
+			</tr>
+			<tr>
+				<td>
+					<A>OrdersBalanceWOPChange</A>
+				</td>
+				<td>Oprávnění měnit v uzávěrce bonů ztráty výroby</td>
+				<td>dtBoolean</td>
+				<td>1/0</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Oprávnění měnit v uzávěrce bonů ztráty výroby</td>
+			</tr>
+			<tr>
+				<td>
+					<A>OrdersBalForcedALStatChange</A>
+				</td>
+				<td>Oprávnění měnit v uzávěrce bonů požadovaný stav výrobních listů</td>
+				<td>dtBoolean</td>
+				<td>1/0</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Oprávnění měnit v uzávěrce bonů požadovaný stav výrobních listů</td>
+			</tr>
+			<tr>
+				<td>
+					<A HREF="BO_EFIAYR5CJY2O1FBRZRNRFSBQO0.htm">POSShift_ID</A>
+				</td>
+				<td>Aktivní směna</td>
+				<td>dtString</td>
+				<td>10/0</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Aktivní směna</td>
+			</tr>
+			<tr>
+				<td>
+					<A>PrintCopy</A>
+				</td>
+				<td>Tisk kopie</td>
+				<td>dtBoolean</td>
+				<td>1/0</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Tisknout kopii účtenky</td>
+			</tr>
+			<tr>
+				<td>
+					<A>RightBillOfDelivery</A>
+				</td>
+				<td>Výdej</td>
+				<td>dtBoolean</td>
+				<td>1/0</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Právo prodeje na dodací list</td>
+			</tr>
+			<tr>
+				<td>
+					<A>RightEditBill</A>
+				</td>
+				<td>Oprávnění editovat účtenku</td>
+				<td>dtBoolean</td>
+				<td>1/0</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Oprávnění editovat účtenku</td>
+			</tr>
+			<tr>
+				<td>
+					<A>RightChangePayments</A>
+				</td>
+				<td>Právo opravovat platby</td>
+				<td>dtBoolean</td>
+				<td>1/0</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Právo opravovat platby</td>
+			</tr>
+			<tr>
+				<td>
+					<A>RightIncome</A>
+				</td>
+				<td>Vracení</td>
+				<td>dtBoolean</td>
+				<td>1/0</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Právo obsluhujícího přijímat vracené zboží</td>
+			</tr>
+			<tr>
+				<td>
+					<A HREF="BO_4415LD3MAFF13FG501C0C2VN0K.htm">ShiftCalendar_ID</A>
+				</td>
+				<td>Pracovní kalendář</td>
+				<td>dtString</td>
+				<td>10/0</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Pracovní kalendář</td>
+			</tr>
+			<tr>
+				<td>
+					<A>ShopManager</A>
+				</td>
+				<td>Provozní vedoucí</td>
+				<td>dtBoolean</td>
+				<td>1/0</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Provozní vedoucí</td>
+			</tr>
+			<tr>
+				<td>
+					<A>UpdateAfterPrintBillPreview</A>
+				</td>
+				<td>Opravy po tisku náhledu</td>
+				<td>dtBoolean</td>
+				<td>1/0</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Právo autorizovat opravu po tisku náhledu účtenky</td>
+			</tr>
+			<tr>
+				<td>
+					<A HREF="BO_22AHIVDVAVE13C5S00CA141B44.htm">User_ID</A>
+				</td>
+				<td>Uživatel</td>
+				<td>dtString</td>
+				<td>10/0</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Jméno uživatele</td>
+			</tr>
+			<tr>
+				<td>
+					<A>ValidateDiscount</A>
+				</td>
+				<td>Autorizace slev</td>
+				<td>dtBoolean</td>
+				<td>1/0</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Právo autorizovat slevu ostatním</td>
+			</tr>
+			<tr>
+				<td>
+					<A>ValidateShortFallExclusion</A>
+				</td>
+				<td>Autorizace vyjmutí</td>
+				<td>dtBoolean</td>
+				<td>1/0</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Právo autorizovat vyjmutí manka z tržby ostatním</td>
+			</tr>
+			<tr>
+				<td>
+					<A>ViewFinalAmount</A>
+				</td>
+				<td>Vidět tržbu</td>
+				<td>dtBoolean</td>
+				<td>1/0</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Právo obsluhujícího vidět při odvodu celkovou tržbu</td>
+			</tr>
+			<tr>
+				<td>
+					<A>ViewQuantity</A>
+				</td>
+				<td>Vidět zásobu</td>
+				<td>dtBoolean</td>
+				<td>1/0</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Právo obsluhujícího při prodeji vidět zásobu</td>
+			</tr>
+			<tr>
+				<td>
+					<A>ViewStoreInfo</A>
+				</td>
+				<td>Vidět informace o zboží</td>
+				<td>dtBoolean</td>
+				<td>1/0</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Právo obsluhujícího při prodeji vidět informace o zboží</td>
+			</tr>
+			<tr>
+				<td>
+					<A HREF="BO_43QOWY2O53EL3JY400C5PPZRN0.htm">VirtualPOS_ID</A>
+				</td>
+				<td>Pokladní místo</td>
+				<td>dtString</td>
+				<td>10/0</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Pokladní místo</td>
+			</tr>
+		</table>
+		<P><EM>Generated by ABRA Software a.s. 15.12.2023 16:41</EM></P>
+	</BODY>
+</html>

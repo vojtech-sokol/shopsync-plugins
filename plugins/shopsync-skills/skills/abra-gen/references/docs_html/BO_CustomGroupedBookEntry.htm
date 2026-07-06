@@ -1,0 +1,424 @@
+<?xml version="1.0" encoding="windows-1250"?>
+<html xmlns="http://www.w3.org/TR/xhtml1/strict" xmlns:msxsl="urn:schemas-microsoft-com:xslt" xmlns:user="http://mycompany.com/mynamespace" xmlns:dt="urn:schemas-microsoft-com:datatypes">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=windows-1250"/>
+		<link rel="stylesheet" type="text/css" href="../GxDoc.css"/>
+		<title>Business objekt - CustomGroupedBookEntry</title>
+	</head>
+	<BODY>
+		
+		<H2>Business objekt - CustomGroupedBookEntry</H2>
+		<DL>
+			<DD>Popis:</DD>
+			<DT>Účetní zápis/žádost podle vlastních skupin</DT>
+			<DD>CLSID:</DD>
+			<DT>{D897FDA4-803E-4BD7-B0C6-7FA5E5897453}</DT>
+			<DD>PackedCLSID:</DD>
+			<DT>ONYTJQ1YK3FORGAAJYMYF2FOEG</DT>
+			<DD>User fields:</DD>
+			<DT>A</DT>
+			<DD>Default DynSource:</DD>
+			<DT><A HREF="DynSQL_43IDMI1FJ3D13ACO03KIU0CLP4.htm">43IDMI1FJ3D13ACO03KIU0CLP4</A></DT>
+			<DD>PersistCLSID</DD>
+			<DT><A HREF="PersistentClasses_HC0KX5OS3RD13ACL03KIU0CLP4.htm">HC0KX5OS3RD13ACL03KIU0CLP4</A></DT>
+		</DL>
+		<H3>Položky</H3>
+		<table>
+			<tr>
+				<th class="font_bold">Název</th>
+				<th class="font_bold">Label</th>
+				<th class="font_bold">Typ</th>
+				<th class="font_bold">Délka</th>
+				<th class="font_bold">Persistent</th>
+				<th class="font_bold">ROnly</th>
+				<th class="font_bold">Popis</th>
+			</tr>
+			<tr>
+				<td>
+					<A>AccDate$DATE</A>
+				</td>
+				<td>Datum účtování</td>
+				<td>dtDateTime</td>
+				<td>10/0</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Datum účtování</td>
+			</tr>
+			<tr>
+				<td>
+					<A HREF="BO_OBTMKVQH3ZD13ACL03KIU0CLP4.htm">AccDocQueue_ID</A>
+				</td>
+				<td>Účetní řada</td>
+				<td>dtString</td>
+				<td>10/0</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Účetní řada</td>
+			</tr>
+			<tr>
+				<td>
+					<A HREF="BO_DJS1BMBT4RD13ACL03KIU0CLP4.htm">AccGroup_ID</A>
+				</td>
+				<td>Účetní skupina</td>
+				<td>dtString</td>
+				<td>10/0</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Účetní skupina</td>
+			</tr>
+			<tr>
+				<td>
+					<A HREF="BO_DJS1BMBT4RD13ACL03KIU0CLP4.htm">AccGroupCredit_ID</A>
+				</td>
+				<td>Skupina D</td>
+				<td>dtString</td>
+				<td>10/0</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Saldokontní skupina D</td>
+			</tr>
+			<tr>
+				<td>
+					<A HREF="BO_DJS1BMBT4RD13ACL03KIU0CLP4.htm">AccGroupDebit_ID</A>
+				</td>
+				<td>Skupina MD</td>
+				<td>dtString</td>
+				<td>10/0</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Saldokontní skupina MD</td>
+			</tr>
+			<tr>
+				<td>
+					<A>Amount</A>
+				</td>
+				<td>Částka</td>
+				<td>dtFloat</td>
+				<td>15/2</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Částka v lokální měně</td>
+			</tr>
+			<tr>
+				<td>
+					<A>AmountInCurrency</A>
+				</td>
+				<td>Cizí částka</td>
+				<td>dtFloat</td>
+				<td>15/2</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Částka v cizí měně</td>
+			</tr>
+			<tr>
+				<td>
+					<A>Auditable</A>
+				</td>
+				<td>Auditovatelné</td>
+				<td>dtBoolean</td>
+				<td>1/0</td>
+				<td>N</td>
+				<td>A</td>
+				<td>Zda je záznam auditovatelný</td>
+			</tr>
+			<tr>
+				<td>
+					<A>Audited</A>
+				</td>
+				<td>Audit</td>
+				<td>dtBoolean</td>
+				<td>1/0</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Záznam byl již zauditován</td>
+			</tr>
+			<tr>
+				<td>
+					<A>ClassID</A>
+				</td>
+				<td>ID třídy</td>
+				<td>dtString</td>
+				<td>26/0</td>
+				<td>N</td>
+				<td>A</td>
+				<td>ID třídy</td>
+			</tr>
+			<tr>
+				<td>
+					<A>CorrectedAt$DATE</A>
+				</td>
+				<td>Opraveno</td>
+				<td>dtDateTime</td>
+				<td>10/0</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Datum a čas poslední opravy</td>
+			</tr>
+			<tr>
+				<td>
+					<A HREF="BO_22AHIVDVAVE13C5S00CA141B44.htm">CorrectedBy_ID</A>
+				</td>
+				<td>Opravil</td>
+				<td>dtString</td>
+				<td>10/0</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Opravil</td>
+			</tr>
+			<tr>
+				<td>
+					<A>CreatedAt$DATE</A>
+				</td>
+				<td>Vytvořeno</td>
+				<td>dtDateTime</td>
+				<td>10/0</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Datum a čas vytvoření</td>
+			</tr>
+			<tr>
+				<td>
+					<A HREF="BO_22AHIVDVAVE13C5S00CA141B44.htm">CreatedBy_ID</A>
+				</td>
+				<td>Vytvořil</td>
+				<td>dtString</td>
+				<td>10/0</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Vytvořil</td>
+			</tr>
+			<tr>
+				<td>
+					<A HREF="BO_S4JQL5BH1ND13ACL03KIU0CLP4.htm">CreditAccount_ID</A>
+				</td>
+				<td>Účet D</td>
+				<td>dtString</td>
+				<td>10/0</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Účet D</td>
+			</tr>
+			<tr>
+				<td>
+					<A HREF="BO_K2WTYL304VD13ACL03KIU0CLP4.htm">CreditBusOrder_ID</A>
+				</td>
+				<td>Zakázka D</td>
+				<td>dtString</td>
+				<td>10/0</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Zakázka D</td>
+			</tr>
+			<tr>
+				<td>
+					<A HREF="BO_QOKMKIQUJF34L3DUICTBWEDQJC.htm">CreditBusProject_ID</A>
+				</td>
+				<td>Projekt D</td>
+				<td>dtString</td>
+				<td>10/0</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Projekt D</td>
+			</tr>
+			<tr>
+				<td>
+					<A HREF="BO_KAWTYL304VD13ACL03KIU0CLP4.htm">CreditBusTransaction_ID</A>
+				</td>
+				<td>O.případ D</td>
+				<td>dtString</td>
+				<td>10/0</td>
+				<td>A</td>
+				<td>N</td>
+				<td>O.případ D</td>
+			</tr>
+			<tr>
+				<td>
+					<A HREF="BO_O1X54EUXPZCL35CH000ILPWJF4.htm">CreditDivision_ID</A>
+				</td>
+				<td>Středisko D</td>
+				<td>dtString</td>
+				<td>10/0</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Středisko D</td>
+			</tr>
+			<tr>
+				<td>
+					<A HREF="BO_4R5FINKNYNDL3C5P00CA141B44.htm">Currency_ID</A>
+				</td>
+				<td>Měna</td>
+				<td>dtString</td>
+				<td>10/0</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Měna</td>
+			</tr>
+			<tr>
+				<td>
+					<A>CustomGroup</A>
+				</td>
+				<td>Skupina</td>
+				<td>dtString</td>
+				<td>71/0</td>
+				<td>N</td>
+				<td>N</td>
+				<td>Skupina</td>
+			</tr>
+			<tr>
+				<td>
+					<A HREF="BO_S4JQL5BH1ND13ACL03KIU0CLP4.htm">DebitAccount_ID</A>
+				</td>
+				<td>Účet MD</td>
+				<td>dtString</td>
+				<td>10/0</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Účet MD</td>
+			</tr>
+			<tr>
+				<td>
+					<A HREF="BO_K2WTYL304VD13ACL03KIU0CLP4.htm">DebitBusOrder_ID</A>
+				</td>
+				<td>Zakázka MD</td>
+				<td>dtString</td>
+				<td>10/0</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Zakázka MD</td>
+			</tr>
+			<tr>
+				<td>
+					<A HREF="BO_QOKMKIQUJF34L3DUICTBWEDQJC.htm">DebitBusProject_ID</A>
+				</td>
+				<td>Projekt MD</td>
+				<td>dtString</td>
+				<td>10/0</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Projekt MD</td>
+			</tr>
+			<tr>
+				<td>
+					<A HREF="BO_KAWTYL304VD13ACL03KIU0CLP4.htm">DebitBusTransaction_ID</A>
+				</td>
+				<td>O.případ MD</td>
+				<td>dtString</td>
+				<td>10/0</td>
+				<td>A</td>
+				<td>N</td>
+				<td>O.případ MD</td>
+			</tr>
+			<tr>
+				<td>
+					<A HREF="BO_O1X54EUXPZCL35CH000ILPWJF4.htm">DebitDivision_ID</A>
+				</td>
+				<td>Středisko MD</td>
+				<td>dtString</td>
+				<td>10/0</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Středisko MD</td>
+			</tr>
+			<tr>
+				<td>
+					<A>DisplayName</A>
+				</td>
+				<td>Číslo dok.</td>
+				<td>dtString</td>
+				<td>20/0</td>
+				<td>N</td>
+				<td>A</td>
+				<td>Číslo dokladu</td>
+			</tr>
+			<tr>
+				<td>
+					<A HREF="BO_4K3EXM5PQBCL35CH000ILPWJF4.htm">Firm_ID</A>
+				</td>
+				<td>Firma</td>
+				<td>dtString</td>
+				<td>10/0</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Firma</td>
+			</tr>
+			<tr>
+				<td>
+					<A HREF="BO_4K3EXM5PQBCL35CH000ILPWJF4.htm">GroupFirm_ID</A>
+				</td>
+				<td>Firma pro skupinu</td>
+				<td>dtString</td>
+				<td>10/0</td>
+				<td>N</td>
+				<td>N</td>
+				<td>Název firmy pro skupinu</td>
+			</tr>
+			<tr>
+				<td>
+					<A>ID</A>
+				</td>
+				<td>Vlastní ID</td>
+				<td>dtString</td>
+				<td>10/0</td>
+				<td>N</td>
+				<td>A</td>
+				<td>Vlastní ID</td>
+			</tr>
+			<tr>
+				<td>
+					<A>IsRequest</A>
+				</td>
+				<td>Žádost</td>
+				<td>dtBoolean</td>
+				<td>1/0</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Žádost nebo účetní zápis</td>
+			</tr>
+			<tr>
+				<td>
+					<A>ObjVersion</A>
+				</td>
+				<td>Verze objektu</td>
+				<td>dtInteger</td>
+				<td>1/0</td>
+				<td>A</td>
+				<td>A</td>
+				<td>Verze objektu</td>
+			</tr>
+			<tr>
+				<td>
+					<A>OrdNumber</A>
+				</td>
+				<td>Pořadové číslo</td>
+				<td>dtInteger</td>
+				<td>6/0</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Pořadové číslo</td>
+			</tr>
+			<tr>
+				<td>
+					<A HREF="BO_CAQPAYUOXVCL3ACL03KIU0CLP4.htm">Period_ID</A>
+				</td>
+				<td>Období</td>
+				<td>dtString</td>
+				<td>10/0</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Období</td>
+			</tr>
+			<tr>
+				<td>
+					<A>Text</A>
+				</td>
+				<td>Text</td>
+				<td>dtString</td>
+				<td>200/0</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Text účetního zápisu</td>
+			</tr>
+		</table>
+		<P><EM>Generated by ABRA Software a.s. 15.12.2023 16:41</EM></P>
+	</BODY>
+</html>

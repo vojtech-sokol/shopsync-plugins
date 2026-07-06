@@ -1,0 +1,292 @@
+<?xml version="1.0" encoding="windows-1250"?>
+<html xmlns="http://www.w3.org/TR/xhtml1/strict" xmlns:msxsl="urn:schemas-microsoft-com:xslt" xmlns:user="http://mycompany.com/mynamespace" xmlns:dt="urn:schemas-microsoft-com:datatypes">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=windows-1250"/>
+		<link rel="stylesheet" type="text/css" href="../GxDoc.css"/>
+		<title>Business objekt - MemResultApprovalSupplierScore</title>
+	</head>
+	<BODY>
+		
+		<H2>Business objekt - MemResultApprovalSupplierScore</H2>
+		<DL>
+			<DD>Popis:</DD>
+			<DT>Hodnocení k výsledkům schvalování dodavatele (pouze paměťový BO)</DT>
+			<DD>CLSID:</DD>
+			<DT>{5583682C-7CE6-4373-9EF6-666CA392DD8E}</DT>
+			<DD>PackedCLSID:</DD>
+			<DT>5LOCAPJAJLTOBBRQGTQEB4QXLS</DT>
+			<DD>User fields:</DD>
+			<DT>N</DT>
+			<DD>Default DynSource:</DD>
+			<DT><A HREF="DynSQL_PLVAHI3RXTZ4Z2VFHW5T4LH5BC.htm">PLVAHI3RXTZ4Z2VFHW5T4LH5BC</A></DT>
+			<DD>PersistCLSID</DD>
+			<DT><A HREF="PersistentClasses_00000000000000000000000000.htm">00000000000000000000000000</A></DT>
+		</DL>
+		<H3>Položky</H3>
+		<table>
+			<tr>
+				<th class="font_bold">Název</th>
+				<th class="font_bold">Label</th>
+				<th class="font_bold">Typ</th>
+				<th class="font_bold">Délka</th>
+				<th class="font_bold">Persistent</th>
+				<th class="font_bold">ROnly</th>
+				<th class="font_bold">Popis</th>
+			</tr>
+			<tr>
+				<td>
+					<A>ApprovedSupplierScore_ID</A>
+				</td>
+				<td>Identifikace již existujícího hodnocení</td>
+				<td>dtString</td>
+				<td>10/0</td>
+				<td>N</td>
+				<td>N</td>
+				<td>Identifikace již existujícího hodnocení</td>
+			</tr>
+			<tr>
+				<td>
+					<A>CalculatedScore</A>
+				</td>
+				<td>Vypočtený počet bodů</td>
+				<td>dtInteger</td>
+				<td>1/0</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Vypočtený počet bodů na základě výpočtového kritéria</td>
+			</tr>
+			<tr>
+				<td>
+					<A>ClassID</A>
+				</td>
+				<td>ID třídy</td>
+				<td>dtString</td>
+				<td>26/0</td>
+				<td>N</td>
+				<td>A</td>
+				<td>ID třídy</td>
+			</tr>
+			<tr>
+				<td>
+					<A HREF="BO_22AHIVDVAVE13C5S00CA141B44.htm">CorrectedBy_ID</A>
+				</td>
+				<td>Opravil</td>
+				<td>dtString</td>
+				<td>10/0</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Uživatel, který záznam naposledy opravil</td>
+			</tr>
+			<tr>
+				<td>
+					<A HREF="BO_22AHIVDVAVE13C5S00CA141B44.htm">CreatedBy_ID</A>
+				</td>
+				<td>Vytvořil</td>
+				<td>dtString</td>
+				<td>10/0</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Uživatel, který záznam vytvořil</td>
+			</tr>
+			<tr>
+				<td>
+					<A>CreatedDate$DATE</A>
+				</td>
+				<td>Datum známkování</td>
+				<td>dtDateTime</td>
+				<td>10/0</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Datum známkování</td>
+			</tr>
+			<tr>
+				<td>
+					<A>DisplayName</A>
+				</td>
+				<td>Název</td>
+				<td>dtString</td>
+				<td>100/0</td>
+				<td>N</td>
+				<td>A</td>
+				<td>Zobrazovací název</td>
+			</tr>
+			<tr>
+				<td>
+					<A>EvaluatedFromDate$DATE</A>
+				</td>
+				<td>Spodní datum vyhodnocovaného období</td>
+				<td>dtDateTime</td>
+				<td>10/0</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Spodní datum vyhodnocovaného období</td>
+			</tr>
+			<tr>
+				<td>
+					<A>EvaluatedToDate$DATE</A>
+				</td>
+				<td>Horní datum vyhodnocovaného období</td>
+				<td>dtDateTime</td>
+				<td>10/0</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Horní datum vyhodnocovaného období</td>
+			</tr>
+			<tr>
+				<td>
+					<A HREF="BO_R0LWHLAXOTSOVHXWU11U2WHOLW.htm">EvaluationCriterion_ID</A>
+				</td>
+				<td>Hodnotící kritérium</td>
+				<td>dtString</td>
+				<td>10/0</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Hodnotící kritérium</td>
+			</tr>
+			<tr>
+				<td>
+					<A>Exists</A>
+				</td>
+				<td>Hodnocení existuje</td>
+				<td>dtBoolean</td>
+				<td>1/0</td>
+				<td>N</td>
+				<td>N</td>
+				<td>Hodnocení existuje (uloženo v hodnoceních)</td>
+			</tr>
+			<tr>
+				<td>
+					<A>Frequency</A>
+				</td>
+				<td>Časový typ hodnocení</td>
+				<td>dtInteger</td>
+				<td>1/0</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Časový typ hodnocení - frekvence vyhodnocování</td>
+			</tr>
+			<tr>
+				<td>
+					<A>HeaderIndex</A>
+				</td>
+				<td>Odkaz na hlavičku</td>
+				<td>dtInteger</td>
+				<td>1/0</td>
+				<td>N</td>
+				<td>N</td>
+				<td>Odkaz na hlavičku</td>
+			</tr>
+			<tr>
+				<td>
+					<A>ID</A>
+				</td>
+				<td>Vlastní ID</td>
+				<td>dtString</td>
+				<td>10/0</td>
+				<td>N</td>
+				<td>A</td>
+				<td>Vlastní ID</td>
+			</tr>
+			<tr>
+				<td>
+					<A>InYear</A>
+				</td>
+				<td>Rok</td>
+				<td>dtInteger</td>
+				<td>1/0</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Rok</td>
+			</tr>
+			<tr>
+				<td>
+					<A>ObjVersion</A>
+				</td>
+				<td>Verze objektu</td>
+				<td>dtInteger</td>
+				<td>1/0</td>
+				<td>A</td>
+				<td>A</td>
+				<td>Verze objektu</td>
+			</tr>
+			<tr>
+				<td>
+					<A>OrderNumber</A>
+				</td>
+				<td>Pořadové číslo období</td>
+				<td>dtInteger</td>
+				<td>1/0</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Pořadové číslo období</td>
+			</tr>
+			<tr>
+				<td>
+					<A HREF="BO_E4X5MPBYBS44HC0FTXHCUTOZOC.htm">Parent_ID</A>
+				</td>
+				<td>Vlastník</td>
+				<td>dtString</td>
+				<td>10/0</td>
+				<td>A</td>
+				<td>A</td>
+				<td>Vlastník</td>
+			</tr>
+			<tr>
+				<td>
+					<A>PercentScore</A>
+				</td>
+				<td>Procentní hodnocení</td>
+				<td>dtFloat</td>
+				<td>1/0</td>
+				<td>N</td>
+				<td>N</td>
+				<td>Procentní hodnocení</td>
+			</tr>
+			<tr>
+				<td>
+					<A>PeriodText</A>
+				</td>
+				<td>Období</td>
+				<td>dtString</td>
+				<td>20/0</td>
+				<td>N</td>
+				<td>N</td>
+				<td>Období v roce</td>
+			</tr>
+			<tr>
+				<td>
+					<A>Satisfactory</A>
+				</td>
+				<td>Vyhovuje</td>
+				<td>dtBoolean</td>
+				<td>1/0</td>
+				<td>N</td>
+				<td>N</td>
+				<td>Vyhovuje hodnocení</td>
+			</tr>
+			<tr>
+				<td>
+					<A>Score</A>
+				</td>
+				<td>Počet bodů</td>
+				<td>dtInteger</td>
+				<td>1/0</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Počet bodů</td>
+			</tr>
+			<tr>
+				<td>
+					<A>Takeover</A>
+				</td>
+				<td>Převzato</td>
+				<td>dtBoolean</td>
+				<td>1/0</td>
+				<td>A</td>
+				<td>N</td>
+				<td>Zda-li bylo hodnocení převzato z předcházejícího platného období</td>
+			</tr>
+		</table>
+		<P><EM>Generated by ABRA Software a.s. 15.12.2023 16:41</EM></P>
+	</BODY>
+</html>
