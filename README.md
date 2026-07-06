@@ -1,4 +1,4 @@
-# vojtech-plugins
+# shopsync-plugins
 
 Claude Code plugin marketplace with dev helper skills for Czech ERP and e-shop integration development.
 
@@ -30,11 +30,11 @@ Skills that give Claude Code detailed API references, PHP client patterns and da
 
 ```
 /plugin marketplace add <github-user>/claude_plugin
-/plugin install shopsync-skills@vojtech-plugins
+/plugin install shopsync-skills@shopsync-plugins
 ```
 
 ## Update
 
 ```
-/plugin marketplace update vojtech-plugins
+/plugin marketplace update shopsync-plugins
 ```
