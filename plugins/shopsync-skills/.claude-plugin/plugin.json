@@ -1,7 +1,7 @@
 {
   "name": "shopsync-skills",
   "description": "Dev helper skills for ERP and e-shop integrations: Pohoda, Money S3/S4/S5, ABRA Flexi, ABRA Gen, Helios Inuvio/Nephrite, Shoptet, PrestaShop, WooCommerce, CREATIVE sites, base (BaseLinker), Brani WMS, plus a skill-builder helper.",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "author": {
     "name": "Vojtech Sokol",
     "email": "vojtech.sokol@gmail.com"
