@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Codebook export (paged). Same shape for: EXPUHRADY (PaymentTypeList), EXPDOPRAVA (TransportationTypeList), EXPTYPYDPH (TaxCodeList),
+     EXPCISRAD0 (SeriesList), EXPSKLADY (WarehouseList), EXPCENSKUP (PriceGroupList), EXPSTR0 (CostCentreList), EXPZAK0 (ContractList),
+     EXPTYPYPOL (ItemTypeList), EXPKATZBOZI (GoodsCatalogList), EXPSKUPZBOZI (GoodsGroupList), EXPOSN0 (AccountList), EXPCINNOSTI, EXPKONTAKTY,
+     EXPPREDKONT, EXPTYPYPLN, EXPPOLFAK, EXPPDPOHYBY. Every command must be ENABLED in the autonomous-mode profiles first. -->
+<mrpEnvelope>
+  <body>
+    <mrpRequest>
+      <request command="EXPUHRADY" requestId=""></request>
+      <data>
+        <paging>
+          <RowFrom>1</RowFrom>
+          <RowTo>999</RowTo>
+        </paging>
+      </data>
+    </mrpRequest>
+  </body>
+</mrpEnvelope>

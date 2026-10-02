@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- EXPEO0 for ONE card with the large image as base64 (dataset karty, field velobraz).
+     Never request images for the whole catalog in one call - the response gets huge. lib/mrpks Pictures does exactly this per card. -->
+<mrpEnvelope>
+  <body>
+    <mrpRequest>
+      <request command="EXPEO0" requestId=""></request>
+      <data>
+        <filter>
+          <fltvalue name="SKKAR.CISLO">1925</fltvalue>
+          <fltvalue name="malObraz">F</fltvalue>
+          <fltvalue name="velObraz">T</fltvalue>
+        </filter>
+      </data>
+    </mrpRequest>
+  </body>
+</mrpEnvelope>

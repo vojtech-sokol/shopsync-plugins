@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- EXPOP1: full received orders in XML MRP-K/S 2.0 (data/MRPKSData/IncomingOrders/Order). EXPOV1 = issued orders (same filters minus OriginalOrderNumber/OriginalIssueDate/Offer). -->
+<mrpEnvelope>
+  <body>
+    <mrpRequest>
+      <request command="EXPOP1" requestId=""></request>
+      <data>
+        <filter>
+          <fltvalue name="OriginalOrderNumber">2026001234</fltvalue>
+          <fltvalue name="IssueDate">01.09.2026..02.10.2026</fltvalue>
+          <fltvalue name="ProcessingStatus">2|1</fltvalue>
+          <fltvalue name="Offer">F</fltvalue>
+        </filter>
+      </data>
+    </mrpRequest>
+  </body>
+</mrpEnvelope>

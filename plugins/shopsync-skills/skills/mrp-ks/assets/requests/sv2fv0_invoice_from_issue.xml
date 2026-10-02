@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- SV2FV0: create an issued invoice from an existing stock issue. WarehouseDocumentNumber = warehouse + 'V' + number (the scislo from OP2SV0).
+     DocumentNumberPrefix overrides the profile's series. Success: data/MRPKSData/IssuedInvoices/Invoice/{DocumentNumber,UUID}. -->
+<mrpEnvelope>
+  <body>
+    <mrpRequest>
+      <request command="SV2FV0" requestId="1_fa_2026001234"></request>
+      <data>
+        <params>
+          <paramvalue name="WarehouseDocumentNumber">001V000000340</paramvalue>
+          <paramvalue name="DocumentNumberPrefix">FV</paramvalue>
+          <paramvalue name="IssueDate">2026-10-02</paramvalue>
+          <paramvalue name="TaxPointDate">2026-10-02</paramvalue>
+        </params>
+      </data>
+    </mrpRequest>
+  </body>
+</mrpEnvelope>

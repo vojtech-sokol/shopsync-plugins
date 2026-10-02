@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Command-line mode: run "mrpks.exe /cC:\full\path\cmdline_expfakvy.xml" (no space after /c, always a FULL path).
+     ConnectionInfo: Firebird host/port, DatabasePath (data directory or DATAxxxx.MRP), MRP user (needs "Plny pristup" for the command), company number.
+     ResultsFileName: MRP re-saves this file there with <Results><Result>/<Message>/<MessageDetail>/<Count> per command - always use it. -->
+<MRPKSCmdLineData>
+  <ConnectionInfo>
+    <ServerIPAddress>localhost/3050</ServerIPAddress>
+    <DatabasePath>C:\MRPKS_DATA\DATACZ25</DatabasePath>
+    <UserName>SHOPSYNC</UserName>
+    <UserPwd>********</UserPwd>
+    <FirNumber>102</FirNumber>
+    <ResultsFileName>C:\temp\mrpks_cmdline_results.xml</ResultsFileName>
+  </ConnectionInfo>
+  <CommandList>
+    <Command>
+      <CommandCode>EXPFAKVY</CommandCode>
+      <Path>C:\temp\mrpks_invoices.xml</Path>
+      <Filter>
+        <TaxPointDate>01.09.2026..30.09.2026</TaxPointDate>
+        <PaymentState>0</PaymentState>
+      </Filter>
+    </Command>
+  </CommandList>
+</MRPKSCmdLineData>

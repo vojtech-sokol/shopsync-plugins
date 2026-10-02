@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- UNDOCUMENTED but used in production (shoptet_mrpks_vodila): fltvalue "prilohy"=T adds dataset <prilohy>
+     with fields cislo, idkarty, docname, doccontent (base64), doctext. Verify on the target MRP version. -->
+<mrpEnvelope>
+  <body>
+    <mrpRequest>
+      <request command="EXPEO1" requestId=""></request>
+      <data>
+        <filter>
+          <fltvalue name="SKKAR.CISLO">19882</fltvalue>
+          <fltvalue name="prilohy">T</fltvalue>
+        </filter>
+      </data>
+    </mrpRequest>
+  </body>
+</mrpEnvelope>

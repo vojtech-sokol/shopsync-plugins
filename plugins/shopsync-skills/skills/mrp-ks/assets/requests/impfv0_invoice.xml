@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- IMPFV0: import ONE issued invoice (only the first <Invoice> is imported). Response: data/MRPKSData/IssuedInvoices/Invoice/{DocumentNumber,UUID}.
+     Leave DocumentNumber out and send DocumentNumberPrefix to let MRP number it; send UUID to make retries detectable. -->
+<mrpEnvelope>
+  <body>
+    <mrpRequest>
+      <request command="IMPFV0" requestId="1_fv_2026001234"></request>
+      <data>
+        <MRPKSData version="2.0" countryCode="CZ" currencyCode="CZK">
+          <IssuedInvoices>
+            <Invoice>
+              <DocumentNumberPrefix>FV</DocumentNumberPrefix>
+              <UUID>7A1C2B3D-4E5F-4061-8172-93A4B5C6D7E8</UUID>
+              <IssueDate>2026-10-02</IssueDate>
+              <TaxPointDate>2026-10-02</TaxPointDate>
+              <PaymentDueDate>2026-10-16</PaymentDueDate>
+              <CurrencyCode>CZK</CurrencyCode>
+              <CurrRate>1.000000</CurrRate>
+              <CurrRateAmount>1.000000</CurrRateAmount>
+              <ValuesWithTax>F</ValuesWithTax>
+              <TaxCode>41</TaxCode>
+              <VatRegime>0</VatRegime>
+              <VatCountry>CZ</VatCountry>
+              <InvoiceType>F</InvoiceType>
+              <VariableSymbol>2026001234</VariableSymbol>
+              <PaymentMeansCode>prevodem</PaymentMeansCode>
+              <DeliveryTypeCode>PPL</DeliveryTypeCode>
+              <OriginalOrderNumber>2026001234</OriginalOrderNumber>
+              <ZeroTaxRateAmount>0.00</ZeroTaxRateAmount>
+              <ReducedTaxRateAmount>0.00</ReducedTaxRateAmount>
+              <BaseTaxRateAmount>1000.00</BaseTaxRateAmount>
+              <RoundingAmount>0.00</RoundingAmount>
+              <ReducedTaxRateTax>0.00</ReducedTaxRateTax>
+              <BaseTaxRateTax>210.00</BaseTaxRateTax>
+              <Company>
+                <CompanyId>12345678</CompanyId>
+                <AddressId>A1B2C3D4E5</AddressId>
+                <Name>Firma s.r.o.</Name>
+                <Street>Hlavni 1</Street>
+                <City>Sokolov</City>
+                <CountryCode>CZ</CountryCode>
+                <ZipCode>35601</ZipCode>
+                <VatNumber>CZ12345678</VatNumber>
+                <NaturalPerson>F</NaturalPerson>
+              </Company>
+              <Items>
+                <Item>
+                  <Description>Obrousky 33x33</Description>
+                  <RowType>1</RowType>
+                  <TaxCode>41</TaxCode>
+                  <UnitCode>ks</UnitCode>
+                  <Quantity>10.000000</Quantity>
+                  <UnitPrice>100.000000</UnitPrice>
+                  <TaxPercent>21.00</TaxPercent>
+                  <TaxAmount>21.000000</TaxAmount>
+                  <UnitDiscount>0.000000</UnitDiscount>
+                  <StockCardNumber>1925.00</StockCardNumber>
+                  <RowSumType>1</RowSumType>
+                </Item>
+              </Items>
+            </Invoice>
+          </IssuedInvoices>
+        </MRPKSData>
+      </data>
+    </mrpRequest>
+  </body>
+</mrpEnvelope>

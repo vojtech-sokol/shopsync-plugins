@@ -16,6 +16,7 @@ Skills that give Claude Code detailed API references, PHP client patterns and da
 | `moneys4-s5` | Money S4 / S5 — CSW_EObchod views + S5Data XML import |
 | `abra-flexi` | ABRA Flexi (FlexiBee) REST API |
 | `abra-gen` | ABRA Gen API |
+| `mrp-ks` | MRP K/S — autonomous mode HTTP API (mrpEnvelope XML), command line, XML 2.0, Firebird reads |
 | `helios-inuvio` | Helios Inuvio (Orange/Easy) ERP |
 | `helios-nephrite` | Helios Nephrite ERP API |
 | `shoptet-api` | Shoptet e-commerce API |
