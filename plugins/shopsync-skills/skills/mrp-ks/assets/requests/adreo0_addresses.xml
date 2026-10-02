@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ADREO0: address book (dataset <adres>: ico, dic, ic_dph, id, firma, meno, ulica, mesto, psc, kodstat, telefon, telefon1, telefon2, fax, email, censkup, stat).
+     id = e-shop customer id written by IMPEO0. ico containing "/" (12345678/1) = sub-address created by IMPEO0 address matching. -->
+<mrpEnvelope>
+  <body>
+    <mrpRequest>
+      <request command="ADREO0" requestId=""></request>
+      <data>
+        <filter>
+          <fltvalue name="ADRES.CENSKUP">not null</fltvalue>
+          <fltvalue name="ADRES.EMAIL">not empty</fltvalue>
+        </filter>
+      </data>
+    </mrpRequest>
+  </body>
+</mrpEnvelope>

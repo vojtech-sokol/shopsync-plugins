@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- EXPOP0: state of received orders. Response is NOT a dataset: data/objednavka[@cisloObj,@puvodniCislo,@datum,@stav,@usrLock,@ico,@nabidka]/polozky/polozka[@stav,@vybavitMJ,...].
+     stav: <0 blocked, 0 fulfilled, 1 partially, 2 not fulfilled. Without typDokladu only orders (no offers). -->
+<mrpEnvelope>
+  <body>
+    <mrpRequest>
+      <request command="EXPOP0" requestId=""></request>
+      <data>
+        <filter>
+          <fltvalue name="OBJPR.ORIGCISLO">2026*</fltvalue>
+          <fltvalue name="OBJPR.DATUM">1.9.2026..2.10.2026</fltvalue>
+          <fltvalue name="polozky">T</fltvalue>
+          <fltvalue name="typDokladu">O</fltvalue>
+        </filter>
+      </data>
+    </mrpRequest>
+  </body>
+</mrpEnvelope>

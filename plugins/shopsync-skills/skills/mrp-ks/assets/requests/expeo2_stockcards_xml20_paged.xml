@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- EXPEO2: store cards in XML MRP-K/S 2.0 (data/MRPKSData/StockCards/StockCard). Supports paging.
+     Statuses/Prices/Detail/RelatedCards = T|F, Attachments = LIST|FULL. Without WarehouseNumber = all warehouses. -->
+<mrpEnvelope>
+  <body>
+    <mrpRequest>
+      <request command="EXPEO2" requestId=""></request>
+      <data>
+        <paging>
+          <RowFrom>1</RowFrom>
+          <RowTo>500</RowTo>
+        </paging>
+        <filter>
+          <fltvalue name="Statuses">T</fltvalue>
+          <fltvalue name="Prices">T</fltvalue>
+          <fltvalue name="Detail">F</fltvalue>
+          <fltvalue name="RelatedCards">F</fltvalue>
+        </filter>
+      </data>
+    </mrpRequest>
+  </body>
+</mrpEnvelope>

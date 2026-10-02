@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- EXPFV1: issued invoices WITH Items and Payments over HTTP (no exe needed). EXPFV0 = header + Company only.
+     PaymentState: 0 all, 1 all with payments to PaymentsToDate, 2 paid, 3 unpaid/unsettled, 4 overpaid, 5 underpaid, 6 paid+overpaid.
+     PaymentsToDate takes ONE concrete date (no range). Paging supported. -->
+<mrpEnvelope>
+  <body>
+    <mrpRequest>
+      <request command="EXPFV1" requestId=""></request>
+      <data>
+        <paging>
+          <RowFrom>1</RowFrom>
+          <RowTo>200</RowTo>
+        </paging>
+        <filter>
+          <fltvalue name="TaxPointDate">01.09.2026..30.09.2026</fltvalue>
+          <fltvalue name="PaymentState">3</fltvalue>
+          <fltvalue name="PaymentsToDate">30.09.2026</fltvalue>
+        </filter>
+      </data>
+    </mrpRequest>
+  </body>
+</mrpEnvelope>

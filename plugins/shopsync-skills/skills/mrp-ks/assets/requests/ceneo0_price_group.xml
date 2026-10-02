@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- CENEO0: resulting prices for customer price groups (cenove skupiny). Dataset <ceny>: cislo, idkarty, censkup, cisloceny, typceny, mena, cenamj, sleva_p, slevamj.
+     Customer -> price group comes from ADREO0 (field censkup). -->
+<mrpEnvelope>
+  <body>
+    <mrpRequest>
+      <request command="CENEO0" requestId=""></request>
+      <data>
+        <filter>
+          <fltvalue name="cisloSkladu">1</fltvalue>
+          <fltvalue name="cisloCeny">1</fltvalue>
+          <fltvalue name="cenovaSkupina">1|2|4..6</fltvalue>
+          <fltvalue name="datum">2026-10-02</fltvalue>
+          <fltvalue name="cenySDPH">F</fltvalue>
+        </filter>
+      </data>
+    </mrpRequest>
+  </body>
+</mrpEnvelope>

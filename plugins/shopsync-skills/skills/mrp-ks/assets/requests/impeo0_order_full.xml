@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- IMPEO0: create received order(s). requestId MUST be unique per attempt (MRP replays the cached answer for a repeated requestId for ~12 h).
+     Length limits: formaUhrady/zpusobDopravy 10 (must match MRP codebooks), puvodniCislo 50, adresa id 10, ulice/mesto 30, psc 15,
+     firma nazev 100, ico 12, dic 17, ic_dph 14 (SK version only), jmeno+prijmeni together < 30, tel 30 (max 3), polozka text 50, poznamkaPolozky 20.
+     Card lookup order: cisloKarty -> eanKarty -> kodKarty (EAN/code only if uniqueness check is enabled in MRP). -->
+<mrpEnvelope>
+  <body>
+    <mrpRequest>
+      <request command="IMPEO0" requestId="1_2026001234_20261002T101500"></request>
+      <data>
+        <params>
+          <paramvalue name="cisloSkladu">1</paramvalue>
+          <paramvalue name="stredisko">0</paramvalue>
+          <paramvalue name="cisloZakazky">0</paramvalue>
+          <paramvalue name="prefixRadyObj">EO</paramvalue>
+        </params>
+        <objednavka formaUhrady="prevodem" zpusobDopravy="PPL" puvodniCislo="2026001234" datum="2026-10-02"
+                    datumDodani="2026-10-05" variabilniSymbol="2026001234" cenySDPH="T" typDPH="41">
+          <parametryDokladu UPDP="2" VATRU="0.01" TRU="0.01" TRM="0"/>
+          <mena kod="CZK" kurz="1" mnozstvi="1"/>
+          <!-- OSS sale to another EU country: kod=2 + statDPH; EU VAT registration: kod=1 + statDPH + vatDPH -->
+          <!-- <rezimDPH kod="2" statDPH="SK"/> -->
+          <adresa id="A1B2C3D4E5" ulice="Hlavni 1" mesto="Sokolov" psc="35601" kodStatu="CZ" fyzickaOsoba="F">
+            <firma nazev="Firma s.r.o." ico="12345678" dic="CZ12345678"/>
+            <osoba jmeno="Jan" prijmeni="Novak"/>
+            <email>jan.novak@example.cz</email>
+            <tel>+420777000111</tel>
+            <uzivatelskaPole>
+              <uzivatelskePole1>eshop</uzivatelskePole1>
+            </uzivatelskaPole>
+          </adresa>
+          <adresa_dod id="F6G7H8I9J0" ulice="Skladova 5" mesto="Cheb" psc="35002" kodStatu="CZ">
+            <firma nazev="Firma s.r.o. - pobocka" ico="" dic=""/>
+            <osoba jmeno="Petr" prijmeni="Dvorak"/>
+            <email>sklad@example.cz</email>
+          </adresa_dod>
+          <polozky>
+            <polozka cisloKarty="1925" text="Obrousky 33x33" cenaMJ="121" pocetMJ="2" sazbaDPH="21"/>
+            <polozka eanKarty="5906360370447" cenaMJ="0" cisloCeny="1" pocetMJ="1" sazbaDPH="21"/>
+            <polozka cisloKarty="" text="Doprava PPL" mj="ks" cenaMJ="99" pocetMJ="1" sazbaDPH="21" typPolozky=""/>
+            <polozka text="Poznamka zakaznika jako textovy radek"/>
+          </polozky>
+          <poznamka>Dorucit dopoledne.</poznamka>
+          <uzivatelskaPole>
+            <uzivatelskePole1>Shoptet</uzivatelskePole1>
+          </uzivatelskaPole>
+        </objednavka>
+      </data>
+    </mrpRequest>
+  </body>
+</mrpEnvelope>

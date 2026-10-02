@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- EXPEO1: store cards + stock/prices per warehouse + catalog tree. Main product sync request of lib/mrpks.
+     SKKAR.UPD_DATE: date-time format j.n.Y H:i (MRP client locale!), '>' must be written as &gt;, '|null' adds never-changed cards.
+     Without cisloSkladu the warehouse set comes from the EXPEO1 profile ("Vzdy pridat omezujici podminky"). -->
+<mrpEnvelope>
+  <body>
+    <mrpRequest>
+      <request command="EXPEO1" requestId=""></request>
+      <data>
+        <filter>
+          <fltvalue name="SKKAR.UPD_DATE">&gt;1.10.2026 08:00|null</fltvalue>
+          <fltvalue name="cisloSkladu">1</fltvalue>
+          <fltvalue name="cisloCeny">1</fltvalue>
+          <fltvalue name="stavy">F</fltvalue>
+          <fltvalue name="malObraz">F</fltvalue>
+          <fltvalue name="velObraz">F</fltvalue>
+          <fltvalue name="polePoznamka1">F</fltvalue>
+          <fltvalue name="poleDetail2">F</fltvalue>
+        </filter>
+      </data>
+    </mrpRequest>
+  </body>
+</mrpEnvelope>

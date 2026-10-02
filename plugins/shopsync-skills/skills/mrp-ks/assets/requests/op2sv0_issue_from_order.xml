@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- OP2SV0: create a stock issue (vydejka) from an existing received order. Order = idObj (first) or cislo = MRP order number
+     (the <cislo> returned by IMPEO0, NOT the e-shop number). Success: data/MRPKSData/skladoveVydejky/skladovaVydejka/scislo, e.g. 001V000000340.
+     datum: -1 today, 0 order date (default), or YYYY-MM-DD. Error codes: see references/autonomous-api.md. -->
+<mrpEnvelope>
+  <body>
+    <mrpRequest>
+      <request command="OP2SV0" requestId="1_vyd_2026001234"></request>
+      <data>
+        <params>
+          <paramvalue name="cislo">EO26000123</paramvalue>
+          <paramvalue name="cisloSkladu">1</paramvalue>
+          <paramvalue name="datum">-1</paramvalue>
+        </params>
+      </data>
+    </mrpRequest>
+  </body>
+</mrpEnvelope>

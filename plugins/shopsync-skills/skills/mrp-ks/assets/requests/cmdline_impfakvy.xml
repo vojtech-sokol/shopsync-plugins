@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Command-line invoice import (lib/mrpks cfg_files/import_faktur.xml pattern). ProfCode must exist in MRP:
+     Nastaveni - Program - CommandLine rezim - Profily a nastaveni. The imported file(s) are DELETED after the run, success or not.
+     IMPFAKVY1 = single invoice with UUID/DocumentNumber returned in Results/Data. -->
+<MRPKSCmdLineData>
+  <ConnectionInfo>
+    <ServerIPAddress>localhost/3050</ServerIPAddress>
+    <DatabasePath>C:\Program Files\MRP\MRPKS\DATA\DATA0023.MRP</DatabasePath>
+    <UserName>SHOPSYNC</UserName>
+    <UserPwd>********</UserPwd>
+    <FirNumber>23</FirNumber>
+    <ResultsFileName>C:\temp\mrpks_cmdline_results.xml</ResultsFileName>
+  </ConnectionInfo>
+  <CommandList>
+    <Command>
+      <CommandCode>IMPFAKVY</CommandCode>
+      <ProfCode>FVIMPPROF</ProfCode>
+      <Path>C:\temp\mrpks_faktury.xml</Path>
+    </Command>
+  </CommandList>
+</MRPKSCmdLineData>

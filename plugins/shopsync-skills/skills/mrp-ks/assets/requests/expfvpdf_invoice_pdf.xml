@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- EXPFVPDF: render the invoice PDF online (FastReport template from the profile, default "01 - Faktura") and return it base64 in
+     data/MRPKSData/IssuedInvoices/Invoice/Attachments/Attachment/FileContent. Exactly ONE DocumentNumber, no ranges.
+     The template must not show any dialog - it would block the autonomous mode. EXPFV2 = the PDF already STORED as attachment. -->
+<mrpEnvelope>
+  <body>
+    <mrpRequest>
+      <request command="EXPFVPDF" requestId=""></request>
+      <data>
+        <params>
+          <paramvalue name="ReportName">FV01_1A2.FR3</paramvalue>
+        </params>
+        <filter>
+          <fltvalue name="DocumentNumber">26100058</fltvalue>
+        </filter>
+      </data>
+    </mrpRequest>
+  </body>
+</mrpEnvelope>
